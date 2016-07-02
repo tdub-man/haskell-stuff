@@ -8,7 +8,7 @@ module Matrix
     , getNorth, getEast, getSouth, getWest
     , foldMatrix
     ) where
-import Control.Applicative
+import Control.Applicative()
 
 data Matrix a = Border | Cell { value :: a
                               , north :: Matrix a
@@ -55,15 +55,19 @@ singleCell :: a -> Matrix a
 singleCell x = Cell x Border Border Border Border
 
 addNorth :: Matrix a -> Matrix a -> Matrix a
+addNorth Border _ = Border
 addNorth (Cell a _ e s w) n = Cell a n e s w
 
 addEast :: Matrix a -> Matrix a -> Matrix a
+addEast Border _ = Border
 addEast (Cell a n _ s w) e = Cell a n e s w
 
 addSouth :: Matrix a -> Matrix a -> Matrix a
+addSouth Border _ = Border
 addSouth (Cell a n e _ w) s = Cell a n e s w
 
 addWest :: Matrix a -> Matrix a -> Matrix a
+addWest Border _ = Border
 addWest (Cell a n e s _) w = Cell a n e s w
 
 maxLocalNorth :: Matrix a -> Matrix a
