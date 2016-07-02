@@ -6,6 +6,7 @@ module Matrix
     , maxLocalNorth, maxLocalEast, maxLocalSouth, maxLocalWest
     , levelsLocalNorth, levelsLocalEast, levelsLocalSouth, levelsLocalWest
     , getNorth, getEast, getSouth, getWest
+    , foldMatrix
     ) where
 import Control.Applicative
 
@@ -134,12 +135,10 @@ getWest Border _ = Border
 getWest x 0 = west x
 getWest x n = getWest (west x) (n-1)
 
--- foldMatrix :: (a -> a -> a) -> a -> Matrix a -> b
--- foldMatrix f st (Cell a n e s w) = foldr1 [a, n', e', s', w'] where
---   n' = foldMatrix n
---   e' = foldMatrix e
---   s' = foldMatrix s
---   w' = foldMatrix w
---   cs = [c | c <- [n,e,s,w], c /= Border]
+foldMatrix :: (Eq a) => (a -> a -> a) -> Matrix a -> a
+foldMatrix f (Cell a n e s w) = foldr1 f list where
+  cs = [c | c <- [n,e,s,w], c /= Border]
+  fcs = map (foldMatrix f) cs
+  list = a:fcs
 
 -- CANNOT SOLVE CYCLING PROBLEM, MAYBE GRAPH THEORY HELPS
