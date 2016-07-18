@@ -1,16 +1,21 @@
 module Queue
     ( Queue
+    , emptyQueue
     , push
     , pop
     , peek
     , QueueState
     , pushQueue
     , popQueue
-    , arrToQueue
+    , fillQueue
+    , flushQueue
     ) where
 import Control.Monad.State
 
 data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq, Show)
+
+emptyQueue :: Queue a
+emptyQueue = Queue [] []
 
 push :: a -> Queue a -> Queue a
 push e (Queue inb out) = Queue (e:inb) out
@@ -33,6 +38,10 @@ pushQueue e = state $ \q -> ((),push e q)
 popQueue :: QueueState a (Maybe a)
 popQueue = state $ \q -> pop q
 
-arrToQueue :: [a] -> Queue a
-arrToQueue [] = Queue [] []
-arrToQueue x = Queue (reverse x) []
+fillQueue :: [a] -> Queue a
+fillQueue = Queue []
+
+flushQueue :: Queue a -> [a]
+flushQueue q = case pop q of
+  (Nothing,_) -> []
+  (Just x,q') -> x:flushQueue q'
