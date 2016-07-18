@@ -1,19 +1,11 @@
 module Queue
-    ( Queue(Queue)
-    , emptyQueue
-    , push
-    , pop
-    , peek
-    , QueueState
-    , pushQueue
-    , popQueue
-    , fillQueue
-    , flushQueue
-    , chainQueue
-    , chainQueueWhile
-    , chainQueueMap
-    , takeQueueWhile
+    ( Queue(Queue), emptyQueue
+    , push, pop, peek
+    , QueueState, pushQueue, popQueue
+    , fillQueue, flushQueue
+    , chainQueue, chainQueueWhile, chainQueueMap, takeQueueWhile
     , zipQueue
+    , elem'
     ) where
 import Control.Applicative
 import Control.Monad.State
@@ -37,7 +29,12 @@ instance Applicative Queue where
     (Just f,qf') = pop qf
     qb = fmap f qa
     in chainQueue qb (qf' <*> qa)
-  -- fmap each f to qa
+
+-- instance Monad Queue where
+--   return = pure
+--   (Queue [] []) >>= _ = emptyQueue
+--   qa >>= f = where
+--     definitions
 
 push :: a -> Queue a -> Queue a
 push e (Queue inb out) = Queue (e:inb) out
@@ -97,3 +94,9 @@ zipQueue f qa qb qc = zipQueue f qa' qb' qc' where
   (Just ea,qa') = pop qa
   (Just eb,qb') = pop qb
   qc' = push (f ea eb) qc
+
+elem' :: (Eq a) => a -> Queue a -> Bool
+elem' _ (Queue [] []) = False
+elem' x q = let
+  (Just a,q') = pop q
+  in (x == a) || elem' x q'
