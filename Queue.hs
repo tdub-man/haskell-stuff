@@ -11,17 +11,33 @@ module Queue
     , flushQueue
     , chainQueue
     , chainQueueWhile
+    , chainQueueMap
     , takeQueueWhile
+    , zipQueue
     ) where
+import Control.Applicative
 import Control.Monad.State
 
 data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq)
 
+emptyQueue :: Queue a
+emptyQueue = Queue [] []
+
 instance (Show a) => Show (Queue a) where
   show (Queue inb out) = show $ out ++ reverse inb
 
-emptyQueue :: Queue a
-emptyQueue = Queue [] []
+instance Functor Queue where
+  fmap _ (Queue [] []) = emptyQueue
+  fmap f q = chainQueueMap f q emptyQueue
+
+instance Applicative Queue where
+  pure e = push e emptyQueue
+  (Queue [] []) <*> _ = emptyQueue
+  qf <*> qa = let
+    (Just f,qf') = pop qf
+    qb = fmap f qa
+    in chainQueue qb (qf' <*> qa)
+  -- fmap each f to qa
 
 push :: a -> Queue a -> Queue a
 push e (Queue inb out) = Queue (e:inb) out
@@ -67,3 +83,17 @@ chainQueueWhile f q1 q2 = if f e
 
 takeQueueWhile :: (a -> Bool) -> Queue a -> Queue a
 takeQueueWhile f = chainQueueWhile f emptyQueue
+
+chainQueueMap :: (a -> b) -> Queue a -> Queue b -> Queue b
+chainQueueMap _ (Queue [] []) qb = qb
+chainQueueMap f qa qb = chainQueueMap f qa' qb' where
+  (Just e,qa') = pop qa
+  qb' = push (f e) qb
+
+zipQueue :: (a -> b -> c) -> Queue a -> Queue b -> Queue c -> Queue c
+zipQueue _ (Queue [] []) _ qc = qc
+zipQueue _ _ (Queue [] []) qc = qc
+zipQueue f qa qb qc = zipQueue f qa' qb' qc' where
+  (Just ea,qa') = pop qa
+  (Just eb,qb') = pop qb
+  qc' = push (f ea eb) qc
