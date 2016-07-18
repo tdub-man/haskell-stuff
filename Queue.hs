@@ -10,6 +10,8 @@ module Queue
     , fillQueue
     , flushQueue
     , chainQueue
+    , chainQueueWhile
+    , takeQueueWhile
     ) where
 import Control.Monad.State
 
@@ -48,8 +50,17 @@ flushQueue q = case pop q of
   (Just x,q') -> x:flushQueue q'
 
 chainQueue :: Queue a -> Queue a -> Queue a
-chainQueue (Queue [] []) q = q
 chainQueue q (Queue [] []) = q
 chainQueue q1 q2 = chainQueue q1' q2' where
   (Just e,q2') = pop q2
   q1' = push e q1
+
+chainQueueWhile :: (a -> Bool) -> Queue a -> Queue a -> Queue a
+chainQueueWhile _ q1 (Queue [] []) = q1
+chainQueueWhile f q1 q2 = if f e
+  then chainQueueWhile f (push e q1) q2' else q1
+  where
+    (Just e,q2') = pop q2
+
+takeQueueWhile :: (a -> Bool) -> Queue a -> Queue a
+takeQueueWhile f = chainQueueWhile f emptyQueue
