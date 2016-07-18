@@ -1,5 +1,5 @@
 module Queue
-    ( Queue
+    ( Queue(Queue)
     , emptyQueue
     , push
     , pop
@@ -9,6 +9,7 @@ module Queue
     , popQueue
     , fillQueue
     , flushQueue
+    , chainQueue
     ) where
 import Control.Monad.State
 
@@ -45,3 +46,10 @@ flushQueue :: Queue a -> [a]
 flushQueue q = case pop q of
   (Nothing,_) -> []
   (Just x,q') -> x:flushQueue q'
+
+chainQueue :: Queue a -> Queue a -> Queue a
+chainQueue (Queue [] []) q = q
+chainQueue q (Queue [] []) = q
+chainQueue q1 q2 = chainQueue q1' q2' where
+  (Just e,q2') = pop q2
+  q1' = push e q1
