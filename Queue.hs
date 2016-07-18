@@ -15,7 +15,10 @@ module Queue
     ) where
 import Control.Monad.State
 
-data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq, Show)
+data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq)
+
+instance (Show a) => Show (Queue a) where
+  show (Queue inb out) = show $ out ++ reverse inb
 
 emptyQueue :: Queue a
 emptyQueue = Queue [] []
