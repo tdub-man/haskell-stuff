@@ -3,11 +3,12 @@ module Queue
     , push, pop, peek
     , QueueState, pushQueue, popQueue
     , fillQueue, flushQueue
-    , chainQueue, chainQueueWhile, chainQueueMap, takeQueueWhile
+    , chainQueue, chainQueues, chainQueueWhile, chainQueueMap, takeQueueWhile
     , zipQueue
     , elem'
     ) where
 import Control.Applicative
+import Data.Monoid
 import Control.Monad.State
 
 data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq)
@@ -30,11 +31,17 @@ instance Applicative Queue where
     qb = fmap f qa
     in chainQueue qb (qf' <*> qa)
 
--- instance Monad Queue where
---   return = pure
---   (Queue [] []) >>= _ = emptyQueue
---   qa >>= f = where
---     definitions
+instance Monoid (Queue m) where
+  mempty = emptyQueue
+  mappend = chainQueue
+  mconcat = chainQueues
+
+instance Monad Queue where
+  return = pure
+  (Queue [] []) >>= _ = mempty
+  qa >>= f = let
+    qb = fmap f qa
+    in queueFoldl mappend mempty qb
 
 push :: a -> Queue a -> Queue a
 push e (Queue inb out) = Queue (e:inb) out
@@ -71,6 +78,10 @@ chainQueue q1 q2 = chainQueue q1' q2' where
   (Just e,q2') = pop q2
   q1' = push e q1
 
+chainQueues :: [Queue x] -> Queue x
+chainQueues [] = emptyQueue
+chainQueues x = foldr1 chainQueue x
+
 chainQueueWhile :: (a -> Bool) -> Queue a -> Queue a -> Queue a
 chainQueueWhile _ q1 (Queue [] []) = q1
 chainQueueWhile f q1 q2 = if f e
@@ -86,6 +97,20 @@ chainQueueMap _ (Queue [] []) qb = qb
 chainQueueMap f qa qb = chainQueueMap f qa' qb' where
   (Just e,qa') = pop qa
   qb' = push (f e) qb
+
+queueFoldl :: (b -> a -> b) -> b -> Queue a -> b
+queueFoldl _ x (Queue [] []) = x
+queueFoldl f b qa = let
+  (Just a,qa') = pop qa
+  b' = f b a
+  in queueFoldl f b' qa'
+
+queueFoldl1 :: (a -> a -> a) -> Queue a -> Maybe a
+queueFoldl1 f qa = case pop qa of
+  (Nothing,_) -> Nothing
+  (Just x,qa') -> case queueFoldl1 f qa' of
+    Nothing -> Just x
+    Just y -> Just $ f x y
 
 zipQueue :: (a -> b -> c) -> Queue a -> Queue b -> Queue c -> Queue c
 zipQueue _ (Queue [] []) _ qc = qc
