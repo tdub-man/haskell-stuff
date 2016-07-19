@@ -8,25 +8,26 @@ module TriangleSquares
     , nextTriangleSquare
     , nthTriangleSquare
     , calcTriangleSquares
+    , calcTriangleSquaresFrom
     , squareRoot
     ) where
 
 sqr :: Integer -> Integer
 sqr n = n * n
 
-(^!) :: Num a => a -> Int -> a
-(^!) x n = x^n
+-- (^) :: Num a => a -> Int -> a
+-- (^) x n = x^n
 
 squareRoot :: Integer -> Integer
 squareRoot 0 = 0
 squareRoot 1 = 1
 squareRoot n =
-   let twopows = iterate (^!2) 2
+   let twopows = iterate (^2) 2
        (lowerRoot, lowerN) =
           last $ takeWhile ((n>=) . snd) $ zip (1:twopows) twopows
        newtonStep x = div (x + div n x) 2
        iters = iterate newtonStep (squareRoot (div n lowerN) * lowerRoot)
-       isRoot r  =  r^!2 <= n && n < (r+1)^!2
+       isRoot r  =  r^2 <= n && n < (r+1)^2
   in  head $ dropWhile (not . isRoot) iters
 
 binarySearch :: Integer -> Integer -> Integer -> (Integer -> Integer) -> Bool
@@ -61,9 +62,8 @@ nTriSqrs :: Int -> [Integer]
 nTriSqrs n = take n triSqrs
 
 nextTriangleSquare :: Integer -> Integer
-nextTriangleSquare n = if isTriangleSquare n
-  then 1 + 17*n + 6*squareRoot (n + 8*sqr n)
-  else 0
+nextTriangleSquare n | isTriangleSquare n = 1 + 17*n + 6*squareRoot (n + 8*sqr n)
+nextTriangleSquare na = na
 
 nthTriangleSquare :: Integer -> Integer -> Integer
 nthTriangleSquare 0 n = n
@@ -77,4 +77,8 @@ calcTriangleSquares n = num:prev where
   prev = calcTriangleSquares (n-1)
   num = nextTriangleSquare . head $ prev
 
--- TODO write output to file
+calcTriangleSquaresFrom :: Integer -> Integer -> [Integer] -> [Integer]
+calcTriangleSquaresFrom 0 _ xs = xs
+calcTriangleSquaresFrom n x xs = calcTriangleSquaresFrom (n-1) next xs' where
+  next = nextTriangleSquare x
+  xs' = xs ++ [next]
