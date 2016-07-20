@@ -62,8 +62,9 @@ nTriSqrs :: Int -> [Integer]
 nTriSqrs n = take n triSqrs
 
 nextTriangleSquare :: Integer -> Integer
-nextTriangleSquare n | isTriangleSquare n = 1 + 17*n + 6*squareRoot (n + 8*sqr n)
-nextTriangleSquare na = na
+nextTriangleSquare n
+  | isTriangleSquare n = 1 + 17*n + 6*squareRoot (n + 8*sqr n)
+  | otherwise = n
 
 nthTriangleSquare :: Integer -> Integer -> Integer
 nthTriangleSquare 0 n = n
