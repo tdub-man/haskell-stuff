@@ -12,7 +12,7 @@ fbCond i
     | otherwise = show i
 
 fizzBuzz :: [String]
-fizzBuzz = [fbCond i | i <- [1..], (i `mod` 3 == 0) || (i `mod` 5 == 0)]
+fizzBuzz = [fbCond i | i <- [1..]]
 
 nth :: [a] -> Int -> Maybe a
 nth [] _ = Nothing
