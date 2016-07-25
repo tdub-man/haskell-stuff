@@ -27,3 +27,6 @@ subList n xs
       rest = drop n xs
       in Just (taken,rest)
   | otherwise = Just ([],xs)
+
+concatZip :: [a] -> [a] -> [a]
+concatZip a = concat . zipWith (\x y -> [x,y]) a
