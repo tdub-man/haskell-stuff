@@ -9,6 +9,9 @@ module PegBoard
     , neighbor
     , validMove
     , nextMoves
+    , movePegs
+    , movePegsChain
+    , play
     ) where
 -- import Data.List(groupBy)
 
@@ -90,3 +93,26 @@ nextMoves ps = ops' where
   ops = options' ps
   validOps = map validMove ops
   ops' = map fst . filter (\(_,mv) -> mv /= None) $ zip ops validOps
+
+elem3Tup :: (Eq a) => a -> (a,a,a) -> Bool
+elem3Tup x (a,b,c)
+    | x == a = True
+    | x == b = True
+    | x == c = True
+    | otherwise = False
+
+movePegs :: [Peg] -> [[Peg]]
+movePegs ps = ps' where
+  nMoves = nextMoves ps
+  ps' = [ map (\p -> if p `elem3Tup` t then togglePeg p else p) ps | t <- nMoves ]
+-- TODO : Implement logging
+
+movePegsChain :: [[Peg]] -> [[Peg]]
+movePegsChain lps = let
+  nlps = concatMap movePegs lps
+  in case nlps of
+    [] -> lps
+    _ -> movePegsChain nlps
+
+play :: [Peg] -> [[Peg]]
+play ps = movePegsChain [ps]
