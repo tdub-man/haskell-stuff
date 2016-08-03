@@ -13,15 +13,18 @@ module PegBoard
     , movePegsChain
     , play
     ) where
--- import Data.List(groupBy)
+import Data.List(partition,break)
 
 data Coord = Coord { xCoord :: Int, yCoord :: Int } deriving (Eq)
 data Peg = Peg { coord :: Coord, pegged :: Bool } deriving (Eq)
+data Board = Board { width :: Int, pegs :: [Peg] } deriving (Eq)
 
 instance Show Coord where
   show (Coord x y) = show (x,y)
 instance Show Peg where
   show (Peg c b) = show c ++ "_" ++ show b
+instance Show Board where
+  show (Board s ps) = "B-" ++ show s ++ ":" ++ show ps
 
 -- Pos[Left,Right] = Move along a line of positive slope
 -- Zed[Left,Right] = Move along a line of zero slope
@@ -53,12 +56,31 @@ options' a = options a a a
 boardList :: Int -> [Peg]
 boardList n = [ Peg (Coord x y) False | x <- [1..n], y <- [1..x] ]
 
+boardList' :: Int -> Board
+boardList' n = Board n ps where
+  ps = [ Peg (Coord x y) True | x <- [1..n], y <- [1..x] ]
+
 openBoard :: Coord -> [Peg] -> [Peg]
 openBoard (Coord x y) ps = let
   pegMatch (Peg c _) = if xCoord c == x && yCoord c == y
     then Peg c False
     else Peg c True
   in map pegMatch ps
+
+removePeg' :: Coord -> Board -> Board
+removePeg' c (Board n ps) = Board n ps' where
+  (pre,rest) = break (\(Peg pc _) -> pc == c) ps
+  ps' = case rest of
+    [] -> ps
+    _:xs -> pre ++ xs
+
+addPeg :: Coord -> Board -> Board
+addPeg c (Board n ps) = Board n $ Peg c True:ps
+
+onBoard :: Int -> Peg -> Bool
+onBoard n (Peg (Coord x y) _) = pos && inWidth where
+  pos = x > 0 && y > 0
+  inWidth = x <= n && y <= n
 
 togglePeg :: Peg -> Peg
 togglePeg (Peg c b) = Peg c $ not b
@@ -76,6 +98,22 @@ neighbor a b = let
     (0,-1)  -> ZedLeft
     (0,1)   -> ZedRight
     _       -> None
+
+makeNeighbor :: Peg -> BoardMoves -> Maybe Peg
+makeNeighbor _ None     = Nothing
+makeNeighbor p PosRight = Just $ Peg (Coord (pegX p - 1) (pegY p)) True
+makeNeighbor p PosLeft  = Just $ Peg (Coord (pegX p + 1) (pegY p)) True
+makeNeighbor p NegLeft  = Just $ Peg (Coord (pegX p - 1) (pegY p - 1)) True
+makeNeighbor p NegRight = Just $ Peg (Coord (pegX p + 1) (pegY p + 1)) True
+makeNeighbor p ZedLeft  = Just $ Peg (Coord (pegX p) (pegY p - 1)) True
+makeNeighbor p ZedRight = Just $ Peg (Coord (pegX p) (pegY p + 1)) True
+
+findThirdNeighbor :: Int -> Peg -> Peg -> Maybe Peg
+findThirdNeighbor s a b = third where
+  abRel = neighbor a b
+  third = case makeNeighbor b abRel of
+    Nothing -> Nothing
+    Just p -> if onBoard s p then Just p else Nothing
 
 validMove :: PegTriple -> BoardMoves
 validMove (Peg _ False,_,_) = None
@@ -113,6 +151,21 @@ movePegsChain lps = let
   in case nlps of
     [] -> lps
     _ -> movePegsChain nlps
+
+movePegs' :: [Peg] -> [[Peg]]
+movePegs' ps = ps' where
+  nMoves = nextMoves ps
+  ps' = case nMoves of
+    [] -> [ps]
+    _  -> [ map (\p -> if p `elem3Tup` t then togglePeg p else p) ps | t <- nMoves ]
+
+movePegsChain' :: [[Peg]] -> [[Peg]]
+movePegsChain' lps = let
+  nlps = concatMap movePegs' lps
+  (same,new) = partition (`elem` lps) nlps
+  in case nlps of
+    [] -> lps
+    _ -> movePegsChain' nlps
 
 play :: [Peg] -> [[Peg]]
 play ps = movePegsChain [ps]
