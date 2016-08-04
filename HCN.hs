@@ -4,6 +4,7 @@ module HCN
     , primeCount
     , primorialN
     , primorials
+    , primorialsN
     , divisors
     , numDivisors
     , smallestNDivs
@@ -29,6 +30,10 @@ primorialN = product . sieveEras
 
 primorials :: [Integer]
 primorials = nub . map primorialN $ [1..]
+
+-- Cumulative product of primes up to n
+primorialsN :: Integer -> [Integer]
+primorialsN = map product . inits . sieveEras
 
 divisors :: Integer -> [Integer]
 divisors n = filter dividesN [1..n] where
