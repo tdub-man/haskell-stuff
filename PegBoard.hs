@@ -12,9 +12,10 @@ module PegBoard
     , nextMoves
     , movePegs
     , movePegsAll
-    -- , play
+    , play
+    , playGame
     ) where
-import Data.List(nub,tails,find,delete)
+import Data.List(nub,tails,find,delete,partition)
 import Control.Monad(replicateM)
 
 data Coord = Coord { xCoord :: Int, yCoord :: Int } deriving (Eq)
@@ -110,6 +111,16 @@ movePegs (a,b,c) = removePeg a . removePeg b . addPeg c
 movePegsAll :: [(Coord,Coord,Coord)] -> Board -> [Board]
 movePegsAll mvs b = [ movePegs mv b | mv <- mvs ]
 -- TODO : Implement logging
---
--- play :: [Peg] -> [[Peg]]
--- play ps = movePegsChain [ps]
+
+play :: ([Board],[Board]) -> ([Board],[Board])
+play ([],ended) = ([],ended)
+play (playing,ended) = play (playing',ended') where
+  boardAndMoves = zip playing $ map nextMoves playing
+  (newlyEnded,playable) = partition (\(_,m) -> null m) boardAndMoves
+  newlyEnded' = map fst newlyEnded
+  ended' = ended ++ newlyEnded'
+  playing' = concat [ movePegsAll mvs b | (b,mvs) <- playable ]
+
+playGame :: Board -> [Board]
+playGame b = endStates where
+  (_,endStates) = play ([b],[])
