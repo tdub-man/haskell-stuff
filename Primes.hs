@@ -3,9 +3,11 @@ module Primes
     , sieveForm
     , primeForm
     , isPrime
+    , isPrime'
     , nPrimes
     ) where
 import TriangleSquares(squareRoot)
+import Data.List
 
 type PrimeRec = ([Integer],[Integer])
 
@@ -21,6 +23,9 @@ negative x = x < 0
 
 mult :: Integer -> Integer -> Bool
 a `mult` b = a `mod` b == 0
+
+mult' :: Integer -> Integer -> Bool
+mult' a b = min a b == gcd a b
 
 nonMult :: Integer -> Integer -> Bool
 a `nonMult` b = a `mod` b > 0
@@ -51,6 +56,15 @@ isPrime n
       xs' = filter odd xs
       xs'' = filter (n `mult`) xs'
       in isEmpty xs''
+
+isPrime' :: Integer -> Bool
+isPrime' n
+    | even n     = False
+    | n `mult` 3 = False
+    | otherwise  = let
+      xs = [ x | x <- [2..squareRoot n], odd x ]
+      findMult = find (\i -> n `mult` i) xs
+      in findMult == Nothing
 
 nPrimes :: Int -> [Integer]
 nPrimes 1 = [2]
