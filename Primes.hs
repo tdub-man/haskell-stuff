@@ -6,7 +6,7 @@ module Primes
     , isPrime'
     , nPrimes
     ) where
-import TriangleSquares(squareRoot)
+import MathHelpers(squareRoot)
 import Data.List
 
 type PrimeRec = ([Integer],[Integer])
