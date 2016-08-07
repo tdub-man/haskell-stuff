@@ -1,30 +1,33 @@
 module PegBoard
     ( Coord
     , Peg
-    -- , triangleNum
+    , BoardMoves
     , concatZip
-    , options
-    , boardList
-    , openBoard
+    , combinations
+    , nPerms
+    -- , removePeg
+    , makeBoard
     , neighbor
-    , validMove
+    -- , validMove
     , nextMoves
     , movePegs
-    , movePegsChain
+    , movePegsAll
     , play
+    , playGame
     ) where
-import Data.List(partition,break)
+import Data.List(nub,tails,find,delete,partition)
+import Control.Monad(replicateM)
 
 data Coord = Coord { xCoord :: Int, yCoord :: Int } deriving (Eq)
 data Peg = Peg { coord :: Coord, pegged :: Bool } deriving (Eq)
-data Board = Board { width :: Int, pegs :: [Peg] } deriving (Eq)
+data Board = Board { pegs :: [Coord], holes :: [Coord] } deriving (Eq)
 
 instance Show Coord where
   show (Coord x y) = show (x,y)
 instance Show Peg where
   show (Peg c b) = show c ++ "_" ++ show b
 instance Show Board where
-  show (Board s ps) = "B-" ++ show s ++ ":" ++ show ps
+  show (Board ps hs) = "{ Pegs-" ++ show ps ++ " Holes-" ++ show hs ++ " }"
 
 -- Pos[Left,Right] = Move along a line of positive slope
 -- Zed[Left,Right] = Move along a line of zero slope
@@ -35,8 +38,8 @@ data BoardMoves = None
                 | NegLeft | NegRight deriving (Eq,Enum,Show)
 type PegTriple = (Peg,Peg,Peg)
 
--- triangleNum :: Int -> Int
--- triangleNum n = n * (n+1) `div` 2
+bmAnd :: BoardMoves -> BoardMoves -> BoardMoves
+bmAnd a b = if a == b then a else None
 
 pegX :: Peg -> Int
 pegX = xCoord . coord
@@ -47,50 +50,42 @@ pegY = yCoord . coord
 concatZip :: [a] -> [a] -> [a]
 concatZip a = concat . zipWith (\x y -> [x,y]) a
 
-options :: [a] -> [a] -> [a] -> [(a,a,a)]
-options a b c = [ (x,y,z) | x <- a, y <- b, z <- c ]
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations n xs = do
+  (x:xs') <- tails xs
+  rest <- combinations (n-1) xs'
+  return $ x:rest
 
-options' :: [a] -> [(a,a,a)]
-options' a = options a a a
+nPerms :: (Eq a) => Int -> [a] -> [[a]]
+nPerms n = filter ((==n).length.nub) . replicateM n
 
-boardList :: Int -> [Peg]
-boardList n = [ Peg (Coord x y) False | x <- [1..n], y <- [1..x] ]
+-- remove :: (Eq a) => a -> [a] -> (Maybe a,[a])
+-- remove x xs = case find (==x) xs of
+--   Nothing -> (Nothing, xs)
+--   Just _ -> (Just x, delete x xs)
 
-boardList' :: Int -> Board
-boardList' n = Board n ps where
-  ps = [ Peg (Coord x y) True | x <- [1..n], y <- [1..x] ]
+moveXTo :: (Eq a) => a -> ([a],[a]) -> ([a],[a])
+moveXTo x (as,bs) = case find (==x) as of
+  Nothing -> (as,bs)
+  Just _ -> (delete x as,x:bs)
 
-openBoard :: Coord -> [Peg] -> [Peg]
-openBoard (Coord x y) ps = let
-  pegMatch (Peg c _) = if xCoord c == x && yCoord c == y
-    then Peg c False
-    else Peg c True
-  in map pegMatch ps
+makeBoard :: Int -> Board
+makeBoard n = Board ps [] where
+  ps = [ Coord x y | x <- [1..n], y <- [1..x] ]
 
-removePeg' :: Coord -> Board -> Board
-removePeg' c (Board n ps) = Board n ps' where
-  (pre,rest) = break (\(Peg pc _) -> pc == c) ps
-  ps' = case rest of
-    [] -> ps
-    _:xs -> pre ++ xs
+-- Use to open board
+removePeg :: Coord -> Board -> Board
+removePeg c (Board ps hs) = Board ps' hs' where
+  (ps',hs') = moveXTo c (ps,hs)
 
 addPeg :: Coord -> Board -> Board
-addPeg c (Board n ps) = Board n $ Peg c True:ps
-
-onBoard :: Int -> Peg -> Bool
-onBoard n (Peg (Coord x y) _) = pos && inWidth where
-  pos = x > 0 && y > 0
-  inWidth = x <= n && y <= n
-
-togglePeg :: Peg -> Peg
-togglePeg (Peg c b) = Peg c $ not b
+addPeg c (Board ps hs) = Board ps' hs' where
+  (hs',ps') = moveXTo c (hs,ps)
 
 -- b's relation to a
-neighbor :: Peg -> Peg -> BoardMoves
-neighbor a b = let
-  compX = pegX b - pegX a
-  compY = pegY b - pegY a
-  in case (compX,compY) of
+neighbor :: Coord -> Coord -> BoardMoves
+neighbor (Coord x1 y1) (Coord x2 y2) = case (x2-x1, y2-y1) of
     (-1,0)  -> PosRight
     (1,0)   -> PosLeft
     (-1,-1) -> NegLeft
@@ -99,73 +94,33 @@ neighbor a b = let
     (0,1)   -> ZedRight
     _       -> None
 
-makeNeighbor :: Peg -> BoardMoves -> Maybe Peg
-makeNeighbor _ None     = Nothing
-makeNeighbor p PosRight = Just $ Peg (Coord (pegX p - 1) (pegY p)) True
-makeNeighbor p PosLeft  = Just $ Peg (Coord (pegX p + 1) (pegY p)) True
-makeNeighbor p NegLeft  = Just $ Peg (Coord (pegX p - 1) (pegY p - 1)) True
-makeNeighbor p NegRight = Just $ Peg (Coord (pegX p + 1) (pegY p + 1)) True
-makeNeighbor p ZedLeft  = Just $ Peg (Coord (pegX p) (pegY p - 1)) True
-makeNeighbor p ZedRight = Just $ Peg (Coord (pegX p) (pegY p + 1)) True
+validMove :: (Coord,Coord,Coord) -> BoardMoves
+validMove (a,b,c) = ab `bmAnd` bc where
+  ab = neighbor a b
+  bc = neighbor b c
 
-findThirdNeighbor :: Int -> Peg -> Peg -> Maybe Peg
-findThirdNeighbor s a b = third where
-  abRel = neighbor a b
-  third = case makeNeighbor b abRel of
-    Nothing -> Nothing
-    Just p -> if onBoard s p then Just p else Nothing
+nextMoves :: Board -> [(Coord,Coord,Coord)]
+nextMoves (Board ps hs) = trips' where
+  pPerm = 2 `nPerms` ps
+  trips = [ (a,b,c) | [a,b] <- pPerm, c <- hs ]
+  trips' = filter (\tri -> validMove tri /= None) trips
 
-validMove :: PegTriple -> BoardMoves
-validMove (Peg _ False,_,_) = None
-validMove (_,Peg _ False,_) = None
-validMove (_,_,Peg _ True)  = None
-validMove (a,b,c) = let
-  neighAB = neighbor a b
-  neighBC = neighbor b c
-  in if neighAB == neighBC
-    then neighAB
-    else None
+movePegs :: (Coord,Coord,Coord) -> Board -> Board
+movePegs (a,b,c) = removePeg a . removePeg b . addPeg c
 
-nextMoves :: [Peg] -> [(Peg,Peg,Peg)]
-nextMoves ps = ops' where
-  ops = options' ps
-  validOps = map validMove ops
-  ops' = map fst . filter (\(_,mv) -> mv /= None) $ zip ops validOps
-
-elem3Tup :: (Eq a) => a -> (a,a,a) -> Bool
-elem3Tup x (a,b,c)
-    | x == a = True
-    | x == b = True
-    | x == c = True
-    | otherwise = False
-
-movePegs :: [Peg] -> [[Peg]]
-movePegs ps = ps' where
-  nMoves = nextMoves ps
-  ps' = [ map (\p -> if p `elem3Tup` t then togglePeg p else p) ps | t <- nMoves ]
+movePegsAll :: [(Coord,Coord,Coord)] -> Board -> [Board]
+movePegsAll mvs b = [ movePegs mv b | mv <- mvs ]
 -- TODO : Implement logging
 
-movePegsChain :: [[Peg]] -> [[Peg]]
-movePegsChain lps = let
-  nlps = concatMap movePegs lps
-  in case nlps of
-    [] -> lps
-    _ -> movePegsChain nlps
+play :: ([Board],[Board]) -> ([Board],[Board])
+play ([],ended) = ([],ended)
+play (playing,ended) = play (playing',ended') where
+  boardAndMoves = zip playing $ map nextMoves playing
+  (newlyEnded,playable) = partition (\(_,m) -> null m) boardAndMoves
+  newlyEnded' = map fst newlyEnded
+  ended' = ended ++ newlyEnded'
+  playing' = concat [ movePegsAll mvs b | (b,mvs) <- playable ]
 
-movePegs' :: [Peg] -> [[Peg]]
-movePegs' ps = ps' where
-  nMoves = nextMoves ps
-  ps' = case nMoves of
-    [] -> [ps]
-    _  -> [ map (\p -> if p `elem3Tup` t then togglePeg p else p) ps | t <- nMoves ]
-
-movePegsChain' :: [[Peg]] -> [[Peg]]
-movePegsChain' lps = let
-  nlps = concatMap movePegs' lps
-  (same,new) = partition (`elem` lps) nlps
-  in case nlps of
-    [] -> lps
-    _ -> movePegsChain' nlps
-
-play :: [Peg] -> [[Peg]]
-play ps = movePegsChain [ps]
+playGame :: Board -> [Board]
+playGame b = endStates where
+  (_,endStates) = play ([b],[])
