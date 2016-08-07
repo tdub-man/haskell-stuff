@@ -1,31 +1,17 @@
 module PegBoard
     ( Coord
-    , Peg
-    , BoardMoves
-    , concatZip
-    , combinations
-    , nPerms
-    -- , removePeg
+    , Board
     , makeBoard
-    , neighbor
-    -- , validMove
-    , nextMoves
-    , movePegs
-    , movePegsAll
-    , play
     , playGame
     ) where
-import Data.List(nub,tails,find,delete,partition)
-import Control.Monad(replicateM)
+import Data.List(partition)
+import ListHelpers(nPerms,moveXTo)
 
-data Coord = Coord { xCoord :: Int, yCoord :: Int } deriving (Eq)
-data Peg = Peg { coord :: Coord, pegged :: Bool } deriving (Eq)
-data Board = Board { pegs :: [Coord], holes :: [Coord] } deriving (Eq)
+data Coord = Coord { _xCoord :: Int, _yCoord :: Int } deriving (Eq)
+data Board = Board { _pegs :: [Coord], _holes :: [Coord] } deriving (Eq)
 
 instance Show Coord where
   show (Coord x y) = show (x,y)
-instance Show Peg where
-  show (Peg c b) = show c ++ "_" ++ show b
 instance Show Board where
   show (Board ps hs) = "{ Pegs-" ++ show ps ++ " Holes-" ++ show hs ++ " }"
 
@@ -36,39 +22,9 @@ data BoardMoves = None
                 | PosLeft | PosRight
                 | ZedLeft | ZedRight
                 | NegLeft | NegRight deriving (Eq,Enum,Show)
-type PegTriple = (Peg,Peg,Peg)
 
 bmAnd :: BoardMoves -> BoardMoves -> BoardMoves
 bmAnd a b = if a == b then a else None
-
-pegX :: Peg -> Int
-pegX = xCoord . coord
-
-pegY :: Peg -> Int
-pegY = yCoord . coord
-
-concatZip :: [a] -> [a] -> [a]
-concatZip a = concat . zipWith (\x y -> [x,y]) a
-
-combinations :: Int -> [a] -> [[a]]
-combinations 0 _ = [[]]
-combinations n xs = do
-  (x:xs') <- tails xs
-  rest <- combinations (n-1) xs'
-  return $ x:rest
-
-nPerms :: (Eq a) => Int -> [a] -> [[a]]
-nPerms n = filter ((==n).length.nub) . replicateM n
-
--- remove :: (Eq a) => a -> [a] -> (Maybe a,[a])
--- remove x xs = case find (==x) xs of
---   Nothing -> (Nothing, xs)
---   Just _ -> (Just x, delete x xs)
-
-moveXTo :: (Eq a) => a -> ([a],[a]) -> ([a],[a])
-moveXTo x (as,bs) = case find (==x) as of
-  Nothing -> (as,bs)
-  Just _ -> (delete x as,x:bs)
 
 makeBoard :: Int -> Board
 makeBoard n = Board ps [] where
