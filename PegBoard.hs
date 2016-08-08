@@ -3,9 +3,10 @@ module PegBoard
     , Board
     , makeBoard
     , playGame
+    , showBoard
     ) where
-import Data.List(partition)
-import ListHelpers(nPerms,moveXTo)
+import Data.List(partition,sortBy,intercalate)
+import ListHelpers(nPerms,moveXTo,groupWithNs)
 
 data Coord = Coord { _xCoord :: Int, _yCoord :: Int } deriving (Eq)
 data Board = Board { _pegs :: [Coord], _holes :: [Coord] } deriving (Eq)
@@ -14,6 +15,27 @@ instance Show Coord where
   show (Coord x y) = show (x,y)
 instance Show Board where
   show (Board ps hs) = "{ Pegs-" ++ show ps ++ " Holes-" ++ show hs ++ " }"
+
+compareCoord :: Coord -> Coord -> Ordering
+compareCoord (Coord x1 y1) (Coord x2 y2) = let
+  xComp = x1 `compare` x2
+  yComp = y1 `compare` y2
+  in xComp `mappend` yComp
+
+groupTri :: [a] -> [[a]]
+groupTri as = groupWithNs as [1..]
+
+showBoard :: Board -> String
+showBoard (Board ps hs) = intercalate "\n" strs where
+  ps' = zip ps $ repeat (1 :: Int)
+  hs' = zip hs $ repeat (0 :: Int)
+  compF (a,_) (b,_) = a `compareCoord` b
+  allCoord = sortBy compF $ ps' ++ hs'
+  allCoord' = map (map snd) $ groupTri allCoord
+  acLength = length allCoord'
+  spaces n = concat . replicate n $ " "
+  spaceN = [acLength-1,acLength-2..1]
+  strs = zipWith (\n cs -> spaces n ++ show cs) spaceN allCoord'
 
 -- Pos[Left,Right] = Move along a line of positive slope
 -- Zed[Left,Right] = Move along a line of zero slope
