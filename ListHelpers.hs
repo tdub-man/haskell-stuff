@@ -5,6 +5,8 @@ module ListHelpers
     , combinations
     , nPerms
     , moveXTo
+    , groupWithNs
+    , longest
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
@@ -40,3 +42,13 @@ moveXTo :: (Eq a) => a -> ([a],[a]) -> ([a],[a])
 moveXTo x (as,bs) = case find (==x) as of
   Nothing -> (as,bs)
   Just _ -> (delete x as,x:bs)
+
+groupWithNs :: [a] -> [Int] -> [[a]]
+groupWithNs [] _ = []
+groupWithNs xs [] = [xs]
+groupWithNs xs (n:ns) = pre:suf' where
+  (pre,suf) = splitAt n xs
+  suf' = groupWithNs suf ns
+
+longest :: [[a]] -> Int
+longest xs = maximum $ map length xs
