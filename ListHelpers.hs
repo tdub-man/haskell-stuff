@@ -7,6 +7,8 @@ module ListHelpers
     , moveXTo
     , groupWithNs
     , longest
+    , compR
+    , compL
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
@@ -52,3 +54,23 @@ groupWithNs xs (n:ns) = pre:suf' where
 
 longest :: [[a]] -> Int
 longest xs = maximum $ map length xs
+
+compR :: (a -> a -> a) -> [a] -> [a]
+compR f as = snd . compRTup $ (as,[]) where
+  compRTup ([],ys)  = ([],ys)
+  compRTup ([_],ys) = ([],ys)
+  compRTup (xs,ys)  = compRTup (xs',y:ys) where
+    xs' = init xs
+    l = last xs
+    l2 = last xs'
+    y = f l l2
+
+compL :: (a -> a -> a) -> [a] -> [a]
+compL f as = snd . compLTup $ (as,[]) where
+  compLTup ([],ys)  = ([],ys)
+  compLTup ([_],ys) = ([],ys)
+  compLTup (xs,ys)  = compLTup (xs',y:ys) where
+    xs' = tail xs
+    h = head xs
+    h2 = head xs'
+    y = f h h2
