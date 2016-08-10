@@ -7,10 +7,12 @@ module HCN
     , primorialsN
     , divisors
     , numDivisors
+    , factors
     , smallestNDivs
     ) where
 import Primes
 import Data.List
+-- import ListHelpers(compR)
 
 length' :: [a] -> Integer
 length' = foldr (\_ -> (+) 1) 0
@@ -41,6 +43,9 @@ divisors n = filter dividesN [1..n] where
 
 numDivisors :: Integer -> Integer
 numDivisors = length' . divisors
+
+factors :: Integer -> [Integer]
+factors = filter isPrime . divisors
 
 -- smallestBigDivs :: [Integer]
 -- smallestBigDivs = [ let (Just n) = find (\i -> numDivisors i == x) [1..] in n | x <- [1..] ]
