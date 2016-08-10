@@ -1,9 +1,25 @@
 module MathHelpers
-    ( squareRoot
+    ( evens
+    , odds
+    , squares
+    , squareRoot
     ) where
 
 (.^) :: Num a => a -> Int -> a
 (.^) x n = x^n
+
+evens :: [Integer]
+evens = map (2*) [1..]
+
+odds :: [Integer]
+odds = map (\x -> 2*x - 1) [1..]
+
+squares :: [Integer]
+squares = map (\x -> x*x) [1..]
+
+-- Squares are repeated additions of consecutive odd numbers
+squaresOdds :: [Integer]
+squaresOdds = scanl1 (+) odds
 
 squareRoot :: Integer -> Integer
 squareRoot 0 = 0
@@ -16,3 +32,6 @@ squareRoot n =
        iters = iterate newtonStep (squareRoot (div n lowerN) * lowerRoot)
        isRoot r  =  r.^2 <= n && n < (r+1).^2
   in  head $ dropWhile (not . isRoot) iters
+
+triangles :: [Integer]
+triangles = scanl1 (+) [1..]
