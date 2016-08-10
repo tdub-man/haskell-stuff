@@ -48,6 +48,9 @@ sieveForm n = erasth ([],xs) where
   xs = 2:3:takeWhile (<= n) primeForm
 
 isPrime :: Integer -> Bool
+isPrime 1        = False
+isPrime 2        = True
+isPrime 3        = True
 isPrime n
     | even n     = False
     | n `mult` 3 = False
