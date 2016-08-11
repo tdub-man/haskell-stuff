@@ -14,6 +14,7 @@ module ListHelpers
     , compR
     , compL
     , middle
+    , iterateN
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
@@ -96,3 +97,6 @@ middle :: [a] -> [a]
 middle xs
     | length xs == 1 || length xs == 2 = []
     | otherwise = init . tail $ xs
+
+iterateN :: (a -> a) -> a -> Int -> a
+iterateN f x n = iterate f x !! n
