@@ -1,5 +1,6 @@
 module ListHelpers
-    ( nth
+    ( lengthIntegral
+    , nth
     , subList
     , concatZip
     , combinations
@@ -12,9 +13,13 @@ module ListHelpers
     , longest
     , compR
     , compL
+    , middle
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
+
+lengthIntegral :: (Integral b) => [a] -> b
+lengthIntegral = foldr (\_ -> (+) 1) 0
 
 nth :: [a] -> Int -> Maybe a
 nth [] _ = Nothing
@@ -86,3 +91,8 @@ compL f as = snd . compLTup $ (as,[]) where
     h = head xs
     h2 = head xs'
     y = f h h2
+
+middle :: [a] -> [a]
+middle xs
+    | length xs == 1 || length xs == 2 = []
+    | otherwise = init . tail $ xs
