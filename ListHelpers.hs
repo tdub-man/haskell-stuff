@@ -6,6 +6,9 @@ module ListHelpers
     , nPerms
     , moveXTo
     , groupWithNs
+    , shorter
+    , shortest
+    , longer
     , longest
     , compR
     , compL
@@ -52,8 +55,17 @@ groupWithNs xs (n:ns) = pre:suf' where
   (pre,suf) = splitAt n xs
   suf' = groupWithNs suf ns
 
-longest :: [[a]] -> Int
-longest xs = maximum $ map length xs
+shorter :: [a] -> [a] -> [a]
+shorter a b = if length a <= length b then a else b
+
+shortest :: [[a]] -> [a]
+shortest = foldr1 shorter
+
+longer :: [a] -> [a] -> [a]
+longer a b = if length a >= length b then a else b
+
+longest :: [[a]] -> [a]
+longest = foldr1 longer
 
 compR :: (a -> a -> a) -> [a] -> [a]
 compR f as = snd . compRTup $ (as,[]) where
