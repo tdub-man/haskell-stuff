@@ -4,6 +4,8 @@ module PegBoardAnalytics
     , endState
     , uniqueEndStates
     , numEndStates
+    , innerTriangle
+    , concentricTriangles
     , critPoints
     )where
 import PegBoard
@@ -50,42 +52,38 @@ innerTriangle :: Board -> Board
 innerTriangle b = Board mids [] where
   mids = concatMap middle . middle . rows $ b
 
-originShift :: Board -> Board
-originShift (Board ps _) = Board ps' [] where
-  ps' = map (\(Coord x y) -> Coord (x-2) (y-1)) ps
+concentricTriangles' :: (Board,[Board]) -> (Board,[Board])
+concentricTriangles' (Board [] _,bs) = (Board [] [],bs)
+concentricTriangles' (b,bs) = concentricTriangles' (b',bs') where
+  b' = innerTriangle b
+  bs' = b:bs
+
+concentricTriangles :: Board -> [Board]
+concentricTriangles b = snd . concentricTriangles' $ (b,[])
+
+originShift :: [Coord] -> [Coord]
+originShift = map (\(Coord x y) -> Coord (x-2) (y-1))
+
+originShift' :: Board -> Board
+originShift' (Board ps _) = Board ps' [] where
+  ps' = originShift ps
+
+insideShift :: [Coord] -> [Coord]
+insideShift = map (\(Coord x y) -> Coord (x+2) (y+1))
+
+insideShift' :: Board -> Board
+insideShift' (Board ps _) = Board ps' [] where
+  ps' = insideShift ps
+
 
 topLeftRow :: Board -> [Coord]
-topLeftRow (Board ps _) = filter (\(Coord _ y) -> y == 1) ps
-
-critPoints' :: (Board,[Coord]) -> (Board,[Coord])
-critPoints' (Board [] [],cs) = (Board [] [],cs)
-critPoints' (b,cs) = critPoints' (b',cs') where
-  b' = originShift . innerTriangle $ b
-  tlRow = topLeftRow b
-  lenTLRow = length tlRow
-  n = lenTLRow `ceilDiv` 2
-  cs' = cs ++ take n tlRow
+topLeftRow (Board [] _) = []
+topLeftRow (Board ps@(Coord _ y:_) _) = filter (\(Coord _ y') -> y' == y) ps
 
 critPoints :: Board -> [Coord]
-critPoints (Board [] _) = []
 critPoints b = cs where
-  (_,cs) = critPoints' (b,[])
-
--- ALL GAMES ON 5 BOARD
-
--- tCoords :: [Coord]
--- tCoords = [(Coord 1 1),(Coord 2 1),(Coord 3 1),(Coord 3 2)]
-
-tBoards :: [Board]
-tBoards = [ removePeg c b | c <- coords ] where
-  b = makeBoard 5
-  coords = critPoints b
-
-tAllGames :: [[BoardLog]]
-tAllGames = map playGameLog tBoards
-
-mapShow :: [[BoardLog]] -> IO ()
-mapShow = mapM_ (print . numEndStates)
-
-main :: IO ()
-main = mapShow tAllGames
+  inners = reverse . concentricTriangles $ b
+  tlRows = map topLeftRow inners
+  lenTLRows = map length tlRows
+  ns = map (`ceilDiv` 2) lenTLRows
+  cs = concat [ take n tlr | (tlr,n) <- zip tlRows ns ]
