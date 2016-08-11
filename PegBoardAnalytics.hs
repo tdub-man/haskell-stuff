@@ -1,5 +1,11 @@
-module Main where
-
+module PegBoardAnalytics
+    ( endWith
+    , shortestGame
+    , endState
+    , uniqueEndStates
+    , numEndStates
+    , critPoints
+    )where
 import PegBoard
 import Data.List(sortBy,nubBy,group,groupBy)
 import Data.Function(on)
@@ -39,7 +45,6 @@ numEndStates = numberOfPegCounts . endPegCount . uniqueEndStates where
 
 rows :: Board -> [[Coord]]
 rows (Board ps _) = groupBy (\(Coord a _) (Coord b _) -> a == b) ps
-
 
 innerTriangle :: Board -> Board
 innerTriangle b = Board mids [] where
