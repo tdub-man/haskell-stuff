@@ -3,10 +3,13 @@ module PegBoard
     , Board
     , makeBoard
     , removePeg
+    , pegCount
     , playGame
     , playGameLog
     , collectLog
     , showBoard
+    , showBoardLog
+    , endWith
     ) where
 import Data.List(partition,sortBy,intercalate)
 import ListHelpers(nPerms,moveXTo,groupWithNs)
@@ -41,7 +44,11 @@ showBoard (Board ps hs) = intercalate "\n" strs where
   acLength = length allCoord'
   spaces n = concat . replicate n $ " "
   spaceN = [acLength-1,acLength-2..1]
-  strs = zipWith (\n cs -> spaces n ++ show cs) spaceN allCoord'
+  lastLine = show . last $ allCoord'
+  strs = (++ [lastLine]) . zipWith (\n cs -> spaces n ++ show cs) spaceN $ allCoord'
+
+showBoardLog :: BoardLog -> [String]
+showBoardLog = map showBoard . collectLog
 
 changeBoard :: BoardLog -> Board -> BoardLog
 changeBoard (BoardLog b bs) x = BoardLog x (b:bs)
@@ -72,6 +79,9 @@ removePeg c (Board ps hs) = Board ps' hs' where
 addPeg :: Coord -> Board -> Board
 addPeg c (Board ps hs) = Board ps' hs' where
   (hs',ps') = moveXTo c (hs,ps)
+
+pegCount :: Board -> Int
+pegCount = length . _pegs
 
 -- b's relation to a
 neighbor :: Coord -> Coord -> BoardMoves
@@ -134,3 +144,6 @@ playGameLog :: Board -> [BoardLog]
 playGameLog b = games where
   bLog = BoardLog b []
   (_,games) = playLog ([bLog],[])
+
+endWith :: Int -> [BoardLog] -> [BoardLog]
+endWith n = filter ((==n) . pegCount . _current)
