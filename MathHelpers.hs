@@ -2,7 +2,9 @@ module MathHelpers
     ( evens
     , odds
     , squares
+    , triangles
     , squareRoot
+    , ceilDiv
     ) where
 
 (.^) :: Num a => a -> Int -> a
@@ -35,3 +37,8 @@ squareRoot n =
 
 triangles :: [Integer]
 triangles = scanl1 (+) [1..]
+
+ceilDiv :: (Integral a) => a -> a -> a
+ceilDiv a b = if a `mod` b == 0
+  then a `div` b
+  else (a `div` b) + 1
