@@ -13,7 +13,7 @@ module PegBoard
     , showBoardLog
     ) where
 import Data.List(partition,sortBy,intercalate)
-import ListHelpers(nPerms,moveXTo,groupWithNs)
+import ListHelpers(nPerms,moveXTo,groupWithNs,takeThrough)
 
 data Coord = Coord { _xCoord :: Int, _yCoord :: Int } deriving (Eq)
 data Board = Board { _pegs :: [Coord], _holes :: [Coord] } deriving (Eq)
@@ -25,6 +25,11 @@ instance Show Board where
   show (Board ps hs) = "{ Pegs-" ++ show ps ++ " Holes-" ++ show hs ++ " }"
 instance Show BoardLog where
   show = show . collectLog
+instance Read Coord where
+  readsPrec _ input = [(c,rest)] where
+    (tup,rest) = takeThrough (/=')') input
+    (x,y) = read tup :: (Int,Int)
+    c = Coord x y
 
 compareCoord :: Coord -> Coord -> Ordering
 compareCoord (Coord x1 y1) (Coord x2 y2) = let
