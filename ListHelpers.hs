@@ -15,6 +15,7 @@ module ListHelpers
     , compL
     , middle
     , iterateN
+    , takeThrough
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
@@ -100,3 +101,11 @@ middle xs
 
 iterateN :: (a -> a) -> a -> Int -> a
 iterateN f x n = iterate f x !! n
+
+takeThrough :: (a -> Bool) -> [a] -> ([a],[a])
+takeThrough f xs = tWhile f ([],xs) where
+  tWhile _ (as,[]) = (as,[])
+  tWhile g (as,b:bs) = if f b
+    then tWhile g (as ++ [b],bs)
+    else (as ++ [b],bs)
+  -- (_,ys) = tWhile f (xs,[])
