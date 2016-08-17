@@ -16,9 +16,12 @@ module ListHelpers
     , middle
     , iterateN
     , takeThrough
+    , distMinMax
+    , numMid
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
+import MathHelpers(dist)
 
 lengthIntegral :: (Integral b) => [a] -> b
 lengthIntegral = foldr (\_ -> (+) 1) 0
@@ -109,3 +112,20 @@ takeThrough f xs = tWhile f ([],xs) where
     then tWhile g (as ++ [b],bs)
     else (as ++ [b],bs)
   -- (_,ys) = tWhile f (xs,[])
+
+-- Multiplies the distance of a number
+-- from the minimum and maximum of the list
+distMinMax :: (Num a, Ord a) => [a] -> (a -> a)
+distMinMax xs = \x -> distMin x * distMax x where
+  distMin = dist $ minimum xs
+  distMax = dist $ maximum xs
+
+-- Doesn't necessarily find the middle element,
+-- just the numerically middle-most element
+-- between the minimum and maximum
+numMid :: (Num a, Ord a) => [a] -> a
+numMid x = foldr1 maxDist x where
+  dist' = distMinMax x
+  maxDist a b = if max da db == da then a else b where
+    da = dist' a
+    db = dist' b

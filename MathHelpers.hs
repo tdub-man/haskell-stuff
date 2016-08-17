@@ -5,6 +5,7 @@ module MathHelpers
     , triangles
     , squareRoot
     , ceilDiv
+    , dist
     ) where
 
 (.^) :: Num a => a -> Int -> a
@@ -42,3 +43,6 @@ ceilDiv :: (Integral a) => a -> a -> a
 ceilDiv a b = if a `mod` b == 0
   then a `div` b
   else (a `div` b) + 1
+
+dist :: (Num a) => a -> a -> a
+dist a b = abs $ a-b
