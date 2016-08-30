@@ -10,6 +10,7 @@ module Queue
 import Control.Applicative
 import Data.Monoid
 import Control.Monad.State
+import Helpers.Classes
 
 data Queue a = Queue { inbox :: [a], outbox :: [a] } deriving (Eq)
 

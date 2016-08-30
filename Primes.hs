@@ -6,7 +6,7 @@ module Primes
     , isPrime'
     , nPrimes
     ) where
-import MathHelpers(squareRoot)
+import Helpers.Math(squareRoot)
 import Data.List
 
 type PrimeRec = ([Integer],[Integer])

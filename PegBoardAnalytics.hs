@@ -11,8 +11,8 @@ module PegBoardAnalytics
 import PegBoard
 import Data.List(sortBy,nubBy,group,groupBy)
 import Data.Function(on)
-import ListHelpers(middle)
-import MathHelpers(ceilDiv)
+import Helpers.Lists(middle)
+import Helpers.Math(ceilDiv)
 
 -- ANALYTICS
 

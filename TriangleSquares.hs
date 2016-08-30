@@ -10,7 +10,7 @@ module TriangleSquares
     , calcTriangleSquares
     , calcTriangleSquaresFrom
     ) where
-import MathHelpers(squareRoot)
+import Helpers.Math(squareRoot)
 
 sqr :: Integer -> Integer
 sqr n = n * n

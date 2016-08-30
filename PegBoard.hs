@@ -13,7 +13,7 @@ module PegBoard
     , showBoardLog
     ) where
 import Data.List(partition,sortBy,intercalate)
-import ListHelpers(nPerms,moveXTo,groupWithNs,takeThrough)
+import Helpers.Lists(nPerms,moveXTo,groupWithNs,takeThrough)
 
 data Coord = Coord { _xCoord :: Int, _yCoord :: Int } deriving (Eq)
 data Board = Board { _pegs :: [Coord], _holes :: [Coord] } deriving (Eq)
