@@ -4,15 +4,17 @@
 {-# LANGUAGE KindSignatures #-}
 
 module Helpers.Classes
-    ( DistA(distA,distMinMaxA,midElemA)
-    , DistB(distB,distMinMaxB,midElemB)
+    ( DistA(distA,multA,distMinMaxA,midElemA)
+    , DistB(distB,multB,distMinMaxB,midElemB)
     ) where
 
 -- For datatype a of kind *
-class (Ord a, Ord n, Num n) => DistA a n | a -> n where
+class (Ord a, Ord n) => DistA a n | a -> n, n -> a where
   distA :: a -> a -> n
+  -- Some form of multiplication
+  multA :: n -> n -> n
   distMinMaxA :: (Foldable t) => t a -> (a -> n)
-  distMinMaxA xs = \x -> distMin x * distMax x where
+  distMinMaxA xs = \x -> distMin x `multA` distMax x where
     distMin = distA $ minimum xs
     distMax = distA $ maximum xs
   midElemA :: (Foldable t) => t a -> a
@@ -23,10 +25,11 @@ class (Ord a, Ord n, Num n) => DistA a n | a -> n where
       db = dist' b
 
 -- For datatype a of kind * -> *
-class (Ord (a n), Ord n, Num n) => DistB (a :: * -> *) n | a n -> n where
+class (Ord (a n), Ord n) => DistB (a :: * -> *) n | a n -> n, n -> a n where
   distB :: a n -> a n -> n
+  multB :: n -> n -> n
   distMinMaxB :: (Foldable t) => t (a n) -> (a n -> n)
-  distMinMaxB xs = \x -> distMin x * distMax x where
+  distMinMaxB xs = \x -> distMin x `multB` distMax x where
     distMin = distB $ minimum xs
     distMax = distB $ maximum xs
   midElemB :: (Foldable t) => t (a n) -> a n
