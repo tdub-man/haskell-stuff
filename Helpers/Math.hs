@@ -1,5 +1,6 @@
 module Helpers.Math
-    ( evens
+    ( (.^)
+    , evens
     , odds
     , squares
     , triangles
@@ -7,9 +8,11 @@ module Helpers.Math
     , ceilDiv
     , dist
     , divTimes
+    , factorial
+    , intSize
     ) where
 
-(.^) :: Num a => a -> Int -> a
+(.^) :: Num a => a -> Integer -> a
 (.^) x n = x^n
 
 evens :: [Integer]
@@ -50,3 +53,15 @@ dist a b = abs $ a-b
 
 divTimes :: (Integral a) => a -> a -> a
 divTimes x = fst . divMod x
+
+factorial :: (Integral a) => a -> a
+factorial 0 = 1
+factorial n = fst . factHelp $ (1,n) where
+  factHelp (a,0) = (a,0)
+  factHelp (a,b) = factHelp (a*b,b-1)
+
+intSize :: (Integral a) => a -> a
+intSize 0 = 1
+intSize n = fst . sizeHelp $ (0,n) where
+  sizeHelp (s,0) = (s,0)
+  sizeHelp (s,x) = sizeHelp (s+1,x `div` 10)
