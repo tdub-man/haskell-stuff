@@ -17,6 +17,7 @@ type Time = (Int,Int,Int)
 type QueueTime = Queue Time
 
 instance DistA Time Int where
+  multA = (*)
   distA (h1,m1,s1) (h2,m2,s2) = abs $ t1 - t2 where
     t1 = (3600 * h1) + (60 * m1) + s1
     t2 = (3600 * h2) + (60 * m2) + s2
