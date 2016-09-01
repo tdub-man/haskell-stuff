@@ -4,7 +4,7 @@ module Helpers.Lists
     , subList
     , concatZip
     , combinations
-    , nPerms
+    , nPerms, generalNPerms, perms, generalPerms
     , moveXTo
     , groupWithNs
     , shorter, shortest
@@ -13,6 +13,7 @@ module Helpers.Lists
     , middle
     , iterateN
     , takeThrough
+    , foldlBind
     ) where
 import Data.List(tails,nub,find,delete)
 import Control.Monad(replicateM)
@@ -46,6 +47,22 @@ combinations n xs = do
 
 nPerms :: (Eq a) => Int -> [a] -> [[a]]
 nPerms n = filter ((==n).length.nub) . replicateM n
+
+generalNPerms :: Int -> [a] -> [[a]]
+generalNPerms n x = res where
+  replace n' = x !! n'
+  ps = nPerms n [0..length x - 1]
+  res = map (map replace) ps
+
+perms :: (Eq a) => [a] -> [[a]]
+perms x = nPerms (length x) x
+
+generalPerms :: [a] -> [[a]]
+generalPerms x = generalNPerms (length x) x
+-- generalPerms x = res where
+--   replace n = x !! n
+--   ps = perms [0..length x - 1]
+--   res = map (map replace) ps
 
 moveXTo :: (Eq a) => a -> ([a],[a]) -> ([a],[a])
 moveXTo x (as,bs) = case find (==x) as of
@@ -106,3 +123,6 @@ takeThrough f xs = tWhile f ([],xs) where
     then tWhile g (as ++ [b],bs)
     else (as ++ [b],bs)
   -- (_,ys) = tWhile f (xs,[])
+
+foldlBind :: (Monad m) => a -> [a -> m a] -> m a
+foldlBind x = foldl (>>=) (return x)
