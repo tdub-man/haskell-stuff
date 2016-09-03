@@ -15,6 +15,7 @@ module Kinematics
     , ex
     ) where
 import Helpers.Lists(generalPerms,generalNPerms,foldlBind)
+import Data.List(nub)
 
 data SigDig n = Null | SigDig n deriving (Eq,Show)
 data Motion n = Motion { _di :: SigDig n, _df :: SigDig n
@@ -66,6 +67,9 @@ cPNSets n = conses where
 fExs :: Int -> [Motion Double]
 fExs n = fs <*> [ex] where
   fs = cPNSets n
+
+nfExs :: Int -> [Motion Double]
+nfExs = nub . fExs
 
 calcVf :: (Floating n) => Motion n -> Maybe (Motion n)
 calcVf (Motion di df vi'@(SigDig vi) _ a'@(SigDig a) t'@(SigDig t)) =
@@ -155,6 +159,7 @@ findPossible m
           res = map (foldlBind m) eqs'
           resF = filter (/=Nothing) res
           exJust (Just x) = x
-          m'' = if null resF
+          resF' = filter (allValues . exJust) resF
+          m'' = if null resF'
             then m
             else head . map exJust $ resF
