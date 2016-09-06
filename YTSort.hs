@@ -14,7 +14,7 @@ import Helpers.Classes
 import Helpers.Math(divTimes)
 import Helpers.Lists(compMapL)
 
-data MoveOp = Top | Leave | Bottom deriving (Eq,Ord)
+data MoveOp = Top | Leave | Bottom deriving (Eq,Ord,Show)
 
 type Time = (Int,Int,Int)
 type Times = [Time]
@@ -60,9 +60,9 @@ timesSorted = all (==LT) . compMapL tComp
 
 tMove :: Time -> Time -> TimeOp
 tMove a b = case a `tComp` b of
-  LT -> (b,Top)
-  EQ -> (b,Leave)
-  GT -> (b,Bottom)
+  LT -> (a,Top)
+  EQ -> (a,Leave)
+  GT -> (a,Bottom)
 
 startSort :: Times -> (TimeOps,Time)
 startSort ts = (tsOps,mid) where
@@ -72,47 +72,29 @@ startSort ts = (tsOps,mid) where
 sortTop :: Times -> TimeOps
 sortTop ts = tsOps where
   bot = foldl1 tMax ts
-  tsOps = map (tMove bot) ts
+  tsOps = map (`tMove` bot) ts
 
 sortBot :: Times -> TimeOps
 sortBot ts = tsOps where
   top = foldl1 tMin ts
-  tsOps = map (tMove top) ts
+  tsOps = map (`tMove` top) ts
 
--- evalOps :: TimeOps -> Times
--- evalOps tsOps = where
---   mv (x:xs) = case snd x of
---     Top -> mv $ (fst x,Leave):xs
---     Leave -> mv
+evalOps :: TimeOps -> Times
+evalOps tsOps = ts where
+  tops = filter (\(_,op) -> op == Top) tsOps
+  leaves = filter (\(_,op) -> op == Leave) tsOps
+  bots = filter (\(_,op) -> op == Bottom) tsOps
+  tsOps' = tops ++ leaves ++ bots
+  ts = map fst tsOps'
 
--- closer :: (Num a, Ord a) => a -> (a,a) -> (a,a)
--- closer a (b,x) = if dist a x < dist b x then (a,x) else (b,x)
+sortTimes :: Times -> Times
+sortTimes ts
+  | timesSorted ts = ts
+  | otherwise = fst . sortHelp $ ([],ts) where
+      sortHelp (s,[]) = (s,[])
+      sortHelp (s,us) = sortHelp (s',us') where
+        xs = evalOps . sortBot $ us
+        us' = tail xs
+        s' = s ++ [head xs]
 
--- qLess :: (Ord a) => Queue a -> Queue a
--- qLess (Queue [] []) = emptyQueue
--- qLess q = takeQueueWhile (< e) q where
---   (Just e,_) = pop q
---
--- type QueueTriple x = (Queue x, Queue x, Queue x)
---
--- emptyQueueTri :: QueueTriple a
--- emptyQueueTri = (emptyQueue,emptyQueue,emptyQueue)
---
--- qCompare :: (x -> Ordering) -> Queue x -> QueueTriple x -> QueueTriple x
--- qCompare _ (Queue [] []) qtri = qtri
--- qCompare f qx (qa,qb,qc) = let
---   (Just x,qx') = pop qx
---   qtri' = case f x of
---     LT -> (push x qa,qb,qc)
---     EQ -> (qa,push x qb,qc)
---     GT -> (qa,qb,push x qc)
---   in qCompare f qx' qtri'
---
--- queueSort :: (Ord x) => Queue x -> Queue x
--- queueSort (Queue [] []) = emptyQueue
--- queueSort qx = chainQueues [qa',qb,qc'] where
---   (Just x,_) = pop qx
---   comp = (`compare` x)
---   (qa,qb,qc) = qCompare comp qx emptyQueueTri
---   qa' = queueSort qa
---   qc' = queueSort qc
+-- Collect log of all ops required to sort the list
