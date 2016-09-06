@@ -10,6 +10,7 @@ module Helpers.Lists
     , shorter, shortest
     , longer, longest
     , compR, compL
+    , compMapR, compMapL
     , middle
     , iterateN
     , takeThrough
@@ -89,7 +90,10 @@ longest :: [[a]] -> [a]
 longest = foldr1 longer
 
 compR :: (a -> a -> a) -> [a] -> [a]
-compR f as = snd . compRTup $ (as,[]) where
+compR = compMapR
+
+compMapR :: (a -> a -> b) -> [a] -> [b]
+compMapR f as = snd . compRTup $ (as,[]) where
   compRTup ([],ys)  = ([],ys)
   compRTup ([_],ys) = ([],ys)
   compRTup (xs,ys)  = compRTup (xs',y:ys) where
@@ -99,7 +103,10 @@ compR f as = snd . compRTup $ (as,[]) where
     y = f l l2
 
 compL :: (a -> a -> a) -> [a] -> [a]
-compL f as = snd . compLTup $ (as,[]) where
+compL = compMapL
+
+compMapL :: (a -> a -> b) -> [a] -> [b]
+compMapL f as = reverse . snd . compLTup $ (as,[]) where
   compLTup ([],ys)  = ([],ys)
   compLTup ([_],ys) = ([],ys)
   compLTup (xs,ys)  = compLTup (xs',y:ys) where
