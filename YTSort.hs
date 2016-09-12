@@ -8,11 +8,14 @@ module YTSort
     -- , qEither, qCompare
     -- , queueSort
     , secs, fTime, tAdd, tDiff, tComp
+    , sortTimes, sortAndLog
+    , simpleLog
     ) where
 -- import Queue
 import Helpers.Classes
 import Helpers.Math(divTimes)
 import Helpers.Lists(compMapL)
+import Data.List(sortBy)
 
 data MoveOp = Top | Leave | Bottom deriving (Eq,Ord,Show)
 
@@ -98,3 +101,30 @@ sortTimes ts
         s' = s ++ [head xs]
 
 -- Collect log of all ops required to sort the list
+
+logOps :: TimeOps -> TimeOps -> TimeOps
+logOps old new = old ++ new
+
+sortAndLog :: (Times,TimeOps) -> (Times,TimeOps)
+sortAndLog (ts,opLog)
+  | timesSorted ts = (ts,opLog)
+  | otherwise = (ts',opLog') where
+      (ts',_,opLog') = sortHelp ([],ts,opLog)
+      sortHelp (s,[],ls) = (s,[],ls)
+      sortHelp (s,us,ls) = sortHelp (s',us',ls') where
+        ops = sortBot us
+        ls' = logOps ls ops
+        xs = evalOps ops
+        us' = tail xs
+        s' = s ++ [head xs]
+
+-- This solution is dead simple
+-- I just have to find a way to match
+-- The items on the website to the
+-- items in the list
+-- I could even just sort the times
+-- and apply the bottom function to
+-- each web item as it is matched
+simpleLog :: Times -> TimeOps
+simpleLog = map moveBot . sortBy tComp where
+  moveBot x = (x,Bottom)
