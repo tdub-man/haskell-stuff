@@ -1,0 +1,3 @@
+let b = removePeg (Coord 3 2) . makeBoard $ 5
+let games = playGameLog b
+mapM_ putStrLn . showBoardLog . head . endWith 1 $ games
