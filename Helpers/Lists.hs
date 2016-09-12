@@ -1,7 +1,7 @@
 module Helpers.Lists
     ( lengthIntegral
     , nth
-    , subList
+    , subList, subSelect
     , concatZip
     , combinations
     , nPerms, generalNPerms, perms, generalPerms
@@ -11,7 +11,7 @@ module Helpers.Lists
     , longer, longest
     , compR, compL
     , compMapR, compMapL
-    , middle
+    , middle, middleElem
     , iterateN
     , takeThrough
     , foldlBind
@@ -35,6 +35,14 @@ subList n xs
       rest = drop n xs
       in Just (taken,rest)
   | otherwise = Just ([],xs)
+
+subSelect :: Int -> [a] -> Maybe ([a], Maybe a, [a])
+subSelect _ [] = Nothing
+subSelect n xs = Just (taken',selected,rest) where
+  ( Just (taken,rest) ) = subList n xs
+  (taken',selected) = if null taken
+    then (taken,Nothing)
+    else (init taken,Just . last $ taken)
 
 concatZip :: [a] -> [a] -> [a]
 concatZip a = concat . zipWith (\x y -> [x,y]) a
@@ -119,6 +127,14 @@ middle :: [a] -> [a]
 middle xs
     | length xs == 1 || length xs == 2 = []
     | otherwise = init . tail $ xs
+
+middleElem :: [a] -> Maybe a
+middleElem [] = Nothing
+middleElem [x] = Just x
+middleElem [_,_] = Nothing
+middleElem xs
+    | length xs `mod` 2 == 0 = Nothing
+    | otherwise = middleElem . middle $ xs
 
 iterateN :: (a -> a) -> a -> Int -> a
 iterateN f x n = iterate f x !! n
