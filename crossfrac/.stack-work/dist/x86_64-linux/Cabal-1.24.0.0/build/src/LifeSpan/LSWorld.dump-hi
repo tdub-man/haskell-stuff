@@ -1,0 +1,386 @@
+
+==================== FINAL INTERFACE ====================
+2016-09-20 21:09:47.965349 UTC
+
+interface crossfrac-0.1.0.0-LqWiCV7pRitGpJbq1TgxgV:LSWorld 8001
+  interface hash: 715359aa1567c47d6c5cf491edd0cd1c
+  ABI hash: b7394cb25af9bcb47b90089554009169
+  export-list hash: ab72f42e44dbcc6eca66b50d0d48d03d
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 61b982f7abcefcc02ec93cdfc176153b
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  LSWorld.evolve
+  LSWorld.genesis
+  LSWorld.genesis'
+  LSWorld.render
+  LSWorld.stepsMax
+  LSWorld.World{LSWorld.World}
+module dependencies: Cell Community
+package dependencies: GLURaw-2.0.0.2@GLURaw-2.0.0.2-FbcPHzTa7vLEnCQ0kkJ8B4
+                      GLUT-2.7.0.10@GLUT-2.7.0.10-A3NqGto8XAVI0ysflkZZW9
+                      ObjectName-1.1.0.1@ObjectName-1.1.0.1-HHHIolNI8Pm5H3OGkgSUrO
+                      OpenGL-3.0.1.0@OpenGL-3.0.1.0-2SQfSEFR02AIolFfoam9tJ
+                      OpenGLRaw-3.2.2.0@OpenGLRaw-3.2.2.0-KWU3ruQNCGR7AsVafRovL
+                      StateVar-1.1.0.4@StateVar-1.1.0.4-CJpWsiXJdd89SnV9dZtTwc
+                      array-0.5.1.1@array-0.5.1.1 base-4.9.0.0
+                      binary-0.8.3.0@binary-0.8.3.0
+                      bmp-1.2.6.3@bmp-1.2.6.3-KF4xHl5RTVIp6NQI8dI2I
+                      bytestring-0.10.8.1@bytestring-0.10.8.1
+                      containers-0.5.7.1@containers-0.5.7.1
+                      deepseq-1.4.2.0@deepseq-1.4.2.0
+                      fixed-0.2.1.1@fixed-0.2.1.1-21JkkJmr6h52cZo1o8cauA ghc-prim-0.5.0.0
+                      gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB
+                      gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr
+                      half-0.2.2.3@half-0.2.2.3-BFHx0LiJemg6baNXrjGThF
+                      integer-gmp-1.0.0.1 random-1.1@random-1.1-54KmMHXjttlERYcr1mvsAe
+                      stm-2.4.4.1@stm-2.4.4.1-4z2NRWnB0NIIUvSJsHW0kF
+                      text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s
+                      time-1.6.0.1@time-1.6.0.1
+orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
+         binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
+         bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
+         gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture
+         stm-2.4.4.1@stm-2.4.4.1-4z2NRWnB0NIIUvSJsHW0kF:Control.Monad.STM
+         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text
+         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text.Show
+         time-1.6.0.1@time-1.6.0.1:Data.Time.Calendar.Gregorian
+         time-1.6.0.1@time-1.6.0.1:Data.Time.Format.Parse
+         time-1.6.0.1@time-1.6.0.1:Data.Time.LocalTime.LocalTime
+family instance modules: base-4.9.0.0:Control.Applicative
+                         base-4.9.0.0:Data.Complex base-4.9.0.0:Data.Either
+                         base-4.9.0.0:Data.Functor.Const base-4.9.0.0:Data.Functor.Identity
+                         base-4.9.0.0:Data.List.NonEmpty base-4.9.0.0:Data.Monoid
+                         base-4.9.0.0:Data.Semigroup base-4.9.0.0:Data.Type.Equality
+                         base-4.9.0.0:Data.Version base-4.9.0.0:Data.Void
+                         base-4.9.0.0:GHC.Exts base-4.9.0.0:GHC.Generics
+                         base-4.9.0.0:GHC.IO.Exception base-4.9.0.0:GHC.TypeLits
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntMap.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntSet.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Map.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Sequence
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
+                         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text
+import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
+import  -/  base-4.9.0.0:GHC.Float 469226b1bc53433e95d0167dec5d0312
+import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
+import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
+import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
+import  -/  Cell 0ee825affa42ab02b07e7fa073caa13b
+  exports: f1e33065e6d5c24200a9b66269e732e0
+  Cell 07cffa0ea79de6d41ee245fa90c4a2d0
+import  -/  Community e78efa77041bb7e4c4b61c9597781132
+  exports: 455e89c06ff739b1269f481302e48efa
+  Community 2b75141e0313e42f48fb010abad2ef38
+  generation 55c73e507c216155c418da717a036b78
+  render c97bf6aace5cdeb1941224f57f10ed49
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss d5b982018b0c758f00994fce74453c04
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Data.ViewPort e58f82e5a6f985b2015270a8c26f6712
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Interface.Pure.Simulate 8a118cec02736d63308d1c10159bfe2a
+import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Color 1961f99f86447a13667ebc7ff1dc0ff4
+import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
+import  -/  random-1.1@random-1.1-54KmMHXjttlERYcr1mvsAe:System.Random 12e582ce6a18ca02c107789bb28c509c
+cea90a5aa1777bd7522c73b5f5afe61d
+  $fShowWorld :: GHC.Show.Show LSWorld.World
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ LSWorld.World
+                  LSWorld.$fShowWorld_$cshowsPrec
+                  LSWorld.$fShowWorld_$cshow
+                  LSWorld.$fShowWorld_$cshowList -}
+cea90a5aa1777bd7522c73b5f5afe61d
+  $fShowWorld1 :: LSWorld.World -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ (w :: LSWorld.World) (w1 :: GHC.Base.String) ->
+                 case w of ww { LSWorld.World ww1 ww2 ww3 ->
+                 LSWorld.$w$cshowsPrec 0# ww1 ww2 ww3 w1 }) -}
+346644f3dca2018d6f6a361ecc427358
+  $fShowWorld2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "World "#) -}
+cea90a5aa1777bd7522c73b5f5afe61d
+  $fShowWorld_$cshow :: LSWorld.World -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U,1*U(U,U),1*U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: LSWorld.World) ->
+                 LSWorld.$fShowWorld_$cshowsPrec
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+cea90a5aa1777bd7522c73b5f5afe61d
+  $fShowWorld_$cshowList :: [LSWorld.World] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ LSWorld.World
+                   LSWorld.$fShowWorld1) -}
+cea90a5aa1777bd7522c73b5f5afe61d
+  $fShowWorld_$cshowsPrec ::
+    GHC.Types.Int -> LSWorld.World -> GHC.Show.ShowS
+  {- Arity: 3,
+     Strictness: <S(S),1*U(U)><S,1*U(1*U,1*U(U,U),1*U(U))><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: LSWorld.World)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { LSWorld.World ww3 ww4 ww5 ->
+                 LSWorld.$w$cshowsPrec ww1 ww3 ww4 ww5 w2 } }) -}
+639c5d966e8fcf067b23bd99582bab72
+  $tc'World :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1887638851154053100##
+                   7479638322184045534##
+                   LSWorld.$trModule
+                   LSWorld.$tc'World1) -}
+0f8f0dbcf494f3587ac216cd40f47915
+  $tc'World1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'World"#) -}
+887515892c2562fc4ae0beb5a0fc3a92
+  $tcWorld :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1624291172892362161##
+                   16942696320307453551##
+                   LSWorld.$trModule
+                   LSWorld.$tcWorld1) -}
+bfacbf2ca5bf7c9c46bab904f6613fe2
+  $tcWorld1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "World"#) -}
+aa0c327882408aebc5210229b24bbb91
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   LSWorld.$trModule2
+                   LSWorld.$trModule1) -}
+7d508cc4bb1579632b06669bf41ae383
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "LSWorld"#) -}
+7793c6f2209bad473b0314f78f9b7929
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "crossfrac-0.1.0.0-LqWiCV7pRitGpJbq1TgxgV"#) -}
+1633723801d637e726a1dfe6057f44e5
+  $w$cshowsPrec ::
+    GHC.Prim.Int#
+    -> Community.Community
+    -> System.Random.StdGen
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 5, Strictness: <S,U><L,1*U><L,1*U(U,U)><L,1*U(U)><L,U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: Community.Community)
+                   (ww2 :: System.Random.StdGen)
+                   (ww3 :: GHC.Types.Int)
+                   (w :: GHC.Base.String) ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,U> -}
+                   = \ (x :: GHC.Base.String)[OneShot] ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       LSWorld.$fShowWorld2
+                       (GHC.Show.showList__
+                          @ Cell.Cell
+                          Cell.$fShowCell1
+                          ww1
+                          (GHC.Types.:
+                             @ GHC.Types.Char
+                             GHC.Show.showSpace1
+                             (case ww2 of ww4 { System.Random.StdGen ww5 ww6 ->
+                              case GHC.Show.$wshowSignedInt
+                                     11#
+                                     ww5
+                                     (GHC.Types.:
+                                        @ GHC.Types.Char
+                                        System.Random.$fShowStdGen2
+                                        (case GHC.Show.$wshowSignedInt
+                                                11#
+                                                ww6
+                                                (GHC.Types.:
+                                                   @ GHC.Types.Char
+                                                   GHC.Show.showSpace1
+                                                   (case ww3 of ww7 { GHC.Types.I# ww8 ->
+                                                    case GHC.Show.$wshowSignedInt
+                                                           11#
+                                                           ww8
+                                                           x of ww9 { (#,#) ww10 ww11 ->
+                                                    GHC.Types.:
+                                                      @ GHC.Types.Char
+                                                      ww10
+                                                      ww11 } })) of ww7 { (#,#) ww8 ww9 ->
+                                         GHC.Types.:
+                                           @ GHC.Types.Char
+                                           ww8
+                                           ww9 })) of ww7 { (#,#) ww8 ww9 ->
+                              GHC.Types.: @ GHC.Types.Char ww8 ww9 } })))
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11#) of wild {
+                   GHC.Types.False -> p w
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.shows6 w)) }) -}
+9e882591b570cc81b2baba833f9c15c8
+  $wevolve ::
+    Community.Community
+    -> System.Random.StdGen
+    -> GHC.Prim.Int#
+    -> (# Community.Community, System.Random.StdGen, GHC.Types.Int #)
+  {- Arity: 3, Strictness: <L,U><L,U(U,U)><S,U>, Inline: [0],
+     Unfolding: (\ (ww :: Community.Community)
+                   (ww1 :: System.Random.StdGen)
+                   (ww2 :: GHC.Prim.Int#) ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.># ww2 20#) of wild {
+                   GHC.Types.False
+                   -> let {
+                        ds :: (System.Random.StdGen, System.Random.StdGen)
+                        = case ww1 of ww3 { System.Random.StdGen ww4 ww5 ->
+                          case System.Random.$w$csplit ww4 ww5 of ww6 { (#,#) ww7 ww8 ->
+                          (ww7, ww8) } }
+                      } in
+                      (# let {
+                           ds1 :: (System.Random.StdGen, System.Random.StdGen)
+                           = case ds of wild1 { (,) genThis genNext ->
+                             case genThis of ww3 { System.Random.StdGen ww4 ww5 ->
+                             case System.Random.$w$csplit ww4 ww5 of ww6 { (#,#) ww7 ww8 ->
+                             (ww7, ww8) } } }
+                         } in
+                         Community.survive
+                           (Community.zipWith4
+                              @ Cell.Cell
+                              @ GHC.Types.Float
+                              @ GHC.Types.Float
+                              @ GHC.Types.Int
+                              @ Cell.Cell
+                              Cell.offspring
+                              ww
+                              (LSWorld.evolve_go1 (case ds1 of wild1 { (,) genA genS -> genA }))
+                              (LSWorld.evolve_go (case ds1 of wild1 { (,) genA genS -> genS }))
+                              Community.generation_xs)
+                           (Community.age ww),
+                         case ds of wild1 { (,) genThis genNext -> genNext },
+                         GHC.Types.I# (GHC.Prim.+# ww2 1#) #)
+                   GHC.Types.True -> (# ww, ww1, GHC.Types.I# ww2 #) }) -}
+cea90a5aa1777bd7522c73b5f5afe61d
+  data World
+    = World Community.Community System.Random.StdGen GHC.Types.Int
+b0cc7e03a2b9d06b2bca0722a3a5720a
+  evolve ::
+    Graphics.Gloss.Data.ViewPort.ViewPort
+    -> GHC.Types.Float -> LSWorld.World -> LSWorld.World
+  {- Arity: 3, Strictness: <L,A><L,A><S(LLS(S)),1*U(U,U(U,U),U(U))>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: Graphics.Gloss.Data.ViewPort.ViewPort)
+                   (w1 :: GHC.Types.Float)
+                   (w2 :: LSWorld.World) ->
+                 case w2 of ww { LSWorld.World ww1 ww2 ww3 ->
+                 case ww3 of ww4 { GHC.Types.I# ww5 ->
+                 case LSWorld.$wevolve ww1 ww2 ww5 of ww6 { (#,,#) ww7 ww8 ww9 ->
+                 LSWorld.World ww7 ww8 ww9 } } }) -}
+ef2798debcc5626981eeaa05ab18dad7
+  evolve_go :: System.Random.StdGen -> [GHC.Types.Float]
+  {- Arity: 1, Strictness: <L,U> -}
+9cbaf8a57543900b6adf1e0c42b91d7c
+  evolve_go1 :: System.Random.StdGen -> [GHC.Types.Float]
+  {- Arity: 1, Strictness: <L,U> -}
+385b4f0f8239060c8686eebe64de80cb
+  genesis :: LSWorld.World
+  {- Strictness: m,
+     Unfolding: (LSWorld.World
+                   LSWorld.genesis3
+                   LSWorld.genesis2
+                   LSWorld.genesis1) -}
+cc555264e339cde00cba399288934c71
+  genesis' :: System.Random.StdGen -> LSWorld.World
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (gen :: System.Random.StdGen) ->
+                 LSWorld.World LSWorld.genesis3 gen LSWorld.genesis1) -}
+616c2961e042192b8fa786d12cf87ccd
+  genesis1 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+dd923bb659fb4c005683e274d5b0ca0c
+  genesis2 :: System.Random.StdGen
+  {- Unfolding: (case GHC.Int.$w$cdivMod1
+                        1023#
+                        2147483562# of ww4 { (#,#) ww5 ww6 ->
+                 case ww6 of wild { GHC.Int.I32# x# ->
+                 case ww5 of ww2 { GHC.Int.I32# ww3 ->
+                 case GHC.Classes.modInt# ww3 2147483398# of wild1 { DEFAULT ->
+                 System.Random.StdGen
+                   (GHC.Prim.narrow32Int# (GHC.Prim.+# x# 1#))
+                   (GHC.Prim.narrow32Int#
+                      (GHC.Prim.+# (GHC.Prim.narrow32Int# wild1) 1#)) } } } }) -}
+b08da0555330f60d50e1c07a6464cd8e
+  genesis3 :: [Cell.Cell]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Cell.Cell
+                   LSWorld.genesis4
+                   (GHC.Types.[] @ Cell.Cell)) -}
+9e672a11884fd2a545dc1b0dfe072d68
+  genesis4 :: Cell.Cell
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Cell.Cell
+                   LSWorld.genesis7
+                   LSWorld.genesis6
+                   LSWorld.genesis5) -}
+634ac894dcb78594f1e41e015c9e0b79
+  genesis5 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 5#) -}
+916125282409eaa41906e37d2ab786c9
+  genesis6 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 50.0#) -}
+378b716620df30a69bb1f790c906a93c
+  genesis7 :: (GHC.Types.Float, GHC.Types.Float)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((LSWorld.genesis8, LSWorld.genesis8)) -}
+8aa377fed22d5f664a07dc7e59f42cd0
+  genesis8 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.0#) -}
+1a9e37367a4f9431c8288e829e74a601
+  render ::
+    LSWorld.World -> Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(1*U,A,A)>m10,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: LSWorld.World) ->
+                 case ds of wild { LSWorld.World comm gen ds1 ->
+                 Graphics.Gloss.Internals.Data.Picture.Color
+                   LSWorld.render1
+                   (Community.render comm) }) -}
+c699841b8c22fa27644d57e5b5d34835
+  render1 :: Graphics.Gloss.Internals.Data.Color.Color
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (Graphics.Gloss.Internals.Data.Color.RGBA
+                   0.3#
+                   0.3#
+                   0.6#
+                   1.0#) -}
+5daef8adee1c77d2b10d7b1a4a5a78b4
+  stepsMax :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 20#) -}
+instance GHC.Show.Show [LSWorld.World] = LSWorld.$fShowWorld
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

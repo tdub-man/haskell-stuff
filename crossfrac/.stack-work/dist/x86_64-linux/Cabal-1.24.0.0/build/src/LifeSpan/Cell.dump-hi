@@ -1,0 +1,352 @@
+
+==================== FINAL INTERFACE ====================
+2016-09-20 21:09:47.538772 UTC
+
+interface crossfrac-0.1.0.0-LqWiCV7pRitGpJbq1TgxgV:Cell 8001
+  interface hash: 7f15382ca84874886530de2ff14c9351
+  ABI hash: 0ee825affa42ab02b07e7fa073caa13b
+  export-list hash: f1e33065e6d5c24200a9b66269e732e0
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 61b982f7abcefcc02ec93cdfc176153b
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Cell.offspring
+  Cell.overlap
+  Cell.render
+  Cell.Cell{Cell.Cell}
+module dependencies:
+package dependencies: GLURaw-2.0.0.2@GLURaw-2.0.0.2-FbcPHzTa7vLEnCQ0kkJ8B4
+                      GLUT-2.7.0.10@GLUT-2.7.0.10-A3NqGto8XAVI0ysflkZZW9
+                      ObjectName-1.1.0.1@ObjectName-1.1.0.1-HHHIolNI8Pm5H3OGkgSUrO
+                      OpenGL-3.0.1.0@OpenGL-3.0.1.0-2SQfSEFR02AIolFfoam9tJ
+                      OpenGLRaw-3.2.2.0@OpenGLRaw-3.2.2.0-KWU3ruQNCGR7AsVafRovL
+                      StateVar-1.1.0.4@StateVar-1.1.0.4-CJpWsiXJdd89SnV9dZtTwc
+                      array-0.5.1.1@array-0.5.1.1 base-4.9.0.0
+                      binary-0.8.3.0@binary-0.8.3.0
+                      bmp-1.2.6.3@bmp-1.2.6.3-KF4xHl5RTVIp6NQI8dI2I
+                      bytestring-0.10.8.1@bytestring-0.10.8.1
+                      containers-0.5.7.1@containers-0.5.7.1
+                      deepseq-1.4.2.0@deepseq-1.4.2.0
+                      fixed-0.2.1.1@fixed-0.2.1.1-21JkkJmr6h52cZo1o8cauA ghc-prim-0.5.0.0
+                      gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB
+                      gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr
+                      half-0.2.2.3@half-0.2.2.3-BFHx0LiJemg6baNXrjGThF
+                      integer-gmp-1.0.0.1 stm-2.4.4.1@stm-2.4.4.1-4z2NRWnB0NIIUvSJsHW0kF
+                      text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s
+orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
+         binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
+         bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
+         gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture
+         stm-2.4.4.1@stm-2.4.4.1-4z2NRWnB0NIIUvSJsHW0kF:Control.Monad.STM
+         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text
+         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text.Show
+family instance modules: base-4.9.0.0:Control.Applicative
+                         base-4.9.0.0:Data.Complex base-4.9.0.0:Data.Either
+                         base-4.9.0.0:Data.Functor.Const base-4.9.0.0:Data.Functor.Identity
+                         base-4.9.0.0:Data.List.NonEmpty base-4.9.0.0:Data.Monoid
+                         base-4.9.0.0:Data.Semigroup base-4.9.0.0:Data.Type.Equality
+                         base-4.9.0.0:Data.Version base-4.9.0.0:Data.Void
+                         base-4.9.0.0:GHC.Exts base-4.9.0.0:GHC.Generics
+                         base-4.9.0.0:GHC.IO.Exception base-4.9.0.0:GHC.TypeLits
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntMap.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntSet.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Map.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Sequence
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
+                         text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text
+import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
+import  -/  base-4.9.0.0:GHC.Float 469226b1bc53433e95d0167dec5d0312
+import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
+import  -/  base-4.9.0.0:GHC.Real 08bf4acb5f2508f89d6fbcd57fe232e9
+import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
+import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss d5b982018b0c758f00994fce74453c04
+import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Color 1961f99f86447a13667ebc7ff1dc0ff4
+import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
+3a9466ded8811820f93ed678a28592a3
+  $fShowCell :: GHC.Show.Show Cell.Cell
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Cell.Cell
+                  Cell.$fShowCell_$cshowsPrec
+                  Cell.$fShowCell_$cshow
+                  Cell.$fShowCell_$cshowList -}
+3a9466ded8811820f93ed678a28592a3
+  $fShowCell1 :: Cell.Cell -> GHC.Show.ShowS
+  {- Arity: 1,
+     Unfolding: (\ (w :: Cell.Cell) ->
+                 case w of ww { Cell.Cell ww1 ww2 ww3 ->
+                 Cell.$w$cshowsPrec 0# ww1 ww2 ww3 }) -}
+5ce3924a74a1b5a0e6d792038209dda1
+  $fShowCell2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Cell "#) -}
+ddb425413a635aa7fbacc4b8f4bd5d16
+  $fShowCell3 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 11#) -}
+3a9466ded8811820f93ed678a28592a3
+  $fShowCell_$cshow :: Cell.Cell -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(U(U(U),U(U)),1*U(U),U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Cell.Cell) ->
+                 Cell.$fShowCell_$cshowsPrec
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+3a9466ded8811820f93ed678a28592a3
+  $fShowCell_$cshowList :: [Cell.Cell] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ Cell.Cell Cell.$fShowCell1) -}
+3a9466ded8811820f93ed678a28592a3
+  $fShowCell_$cshowsPrec ::
+    GHC.Types.Int -> Cell.Cell -> GHC.Show.ShowS
+  {- Arity: 2,
+     Strictness: <S(S),1*U(U)><S,1*U(U(U(U),U(U)),1*U(U),U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: GHC.Types.Int) (w1 :: Cell.Cell) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Cell.Cell ww3 ww4 ww5 ->
+                 Cell.$w$cshowsPrec ww1 ww3 ww4 ww5 } }) -}
+29eb18859d4e11f0765c35346d354548
+  $tc'Cell :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3647052699454959582##
+                   4199386692983272549##
+                   Cell.$trModule
+                   Cell.$tc'Cell1) -}
+f3885caa145d378019b9f762ffc0f572
+  $tc'Cell1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Cell"#) -}
+6b60bcb5f830119b4de12d4a8fbcce71
+  $tcCell :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   9662021039515472862##
+                   6763482043987862591##
+                   Cell.$trModule
+                   Cell.$trModule1) -}
+ea47d10df20408ea31db1434f36eba8c
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module Cell.$trModule2 Cell.$trModule1) -}
+e270d2638774344082eec3754f42bb73
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Cell"#) -}
+ec99aa9cf36b5a0c2ba44d89e7045b56
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "crossfrac-0.1.0.0-LqWiCV7pRitGpJbq1TgxgV"#) -}
+0a14210266a8e4c181a366d0637cff36
+  $w$cshowsPrec ::
+    GHC.Prim.Int#
+    -> Graphics.Gloss.Internals.Data.Picture.Point
+    -> GHC.Types.Float
+    -> GHC.Types.Int
+    -> GHC.Show.ShowS
+  {- Arity: 4, Strictness: <S,U><L,U(U(U),U(U))><L,1*U(U)><L,U(U)>,
+     Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: Graphics.Gloss.Internals.Data.Picture.Point)
+                   (ww2 :: GHC.Types.Float)
+                   (ww3 :: GHC.Types.Int) ->
+                 let {
+                   f :: GHC.Base.String -> GHC.Base.String
+                   = case ww2 of ww4 { GHC.Types.F# ww5 ->
+                     GHC.Float.$w$sshowSignedFloat1
+                       GHC.Float.$fShowFloat_$sshowFloat
+                       Cell.$fShowCell3
+                       ww5 }
+                 } in
+                 let {
+                   g :: GHC.Base.String -> GHC.Base.String
+                     {- Arity: 1, Strictness: <L,U> -}
+                   = \ (x :: GHC.Base.String) ->
+                     case ww1 of ww4 { (,) ww5 ww6 ->
+                     GHC.Types.:
+                       @ GHC.Types.Char
+                       GHC.Show.shows9
+                       (case ww5 of ww7 { GHC.Types.F# ww8 ->
+                        GHC.Float.$w$sshowSignedFloat1
+                          GHC.Float.$fShowFloat_$sshowFloat
+                          GHC.Show.shows22
+                          ww8
+                          (GHC.Types.:
+                             @ GHC.Types.Char
+                             GHC.Show.shows7
+                             (GHC.Show.$fShow(,)_$sgo
+                                (GHC.Types.:
+                                   @ GHC.Types.Char
+                                   GHC.Show.shows6
+                                   (GHC.Types.:
+                                      @ GHC.Types.Char
+                                      GHC.Show.showSpace1
+                                      (f (GHC.Types.:
+                                            @ GHC.Types.Char
+                                            GHC.Show.showSpace1
+                                            (case ww3 of ww9 { GHC.Types.I# ww10 ->
+                                             case GHC.Show.$wshowSignedInt
+                                                    11#
+                                                    ww10
+                                                    x of ww11 { (#,#) ww12 ww13 ->
+                                             GHC.Types.: @ GHC.Types.Char ww12 ww13 } })))))
+                                (case ww6 of ww9 { GHC.Types.F# ww10 ->
+                                 GHC.Float.$w$sshowSignedFloat1
+                                   GHC.Float.$fShowFloat_$sshowFloat
+                                   GHC.Show.shows22
+                                   ww10 })
+                                (GHC.Types.[] @ GHC.Show.ShowS))) }) }
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11#) of wild {
+                   GHC.Types.False
+                   -> \ (x :: GHC.Base.String) ->
+                      GHC.Base.++ @ GHC.Types.Char Cell.$fShowCell2 (g x)
+                   GHC.Types.True
+                   -> \ (x :: GHC.Base.String) ->
+                      GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (GHC.Base.++
+                           @ GHC.Types.Char
+                           Cell.$fShowCell2
+                           (g (GHC.Types.: @ GHC.Types.Char GHC.Show.shows6 x))) }) -}
+3a9466ded8811820f93ed678a28592a3
+  data Cell
+    = Cell Graphics.Gloss.Internals.Data.Picture.Point
+           GHC.Types.Float
+           GHC.Types.Int
+2145007ed677027279bf46b73f5e9b49
+  offspring ::
+    Cell.Cell
+    -> GHC.Types.Float -> GHC.Types.Float -> GHC.Types.Int -> Cell.Cell
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S(SLL),1*U(1*U(1*U(U),1*U(U)),U(U),A)><L,U(U)><L,1*U(U)><L,U>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (4, True, False)
+                (\ (w :: Cell.Cell)
+                   (w1 :: GHC.Types.Float)
+                   (w2 :: GHC.Types.Float)
+                   (w3 :: GHC.Types.Int) ->
+                 case w of ww { Cell.Cell ww1 ww2 ww3 ->
+                 case ww1 of ww4 { (,) ww5 ww6 ->
+                 let {
+                   childR :: GHC.Types.Float
+                   = case w2 of wild { GHC.Types.F# x ->
+                     case ww2 of wild1 { GHC.Types.F# y ->
+                     GHC.Types.F# (GHC.Prim.timesFloat# x y) } }
+                 } in
+                 Cell.Cell
+                   (case ww5 of wild { GHC.Types.F# x ->
+                    case childR of wild1 { GHC.Types.F# x1 ->
+                    case ww2 of wild2 { GHC.Types.F# y ->
+                    case w1 of wild3 { GHC.Types.F# x2 ->
+                    GHC.Types.F#
+                      (GHC.Prim.plusFloat#
+                         x
+                         (GHC.Prim.timesFloat#
+                            (GHC.Prim.plusFloat# x1 y)
+                            (GHC.Prim.cosFloat# x2))) } } } },
+                    case ww6 of wild { GHC.Types.F# x ->
+                    case childR of wild1 { GHC.Types.F# x1 ->
+                    case ww2 of wild2 { GHC.Types.F# y ->
+                    case w1 of wild3 { GHC.Types.F# x2 ->
+                    GHC.Types.F#
+                      (GHC.Prim.plusFloat#
+                         x
+                         (GHC.Prim.timesFloat#
+                            (GHC.Prim.plusFloat# x1 y)
+                            (GHC.Prim.sinFloat# x2))) } } } })
+                   childR
+                   w3 } }) -}
+1c2a6c6275587aff46970f4836da1ade
+  overlap :: Cell.Cell -> Cell.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S(S)S(S))S(S)L),1*U(1*U(1*U(U),1*U(U)),1*U(U),A)><S(S(S(S)S(S))S(S)L),1*U(1*U(1*U(U),1*U(U)),1*U(U),A)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Cell.Cell) (w1 :: Cell.Cell) ->
+                 case w of ww { Cell.Cell ww1 ww2 ww3 ->
+                 case ww1 of ww4 { (,) ww5 ww6 ->
+                 case ww5 of ww7 { GHC.Types.F# ww8 ->
+                 case ww6 of ww9 { GHC.Types.F# ww10 ->
+                 case ww2 of ww11 { GHC.Types.F# ww12 ->
+                 case w1 of ww13 { Cell.Cell ww14 ww15 ww16 ->
+                 case ww14 of ww17 { (,) ww18 ww19 ->
+                 case ww18 of ww20 { GHC.Types.F# ww21 ->
+                 case ww19 of ww22 { GHC.Types.F# ww23 ->
+                 case ww15 of ww24 { GHC.Types.F# ww25 ->
+                 let {
+                   x :: GHC.Prim.Float# = GHC.Prim.minusFloat# ww10 ww23
+                 } in
+                 let {
+                   x1 :: GHC.Prim.Float# = GHC.Prim.minusFloat# ww8 ww21
+                 } in
+                 GHC.Prim.tagToEnum#
+                   @ GHC.Types.Bool
+                   (GHC.Prim.ltFloat#
+                      (GHC.Prim.sqrtFloat#
+                         (GHC.Prim.plusFloat#
+                            (GHC.Prim.timesFloat# x1 x1)
+                            (GHC.Prim.timesFloat# x x)))
+                      (GHC.Prim.timesFloat#
+                         (GHC.Prim.plusFloat# ww12 ww25)
+                         0.999#)) } } } } } } } } } }) -}
+ce2b65edc5eddf216b6c57bdda036ad1
+  render ::
+    Cell.Cell -> Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLL),1*U(1*U(U,U),1*U(U),U(U))>m10,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: Cell.Cell) ->
+                 case w of ww { Cell.Cell ww1 ww2 ww3 ->
+                 case ww1 of ww4 { (,) ww5 ww6 ->
+                 Graphics.Gloss.Internals.Data.Picture.Color
+                   (case ww3 of wild { GHC.Types.I# i ->
+                    let {
+                      ww7 :: GHC.Prim.Float#
+                      = GHC.Prim.timesFloat# (GHC.Prim.int2Float# i) 0.12#
+                    } in
+                    case GHC.Prim.tagToEnum#
+                           @ GHC.Types.Bool
+                           (GHC.Prim.leFloat# 1.0# ww7) of wild1 {
+                      GHC.Types.False
+                      -> Graphics.Gloss.Internals.Data.Color.RGBA 0.6# ww7 0.6# 1.0#
+                      GHC.Types.True
+                      -> Graphics.Gloss.Internals.Data.Color.RGBA
+                           0.6#
+                           1.0#
+                           0.6#
+                           1.0# } })
+                   (Graphics.Gloss.Internals.Data.Picture.Translate
+                      ww5
+                      ww6
+                      (let {
+                         thickness :: GHC.Types.Float
+                         = case ww3 of wild { GHC.Types.I# i ->
+                           GHC.Types.F# (GHC.Prim.int2Float# i) }
+                       } in
+                       Graphics.Gloss.Internals.Data.Picture.ThickCircle
+                         (case ww2 of wild { GHC.Types.F# x ->
+                          case thickness of wild1 { GHC.Types.F# x1 ->
+                          GHC.Types.F#
+                            (GHC.Prim.minusFloat# x (GHC.Prim.divideFloat# x1 2.0#)) } })
+                         thickness)) } }) -}
+instance GHC.Show.Show [Cell.Cell] = Cell.$fShowCell
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+
