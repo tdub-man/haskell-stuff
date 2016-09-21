@@ -11,13 +11,22 @@ module PegBoardSymmetries
     , clockSymmetric
     , counterClockSymmetric
     , findSymmetries
+    , boardEquals
     ) where
 import PegBoard
 import PegBoardCriticalPoints( rows
                              , concentricTrianglesExclusive
                              , topRightRow, bottomRow, topLeftRow)
 import Helpers.Lists(middleElem)
-import Data.List(nubBy,nub)
+import Data.List(nubBy,nub,sort)
+
+sortBoard :: Board -> Board
+sortBoard (Board ps hs) = Board ps' hs' where
+  ps' = sort ps
+  hs' = sort hs
+
+boardEquals :: Board -> Board -> Bool
+boardEquals a b = sortBoard a == sortBoard b
 
 boardSize :: Board -> Int
 boardSize (Board ps hs) = x where
@@ -57,6 +66,7 @@ clockRotate b = b' where
     hs' = map fst . filter (not . snd) $ allRows
   rings' = map rotateRing rings
   b' = foldl1 combineBoard rings'
+-- losing empty coords
 
 counterClockRotate :: Board -> Board
 counterClockRotate = clockRotate . clockRotate
@@ -76,31 +86,31 @@ data Symmetries = Positive
 
 posSymmetric :: Board -> Symmetries
 posSymmetric b =
-  if b == posFlip b
+  if b `boardEquals` posFlip b
   then Positive
   else Not Positive
 
 zedSymmetric :: Board -> Symmetries
 zedSymmetric b =
-  if b == zedFlip b
+  if b `boardEquals` zedFlip b
   then Horizontal
   else Not Horizontal
 
 negSymmetric :: Board -> Symmetries
 negSymmetric b =
-  if b == negFlip b
+  if b `boardEquals` negFlip b
   then Negative
   else Not Negative
 
 clockSymmetric :: Board -> Symmetries
 clockSymmetric b =
-  if b == clockRotate b
+  if b `boardEquals` clockRotate b
   then Clockwise
   else Not Clockwise
 
 counterClockSymmetric :: Board -> Symmetries
 counterClockSymmetric b =
-  if b == counterClockRotate b
+  if b `boardEquals` counterClockRotate b
   then CounterClockwise
   else Not CounterClockwise
 
