@@ -4,6 +4,7 @@ import Graphics.Gloss
 
 import PegBoard
 import PegBoardCriticalPoints
+import PegBoardAnalytics
 import PegBoardSymmetries
 import PegBoardGraphics
 

@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-22 06:03:31.327651 UTC
+2016-09-22 08:48:39.636869 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardGraphics 8001
-  interface hash: 3617944f82b7bde92d94f327503f0dd6
-  ABI hash: c72db3ffb09a298d6bcf52a5860d40bf
+  interface hash: 5e7f848b7bfcbff353d4e616a931d8c6
+  ABI hash: 8b57a2d115bf780653d2d7171f057fde
   export-list hash: 50130932605d1fe54dfdf3daf7c43ba8
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -88,14 +88,14 @@ bcb2e7e1b797d846e597756b0e7afff9
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
-5e15b8c2903355f121877e6042c661e0
+2173e93a53b8650f22b4ad9696eb41c7
   $wrenderBoard ::
     PegBoard.Board
     -> (# [Graphics.Gloss.Internals.Data.Picture.Picture] #)
   {- Arity: 1, Strictness: <L,1*U(U,1*U)>, Inline: [0],
      Unfolding: (\ (w :: PegBoard.Board) ->
                  (# case w of ww { PegBoard.Board ww1 ww2 ->
-                    PegBoardGraphics.renderBoard_transCircs
+                    PegBoardGraphics.offset
                       PegBoardGraphics.renderBoard4
                       PegBoardGraphics.renderBoard8
                       (GHC.List.reverse1
@@ -107,14 +107,14 @@ bcb2e7e1b797d846e597756b0e7afff9
                             (PegBoardCriticalPoints.$wrows' ww1 ww2))
                          (GHC.Types.[]
                             @ Graphics.Gloss.Internals.Data.Picture.Picture)) } #)) -}
-84c60234beb1811a8a62572b33652b34
+5d4938c44de8cdaa117a4f977798a283
   displayBoard :: PegBoard.Board -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U(U,U)><S,U>,
      Unfolding: InlineRule (0, True, True)
                 PegBoardGraphics.displayBoard1
                   `cast`
                 (<PegBoard.Board>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-c1fdcf27179f7b9722cb7456531ac10c
+ae4dd71f6981137e388123d4b40728b9
   displayBoard1 ::
     PegBoard.Board
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -165,7 +165,49 @@ b06ca52ac180d7815a4ac46fe6bd439e
 32d698fb4a59ab3198e9231b38999616
   displayBoard7 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "PegBoard"#) -}
-6593b19a1ae9c2326d5c03ea0c9a129d
+95567753ca5a93900f3aa8f614c3a57a
+  offset ::
+    GHC.Types.Float
+    -> GHC.Types.Float
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 3, Strictness: <L,U(U)><L,U(U)><S,1*U>,
+     Unfolding: (\ (x :: GHC.Types.Float)
+                   (y :: GHC.Types.Float)
+                   (ps :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
+                 PegBoardGraphics.renderBoard_go
+                   ps
+                   (case GHC.Real.$wnumericEnumFrom
+                           @ GHC.Types.Float
+                           GHC.Float.$fFractionalFloat
+                           PegBoardGraphics.renderBoard9 of ww { (#,#) ww1 ww2 ->
+                    letrec {
+                      go :: [GHC.Types.Float]
+                            -> [GHC.Types.Float] -> [(GHC.Types.Float, GHC.Types.Float)]
+                        {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
+                      = \ (ds :: [GHC.Types.Float]) (eta :: [GHC.Types.Float]) ->
+                        case ds of wild {
+                          [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
+                          : y1 ys
+                          -> case eta of wild1 {
+                               [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
+                               : y2 ys1
+                               -> GHC.Types.:
+                                    @ (GHC.Types.Float, GHC.Types.Float)
+                                    (case y1 of wild2 { GHC.Types.F# x1 ->
+                                     case x of wild3 { GHC.Types.F# y3 ->
+                                     GHC.Types.F# (GHC.Prim.timesFloat# x1 y3) } },
+                                     y2)
+                                    (go ys ys1) } }
+                    } in
+                    go
+                      (GHC.Types.: @ GHC.Types.Float ww1 ww2)
+                      (GHC.Base.map
+                         @ GHC.Types.Float
+                         @ GHC.Types.Float
+                         (\ (ds :: GHC.Types.Float) -> GHC.Float.timesFloat ds y)
+                         (GHC.Types.: @ GHC.Types.Float ww1 ww2)) })) -}
+f26d7806eec399ae04fb7c161a38b418
   renderBoard ::
     PegBoard.Board -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <L,1*U(U,1*U)>m14, Inline: INLINE[0],
@@ -173,7 +215,7 @@ b06ca52ac180d7815a4ac46fe6bd439e
                 (\ (w :: PegBoard.Board) ->
                  case PegBoardGraphics.$wrenderBoard w of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-59d391e8ed72db8fa287281a173e0fd1
+4b94d2b841437a714efe0e7884782f8c
   renderBoard1 ::
     [(PegBoard.Coord, GHC.Types.Bool)]
     -> Graphics.Gloss.Internals.Data.Picture.Picture
@@ -181,7 +223,7 @@ b06ca52ac180d7815a4ac46fe6bd439e
      Unfolding: InlineRule (1, True, False)
                 (\ (w :: [(PegBoard.Coord, GHC.Types.Bool)]) ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures
-                   (PegBoardGraphics.renderBoard_transCircs
+                   (PegBoardGraphics.offset
                       PegBoardGraphics.renderBoard8
                       PegBoardGraphics.renderBoard7
                       (GHC.Base.map
@@ -232,56 +274,6 @@ f9462f1782a3dcf038ee1d8fad2e233a
     -> [(GHC.Types.Float, GHC.Types.Float)]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
-d497db3a0a63a5c2557972fc8b4e811d
-  renderBoard_transCircs ::
-    GHC.Types.Float
-    -> GHC.Types.Float
-    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
-    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Arity: 3, Strictness: <L,U(U)><L,U(U)><S,1*U>,
-     Unfolding: (\ (x :: GHC.Types.Float)
-                   (y :: GHC.Types.Float)
-                   (cs :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
-                 PegBoardGraphics.renderBoard_go
-                   cs
-                   (case GHC.Real.$wnumericEnumFrom
-                           @ GHC.Types.Float
-                           GHC.Float.$fFractionalFloat
-                           PegBoardGraphics.renderBoard9 of ww { (#,#) ww1 ww2 ->
-                    letrec {
-                      go :: [GHC.Types.Float]
-                            -> [GHC.Types.Float] -> [(GHC.Types.Float, GHC.Types.Float)]
-                        {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
-                      = \ (ds :: [GHC.Types.Float]) (eta :: [GHC.Types.Float]) ->
-                        case ds of wild {
-                          [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
-                          : y1 ys
-                          -> case eta of wild1 {
-                               [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
-                               : y2 ys1
-                               -> GHC.Types.:
-                                    @ (GHC.Types.Float, GHC.Types.Float)
-                                    (case x of wild2 { GHC.Types.F# x1 ->
-                                     case y1 of wild3 { GHC.Types.F# y3 ->
-                                     GHC.Types.F# (GHC.Prim.timesFloat# x1 y3) } },
-                                     y2)
-                                    (go ys ys1) } }
-                    } in
-                    go
-                      (GHC.Types.: @ GHC.Types.Float ww1 ww2)
-                      (letrec {
-                         go1 :: [GHC.Types.Float] -> [GHC.Types.Float]
-                           {- Arity: 1, Strictness: <S,1*U> -}
-                         = \ (ds :: [GHC.Types.Float]) ->
-                           case ds of wild {
-                             [] -> GHC.Types.[] @ GHC.Types.Float
-                             : y1 ys
-                             -> GHC.Types.:
-                                  @ GHC.Types.Float
-                                  (GHC.Float.timesFloat y y1)
-                                  (go1 ys) }
-                       } in
-                       go1 (GHC.Types.: @ GHC.Types.Float ww1 ww2)) })) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
