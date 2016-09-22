@@ -28,6 +28,9 @@ b =
 concB = concentricTriangles b
 concB' = concentricTrianglesExclusive b
 
+b' :: [Board]
+b' = collectLog . head . endWith 1 .  playGameLog $ b
+
 main :: IO ()
 -- main = do
 --   let printBoard = putStrLn . showBoard
@@ -51,4 +54,5 @@ main :: IO ()
 -- -- If negSymmetric, clockRotate == zedFlip and
 -- --                  counterClockRotate == posFlip
 
-main = displayBoard b
+-- main = displayBoard b
+main = displayBoards b'

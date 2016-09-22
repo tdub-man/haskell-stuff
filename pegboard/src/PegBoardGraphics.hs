@@ -33,12 +33,14 @@ renderBoards :: [Board] -> Picture
 renderBoards [] = blank
 renderBoards bs = bs' where
   bsR = map renderBoard bs
-  nRows = fromIntegral .  length . rows' . head $ bs
-  offN n = (nRows * 16) + (16 * n)
-  bsR' = zip bsR [1..]
+  nRows = fromIntegral . length . rows' . head $ bs
+  offN n = (16 * n) * (nRows + 1)
+  bsR' = zip (reverse bsR) [1..]
   offsetB (b,n) = translate 0 (offN n) b
   bsrOff = map offsetB bsR'
   bs' = pictures bsrOff
+
+-- Animate?
 
 displayBoard :: Board -> IO ()
 displayBoard b = display
