@@ -16,15 +16,16 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
                      , /home/tanner/Documents/LYA-Haskell
-  exposed-modules:     Lib
-                     , Helpers.Lists
+  exposed-modules:     Helpers.Lists
                      , Helpers.Math
                      , Helpers.Classes
                      , PegBoard
                      , PegBoardAnalytics
                      , PegBoardCriticalPoints
                      , PegBoardSymmetries
+                     , PegBoardGraphics
   build-depends:       base >= 4.7 && < 5
+                     , gloss
   default-language:    Haskell2010
 
 executable pegboard-exe
@@ -33,6 +34,7 @@ executable pegboard-exe
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , pegboard
+                     , gloss
   default-language:    Haskell2010
 
 test-suite pegboard-test

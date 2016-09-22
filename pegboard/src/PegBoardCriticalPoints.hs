@@ -1,5 +1,5 @@
 module PegBoardCriticalPoints
-    ( rows
+    ( rows, rows'
     , concentricTriangles
     , concentricTrianglesExclusive
     -- , originShift
