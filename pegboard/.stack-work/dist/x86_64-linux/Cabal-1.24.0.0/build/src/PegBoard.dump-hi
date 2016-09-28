@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-22 00:16:07.333737 UTC
+2016-09-23 20:38:34.657485 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 8001
-  interface hash: dc21c81bbb1e22331a11318034b5c27f
+  interface hash: 5cb8a89dd3b88d90945613d137a70c16
   ABI hash: 2feff203ebfeacb2de886c6d7cd8d789
   export-list hash: 1bff303d413b992e037c4116e726befe
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -46,8 +46,8 @@ import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  base-4.9.0.0:Text.Read 9c1be14f7e5eac8b18bcb566c5763677
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
-import  -/  Helpers.Lists 919e134a5dd3434eade779479dcd9843
-  exports: fa56742ed75c5e245afa636e7818f26f
+import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
+  exports: 975c27250cc63b29bcdfa4d36e613251
   groupWithNs b1022a27f57a046ff09486b043ef777b
   moveXTo 0478e9ef0700120cd4c7a855d902d411
   nPerms 7a59ca7f41d7481e845a6ad3b52e5c7d

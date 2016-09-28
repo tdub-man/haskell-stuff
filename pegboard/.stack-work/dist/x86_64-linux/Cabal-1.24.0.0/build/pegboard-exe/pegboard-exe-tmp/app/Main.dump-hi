@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-22 09:40:20.035568 UTC
+2016-09-28 05:31:43.614527 UTC
 
 interface main@main:Main 8001
-  interface hash: 9f2dae8b795325bcaa4b1fbf9371ddd7
-  ABI hash: c7efeb096341b41c35a4e62d06d17eb2
+  interface hash: 8629f203ce6760c4738441303aa41f36
+  ABI hash: c7ab5c40b7ad9c953241d49a820171a1
   export-list hash: 614ba73b009055573df6089fb1797d4e
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -67,7 +67,7 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss 
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 2feff203ebfeacb2de886c6d7cd8d789
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardAnalytics 082d69b928f7761e0ad67f427e506dc8
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardCriticalPoints c2ec82b82f5d6019955109f7e071e60f
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardGraphics c1976638688c41d709652873893d8c1d
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardGraphics 372a7d00e5bf5feb43efacaf85f28dc7
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardSymmetries 4e7cbaa95452ea67396b60360d64683c
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
@@ -158,18 +158,18 @@ cb921e52db1a75bbaaa919aee3bc9d93
   concB' :: [PegBoard.Board]
   {- Unfolding: (case Main.b of ww { PegBoard.Board ww1 ww2 ->
                  PegBoardCriticalPoints.$wconcentricTrianglesExclusive ww1 ww2 }) -}
-f8e8dd0e8fd521c8ea9dcedb13fc0aa9
+7c3cb84952858cfae1a5c29d55331c47
   main :: GHC.Types.IO ()
   {- Arity: 1,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-d9acb54688d62e24dd667bdb3145eb34
+9b87f3f41568a617f55c597cf390a85e
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (PegBoardGraphics.displayBoards1 Main.b') -}
-f4f377cf5e24179c2fbd6a0e6b827c2a
+45d65c2c86ffac103ff4545699ef5c56
   main2 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)

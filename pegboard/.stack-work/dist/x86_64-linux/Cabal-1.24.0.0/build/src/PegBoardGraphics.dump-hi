@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-22 09:40:18.920478 UTC
+2016-09-28 05:31:42.507342 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardGraphics 8001
-  interface hash: 322ad64728f2d20a2c388ecf1f8f8a95
-  ABI hash: c1976638688c41d709652873893d8c1d
+  interface hash: 8f1220f318357b5d284043f83611436d
+  ABI hash: 372a7d00e5bf5feb43efacaf85f28dc7
   export-list hash: 8b4d961c9515a2a1cfca2cbe692f0dba
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -60,6 +60,7 @@ family instance modules: base-4.9.0.0:Control.Applicative
 import  -/  base-4.9.0.0:Data.Foldable 8aeb682f6c74f97fcf0ace0d608a43ea
 import  -/  base-4.9.0.0:Data.Tuple acb0ed10307ed88df6c81b8589f4de16
 import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
+import  -/  base-4.9.0.0:GHC.Float 469226b1bc53433e95d0167dec5d0312
 import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
 import  -/  base-4.9.0.0:GHC.Real 08bf4acb5f2508f89d6fbcd57fe232e9
@@ -71,6 +72,9 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Data.Picture e95e53d5f841f673cdd330becc7218b6
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Interface.Pure.Display 4a533cefe8cfd70824e77b2888fc8dc2
 import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
+import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
+  exports: 975c27250cc63b29bcdfa4d36e613251
+  subDivide 393576c801ae6ff29ff6229f90fd19c8
 import  -/  PegBoard 2feff203ebfeacb2de886c6d7cd8d789
   exports: 1bff303d413b992e037c4116e726befe
   Board a9cbb8b5c5bd98a5c5fb42e9af0a1445
@@ -92,7 +96,7 @@ bcb2e7e1b797d846e597756b0e7afff9
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
-2173e93a53b8650f22b4ad9696eb41c7
+d5a155107df345095f04a060bda8682e
   $wrenderBoard ::
     PegBoard.Board
     -> (# [Graphics.Gloss.Internals.Data.Picture.Picture] #)
@@ -111,14 +115,14 @@ bcb2e7e1b797d846e597756b0e7afff9
                             (PegBoardCriticalPoints.$wrows' ww1 ww2))
                          (GHC.Types.[]
                             @ Graphics.Gloss.Internals.Data.Picture.Picture)) } #)) -}
-5d4938c44de8cdaa117a4f977798a283
+3d078579163c55fbf77709f2772dad03
   displayBoard :: PegBoard.Board -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U(U,U)><S,U>,
      Unfolding: InlineRule (0, True, True)
                 PegBoardGraphics.displayBoard1
                   `cast`
                 (<PegBoard.Board>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-ae4dd71f6981137e388123d4b40728b9
+aa1558242c990cde9b0015c6943a6ddf
   displayBoard1 ::
     PegBoard.Board
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -169,14 +173,14 @@ b06ca52ac180d7815a4ac46fe6bd439e
 32d698fb4a59ab3198e9231b38999616
   displayBoard7 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "PegBoard"#) -}
-52bb5c72c1de5dc299ac2963f0fcffd0
+15621c528f79ea2042d4265a74d10bdc
   displayBoards :: [PegBoard.Board] -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U><S,U>,
      Unfolding: InlineRule (0, True, True)
                 PegBoardGraphics.displayBoards1
                   `cast`
                 (<[PegBoard.Board]>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-14c910aab37e6e089be495c55acb7993
+0667d3cbfb80ef84b55820c2a2afe0de
   displayBoards1 ::
     [PegBoard.Board]
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -201,7 +205,7 @@ b06ca52ac180d7815a4ac46fe6bd439e
                    (<Graphics.Gloss.Data.Controller.Controller>_R
                     ->_R Sym (GHC.Types.N:IO[0] <()>_R))
                    eta) -}
-95567753ca5a93900f3aa8f614c3a57a
+c8eecfb8c58927c9b9791684815e5ea8
   offset ::
     GHC.Types.Float
     -> GHC.Types.Float
@@ -213,37 +217,44 @@ b06ca52ac180d7815a4ac46fe6bd439e
                    (ps :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
                  PegBoardGraphics.renderBoard_go
                    ps
-                   (case GHC.Real.$wnumericEnumFrom
-                           @ GHC.Types.Float
-                           GHC.Float.$fFractionalFloat
-                           PegBoardGraphics.renderBoard9 of ww { (#,#) ww1 ww2 ->
-                    letrec {
-                      go :: [GHC.Types.Float]
+                   (letrec {
+                      go :: GHC.Integer.Type.Integer
                             -> [GHC.Types.Float] -> [(GHC.Types.Float, GHC.Types.Float)]
-                        {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
-                      = \ (ds :: [GHC.Types.Float]) (eta :: [GHC.Types.Float]) ->
-                        case ds of wild {
+                        {- Arity: 2, Strictness: <S,1*U><S,1*U> -}
+                      = \ (x1 :: GHC.Integer.Type.Integer) (eta :: [GHC.Types.Float]) ->
+                        case x1 of x2 { DEFAULT ->
+                        case eta of wild {
                           [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
                           : y1 ys
-                          -> case eta of wild1 {
-                               [] -> GHC.Types.[] @ (GHC.Types.Float, GHC.Types.Float)
-                               : y2 ys1
-                               -> GHC.Types.:
-                                    @ (GHC.Types.Float, GHC.Types.Float)
-                                    (case y1 of wild2 { GHC.Types.F# x1 ->
-                                     case x of wild3 { GHC.Types.F# y3 ->
-                                     GHC.Types.F# (GHC.Prim.timesFloat# x1 y3) } },
-                                     y2)
-                                    (go ys ys1) } }
+                          -> GHC.Types.:
+                               @ (GHC.Types.Float, GHC.Types.Float)
+                               (case GHC.Integer.Type.doubleFromInteger x2 of wild1 { DEFAULT ->
+                                case x of wild2 { GHC.Types.F# y2 ->
+                                GHC.Types.F#
+                                  (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild1) y2) } },
+                                y1)
+                               (go
+                                  (GHC.Integer.Type.plusInteger x2 PegBoardGraphics.renderBoard9)
+                                  ys) } }
+                    } in
+                    letrec {
+                      go1 :: GHC.Integer.Type.Integer -> [GHC.Types.Float]
+                        {- Arity: 1, Strictness: <S,1*U> -}
+                      = \ (x1 :: GHC.Integer.Type.Integer) ->
+                        case x1 of x2 { DEFAULT ->
+                        GHC.Types.:
+                          @ GHC.Types.Float
+                          (case GHC.Integer.Type.doubleFromInteger x2 of wild { DEFAULT ->
+                           case y of wild1 { GHC.Types.F# y1 ->
+                           GHC.Types.F#
+                             (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) y1) } })
+                          (go1
+                             (GHC.Integer.Type.plusInteger x2 PegBoardGraphics.renderBoard9)) }
                     } in
                     go
-                      (GHC.Types.: @ GHC.Types.Float ww1 ww2)
-                      (GHC.Base.map
-                         @ GHC.Types.Float
-                         @ GHC.Types.Float
-                         (\ (ds :: GHC.Types.Float) -> GHC.Float.timesFloat ds y)
-                         (GHC.Types.: @ GHC.Types.Float ww1 ww2)) })) -}
-f26d7806eec399ae04fb7c161a38b418
+                      PegBoardGraphics.renderBoard9
+                      (go1 PegBoardGraphics.renderBoard9))) -}
+e0878d49fe985793206afd6a47271553
   renderBoard ::
     PegBoard.Board -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <L,1*U(U,1*U)>m14, Inline: INLINE[0],
@@ -251,7 +262,7 @@ f26d7806eec399ae04fb7c161a38b418
                 (\ (w :: PegBoard.Board) ->
                  case PegBoardGraphics.$wrenderBoard w of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-4b94d2b841437a714efe0e7884782f8c
+2bcb6283c1f52596861ed0b0a688cf16
   renderBoard1 ::
     [(PegBoard.Coord, GHC.Types.Bool)]
     -> Graphics.Gloss.Internals.Data.Picture.Picture
@@ -301,16 +312,16 @@ b2da73ed9d9a9867547eb652d4799998
 f9462f1782a3dcf038ee1d8fad2e233a
   renderBoard8 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 16.0#) -}
-1aea3b225fc8d0670062ea48b3afcba6
-  renderBoard9 :: GHC.Types.Float
-  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 1.0#) -}
+e6ca92fb756dfde3267316f81bc62dbe
+  renderBoard9 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (1) -}
 5f828ab546d9493cfab7fcd89c3c83fa
   renderBoard_go ::
     [Graphics.Gloss.Internals.Data.Picture.Picture]
     -> [(GHC.Types.Float, GHC.Types.Float)]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
-3b84aa36fd1cbf4003062b62854bb3df
+69c8e0515bbaee5d4a8b2ce1869b0295
   renderBoards ::
     [PegBoard.Board] -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <S,1*U>,
@@ -329,11 +340,11 @@ f9462f1782a3dcf038ee1d8fad2e233a
                          } in
                          letrec {
                            go :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-                                 -> [GHC.Types.Float]
+                                 -> [GHC.Integer.Type.Integer]
                                  -> [Graphics.Gloss.Internals.Data.Picture.Picture]
                              {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
                            = \ (ds1 :: [Graphics.Gloss.Internals.Data.Picture.Picture])
-                               (_ys :: [GHC.Types.Float]) ->
+                               (_ys :: [GHC.Integer.Type.Integer]) ->
                              case ds1 of wild1 {
                                [] -> GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture
                                : ipv2 ipv3
@@ -345,11 +356,14 @@ f9462f1782a3dcf038ee1d8fad2e233a
                                          @ Graphics.Gloss.Internals.Data.Picture.Picture
                                          (Graphics.Gloss.Internals.Data.Picture.Translate
                                             PegBoardGraphics.renderBoard7
-                                            (case ipv4 of wild3 { GHC.Types.F# y ->
+                                            (case GHC.Integer.Type.doubleFromInteger
+                                                    (GHC.Integer.Type.timesInteger
+                                                       PegBoardGraphics.renderBoards2
+                                                       ipv4) of wild3 { DEFAULT ->
                                              case nRows of wild4 { GHC.Types.F# x ->
                                              GHC.Types.F#
                                                (GHC.Prim.timesFloat#
-                                                  (GHC.Prim.timesFloat# 16.0# y)
+                                                  (GHC.Prim.double2Float# wild3)
                                                   (GHC.Prim.plusFloat# x 1.0#)) } })
                                             ipv2)
                                          (go ipv3 ipv5) } }
@@ -364,13 +378,15 @@ f9462f1782a3dcf038ee1d8fad2e233a
                                  wild)
                               (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture))
                            PegBoardGraphics.renderBoards1) }) -}
-ec29ccb68f93749cbfb6b547706ae12f
-  renderBoards1 :: [GHC.Types.Float]
-  {- Unfolding: (case GHC.Real.$wnumericEnumFrom
-                        @ GHC.Types.Float
-                        GHC.Float.$fFractionalFloat
+f696478e1e37e8f2f36c6b4dd9e07a9c
+  renderBoards1 :: [GHC.Integer.Type.Integer]
+  {- Unfolding: (case GHC.Enum.$wenumDeltaInteger
+                        PegBoardGraphics.renderBoard9
                         PegBoardGraphics.renderBoard9 of ww { (#,#) ww1 ww2 ->
-                 GHC.Types.: @ GHC.Types.Float ww1 ww2 }) -}
+                 GHC.Types.: @ GHC.Integer.Type.Integer ww1 ww2 }) -}
+9b0910493c45609b4f58958cbf909333
+  renderBoards2 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (16) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
