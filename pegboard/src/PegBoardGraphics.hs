@@ -1,8 +1,10 @@
 module PegBoardGraphics
     ( renderBoard
     , renderBoards
+    , renderBoardsSquare
     , displayBoard
     , displayBoards
+    , displayBoardsSquare
     ) where
 
 import PegBoard
@@ -10,14 +12,7 @@ import PegBoardCriticalPoints
 import Graphics.Gloss
 import Helpers.Lists
 
--- Problem with offset/offsetF
-
 offset :: Float -> Float -> [Picture] -> [Picture]
--- offset x y ps = ps' where
---   offN n = map (*n) [1..]
---   offsetXY = zip (offN x) (offN y)
---   psOffsets = zip ps offsetXY
---   ps' = map (\(p,(ox,oy)) -> translate ox oy p) psOffsets
 offset x y ps = ps' where
   f m = (*m) . fromIntegral
   ps' = offsetF (f x) (f y) ps
@@ -48,28 +43,24 @@ rBoards = map renderBoard
 renderBoards :: [Board] -> Picture
 renderBoards [] = blank
 renderBoards bs = bs' where
-  -- bsR = map renderBoard bs
   bsR = rBoards bs
   nRows = fromIntegral . length . rows' . head $ bs
-  -- offN n = (16 * n) * (nRows + 1)
   offN n = fromIntegral (16 * n) * (nRows + 1)
-  bsR' = zip (reverse bsR) [1..]
-  offsetB (b,n) = translate 0 (offN n) b
-  bsrOff = map offsetB bsR'
-  -- bsrOff = offsetF (const 0) offN bsR
+  bsrOff = offsetF (const 0) offN (reverse bsR)
   bs' = pictures bsrOff
 
 renderBoardsSquare :: [Board] -> Picture
 renderBoardsSquare [] = blank
-renderBoardsSquare bs = blank where
+renderBoardsSquare bs = bs' where
   sqLen = ceiling . sqrt . fromIntegral . length $ bs
   nRows = fromIntegral . length . rows' . head $ bs
   bsR = rBoards bs
-  offN n = (16 * n) * (nRows + 1)
+  offN n = (16 * fromIntegral n) * (nRows + 1)
   bsrRow = subDivide sqLen bsR
   bsrRow' = map ( (`zip` [1..]) . reverse) bsrRow
   offsetB (b,n) = translate 0 (offN n) b
-  -- bsrRowOff =
+  bsrRowOff = map (pictures . offsetF offN (const 0)) bsrRow
+  bs' = pictures . offsetF (const 0) offN $ reverse bsrRowOff
 
 -- Animate?
 
@@ -84,3 +75,9 @@ displayBoards bs = display
                    (InWindow "PegBoard" (600,600) (20,20))
                    black
                    (renderBoards bs)
+
+displayBoardsSquare :: [Board] -> IO ()
+displayBoardsSquare bs = display
+                         (InWindow "PegBoard" (600,600) (20,20))
+                         black
+                         (renderBoardsSquare bs)

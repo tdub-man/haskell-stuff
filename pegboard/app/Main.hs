@@ -9,11 +9,11 @@ import PegBoardSymmetries
 import PegBoardGraphics
 
 b =
-  removePeg (Coord 1 1) .
-  removePeg (Coord 2 1) .
+  removePeg (Coord 1 1) $
+  -- removePeg (Coord 2 1) .
   -- removePeg (Coord 2 2) .
-  removePeg (Coord 3 1) .
-  removePeg (Coord 3 2) $
+  -- removePeg (Coord 3 1) .
+  -- removePeg (Coord 3 2) $
   -- removePeg (Coord 3 3) .
   -- removePeg (Coord 4 1) .
   -- removePeg (Coord 4 2) .
@@ -55,4 +55,5 @@ main :: IO ()
 -- --                  counterClockRotate == posFlip
 
 -- main = displayBoard b
-main = displayBoards b'
+-- main = displayBoards b'
+main = displayBoardsSquare b'
