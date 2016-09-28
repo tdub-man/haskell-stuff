@@ -2,6 +2,7 @@ module Helpers.Lists
     ( lengthIntegral
     , nth
     , subList, subSelect
+    , subDivide
     , concatZip
     , combinations
     , nPerms, generalNPerms, perms, generalPerms
@@ -35,6 +36,15 @@ subList n xs
       rest = drop n xs
       in Just (taken,rest)
   | otherwise = Just ([],xs)
+
+subDivide :: Int -> [a] -> [[a]]
+subDivide 0 xs = [xs]
+subDivide n xs = xs' where
+  xs' = snd . subDivH $ (xs,[])
+  subDivH ([],bs) = ([],bs)
+  subDivH (as,bs) = subDivH (as',bs') where
+    (t,as') = splitAt n as
+    bs' = bs ++ [t]
 
 subSelect :: Int -> [a] -> Maybe ([a], Maybe a, [a])
 subSelect _ [] = Nothing
