@@ -66,18 +66,18 @@ renderBoardsSquare bs = bs' where
 
 displayBoard :: Board -> IO ()
 displayBoard b = display
-                 (InWindow "PegBoard" (600,600) (20,20))
+                 (InWindow "PegBoard" (600,600) (0,0))
                  black
                  (renderBoard b)
 
 displayBoards :: [Board] -> IO ()
 displayBoards bs = display
-                   (InWindow "PegBoard" (600,600) (20,20))
+                   (InWindow "PegBoard" (600,600) (0,0))
                    black
                    (renderBoards bs)
 
 displayBoardsSquare :: [Board] -> IO ()
 displayBoardsSquare bs = display
-                         (InWindow "PegBoard" (600,600) (20,20))
+                         (InWindow "PegBoard" (600,600) (0,0))
                          black
                          (renderBoardsSquare bs)

@@ -9,15 +9,15 @@ import PegBoardSymmetries
 import PegBoardGraphics
 
 b =
-  removePeg (Coord 1 1) $
+  -- removePeg (Coord 1 1) $
   -- removePeg (Coord 2 1) .
   -- removePeg (Coord 2 2) .
   -- removePeg (Coord 3 1) .
-  -- removePeg (Coord 3 2) $
+  removePeg (Coord 3 2) .
   -- removePeg (Coord 3 3) .
   -- removePeg (Coord 4 1) .
-  -- removePeg (Coord 4 2) .
-  -- removePeg (Coord 4 3) $
+  removePeg (Coord 4 2) .
+  removePeg (Coord 4 3) $
   -- removePeg (Coord 4 4) .
   -- removePeg (Coord 5 1) .
   -- removePeg (Coord 5 2) .
@@ -56,4 +56,12 @@ main :: IO ()
 
 -- main = displayBoard b
 -- main = displayBoards b'
-main = displayBoardsSquare b'
+-- main = displayBoardsSquare b'
+
+main = do
+  -- mapM_ (putStrLn . showBoard) concB
+  mapM_ (putStrLn . showBoard) concB'
+  print . last $ concB'
+
+  -- putStrLn . showBoard . zedFlip $ b
+  -- putStrLn . showBoard . clockRotate $ b
