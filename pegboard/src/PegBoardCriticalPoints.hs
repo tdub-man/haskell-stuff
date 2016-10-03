@@ -1,5 +1,6 @@
 module PegBoardCriticalPoints
     ( rows, rows'
+    , innerTriangle
     , concentricTriangles
     , concentricTrianglesExclusive
     -- , originShift
@@ -9,7 +10,7 @@ module PegBoardCriticalPoints
     ) where
 import PegBoard
 import Data.List(groupBy,sort)
-import Helpers.Lists(middle)
+import Helpers.Lists(middle,compR)
 import Helpers.Math(ceilDiv)
 
 -- CRITICAL POINTS
@@ -37,7 +38,7 @@ innerTriangle b = Board ps hs where
 --   hs' = filter (`elem` hs) mids
 
 concentricTriangles' :: (Board,[Board]) -> (Board,[Board])
-concentricTriangles' (Board [] _,bs) = (Board [] [],bs)
+concentricTriangles' (Board [] [],bs) = (Board [] [],bs)
 concentricTriangles' (b,bs) = concentricTriangles' (b',bs') where
   b' = innerTriangle b
   bs' = b:bs
@@ -49,11 +50,9 @@ concentricTrianglesExclusive :: Board -> [Board]
 concentricTrianglesExclusive b = concs' where
   concs = concentricTriangles b
   remPsHs (Board p1 h1) (Board p2 h2) = Board ps hs where
-    ps = filter (`notElem` p1) p2
-    hs = filter (`notElem` h1) h2
-  concs' = [ exclude n | n <- [0..length concs - 1] ]
-  exclude 0 = head concs
-  exclude n = remPsHs (concs !! (n-1)) (concs !! n)
+    ps = filter (`notElem` p2) p1
+    hs = filter (`notElem` h2) h1
+  concs' = head concs:compR remPsHs concs
 
 originShiftC :: [Coord] -> [Coord]
 originShiftC = map (\(Coord x y) -> Coord (x-2) (y-1))

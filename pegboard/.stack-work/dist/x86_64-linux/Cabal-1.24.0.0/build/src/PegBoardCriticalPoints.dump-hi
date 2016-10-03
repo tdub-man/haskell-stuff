@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2016-09-23 20:38:35.466133 UTC
+2016-10-03 22:48:32.761261 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardCriticalPoints 8001
-  interface hash: fc1758e269f9761fa4cdea2481d93fef
-  ABI hash: c2ec82b82f5d6019955109f7e071e60f
-  export-list hash: 7a43dc8b5c56a03c48b8798a9fabcd09
+  interface hash: a891b8ad117ad62eaf3b966842ef03ad
+  ABI hash: 22473441ab6f350255982d1a1e8c8acb
+  export-list hash: d8b5e02613b0286f9ddb0846804e87d4
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
   sig of: Nothing
@@ -16,6 +16,7 @@ exports:
   PegBoardCriticalPoints.concentricTriangles
   PegBoardCriticalPoints.concentricTrianglesExclusive
   PegBoardCriticalPoints.critPoints
+  PegBoardCriticalPoints.innerTriangle
   PegBoardCriticalPoints.rows
   PegBoardCriticalPoints.rows'
   PegBoardCriticalPoints.topLeftRow
@@ -40,6 +41,7 @@ import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
+  compR 954fde2ef8bcfea3a4ea9d33ff8c4a48
   middle 06ecb8accc6c84e43324f104091abf9c
 import  -/  Helpers.Math 90663dbd1f1fc19916d7ba5eca912c3f
   exports: 855ca1e90ac297801c0ea414b55a5b9e
@@ -95,76 +97,6 @@ import  -/  PegBoard 2feff203ebfeacb2de886c6d7cd8d789
     -> [PegBoard.Board]
     -> (# PegBoard.Board, [PegBoard.Board] #)
   {- Arity: 3, Strictness: <S,U><L,U><L,U>, Inline: [0] -}
-84c349be77747e7d9e39575ce7687819
-  $wconcentricTrianglesExclusive ::
-    [PegBoard.Coord] -> [PegBoard.Coord] -> [PegBoard.Board]
-  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0],
-     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
-                 case PegBoardCriticalPoints.$wconcentricTriangles'
-                        ww
-                        ww1
-                        (GHC.Types.[] @ PegBoard.Board) of ww2 { (#,#) ww3 ww4 ->
-                 case GHC.List.$wlenAcc @ PegBoard.Board ww4 0# of ww5 { DEFAULT ->
-                 let {
-                   y :: GHC.Prim.Int# = GHC.Prim.-# ww5 1#
-                 } in
-                 case GHC.Prim.tagToEnum#
-                        @ GHC.Types.Bool
-                        (GHC.Prim.># 0# y) of wild {
-                   GHC.Types.False
-                   -> let {
-                        lvl1 :: PegBoard.Board
-                        = case ww4 of wild1 {
-                            [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x }
-                      } in
-                      letrec {
-                        go3 :: GHC.Prim.Int# -> [PegBoard.Board]
-                          {- Arity: 1, Strictness: <L,U> -}
-                        = \ (x :: GHC.Prim.Int#) ->
-                          GHC.Types.:
-                            @ PegBoard.Board
-                            (case x of ds {
-                               DEFAULT
-                               -> case GHC.List.$w!!
-                                         @ PegBoard.Board
-                                         ww4
-                                         (GHC.Prim.-# ds 1#) of wild1 { PegBoard.Board p1 h1 ->
-                                  case GHC.List.$w!!
-                                         @ PegBoard.Board
-                                         ww4
-                                         ds of wild2 { PegBoard.Board p2 h2 ->
-                                  PegBoard.Board
-                                    (GHC.List.filter
-                                       @ PegBoard.Coord
-                                       (\ (ds1 :: PegBoard.Coord) ->
-                                        case GHC.List.elem
-                                               @ PegBoard.Coord
-                                               PegBoard.$fEqCoord
-                                               ds1
-                                               p1 of wild3 {
-                                          GHC.Types.False -> GHC.Types.True
-                                          GHC.Types.True -> GHC.Types.False })
-                                       p2)
-                                    (GHC.List.filter
-                                       @ PegBoard.Coord
-                                       (\ (ds1 :: PegBoard.Coord) ->
-                                        case GHC.List.elem
-                                               @ PegBoard.Coord
-                                               PegBoard.$fEqCoord
-                                               ds1
-                                               h1 of wild3 {
-                                          GHC.Types.False -> GHC.Types.True
-                                          GHC.Types.True -> GHC.Types.False })
-                                       h2) } }
-                               0# -> lvl1 })
-                            (case GHC.Prim.tagToEnum#
-                                    @ GHC.Types.Bool
-                                    (GHC.Prim.==# x y) of wild1 {
-                               GHC.Types.False -> go3 (GHC.Prim.+# x 1#)
-                               GHC.Types.True -> GHC.Types.[] @ PegBoard.Board })
-                      } in
-                      go3 0#
-                   GHC.Types.True -> GHC.Types.[] @ PegBoard.Board } } }) -}
 f7d49156837669a03bd01be833c5b16f
   $wcritPoints ::
     [PegBoard.Coord] -> [PegBoard.Coord] -> [PegBoard.Coord]
@@ -192,6 +124,51 @@ f7d49156837669a03bd01be833c5b16f
                       @ GHC.Types.Int
                       PegBoardCriticalPoints.critPoints1
                       tlRows) }) -}
+49cfcf36defa37832c4dc615c209292d
+  $wlvl ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> (# [PegBoard.Coord], [PegBoard.Coord] #)
+  {- Arity: 4, HasNoCafRefs, Strictness: <L,1*U><L,1*U><L,U><L,U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord])
+                   (ww1 :: [PegBoard.Coord])
+                   (ww2 :: [PegBoard.Coord])[OneShot]
+                   (ww3 :: [PegBoard.Coord])[OneShot] ->
+                 (# GHC.List.filter
+                      @ PegBoard.Coord
+                      (\ (ds :: PegBoard.Coord) ->
+                       case GHC.List.elem
+                              @ PegBoard.Coord
+                              PegBoard.$fEqCoord
+                              ds
+                              ww2 of wild {
+                         GHC.Types.False -> GHC.Types.True
+                         GHC.Types.True -> GHC.Types.False })
+                      ww,
+                    GHC.List.filter
+                      @ PegBoard.Coord
+                      (\ (ds :: PegBoard.Coord) ->
+                       case GHC.List.elem
+                              @ PegBoard.Coord
+                              PegBoard.$fEqCoord
+                              ds
+                              ww3 of wild {
+                         GHC.Types.False -> GHC.Types.True
+                         GHC.Types.True -> GHC.Types.False })
+                      ww1 #)) -}
+0f7ec36f3b8f08b5ad94b6359a402188
+  $wlvl1 ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord] -> [(PegBoard.Coord, GHC.Types.Bool)]
+  {- Arity: 2, Strictness: <S,U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 PegBoardCriticalPoints.innerTriangle_go2
+                   (Helpers.Lists.middle
+                      @ [(PegBoard.Coord, GHC.Types.Bool)]
+                      (PegBoardCriticalPoints.$wrows' ww ww1))) -}
 5b5c169d39761aa82c56402ad7ace2e7
   $wrows' ::
     [PegBoard.Coord]
@@ -310,13 +287,43 @@ c28390a750b0f2df9155ade2ef4380e9
                         ww5
                         ww2 of ww6 { (#,#) ww7 ww8 ->
                  (ww7, ww8) } } }) -}
-8c0c436ef6fac5fc6fcb867761b1cd81
+198c0bdd722873789c43851b5cf74ad1
   concentricTrianglesExclusive :: PegBoard.Board -> [PegBoard.Board]
-  {- Arity: 1, Strictness: <S(SL),1*U(U,U)>, Inline: INLINE[0],
+  {- Arity: 1, Strictness: <L,1*U(U,U)>m2, Inline: INLINE[0],
      Unfolding: InlineRule (1, True, False)
                 (\ (w :: PegBoard.Board) ->
+                 let {
+                   concs :: [PegBoard.Board]
+                   = case w of ww { PegBoard.Board ww1 ww2 ->
+                     case PegBoardCriticalPoints.$wconcentricTriangles'
+                            ww1
+                            ww2
+                            (GHC.Types.[] @ PegBoard.Board) of ww3 { (#,#) ww4 ww5 ->
+                     ww5 } }
+                 } in
+                 GHC.Types.:
+                   @ PegBoard.Board
+                   (GHC.List.head @ PegBoard.Board concs)
+                   (Helpers.Lists.compMapR
+                      @ PegBoard.Board
+                      @ PegBoard.Board
+                      PegBoardCriticalPoints.concentricTrianglesExclusive1
+                      concs)) -}
+2dad8121c2c72bc02a12050755995b03
+  concentricTrianglesExclusive1 ::
+    PegBoard.Board -> PegBoard.Board -> PegBoard.Board
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S,1*U(1*U,1*U)><S,1*U(U,U)>m, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: PegBoard.Board) (w1 :: PegBoard.Board)[OneShot] ->
                  case w of ww { PegBoard.Board ww1 ww2 ->
-                 PegBoardCriticalPoints.$wconcentricTrianglesExclusive ww1 ww2 }) -}
+                 case w1 of ww3 { PegBoard.Board ww4 ww5 ->
+                 case PegBoardCriticalPoints.$wlvl
+                        ww1
+                        ww2
+                        ww4
+                        ww5 of ww6 { (#,#) ww7 ww8 ->
+                 PegBoard.Board ww7 ww8 } } }) -}
 bc2569568ec640df20cf5cdf748bfcad
   critPoints :: PegBoard.Board -> [PegBoard.Coord]
   {- Arity: 1, Strictness: <S(SL),1*U(U,U)>, Inline: INLINE[0],
@@ -341,6 +348,51 @@ da52ea780eafcc04d927ca18f14664a5
   critPoints_go ::
     [[PegBoard.Coord]] -> [GHC.Types.Int] -> [PegBoard.Coord]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
+36f9d4d5d5c9a152520e879a92b87e72
+  innerTriangle :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <L,1*U(U,1*U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (b :: PegBoard.Board) ->
+                 let {
+                   mids :: [(PegBoard.Coord, GHC.Types.Bool)]
+                   = PegBoardCriticalPoints.innerTriangle3 b
+                 } in
+                 PegBoard.Board
+                   (PegBoardCriticalPoints.innerTriangle2 mids)
+                   (PegBoardCriticalPoints.innerTriangle1 mids)) -}
+23044a23ecb05cb81a766972613f1e33
+  innerTriangle1 ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ (x :: [(PegBoard.Coord, GHC.Types.Bool)]) ->
+                 PegBoardCriticalPoints.innerTriangle_go x) -}
+8615790038a2de369f9f5d3b0029b537
+  innerTriangle2 ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ (x :: [(PegBoard.Coord, GHC.Types.Bool)]) ->
+                 PegBoardCriticalPoints.innerTriangle_go1 x) -}
+738a15f6db7e8762d3a5a9b6a6de89dc
+  innerTriangle3 ::
+    PegBoard.Board -> [(PegBoard.Coord, GHC.Types.Bool)]
+  {- Arity: 1, Strictness: <S(SL),1*U(U,1*U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 PegBoardCriticalPoints.$wlvl1 ww1 ww2 }) -}
+ca2350cbe572b7ba8b10229100afd63e
+  innerTriangle_go ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+69300ad48a2cdf5aad63c1974f550629
+  innerTriangle_go1 ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+9c293313df0cc4b611d803cfd51dc102
+  innerTriangle_go2 ::
+    [[(PegBoard.Coord, GHC.Types.Bool)]]
+    -> [(PegBoard.Coord, GHC.Types.Bool)]
+  {- Arity: 1, Strictness: <S,1*U> -}
 dbb3b14ce81301ff640fe0c856cf8b01
   rows :: [PegBoard.Coord] -> [[PegBoard.Coord]]
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,

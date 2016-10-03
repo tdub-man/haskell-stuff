@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-03 20:48:29.408573 UTC
+2016-10-03 22:40:26.58205 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardGraphics 8001
-  interface hash: 6713db11176a6ab53f7c73e3ed63ad23
+  interface hash: ef2a8c569267f6c8a02f086962709067
   ABI hash: 516903083d0248f7157640d365cea455
   export-list hash: 88e4021c65fc95cac3726aa9ee587feb
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -80,8 +80,8 @@ import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
 import  -/  PegBoard 2feff203ebfeacb2de886c6d7cd8d789
   exports: 1bff303d413b992e037c4116e726befe
   Board a9cbb8b5c5bd98a5c5fb42e9af0a1445
-import  -/  PegBoardCriticalPoints c2ec82b82f5d6019955109f7e071e60f
-  exports: 7a43dc8b5c56a03c48b8798a9fabcd09
+import  -/  PegBoardCriticalPoints 22473441ab6f350255982d1a1e8c8acb
+  exports: d8b5e02613b0286f9ddb0846804e87d4
   rows' f1f75ad2ae5df3af97fd3e737488e5a5
 bc0bc8a4c8b5743ad1fb4b3d9534e3d0
   $trModule :: GHC.Types.Module
