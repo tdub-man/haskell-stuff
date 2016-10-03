@@ -1,0 +1,784 @@
+
+==================== FINAL INTERFACE ====================
+2016-10-03 22:58:49.952038 UTC
+
+interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries 8001
+  interface hash: 87ebcccb8e781f1385a1b93b3af8400b
+  ABI hash: d9c9953b9a7a3538e84a0ce2c62cc11b
+  export-list hash: c9bdbb9045eeeb48643ca8943ba32c38
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Symmetries.boardEquals
+  Symmetries.clockRotate
+  Symmetries.clockSymmetric
+  Symmetries.counterClockRotate
+  Symmetries.counterClockSymmetric
+  Symmetries.findSymmetries
+  Symmetries.negFlip
+  Symmetries.negSymmetric
+  Symmetries.posFlip
+  Symmetries.posSymmetric
+  Symmetries.zedFlip
+  Symmetries.zedSymmetric
+  Symmetries.Symmetries{Symmetries.Clockwise Symmetries.CounterClockwise Symmetries.Horizontal Symmetries.Negative Symmetries.Positive}
+module dependencies: CriticalPoints Helpers.Lists Helpers.Math
+                     PegBoard
+package dependencies: base-4.9.0.0* ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
+family instance modules: base-4.9.0.0:Control.Applicative
+                         base-4.9.0.0:Data.Either base-4.9.0.0:Data.Functor.Const
+                         base-4.9.0.0:Data.Monoid base-4.9.0.0:Data.Type.Equality
+                         base-4.9.0.0:GHC.Generics base-4.9.0.0:GHC.IO.Exception
+                         base-4.9.0.0:GHC.TypeLits
+import  -/  base-4.9.0.0:Data.Foldable 8aeb682f6c74f97fcf0ace0d608a43ea
+import  -/  base-4.9.0.0:Data.List 49b86831b79b49ce5d4d9416ecba61df
+import  -/  base-4.9.0.0:Data.OldList 0058409f994fb13ae0616e3f1e5b4dae
+import  -/  base-4.9.0.0:Data.Tuple acb0ed10307ed88df6c81b8589f4de16
+import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
+import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
+import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
+import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
+import  -/  CriticalPoints efdaab9f4e3f04d007df7b703950148f
+  exports: 80fdacf561ce6b6b953c62c7fe395c77
+  bottomRow 868af57e38625f48f1526ac785b2d3a4
+  concentricTrianglesExclusive 99faa399206dc3df817984265cbeb96f
+  rows 5352f91c70c94ff17883a89b30b79466
+  topLeftRow a78950bcc84eb7900494b953218532b0
+  topRightRow 9bb43343dd388119b9dea5de438e27dc
+import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
+  exports: 975c27250cc63b29bcdfa4d36e613251
+import  -/  PegBoard 2feff203ebfeacb2de886c6d7cd8d789
+  exports: 1bff303d413b992e037c4116e726befe
+  Board 516e910104420de674001680720ce4e7
+  Board a9cbb8b5c5bd98a5c5fb42e9af0a1445
+  Coord 7afa7b4f5e960a0bbb2106405fa42de1
+c750b800e427db99f4bdbfa400f4de10
+  $fShowSymmetries :: GHC.Show.Show Symmetries.Symmetries
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Symmetries.Symmetries
+                  Symmetries.$fShowSymmetries_$cshowsPrec
+                  Symmetries.$fShowSymmetries_$cshow
+                  Symmetries.$fShowSymmetries_$cshowList -}
+c750b800e427db99f4bdbfa400f4de10
+  $fShowSymmetries1 :: Symmetries.Symmetries -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (Symmetries.$fShowSymmetries_$cshowsPrec
+                   Symmetries.$fShowSymmetries2) -}
+8df4e842fbb8579e9bdad4859378de73
+  $fShowSymmetries2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+c750b800e427db99f4bdbfa400f4de10
+  $fShowSymmetries_$cshow :: Symmetries.Symmetries -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Symmetries.Symmetries) ->
+                 Symmetries.$fShowSymmetries_$cshowsPrec
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+c750b800e427db99f4bdbfa400f4de10
+  $fShowSymmetries_$cshowList ::
+    [Symmetries.Symmetries] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ Symmetries.Symmetries
+                   Symmetries.$fShowSymmetries1) -}
+c750b800e427db99f4bdbfa400f4de10
+  $fShowSymmetries_$cshowsPrec ::
+    GHC.Types.Int -> Symmetries.Symmetries -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U> -}
+19d20512dea6d650672be565a7b2d835
+  $tc'Clockwise :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   17579763627820338954##
+                   10696607267117287990##
+                   Symmetries.$trModule
+                   Symmetries.$tc'Clockwise1) -}
+8ebc8c0162e35ea56ede22680cc4a866
+  $tc'Clockwise1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Clockwise"#) -}
+1f848674ced579fe7a08fbe161378db3
+  $tc'CounterClockwise :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   5580806069646435280##
+                   14215405625332380592##
+                   Symmetries.$trModule
+                   Symmetries.$tc'CounterClockwise1) -}
+6b867d4e2e8d6586090d0ca9f112bd45
+  $tc'CounterClockwise1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'CounterClockwise"#) -}
+3499a6ce0cd2e4a2249a2e84d1d95a24
+  $tc'Horizontal :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1247867082036804003##
+                   7421588153250848080##
+                   Symmetries.$trModule
+                   Symmetries.$tc'Horizontal1) -}
+9c9e9d108ae788682a259946fff6a539
+  $tc'Horizontal1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Horizontal"#) -}
+f16de9dfd2a5e91f75a474f3c3b33f39
+  $tc'Negative :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   17235058719149911408##
+                   14073472057471769598##
+                   Symmetries.$trModule
+                   Symmetries.$tc'Negative1) -}
+e4b8762db10cd740cbf18027d4979a4c
+  $tc'Negative1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Negative"#) -}
+4a06d66f15ddf98f33653bcf56c0ea41
+  $tc'Not :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6227956210802228401##
+                   3823174137688740503##
+                   Symmetries.$trModule
+                   Symmetries.$tc'Not1) -}
+314672151703b5d3eef1eaf1b6b8a577
+  $tc'Not1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Not"#) -}
+26878c0201ebce3877ce70f9cf5f5e1a
+  $tc'Positive :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3913941090723323543##
+                   14268862197761065889##
+                   Symmetries.$trModule
+                   Symmetries.$tc'Positive1) -}
+ee10dd3f0b8b34f4f58dc9ead4ef10d1
+  $tc'Positive1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Positive"#) -}
+5208194262589b217ce0fd278da314ea
+  $tcSymmetries :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   5891910722990328370##
+                   12604077837480834675##
+                   Symmetries.$trModule
+                   Symmetries.$trModule1) -}
+0d4b5668eba1e77775d333fdfdc55a8a
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Symmetries.$trModule2
+                   Symmetries.$trModule1) -}
+8e7c2651a55302fd998d8b2ff598330c
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Symmetries"#) -}
+e45b5cb6cf25c0cb8626bcc96d6d840f
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
+4e66da9e3ebfaa56f34a41081249bbe7
+  $wboardEquals ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord])
+                   (ww1 :: [PegBoard.Coord])
+                   (ww2 :: [PegBoard.Coord])
+                   (ww3 :: [PegBoard.Coord]) ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww2) of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww1)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) }) -}
+f41eae1f33de2a82545f9c89761145d3
+  $wclockRotate ::
+    PegBoard.Board -> (# [PegBoard.Coord], [PegBoard.Coord] #)
+  {- Arity: 1, Strictness: <L,1*U(U,U)>, Inline: [0],
+     Unfolding: (\ (w :: PegBoard.Board) ->
+                 let {
+                   concs :: [PegBoard.Board]
+                   = case w of ww { PegBoard.Board ww1 ww2 ->
+                     case CriticalPoints.$wconcentricTriangles'
+                            ww1
+                            ww2
+                            (GHC.Types.[] @ PegBoard.Board) of ww3 { (#,#) ww4 ww5 ->
+                     ww5 } }
+                 } in
+                 case GHC.Base.map
+                        @ PegBoard.Board
+                        @ PegBoard.Board
+                        Symmetries.clockRotate1
+                        (GHC.Types.:
+                           @ PegBoard.Board
+                           (case concs of wild {
+                              [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x })
+                           (Helpers.Lists.compMapR
+                              @ PegBoard.Board
+                              @ PegBoard.Board
+                              CriticalPoints.concentricTrianglesExclusive1
+                              concs)) of wild {
+                   []
+                   -> case GHC.List.foldl2
+                      ret_ty (# [PegBoard.Coord], [PegBoard.Coord] #)
+                      of {}
+                   : x xs
+                   -> case x of ww { PegBoard.Board ww1 ww2 ->
+                      Symmetries.$wgo xs ww1 ww2 } }) -}
+8efb3c27e57bbb8031135402d9650451
+  $wclockSymmetric ::
+    [PegBoard.Coord] -> [PegBoard.Coord] -> Symmetries.Symmetries
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 case Symmetries.$wclockRotate
+                        (PegBoard.Board ww ww1) of ww2 { (#,#) ww3 ww4 ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) of wild {
+                   GHC.Types.False -> Symmetries.clockSymmetric1
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww1)
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww4) of wild1 {
+                        GHC.Types.False -> Symmetries.clockSymmetric1
+                        GHC.Types.True -> Symmetries.Clockwise } } }) -}
+c20c63b03b1e67e9314634ed649700b0
+  $wcounterClockSymmetric ::
+    [PegBoard.Coord] -> [PegBoard.Coord] -> Symmetries.Symmetries
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 case Symmetries.$wclockRotate
+                        (case Symmetries.$wclockRotate
+                                (PegBoard.Board ww ww1) of ww2 { (#,#) ww3 ww4 ->
+                         PegBoard.Board ww3 ww4 }) of ww2 { (#,#) ww3 ww4 ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) of wild {
+                   GHC.Types.False -> Symmetries.counterClockSymmetric1
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww1)
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww4) of wild1 {
+                        GHC.Types.False -> Symmetries.counterClockSymmetric1
+                        GHC.Types.True -> Symmetries.CounterClockwise } } }) -}
+efa0707dd3f51aa8a60d745940a115fd
+  $wfindSymmetries ::
+    PegBoard.Board
+    -> (# Symmetries.Symmetries, [Symmetries.Symmetries] #)
+  {- Arity: 1, Strictness: <L,U(U,U)>, Inline: [0],
+     Unfolding: (\ (w :: PegBoard.Board) ->
+                 (# Symmetries.posSymmetric w,
+                    GHC.Types.:
+                      @ Symmetries.Symmetries
+                      (Symmetries.zedSymmetric w)
+                      (GHC.Types.:
+                         @ Symmetries.Symmetries
+                         (Symmetries.negSymmetric w)
+                         (GHC.Types.:
+                            @ Symmetries.Symmetries
+                            (Symmetries.clockSymmetric w)
+                            (GHC.Types.:
+                               @ Symmetries.Symmetries
+                               (Symmetries.counterClockSymmetric w)
+                               (GHC.Types.[] @ Symmetries.Symmetries)))) #)) -}
+897bbc0c93ad34e60a831f329fbcdc90
+  $wgo ::
+    [PegBoard.Board]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> (# [PegBoard.Coord], [PegBoard.Coord] #)
+  {- Arity: 3, HasNoCafRefs, Strictness: <S,1*U><L,U><L,U>,
+     Inline: [0] -}
+e938d2527a11d9f6cdb40ed6f78c39e7
+  $wlvl ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord] -> (# [PegBoard.Coord], [PegBoard.Coord] #)
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 let {
+                   allRows :: [(PegBoard.Coord, GHC.Types.Bool)]
+                   = let {
+                       ds :: [PegBoard.Coord] = CriticalPoints.$wtopRightRow ww ww1
+                     } in
+                     let {
+                       ds1 :: [PegBoard.Coord] = CriticalPoints.$wtopLeftRow ww ww1
+                     } in
+                     let {
+                       isPeg :: PegBoard.Coord -> GHC.Types.Bool
+                         {- Arity: 1, Strictness: <L,U>,
+                            Unfolding: InlineRule (1, True, False)
+                                       (\ (ds2 :: PegBoard.Coord) ->
+                                        GHC.List.elem @ PegBoard.Coord PegBoard.$fEqCoord ds2 ww) -}
+                       = \ (ds2 :: PegBoard.Coord) ->
+                         GHC.List.elem @ PegBoard.Coord PegBoard.$fEqCoord ds2 ww
+                     } in
+                     let {
+                       z :: [(PegBoard.Coord, GHC.Types.Bool)]
+                       = let {
+                           ds2 :: [PegBoard.Coord] = CriticalPoints.$wbottomRow ww ww1
+                         } in
+                         let {
+                           z1 :: [(PegBoard.Coord, GHC.Types.Bool)]
+                           = GHC.List.zip
+                               @ PegBoard.Coord
+                               @ GHC.Types.Bool
+                               ds1
+                               (GHC.Base.map @ PegBoard.Coord @ GHC.Types.Bool isPeg ds2)
+                         } in
+                         letrec {
+                           go :: [PegBoard.Coord]
+                                 -> [GHC.Types.Bool] -> [(PegBoard.Coord, GHC.Types.Bool)]
+                             {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
+                           = \ (ds3 :: [PegBoard.Coord]) (_ys :: [GHC.Types.Bool]) ->
+                             case ds3 of wild {
+                               [] -> z1
+                               : ipv ipv1
+                               -> case _ys of wild1 {
+                                    [] -> z1
+                                    : ipv2 ipv3
+                                    -> GHC.Types.:
+                                         @ (PegBoard.Coord, GHC.Types.Bool)
+                                         (ipv, ipv2)
+                                         (go ipv1 ipv3) } }
+                         } in
+                         go ds2 (GHC.Base.map @ PegBoard.Coord @ GHC.Types.Bool isPeg ds)
+                     } in
+                     letrec {
+                       go :: [PegBoard.Coord]
+                             -> [GHC.Types.Bool] -> [(PegBoard.Coord, GHC.Types.Bool)]
+                         {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
+                       = \ (ds2 :: [PegBoard.Coord]) (_ys :: [GHC.Types.Bool]) ->
+                         case ds2 of wild {
+                           [] -> z
+                           : ipv ipv1
+                           -> case _ys of wild1 {
+                                [] -> z
+                                : ipv2 ipv3
+                                -> GHC.Types.:
+                                     @ (PegBoard.Coord, GHC.Types.Bool)
+                                     (ipv, ipv2)
+                                     (go ipv1 ipv3) } }
+                     } in
+                     Data.OldList.nubBy
+                       @ (PegBoard.Coord, GHC.Types.Bool)
+                       Symmetries.clockRotate2
+                       (go ds (GHC.Base.map @ PegBoard.Coord @ GHC.Types.Bool isPeg ds1))
+                 } in
+                 (# Symmetries.clockRotate_go1 allRows,
+                    Symmetries.clockRotate_go allRows #)) -}
+4432bdb6b2552861f40c8584b98e1a34
+  $wnegSymmetric ::
+    [PegBoard.Coord] -> [PegBoard.Coord] -> Symmetries.Symmetries
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 case Symmetries.$wclockRotate
+                        (case Symmetries.$wclockRotate
+                                (case Symmetries.$wclockRotate
+                                        (PegBoard.Board ww ww1) of ww2 { (#,#) ww3 ww4 ->
+                                 PegBoard.Board ww3 ww4 }) of ww2 { (#,#) ww3 ww4 ->
+                         case Symmetries.$wzedFlip ww3 ww4 of ww5 { (#,#) ww6 ww7 ->
+                         PegBoard.Board ww6 ww7 } }) of ww2 { (#,#) ww3 ww4 ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) of wild {
+                   GHC.Types.False -> Symmetries.negSymmetric1
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww1)
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww4) of wild1 {
+                        GHC.Types.False -> Symmetries.negSymmetric1
+                        GHC.Types.True -> Symmetries.Negative } } }) -}
+cde8ac5f6698cd6f66794e91a498a63e
+  $wposSymmetric ::
+    [PegBoard.Coord] -> [PegBoard.Coord] -> Symmetries.Symmetries
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 case Symmetries.$wclockRotate
+                        (case Symmetries.$wclockRotate
+                                (case Symmetries.$wclockRotate
+                                        (PegBoard.Board ww ww1) of ww2 { (#,#) ww3 ww4 ->
+                                 case Symmetries.$wzedFlip ww3 ww4 of ww5 { (#,#) ww6 ww7 ->
+                                 PegBoard.Board ww6 ww7 } }) of ww2 { (#,#) ww3 ww4 ->
+                         PegBoard.Board ww3 ww4 }) of ww2 { (#,#) ww3 ww4 ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) of wild {
+                   GHC.Types.False -> Symmetries.posSymmetric1
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww1)
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww4) of wild1 {
+                        GHC.Types.False -> Symmetries.posSymmetric1
+                        GHC.Types.True -> Symmetries.Positive } } }) -}
+d2026b7bf836a86d5cae2f5036a7754e
+  $wzedFlip ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord] -> (# [PegBoard.Coord], [PegBoard.Coord] #)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 let {
+                   pshs :: [(PegBoard.Coord, GHC.Types.Bool)]
+                   = let {
+                       pRows :: [[PegBoard.Coord]]
+                       = Data.OldList.groupBy
+                           @ PegBoard.Coord
+                           CriticalPoints.bottomRow1
+                           (Data.OldList.sortBy
+                              @ PegBoard.Coord
+                              PegBoard.$fOrdCoord_$ccompare
+                              (GHC.Base.++ @ PegBoard.Coord ww ww1))
+                     } in
+                     let {
+                       g :: PegBoard.Coord -> (PegBoard.Coord, GHC.Types.Bool)
+                         {- Arity: 1, Strictness: <L,U>m,
+                            Unfolding: InlineRule (1, True, False)
+                                       (\ (x :: PegBoard.Coord) ->
+                                        (x,
+                                         GHC.List.elem @ PegBoard.Coord PegBoard.$fEqCoord x ww)) -}
+                       = \ (x :: PegBoard.Coord) ->
+                         (x, GHC.List.elem @ PegBoard.Coord PegBoard.$fEqCoord x ww)
+                     } in
+                     letrec {
+                       go :: [[PegBoard.Coord]]
+                             -> [[PegBoard.Coord]] -> [(PegBoard.Coord, GHC.Types.Bool)]
+                         {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
+                       = \ (ds :: [[PegBoard.Coord]]) (eta :: [[PegBoard.Coord]]) ->
+                         case ds of wild {
+                           [] -> GHC.Types.[] @ (PegBoard.Coord, GHC.Types.Bool)
+                           : y ys
+                           -> case eta of wild1 {
+                                [] -> GHC.Types.[] @ (PegBoard.Coord, GHC.Types.Bool)
+                                : y1 ys1
+                                -> GHC.Base.++
+                                     @ (PegBoard.Coord, GHC.Types.Bool)
+                                     (GHC.List.zipWith
+                                        @ (PegBoard.Coord, GHC.Types.Bool)
+                                        @ PegBoard.Coord
+                                        @ (PegBoard.Coord, GHC.Types.Bool)
+                                        Symmetries.negSymmetric2
+                                        (GHC.List.reverse1
+                                           @ (PegBoard.Coord, GHC.Types.Bool)
+                                           (GHC.Base.map
+                                              @ PegBoard.Coord
+                                              @ (PegBoard.Coord, GHC.Types.Bool)
+                                              g
+                                              y)
+                                           (GHC.Types.[] @ (PegBoard.Coord, GHC.Types.Bool)))
+                                        y1)
+                                     (go ys ys1) } }
+                     } in
+                     go pRows pRows
+                 } in
+                 (# Symmetries.negSymmetric_go1 pshs,
+                    Symmetries.negSymmetric_go pshs #)) -}
+77d8c93f78abac0e5795945550d68354
+  $wzedSymmetric ::
+    [PegBoard.Coord] -> [PegBoard.Coord] -> Symmetries.Symmetries
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord]) (ww1 :: [PegBoard.Coord]) ->
+                 case Symmetries.$wzedFlip ww ww1 of ww2 { (#,#) ww3 ww4 ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww)
+                        (Data.OldList.sortBy
+                           @ PegBoard.Coord
+                           PegBoard.$fOrdCoord_$ccompare
+                           ww3) of wild {
+                   GHC.Types.False -> Symmetries.zedSymmetric1
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww1)
+                             (Data.OldList.sortBy
+                                @ PegBoard.Coord
+                                PegBoard.$fOrdCoord_$ccompare
+                                ww4) of wild1 {
+                        GHC.Types.False -> Symmetries.zedSymmetric1
+                        GHC.Types.True -> Symmetries.Horizontal } } }) -}
+c750b800e427db99f4bdbfa400f4de10
+  data Symmetries
+    = Positive
+    | Horizontal
+    | Negative
+    | Clockwise
+    | CounterClockwise
+    | Not Symmetries.Symmetries
+8dacde1853b633b0ab73d7577e29047f
+  boardEquals :: PegBoard.Board -> PegBoard.Board -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: PegBoard.Board) (w1 :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 case w1 of ww3 { PegBoard.Board ww4 ww5 ->
+                 Symmetries.$wboardEquals ww1 ww2 ww4 ww5 } }) -}
+167d682bd10c77bc6121a242df63b12c
+  clockRotate :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <L,1*U(U,U)>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case Symmetries.$wclockRotate w of ww { (#,#) ww1 ww2 ->
+                 PegBoard.Board ww1 ww2 }) -}
+f0dae28c40282d5419d473c790368a51
+  clockRotate1 :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <S,1*U(U,U)>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 case Symmetries.$wlvl ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
+                 PegBoard.Board ww4 ww5 } }) -}
+70ba0c09c6037657c48eaed8a2a84334
+  clockRotate2 ::
+    (PegBoard.Coord, GHC.Types.Bool)
+    -> (PegBoard.Coord, GHC.Types.Bool) -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S(S)L)L),1*U(1*U(1*U(U),1*U(U)),A)><S(S(S(S)L)L),1*U(1*U(1*U(U),1*U(U)),A)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: (PegBoard.Coord, GHC.Types.Bool))
+                   (w1 :: (PegBoard.Coord, GHC.Types.Bool)) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case ww1 of ww3 { PegBoard.Coord ww4 ww5 ->
+                 case ww4 of ww6 { GHC.Types.I# ww7 ->
+                 case w1 of ww8 { (,) ww9 ww10 ->
+                 case ww9 of ww11 { PegBoard.Coord ww12 ww13 ->
+                 case ww12 of ww14 { GHC.Types.I# ww15 ->
+                 PegBoard.$w$c==1 ww7 ww5 ww15 ww13 } } } } } }) -}
+abae726de52aa962018c48ea1625c973
+  clockRotate_go ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+3d9681633eaf7b12bb67c7b20edf16a7
+  clockRotate_go1 ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+97971d18af9ef6fcb35794fa4c6aa9df
+  clockSymmetric :: PegBoard.Board -> Symmetries.Symmetries
+  {- Arity: 1, Strictness: <S(SL),U(U,U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 Symmetries.$wclockSymmetric ww1 ww2 }) -}
+371d2b2186b550bfa5a02bc8ef67e4ed
+  clockSymmetric1 :: Symmetries.Symmetries
+  {- HasNoCafRefs, Strictness: m6,
+     Unfolding: (Symmetries.Not Symmetries.Clockwise) -}
+e4cb321c14a9aef005d5fb1b54352617
+  counterClockRotate :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <L,1*U(U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PegBoard.Board) ->
+                 Symmetries.clockRotate (Symmetries.clockRotate x)) -}
+86a6dd955130e815e4f50fc89ef9f327
+  counterClockSymmetric :: PegBoard.Board -> Symmetries.Symmetries
+  {- Arity: 1, Strictness: <S(SL),U(U,U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 Symmetries.$wcounterClockSymmetric ww1 ww2 }) -}
+39e141c97e39ec1fe1181a5706094272
+  counterClockSymmetric1 :: Symmetries.Symmetries
+  {- HasNoCafRefs, Strictness: m6,
+     Unfolding: (Symmetries.Not Symmetries.CounterClockwise) -}
+966fa421dedc48c9b1f040e30de32c91
+  findSymmetries :: PegBoard.Board -> [Symmetries.Symmetries]
+  {- Arity: 1, Strictness: <L,U(U,U)>m2, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case Symmetries.$wfindSymmetries w of ww { (#,#) ww1 ww2 ->
+                 GHC.Types.: @ Symmetries.Symmetries ww1 ww2 }) -}
+d752777a694506dccf2033d18cd97296
+  negFlip :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <L,1*U(U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PegBoard.Board) ->
+                 Symmetries.clockRotate
+                   (Symmetries.zedFlip
+                      (Symmetries.clockRotate (Symmetries.clockRotate x)))) -}
+87ef8f3555cd54f59cae1f1218d95c49
+  negSymmetric :: PegBoard.Board -> Symmetries.Symmetries
+  {- Arity: 1, Strictness: <S(SL),U(U,U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 Symmetries.$wnegSymmetric ww1 ww2 }) -}
+25352a9cbc643bd28d48c9848aa78377
+  negSymmetric1 :: Symmetries.Symmetries
+  {- HasNoCafRefs, Strictness: m6,
+     Unfolding: (Symmetries.Not Symmetries.Negative) -}
+b826af85131ee8b351409c8d0ec0f878
+  negSymmetric2 ::
+    (PegBoard.Coord, GHC.Types.Bool)
+    -> PegBoard.Coord -> (PegBoard.Coord, GHC.Types.Bool)
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U(A,U)><L,U>m,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ds :: (PegBoard.Coord, GHC.Types.Bool))
+                   (c :: PegBoard.Coord) ->
+                 case ds of wild { (,) ds1 p -> (c, p) }) -}
+1a7da80b42e6dd2f4ecd37701126d339
+  negSymmetric_go ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+ed38ebc1bd67be15eb32af76cec04563
+  negSymmetric_go1 ::
+    [(PegBoard.Coord, GHC.Types.Bool)] -> [PegBoard.Coord]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+c5045a70df7827cddcdbc848903088a8
+  posFlip :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, Strictness: <L,1*U(U,U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PegBoard.Board) ->
+                 Symmetries.clockRotate
+                   (Symmetries.clockRotate
+                      (Symmetries.zedFlip (Symmetries.clockRotate x)))) -}
+6e611adf036e1e08caaad33c2ab1cf3e
+  posSymmetric :: PegBoard.Board -> Symmetries.Symmetries
+  {- Arity: 1, Strictness: <S(SL),U(U,U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 Symmetries.$wposSymmetric ww1 ww2 }) -}
+4731e35e6d185e4ead706d111c2bbaa4
+  posSymmetric1 :: Symmetries.Symmetries
+  {- HasNoCafRefs, Strictness: m6,
+     Unfolding: (Symmetries.Not Symmetries.Positive) -}
+6e6ce54ecdb1db63c064a9c6225cb840
+  zedFlip :: PegBoard.Board -> PegBoard.Board
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,1*U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 case Symmetries.$wzedFlip ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
+                 PegBoard.Board ww4 ww5 } }) -}
+8def4b5245821d48ffc08a7a9619e500
+  zedSymmetric :: PegBoard.Board -> Symmetries.Symmetries
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),U(U,U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 Symmetries.$wzedSymmetric ww1 ww2 }) -}
+23d307cee1730fe34b29bbec37dd92ce
+  zedSymmetric1 :: Symmetries.Symmetries
+  {- HasNoCafRefs, Strictness: m6,
+     Unfolding: (Symmetries.Not Symmetries.Horizontal) -}
+instance [safe] GHC.Show.Show [Symmetries.Symmetries]
+  = Symmetries.$fShowSymmetries
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

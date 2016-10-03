@@ -1,4 +1,4 @@
-module PegBoardSymmetries
+module Symmetries
     ( zedFlip
     , posFlip
     , negFlip
@@ -14,9 +14,9 @@ module PegBoardSymmetries
     , boardEquals
     ) where
 import PegBoard
-import PegBoardCriticalPoints( rows
-                             , concentricTrianglesExclusive
-                             , topRightRow, bottomRow, topLeftRow)
+import CriticalPoints( rows
+                     , concentricTrianglesExclusive
+                     , topRightRow, bottomRow, topLeftRow)
 import Helpers.Lists(middleElem)
 import Data.List(nubBy,nub,sort)
 

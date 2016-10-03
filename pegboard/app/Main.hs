@@ -3,10 +3,10 @@ module Main where
 import Graphics.Gloss
 
 import PegBoard
-import PegBoardCriticalPoints
-import PegBoardAnalytics
-import PegBoardSymmetries
-import PegBoardGraphics
+import CriticalPoints
+import Analytics
+import Symmetries
+import Graphics
 
 b =
   removePeg (Coord 1 1) $

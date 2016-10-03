@@ -1,4 +1,4 @@
-module PegBoardGraphics
+module Graphics
     ( renderBoard
     , renderBoards
     , renderBoardsSquare
@@ -8,7 +8,7 @@ module PegBoardGraphics
     ) where
 
 import PegBoard
-import PegBoardCriticalPoints
+import CriticalPoints
 import Graphics.Gloss
 import Helpers.Lists
 

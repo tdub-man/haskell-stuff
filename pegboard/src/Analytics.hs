@@ -1,4 +1,4 @@
-module PegBoardAnalytics
+module Analytics
     ( endWith
     , shortestGame
     , endState
@@ -6,7 +6,7 @@ module PegBoardAnalytics
     , numEndStates
     )where
 import PegBoard
-import PegBoardCriticalPoints(concentricTriangles)
+import CriticalPoints(concentricTriangles)
 import Data.List(sort,nubBy,group,groupBy)
 import Data.Function(on)
 import Helpers.Lists(middle)

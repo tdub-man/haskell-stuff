@@ -1,4 +1,4 @@
-module PegBoardCriticalPoints
+module CriticalPoints
     ( rows, rows'
     , innerTriangle
     , concentricTriangles
