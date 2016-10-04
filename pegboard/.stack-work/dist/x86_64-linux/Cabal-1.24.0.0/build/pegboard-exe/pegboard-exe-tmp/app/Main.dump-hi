@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-03 22:58:51.491415 UTC
+2016-10-04 16:19:34.695129 UTC
 
 interface main@main:Main 8001
-  interface hash: f42cf5481e62970fd93b7fd2bc2c26b5
-  ABI hash: 253ad732d4c25f199d5f725f581a44ab
+  interface hash: e7d613faa5684862cce5140c2d067a24
+  ABI hash: 73e355f2adcec455e1534362c1d1eb99
   export-list hash: 614ba73b009055573df6089fb1797d4e
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -66,11 +66,12 @@ import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  base-4.9.0.0:System.IO eb1d40aa793a4047069a5023f2ebcfe3
 import  -/  ghc-prim-0.5.0.0:GHC.Types 7378e41b7749213c8c88ceb6b0665d4c
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss d5b982018b0c758f00994fce74453c04
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 1c22391ca93a1c66d7952e12a9d54c85
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints efdaab9f4e3f04d007df7b703950148f
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 656d53c55430f23a083f258f1855051f
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 2feff203ebfeacb2de886c6d7cd8d789
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries d9c9953b9a7a3538e84a0ce2c62cc11b
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 39eb14961649799faee79358a8534710
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints 3ac4b1acf8244223bf7173d25fc6c635
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 3b21b77a536a60b930c1cdd2d1de6821
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard e5ae7f741df6e5acec6857f64e0e15aa
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame ea989d509c6118403d9cf21429970cf0
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries e33bd8a3477142c6e23c8ce3a5906f5b
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -83,39 +84,39 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
-5d00de977dbd8ece8c388b553b56a23c
+1b63d2928a88b99d0b23507e9bd762c3
   $wgo ::
-    [PegBoard.BoardLog] -> (# PegBoard.Board, [PegBoard.Board] #)
+    [PlayGame.BoardLog] -> (# PegBoard.Board, [PegBoard.Board] #)
   {- Arity: 1, Strictness: <S,1*U>, Inline: [0] -}
-3dcfabe7c5aa3ef40abfd6b8743ad69c
+a4a0b24e165a13e8130c590532600f8b
   b :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
                         Main.b3 of ww { (#,#) ww1 ww2 ->
                  case PegBoard.$wremovePeg Main.b1 ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
                  PegBoard.Board ww4 ww5 } }) -}
-bd3e460be151f9fa149f469a5ccf1992
+91b201580e879c179b1a43cd242869b1
   b' :: [PegBoard.Board]
-  {- Unfolding: (case PegBoard.$wplayLog
+  {- Unfolding: (case PlayGame.$wplayLog
                         Main.b'1
-                        (GHC.Types.[] @ PegBoard.BoardLog) of ww3 { (#,#) ww4 ww5 ->
+                        (GHC.Types.[] @ PlayGame.BoardLog) of ww3 { (#,#) ww4 ww5 ->
                  case Main.$wgo ww5 of ww { (#,#) ww1 ww2 ->
                  GHC.List.reverse1
                    @ PegBoard.Board
                    (GHC.Types.: @ PegBoard.Board ww1 ww2)
                    (GHC.Types.[] @ PegBoard.Board) } }) -}
-78f482ccf2f4910b22fa737d006da3ec
-  b'1 :: [PegBoard.BoardLog]
+ddd71c4d8b5d705aa8b034f6925d78c1
+  b'1 :: [PlayGame.BoardLog]
   {- Unfolding: (GHC.Types.:
-                   @ PegBoard.BoardLog
+                   @ PlayGame.BoardLog
                    Main.b'2
-                   (GHC.Types.[] @ PegBoard.BoardLog)) -}
-e5b7ca7e4a44b91dd774a1a0f8a52e69
-  b'2 :: PegBoard.BoardLog
+                   (GHC.Types.[] @ PlayGame.BoardLog)) -}
+333200f480bc177a5bcc6bb0adc08e9c
+  b'2 :: PlayGame.BoardLog
   {- Strictness: m,
-     Unfolding: (PegBoard.BoardLog
+     Unfolding: (PlayGame.BoardLog
                    Main.b
                    (GHC.Types.[] @ PegBoard.Board)) -}
-38ef4bce002d1ecec30c65dda4cbf5c4
+409b740f7b8d5c06f741ffd1655fd8d4
   b1 :: PegBoard.Coord
   {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b2 Main.b2) -}
 47bad64b76482af8b80d6600a4029f6e
@@ -124,7 +125,7 @@ e5b7ca7e4a44b91dd774a1a0f8a52e69
 5ccc98defcf0e6c43b885fdfd9dec78c
   b3 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
-4d911c3eda91a44da4952109f5921820
+c4bb72fabfdae00e6a251a4c2460585d
   concB :: [PegBoard.Board]
   {- Unfolding: (case Main.b of ww3 { PegBoard.Board ww4 ww5 ->
                  case CriticalPoints.$wconcentricTriangles'
@@ -132,30 +133,30 @@ e5b7ca7e4a44b91dd774a1a0f8a52e69
                         ww5
                         (GHC.Types.[] @ PegBoard.Board) of ww6 { (#,#) ww7 ww8 ->
                  ww8 } }) -}
-e65848d2c059904f737e9ee851c13bf4
+d7e9104d63cf7a080ad9c886d343df25
   concB' :: [PegBoard.Board]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
                    @ PegBoard.Board
                    Main.concB'2
                    Main.concB'1) -}
-98e92d4b9c40607551523fa585692b56
+f907804d569ff1f3fd23518e000e84e4
   concB'1 :: [PegBoard.Board]
   {- Unfolding: (Helpers.Lists.compMapR
                    @ PegBoard.Board
                    @ PegBoard.Board
                    CriticalPoints.concentricTrianglesExclusive1
                    Main.concB) -}
-e8f591a802125b16d7351af26ead37f3
+792013d02335c3c341633d2e9f92bb8b
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
                    [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x }) -}
-a1707c00a1514dcf59039495dd8ff5b3
+25f4bc06f4f3d34e7b84cd7604c2a325
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-dde1f374c45fffe2ef9b18c8ac3701f5
+d0af4413cf3c9243841dcaf825a5ff55
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -227,12 +228,12 @@ dde1f374c45fffe2ef9b18c8ac3701f5
                         GHC.Types.True
                         ipv22 of ds13 { (#,#) ipv24 ipv25 ->
                  Main.main3 Main.main2 ipv24 } } } } } } } } } } } } }) -}
-fbfb6ef41cff8563f27100cda71ac429
+6379dc2fb1ccd1cbf1fef1fdc77f30e0
   main10 :: PegBoard.Board
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.main11 of ww { (#,#) ww1 ww2 ->
                  PegBoard.Board ww1 ww2 }) -}
-b2cf38d04d8fe4ef78f7006d1616d69b
+b49cc0c2cc2b745aa7f6a86fcccbc58c
   main11 :: PegBoard.Board
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.b of ww { (#,#) ww1 ww2 ->
@@ -243,7 +244,7 @@ b2cf38d04d8fe4ef78f7006d1616d69b
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Pos Flip"#) -}
-5a29b0166e94be4ad6c0cd7e67b175aa
+a09969cde94de26cd20aa48624c91a7e
   main13 :: GHC.Base.String
   {- Unfolding: (case Main.b of ww { PegBoard.Board ww1 ww2 ->
                  case Symmetries.$wzedFlip ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
@@ -253,7 +254,7 @@ b2cf38d04d8fe4ef78f7006d1616d69b
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Zed Flip"#) -}
-42e413d75f9e1512a14fdf872f12070d
+955de7c41e7755fac5e13a75b270d789
   main15 :: GHC.Base.String
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.main7 of ww { (#,#) ww1 ww2 ->
@@ -263,7 +264,7 @@ cb246240f58003de5de35b0fb3687886
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Counter-clockwise Rotation"#) -}
-8d79bb7bec05a5015ca89c23b4b372be
+d9e13b32a2d177dfaeb24e4d1e9f076e
   main17 :: GHC.Base.String
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.b of ww { (#,#) ww1 ww2 ->
@@ -273,11 +274,11 @@ cb246240f58003de5de35b0fb3687886
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Clockwise Rotation"#) -}
-5c36b7ad2315615ab93edc8c28c8d30b
+cfb28437bb9f9c74dc296f22dbb6e547
   main19 :: GHC.Base.String
   {- Unfolding: (case Main.b of ww { PegBoard.Board ww1 ww2 ->
                  PegBoard.$wshowBoard ww1 ww2 }) -}
-964238ccd2dcda25f3d57dc0e620e5e3
+cfb917f2d18ee372a4b3e0996cbeb8a3
   main2 :: [Symmetries.Symmetries]
   {- Unfolding: (case Symmetries.$wfindSymmetries
                         Main.b of ww { (#,#) ww1 ww2 ->
@@ -285,7 +286,7 @@ cb246240f58003de5de35b0fb3687886
 99e92c78de5a4d99616e3a04ca635dc8
   main20 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "Base Board"#) -}
-fa2e76cac544d56b833ed22a8d24cbae
+63e8e07463c78a8285e3b36a3a480112
   main21 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -304,18 +305,18 @@ add7f8ba56232e7ab3b7b213af20dd5e
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Symmetries:"#) -}
-4a89540f619c5d1302cb3df08d2bb027
+ffb9dade45baed7c4a3cee88647e27eb
   main5 :: GHC.Base.String
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.main6 of ww { (#,#) ww1 ww2 ->
                  PegBoard.$wshowBoard ww1 ww2 }) -}
-4d7a95258ce22ff71a9fdda6375e86da
+239465a5f39e7a0e9c7833d85901f517
   main6 :: PegBoard.Board
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.main7 of ww { (#,#) ww1 ww2 ->
                  case Symmetries.$wzedFlip ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
                  PegBoard.Board ww4 ww5 } }) -}
-67265b469ef12632ac79e3c2a0a2597b
+f1f05901b4e8e860e480dec8a29ae2d0
   main7 :: PegBoard.Board
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.b of ww { (#,#) ww1 ww2 ->
@@ -325,7 +326,7 @@ add7f8ba56232e7ab3b7b213af20dd5e
   {- Unfolding: (GHC.CString.unpackCString#
                    "\n\
                    \Neg Flip"#) -}
-4548d6984d0ef1e4bb1e0ca7bb19716a
+7d62be93f71f79c4eec28bb0788f9e81
   main9 :: GHC.Base.String
   {- Unfolding: (case Symmetries.$wclockRotate
                         Main.main10 of ww { (#,#) ww1 ww2 ->

@@ -6,6 +6,7 @@ module Analytics
     , numEndStates
     )where
 import PegBoard
+import PlayGame(BoardLog(BoardLog,_current),collectLog)
 import CriticalPoints(concentricTriangles)
 import Data.List(sort,nubBy,group,groupBy)
 import Data.Function(on)

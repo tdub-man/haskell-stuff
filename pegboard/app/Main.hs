@@ -3,6 +3,7 @@ module Main where
 import Graphics.Gloss
 
 import PegBoard
+import PlayGame
 import CriticalPoints
 import Analytics
 import Symmetries

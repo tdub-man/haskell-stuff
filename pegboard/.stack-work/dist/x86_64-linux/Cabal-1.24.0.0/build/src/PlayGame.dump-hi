@@ -1,0 +1,360 @@
+
+==================== FINAL INTERFACE ====================
+2016-10-04 16:19:32.187377 UTC
+
+interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 8001
+  interface hash: 9cb46ecd9ceaa3b050139f58514d5d3a
+  ABI hash: ea989d509c6118403d9cf21429970cf0
+  export-list hash: db98f7a3543cf5dfbe75863e31383cd6
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  PlayGame.collectLog
+  PlayGame.playGame
+  PlayGame.playGameLog
+  PlayGame.showBoardLog
+  PlayGame.BoardLog{PlayGame.BoardLog _current}
+module dependencies: Helpers.Lists PegBoard
+package dependencies: base-4.9.0.0* ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
+family instance modules: base-4.9.0.0:Control.Applicative
+                         base-4.9.0.0:Data.Either base-4.9.0.0:Data.Functor.Const
+                         base-4.9.0.0:Data.Monoid base-4.9.0.0:Data.Type.Equality
+                         base-4.9.0.0:GHC.Generics base-4.9.0.0:GHC.IO.Exception
+                         base-4.9.0.0:GHC.TypeLits
+import  -/  base-4.9.0.0:Data.Foldable 8aeb682f6c74f97fcf0ace0d608a43ea
+import  -/  base-4.9.0.0:Data.List 49b86831b79b49ce5d4d9416ecba61df
+import  -/  base-4.9.0.0:Data.OldList 0058409f994fb13ae0616e3f1e5b4dae
+import  -/  base-4.9.0.0:Data.Tuple acb0ed10307ed88df6c81b8589f4de16
+import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
+import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
+import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
+import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
+import  -/  PegBoard e5ae7f741df6e5acec6857f64e0e15aa
+  exports: fc07b7050cc2af4e0e64b548dbb35a86
+  Board a52c37830432dd53520a978725b1b57a
+  Coord e90daf56cd239fe823a66b0baea38df2
+  movePegs 921ac017247f4cfc281240f437571f37
+  movePegsAll 46e66b13c1ab41517b36f58e95924bb0
+  nextMoves 9754ecfe87712f6b7f6c73c91a98e4f0
+  showBoard 01bdc32339c5836085318896d3e60855
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fEqBoardLog :: GHC.Classes.Eq PlayGame.BoardLog
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ PlayGame.BoardLog
+                  PlayGame.$fEqBoardLog_$c==
+                  PlayGame.$fEqBoardLog_$c/= -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fEqBoardLog_$c/= ::
+    PlayGame.BoardLog -> PlayGame.BoardLog -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(SL)L),1*U(1*U(1*U,1*U),1*U)><S(S(SL)L),1*U(1*U(1*U,1*U),1*U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: PlayGame.BoardLog) (b :: PlayGame.BoardLog) ->
+                 case PlayGame.$fEqBoardLog_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fEqBoardLog_$c== ::
+    PlayGame.BoardLog -> PlayGame.BoardLog -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(SL)L),1*U(1*U(1*U,1*U),1*U)><S(S(SL)L),1*U(1*U(1*U,1*U),1*U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: PlayGame.BoardLog) (w1 :: PlayGame.BoardLog) ->
+                 case w of ww { PlayGame.BoardLog ww1 ww2 ->
+                 case ww1 of ww3 { PegBoard.Board ww4 ww5 ->
+                 case w1 of ww6 { PlayGame.BoardLog ww7 ww8 ->
+                 case ww7 of ww9 { PegBoard.Board ww10 ww11 ->
+                 PlayGame.$w$c== ww4 ww5 ww2 ww10 ww11 ww8 } } } }) -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fShowBoardLog :: GHC.Show.Show PlayGame.BoardLog
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ PlayGame.BoardLog
+                  PlayGame.$fShowBoardLog_$cshowsPrec
+                  PlayGame.$fShowBoardLog_$cshow
+                  PlayGame.$fShowBoardLog_$cshowList -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fShowBoardLog1 ::
+    PlayGame.BoardLog -> GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 2,
+     Unfolding: (\ (x :: PlayGame.BoardLog)
+                   (s :: GHC.Base.String)[OneShot] ->
+                 case x of ww { PlayGame.BoardLog ww1 ww2 ->
+                 case GHC.List.reverse1
+                        @ PegBoard.Board
+                        (GHC.Types.: @ PegBoard.Board ww1 ww2)
+                        (GHC.Types.[] @ PegBoard.Board) of wild {
+                   [] -> GHC.Base.++ @ GHC.Types.Char PlayGame.$fShowBoardLog2 s
+                   : x1 xs
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        (GHC.Types.:
+                           @ GHC.Types.Char
+                           GHC.Show.showList__2
+                           (case x1 of ww3 { PegBoard.Board ww4 ww5 ->
+                            GHC.Base.++
+                              @ GHC.Types.Char
+                              (PegBoard.$w$cshow ww4 ww5)
+                              (PlayGame.$fShowBoardLog_showl xs) }))
+                        s } }) -}
+2d37215fde72c4b9c958ece9b17ed00e
+  $fShowBoardLog2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   "[]"#
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fShowBoardLog_$cshow :: PlayGame.BoardLog -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(U,U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PlayGame.BoardLog) ->
+                 case w of ww { PlayGame.BoardLog ww1 ww2 ->
+                 PlayGame.$w$cshow ww1 ww2 }) -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fShowBoardLog_$cshowList :: [PlayGame.BoardLog] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: (\ (ls :: [PlayGame.BoardLog]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__
+                   @ PlayGame.BoardLog
+                   PlayGame.$fShowBoardLog1
+                   ls
+                   s) -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  $fShowBoardLog_$cshowsPrec ::
+    GHC.Types.Int -> PlayGame.BoardLog -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,A><S,1*U(U,U)><L,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ (ds :: GHC.Types.Int)
+                   (x :: PlayGame.BoardLog)
+                   (s :: GHC.Base.String) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr
+                      @ GHC.Types.Char
+                      @ b
+                      c
+                      n
+                      (PlayGame.$fShowBoardLog_$cshow x))
+                   s) -}
+c092fc72d40b191f71c2097540964f7b
+  $fShowBoardLog_showl :: [PegBoard.Board] -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U> -}
+6cdbbaeceb164fdd92b5d3cc621fb2a8
+  $tc'BoardLog :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   5285689402995016967##
+                   496127931219336874##
+                   PlayGame.$trModule
+                   PlayGame.$tc'BoardLog1) -}
+0317929fbea7ae89d0a4305440669c19
+  $tc'BoardLog1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'BoardLog"#) -}
+1dcf611a318d60a7af4585720f3a38f2
+  $tcBoardLog :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16480697937415530379##
+                   2916300086460299043##
+                   PlayGame.$trModule
+                   PlayGame.$tcBoardLog1) -}
+ba8f07aed631e32f22b014b28843a92c
+  $tcBoardLog1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "BoardLog"#) -}
+d068e2d713bb9c946e63bf6cce52d4bf
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   PlayGame.$trModule2
+                   PlayGame.$trModule1) -}
+f3d4ab177386020d40a84ac76fc5fbd8
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "PlayGame"#) -}
+97898f71cf5bea21de91318d155b7c16
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS
+                   "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
+63727b2f56d2098aa8cf271be9bc3a81
+  $w$c== ::
+    [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Board]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Coord]
+    -> [PegBoard.Board]
+    -> GHC.Types.Bool
+  {- Arity: 6, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><L,1*U><S,1*U><L,1*U><L,1*U>,
+     Inline: [0],
+     Unfolding: (\ (ww :: [PegBoard.Coord])
+                   (ww1 :: [PegBoard.Coord])
+                   (ww2 :: [PegBoard.Board])
+                   (ww3 :: [PegBoard.Coord])
+                   (ww4 :: [PegBoard.Coord])
+                   (ww5 :: [PegBoard.Board]) ->
+                 case GHC.Classes.$fEq[]_$c==
+                        @ PegBoard.Coord
+                        PegBoard.$fEqCoord
+                        ww
+                        ww3 of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> case GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             ww1
+                             ww4 of wild1 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> GHC.Classes.$fEq[]_$c==
+                             @ PegBoard.Board
+                             PegBoard.$fEqBoard
+                             ww2
+                             ww5 } }) -}
+375cb3103880e5364a277c7ee163c2f3
+  $w$cshow :: PegBoard.Board -> [PegBoard.Board] -> GHC.Base.String
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: PegBoard.Board) (ww1 :: [PegBoard.Board]) ->
+                 GHC.Show.showList__
+                   @ PegBoard.Board
+                   PegBoard.$fShowBoard1
+                   (GHC.List.reverse1
+                      @ PegBoard.Board
+                      (GHC.Types.: @ PegBoard.Board ww ww1)
+                      (GHC.Types.[] @ PegBoard.Board))
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+97b5e10b73a3433fafacb39aebdd2058
+  $wplay ::
+    [PegBoard.Board]
+    -> [PegBoard.Board] -> (# [PegBoard.Board], [PegBoard.Board] #)
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,U>, Inline: [0] -}
+e59e50b3d5b786b83765104f26ce8bd6
+  $wplayLog ::
+    [PlayGame.BoardLog]
+    -> [PlayGame.BoardLog]
+    -> (# [PlayGame.BoardLog], [PlayGame.BoardLog] #)
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,U>, Inline: [0] -}
+7d759c1c7049ded22a1f49d5cf74b9a9
+  data BoardLog
+    = BoardLog {_current :: PegBoard.Board,
+                _history :: [PegBoard.Board]}
+870c3ddee1e330783a8dfa6a70058f75
+  _current :: PlayGame.BoardLog -> PegBoard.Board
+  RecSel Left PlayGame.BoardLog
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),1*U(1*U(U,U),A)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: PlayGame.BoardLog) ->
+                 case ds of wild { PlayGame.BoardLog ds1 ds2 -> ds1 }) -}
+ebd2579124eba040cb591ccf1efee64d
+  _history :: PlayGame.BoardLog -> [PegBoard.Board]
+  RecSel Left PlayGame.BoardLog
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LS),1*U(A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: PlayGame.BoardLog) ->
+                 case ds of wild { PlayGame.BoardLog ds1 ds2 -> ds2 }) -}
+44be3ac61c85cbe75109647fbf0017de
+  collectLog :: PlayGame.BoardLog -> [PegBoard.Board]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: PlayGame.BoardLog) ->
+                 case ds of wild { PlayGame.BoardLog b bl ->
+                 GHC.List.reverse1
+                   @ PegBoard.Board
+                   (GHC.Types.: @ PegBoard.Board b bl)
+                   (GHC.Types.[] @ PegBoard.Board) }) -}
+0bafa580224c3fa52ca28bddebc9c511
+  play ::
+    ([PegBoard.Board], [PegBoard.Board])
+    -> ([PegBoard.Board], [PegBoard.Board])
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),1*U(1*U,U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: ([PegBoard.Board], [PegBoard.Board])) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case PlayGame.$wplay ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
+                 (ww4, ww5) } }) -}
+d7018c407089802133f30c771c54b858
+  playGame :: PegBoard.Board -> [PegBoard.Board]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (b :: PegBoard.Board) ->
+                 case PlayGame.play
+                        (GHC.Types.: @ PegBoard.Board b (GHC.Types.[] @ PegBoard.Board),
+                         GHC.Types.[] @ PegBoard.Board) of wild { (,) ds endStates ->
+                 endStates }) -}
+4158eab4e094b8cdd9909af19f823652
+  playGameLog :: PegBoard.Board -> [PlayGame.BoardLog]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (b :: PegBoard.Board) ->
+                 case PlayGame.playLog
+                        (GHC.Types.:
+                           @ PlayGame.BoardLog
+                           (PlayGame.BoardLog b (GHC.Types.[] @ PegBoard.Board))
+                           (GHC.Types.[] @ PlayGame.BoardLog),
+                         GHC.Types.[] @ PlayGame.BoardLog) of wild { (,) ds games ->
+                 games }) -}
+503954c9055e0727789d8c4f5a266c97
+  playLog ::
+    ([PlayGame.BoardLog], [PlayGame.BoardLog])
+    -> ([PlayGame.BoardLog], [PlayGame.BoardLog])
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),1*U(1*U,U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: ([PlayGame.BoardLog], [PlayGame.BoardLog])) ->
+                 case w of ww { (,) ww1 ww2 ->
+                 case PlayGame.$wplayLog ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
+                 (ww4, ww5) } }) -}
+c3d2707bc99dfc50c4d4336bbe6b8e3a
+  showBoardLog :: PlayGame.BoardLog -> [GHC.Base.String]
+  {- Arity: 1, Strictness: <S,1*U(U,U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PlayGame.BoardLog) ->
+                 case x of wild { PlayGame.BoardLog b bl ->
+                 GHC.Base.build
+                   @ [GHC.Types.Char]
+                   (\ @ b1
+                      (c :: [GHC.Types.Char] -> b1 -> b1)[OneShot]
+                      (n :: b1)[OneShot] ->
+                    GHC.Base.foldr
+                      @ PegBoard.Board
+                      @ b1
+                      (GHC.Base.mapFB
+                         @ [GHC.Types.Char]
+                         @ b1
+                         @ PegBoard.Board
+                         c
+                         PegBoard.showBoard)
+                      n
+                      (GHC.List.reverse1
+                         @ PegBoard.Board
+                         (GHC.Types.: @ PegBoard.Board b bl)
+                         (GHC.Types.[] @ PegBoard.Board))) }) -}
+instance [safe] GHC.Classes.Eq [PlayGame.BoardLog]
+  = PlayGame.$fEqBoardLog
+instance [safe] GHC.Show.Show [PlayGame.BoardLog]
+  = PlayGame.$fShowBoardLog
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

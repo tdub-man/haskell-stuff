@@ -20,6 +20,7 @@ library
                      , Helpers.Math
                      , Helpers.Classes
                      , PegBoard
+                     , PlayGame
                      , Analytics
                      , CriticalPoints
                      , Symmetries

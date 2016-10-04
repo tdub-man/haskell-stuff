@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-03 22:58:50.312127 UTC
+2016-10-03 23:27:57.53949 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 8001
-  interface hash: 10de234521247151547dbcd0f4cc987b
-  ABI hash: 656d53c55430f23a083f258f1855051f
+  interface hash: 768a317ce52f55c1c2776071a4427dbd
+  ABI hash: 3b21b77a536a60b930c1cdd2d1de6821
   export-list hash: 45a222b2bfc7554ed10506a0bd389f4c
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -74,15 +74,15 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Data.Picture e95e53d5f841f673cdd330becc7218b6
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Interface.Pure.Display 4a533cefe8cfd70824e77b2888fc8dc2
 import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
-import  -/  CriticalPoints efdaab9f4e3f04d007df7b703950148f
+import  -/  CriticalPoints 3ac4b1acf8244223bf7173d25fc6c635
   exports: 80fdacf561ce6b6b953c62c7fe395c77
-  rows' c0194dbbc2ec989b8b68f5482d9e7e2b
+  rows' 24a097f901dea126e2d115fb320a47fd
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
   subDivide 393576c801ae6ff29ff6229f90fd19c8
-import  -/  PegBoard 2feff203ebfeacb2de886c6d7cd8d789
-  exports: 1bff303d413b992e037c4116e726befe
-  Board a9cbb8b5c5bd98a5c5fb42e9af0a1445
+import  -/  PegBoard e5ae7f741df6e5acec6857f64e0e15aa
+  exports: fc07b7050cc2af4e0e64b548dbb35a86
+  Board a52c37830432dd53520a978725b1b57a
 02db14ea86b7a65c93efbb2c1750683c
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -98,7 +98,7 @@ f215b5d543a20d1c5d18ef80d6ca5792
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
-989edc693373db15ec93382f319ed6d5
+a6b343290d468f13288f21eb052a59d5
   $wrenderBoard ::
     PegBoard.Board
     -> (# [Graphics.Gloss.Internals.Data.Picture.Picture] #)
@@ -117,14 +117,14 @@ f215b5d543a20d1c5d18ef80d6ca5792
                             (CriticalPoints.$wrows' ww1 ww2))
                          (GHC.Types.[]
                             @ Graphics.Gloss.Internals.Data.Picture.Picture)) } #)) -}
-607c6187620a6ada91f591183bb0d679
+9e1c3a581941852ef83d5fe447577c60
   displayBoard :: PegBoard.Board -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U(U,U)><S,U>,
      Unfolding: InlineRule (0, True, True)
                 Graphics.displayBoard1
                   `cast`
                 (<PegBoard.Board>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-664f48c796c7872fafbd8c45313a7c2d
+a90006be81331a649614ee7ad6b616c6
   displayBoard1 ::
     PegBoard.Board
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -173,14 +173,14 @@ e2b58046e076eab67c07f476e99aa11b
 3c0ae0105ba39f69833cf50d3e5ab958
   displayBoard7 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "PegBoard"#) -}
-c48cae94284dee7ffe9093d339fd2287
+185617a548f7b8d426c03632156fda1b
   displayBoards :: [PegBoard.Board] -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U><S,U>,
      Unfolding: InlineRule (0, True, True)
                 Graphics.displayBoards1
                   `cast`
                 (<[PegBoard.Board]>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-78757ea3a6b058db8a3c38e3fea0f854
+b530723cf821d3a31f7b1bb550350410
   displayBoards1 ::
     [PegBoard.Board]
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -205,14 +205,14 @@ c48cae94284dee7ffe9093d339fd2287
                    (<Graphics.Gloss.Data.Controller.Controller>_R
                     ->_R Sym (GHC.Types.N:IO[0] <()>_R))
                    eta) -}
-15145e3ff715ac6d0ca79c3fc5488e1b
+fd2cac050ace972a085e7bbafcade6f9
   displayBoardsSquare :: [PegBoard.Board] -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,U><S,U>,
      Unfolding: InlineRule (0, True, True)
                 Graphics.displayBoardsSquare1
                   `cast`
                 (<[PegBoard.Board]>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-162f7aaad12ae16ebffa946fe175c0e8
+b4e19b9eb3de8fe4f3fa00c14a8be321
   displayBoardsSquare1 ::
     [PegBoard.Board]
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -237,7 +237,7 @@ c48cae94284dee7ffe9093d339fd2287
                    (<Graphics.Gloss.Data.Controller.Controller>_R
                     ->_R Sym (GHC.Types.N:IO[0] <()>_R))
                    eta) -}
-d1947adc11853a28f582954937ecdfac
+0d2534e09146a3123f8807ba63506b49
   renderBoard ::
     PegBoard.Board -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <L,1*U(U,1*U)>m14, Inline: INLINE[0],
@@ -245,7 +245,7 @@ d1947adc11853a28f582954937ecdfac
                 (\ (w :: PegBoard.Board) ->
                  case Graphics.$wrenderBoard w of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-7558503012fc5bfad5acebe19912a966
+2d36ffcf23efc1deadcc40cd4f35d8b8
   renderBoard1 ::
     [(PegBoard.Coord, GHC.Types.Bool)]
     -> Graphics.Gloss.Internals.Data.Picture.Picture
@@ -268,7 +268,7 @@ b2913d0efeabe9e48af0c7ca58ee061a
                  case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
                  GHC.Types.F#
                    (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) 8.0#) }) -}
-4e1475f062e326e73ba9769698d71d38
+2206ddb1463b3b2a6e816fe598139c79
   renderBoard2 ::
     (PegBoard.Coord, GHC.Types.Bool)
     -> Graphics.Gloss.Internals.Data.Picture.Picture
@@ -362,7 +362,7 @@ ccc81884bad9b2796c9c1de04a4409d5
 9b204a27d6c9fb4d540f96514c1f2e2a
   renderBoard_r :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 8.0#) -}
-b84073d6edfbd8f5e88ea6c3c32aa09b
+a588ddc6847f405e3789e04847a7b83d
   renderBoards ::
     [PegBoard.Board] -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <S,1*U>,
@@ -409,7 +409,7 @@ c58515f3718f83092b9a6c82e3506b37
 49b3317b69772a89a1f9e08f76e39b52
   renderBoards3 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.0#) -}
-1ef3c9518f70026eaea16f314ff6086d
+e77782451995c2aa898fb7c01e8a5027
   renderBoardsSquare ::
     [PegBoard.Board] -> Graphics.Gloss.Internals.Data.Picture.Picture
   {- Arity: 1, Strictness: <S,1*U>,

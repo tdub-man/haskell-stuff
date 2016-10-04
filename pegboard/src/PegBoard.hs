@@ -1,30 +1,27 @@
 module PegBoard
     ( Coord(Coord)
     , Board(Board)
-    , BoardLog(BoardLog,_current)
     -- , compareCoord
     , makeBoard
     , removePeg
     , pegCount
-    , playGame
-    , playGameLog
-    , collectLog
     , showBoard
-    , showBoardLog
+
+    , BoardMoves
+    , movePegs
+    , nextMoves
+    , movePegsAll
     ) where
 import Data.List(partition,sortBy,intercalate)
 import Helpers.Lists(nPerms,moveXTo,groupWithNs,takeThrough)
 
 data Coord = Coord { _xCoord :: Int, _yCoord :: Int } deriving (Eq)
 data Board = Board { _pegs :: [Coord], _holes :: [Coord] } deriving (Eq)
-data BoardLog = BoardLog { _current :: Board, _history :: [Board] } deriving (Eq)
 
 instance Show Coord where
   show (Coord x y) = show (x,y)
 instance Show Board where
   show (Board ps hs) = "{ Pegs-" ++ show ps ++ " Holes-" ++ show hs ++ " }"
-instance Show BoardLog where
-  show = show . collectLog
 instance Read Coord where
   readsPrec _ input = [(c,rest)] where
     (tup,rest) = takeThrough (/=')') input
@@ -57,15 +54,6 @@ showBoard (Board ps hs) = intercalate "\n" strs where
   spaceN = [acLength-1,acLength-2..1]
   lastLine = show . last $ allCoord'
   strs = (++ [lastLine]) . zipWith (\n cs -> spaces n ++ show cs) spaceN $ allCoord'
-
-showBoardLog :: BoardLog -> [String]
-showBoardLog = map showBoard . collectLog
-
-changeBoard :: BoardLog -> Board -> BoardLog
-changeBoard (BoardLog b bs) x = BoardLog x (b:bs)
-
-collectLog :: BoardLog -> [Board]
-collectLog (BoardLog b bl) = reverse $ b:bl
 
 -- Pos[Left,Right] = Move along a line of positive slope
 -- Zed[Left,Right] = Move along a line of zero slope
@@ -119,39 +107,5 @@ nextMoves (Board ps hs) = trips' where
 movePegs :: (Coord,Coord,Coord) -> Board -> Board
 movePegs (a,b,c) = removePeg a . removePeg b . addPeg c
 
-movePegsLog :: (Coord,Coord,Coord) -> BoardLog -> BoardLog
-movePegsLog tri bLog = changeBoard bLog b where
-  b = movePegs tri $ _current bLog
-
 movePegsAll :: [(Coord,Coord,Coord)] -> Board -> [Board]
 movePegsAll mvs b = [ movePegs mv b | mv <- mvs ]
-
-movePegsAllLog :: [(Coord,Coord,Coord)] -> BoardLog -> [BoardLog]
-movePegsAllLog mvs bLog = [ movePegsLog mv bLog | mv <- mvs ]
-
-play :: ([Board],[Board]) -> ([Board],[Board])
-play ([],ended) = ([],ended)
-play (playing,ended) = play (playing',ended') where
-  boardAndMoves = zip playing $ map nextMoves playing
-  (newlyEnded,playable) = partition (\(_,m) -> null m) boardAndMoves
-  newlyEnded' = map fst newlyEnded
-  ended' = ended ++ newlyEnded'
-  playing' = concat [ movePegsAll mvs b | (b,mvs) <- playable ]
-
-playLog :: ([BoardLog],[BoardLog]) -> ([BoardLog],[BoardLog])
-playLog ([],ended) = ([],ended)
-playLog (playing,ended) = playLog (playing',ended') where
-  boardAndMoves = zip playing $ map (nextMoves . _current) playing
-  (newlyEnded,playable) = partition (\(_,m) -> null m) boardAndMoves
-  newlyEnded' = map fst newlyEnded
-  ended' = ended ++ newlyEnded'
-  playing' = concat [ movePegsAllLog mvs b | (b,mvs) <- playable ]
-
-playGame :: Board -> [Board]
-playGame b = endStates where
-  (_,endStates) = play ([b],[])
-
-playGameLog :: Board -> [BoardLog]
-playGameLog b = games where
-  bLog = BoardLog b []
-  (_,games) = playLog ([bLog],[])
