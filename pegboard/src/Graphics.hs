@@ -5,12 +5,14 @@ module Graphics
     , displayBoard
     , displayBoards
     , displayBoardsSquare
+    , displayInteractive
     ) where
 
 import PegBoard
 import CriticalPoints
-import Graphics.Gloss
 import Helpers.Lists
+import Graphics.Gloss
+import Graphics.Gloss.Interface.Pure.Game
 
 offset :: Float -> Float -> [Picture] -> [Picture]
 offset x y ps = ps' where
@@ -81,3 +83,35 @@ displayBoardsSquare bs = display
                          (InWindow "PegBoard" (600,600) (0,0))
                          black
                          (renderBoardsSquare bs)
+
+
+type PBZipper = ([Board],[Board])
+
+getPB :: PBZipper -> Picture
+getPB ([],[])  = blank
+getPB ([],b:_) = renderBoard b
+getPB (a:_,_)  = renderBoard a
+
+pbNext :: PBZipper -> PBZipper
+pbNext ([],bs)   = ([],bs)
+pbNext (x:as,bs) = (as,x:bs)
+
+pbPrev :: PBZipper -> PBZipper
+pbPrev (as,[])   = (as,[])
+pbPrev (as,x:bs) = (x:as,bs)
+
+handleEvent :: Event -> PBZipper -> PBZipper
+handleEvent (EventKey (SpecialKey KeyRight) Down _ _) pbz = pbNext pbz
+handleEvent (EventKey (SpecialKey KeyLeft)  Down _ _) pbz = pbPrev pbz
+handleEvent _                                         pbz = pbz
+
+displayInteractive :: [Board] -> IO ()
+displayInteractive bs =
+  play
+  (InWindow "PegBoard" (600,600) (0,0))
+  black
+  100
+  (bs,[])
+  getPB
+  handleEvent
+  (\_ x -> x)

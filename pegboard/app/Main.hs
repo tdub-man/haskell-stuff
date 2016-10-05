@@ -33,24 +33,24 @@ b' :: [Board]
 b' = collectLog . head . endWith 1 .  playGameLog $ b
 
 main :: IO ()
-main = do
-  let printBoard = putStrLn . showBoard
-
-  putStrLn "Base Board"
-  printBoard b
-  putStrLn "\nClockwise Rotation"
-  printBoard . clockRotate $ b
-  putStrLn "\nCounter-clockwise Rotation"
-  printBoard . counterClockRotate $ b
-  putStrLn "\nZed Flip"
-  printBoard . zedFlip $ b
-  putStrLn "\nPos Flip"
-  printBoard . posFlip $ b
-  putStrLn "\nNeg Flip"
-  printBoard . negFlip $ b
-
-  putStrLn "\nSymmetries:"
-  mapM_ print . findSymmetries $ b
+-- main = do
+--   let printBoard = putStrLn . showBoard
+--
+--   putStrLn "Base Board"
+--   printBoard b
+--   putStrLn "\nClockwise Rotation"
+--   printBoard . clockRotate $ b
+--   putStrLn "\nCounter-clockwise Rotation"
+--   printBoard . counterClockRotate $ b
+--   putStrLn "\nZed Flip"
+--   printBoard . zedFlip $ b
+--   putStrLn "\nPos Flip"
+--   printBoard . posFlip $ b
+--   putStrLn "\nNeg Flip"
+--   printBoard . negFlip $ b
+--
+--   putStrLn "\nSymmetries:"
+--   mapM_ print . findSymmetries $ b
 
 -- If negSymmetric, clockRotate == zedFlip and
 --                  counterClockRotate == posFlip
@@ -66,3 +66,5 @@ main = do
 --
 --   -- putStrLn . showBoard . zedFlip $ b
 --   putStrLn . showBoard . clockRotate $ b
+
+main = displayInteractive b'
