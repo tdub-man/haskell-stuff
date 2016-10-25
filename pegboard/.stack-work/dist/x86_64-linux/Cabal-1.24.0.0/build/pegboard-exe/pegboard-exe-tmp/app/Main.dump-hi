@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-06 00:27:00.186914 UTC
+2016-10-25 21:26:59.767508 UTC
 
 interface main@main:Main 8001
-  interface hash: 2d5b986f93f62f529ff79a7345759de6
-  ABI hash: ae08d559454f3d532c61a863531b30af
-  export-list hash: 614ba73b009055573df6089fb1797d4e
+  interface hash: 4efac3c391eabcb71ac08a898f6e872e
+  ABI hash: 101885486bdeffa5a23b269506bdf59c
+  export-list hash: f930c9ad9f7258930bea3d9057ad8e16
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
   sig of: Nothing
@@ -17,6 +17,8 @@ exports:
   Main.concB
   Main.concB'
   Main.main
+  Main.testPromptC
+  Main.testPromptR
 module dependencies:
 package dependencies: GLURaw-2.0.0.2@GLURaw-2.0.0.2-FbcPHzTa7vLEnCQ0kkJ8B4
                       GLUT-2.7.0.10@GLUT-2.7.0.10-A3NqGto8XAVI0ysflkZZW9
@@ -61,14 +63,20 @@ family instance modules: base-4.9.0.0:Control.Applicative
                          text-1.2.2.1@text-1.2.2.1-5QpmrLQApEZ4Ly9nMHWY0s:Data.Text
 import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
 import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
+import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
+import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Types 7378e41b7749213c8c88ceb6b0665d4c
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss d5b982018b0c758f00994fce74453c04
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Data.Color b525c333674d23cc8320332d7db6f0cc
+import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Data.Picture e95e53d5f841f673cdd330becc7218b6
+import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 39eb14961649799faee79358a8534710
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints 3ac4b1acf8244223bf7173d25fc6c635
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 7181cb82e662eb7c98d61d5ba5e1f798
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics c95348a5d07555ece418b9b94c5d5bd3
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard e5ae7f741df6e5acec6857f64e0e15aa
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame ea989d509c6118403d9cf21429970cf0
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve a75d731c22b42b944175b4bdf651a5da
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries e33bd8a3477142c6e23c8ce3a5906f5b
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
@@ -86,6 +94,10 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $wgo ::
     [PlayGame.BoardLog] -> (# PegBoard.Board, [PegBoard.Board] #)
   {- Arity: 1, Strictness: <S,1*U>, Inline: [0] -}
+484ad87ee9cb457d9f3ae7b8af65bf0a
+  $wxs ::
+    GHC.Prim.Int# -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
 a4a0b24e165a13e8130c590532600f8b
   b :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
@@ -131,7 +143,7 @@ c4bb72fabfdae00e6a251a4c2460585d
                         ww5
                         (GHC.Types.[] @ PegBoard.Board) of ww6 { (#,#) ww7 ww8 ->
                  ww8 } }) -}
-d7e9104d63cf7a080ad9c886d343df25
+b6489eefb669121474029a14b58eb94d
   concB' :: [PegBoard.Board]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
@@ -145,28 +157,325 @@ f907804d569ff1f3fd23518e000e84e4
                    @ PegBoard.Board
                    CriticalPoints.concentricTrianglesExclusive1
                    Main.concB) -}
-792013d02335c3c341633d2e9f92bb8b
+d72edf94a0b0d61495b3f7ca1fbf22c3
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
-                   [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x }) -}
-e442c8a28dd91167938b508020c0333b
+                   [] -> GHC.List.badHead @ PegBoard.Board : x6 ds1 -> x6 }) -}
+878a690e2a4959191600f0b0d4be63ab
   main :: GHC.Types.IO ()
-  {- Arity: 1,
+  {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
-                Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-79e38f15c936d8ecce0dba23d91860c9
+                Solve.promptStart1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+f559de98d64cf88e150aa9547a3ec8af
   main1 ::
-    GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
-  {- Arity: 1, Unfolding: (Graphics.displayInteractive1 Main.b') -}
-7a0479a403e4982150f3296d17e2b8f4
-  main2 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
-                   Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+                   Solve.promptStart1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+adef338966afccb905a4e8549ffd7e3b
+  testPromptC :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m14,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Main.testPromptC1) -}
+a9b8d365f0cd599c844329fcea033486
+  testPromptC1 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Main.testPromptC22
+                   Main.testPromptC2) -}
+fbeea001c8a236ef9c4985d6591bf966
+  testPromptC10 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (1) -}
+5f95ed57bf5b5a3088b8978d0045c09c
+  testPromptC11 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (-1) -}
+0ffc33e9deaf4c0f13dd5d554aa577ed
+  testPromptC12 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (5) -}
+f62f8ddadd1def10f724269633e3a86c
+  testPromptC13 ::
+    [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (ds :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
+                 GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture) -}
+31a275c4a7eccc581b2c87c68ae6d956
+  testPromptC14 ::
+    GHC.Integer.Type.Integer
+    -> ([Graphics.Gloss.Internals.Data.Picture.Picture]
+        -> [Graphics.Gloss.Internals.Data.Picture.Picture])
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 2,
+     Unfolding: (\ (ds :: GHC.Integer.Type.Integer)
+                   (ds1 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+                           -> [Graphics.Gloss.Internals.Data.Picture.Picture])[OneShot] ->
+                 let {
+                   _x :: GHC.Base.String
+                   = case GHC.Show.$w$cshowsPrec3
+                            0#
+                            ds
+                            (GHC.Types.[] @ GHC.Types.Char) of ww2 { (#,#) ww3 ww4 ->
+                     GHC.Types.: @ GHC.Types.Char ww3 ww4 }
+                 } in
+                 let {
+                   _x1 :: Graphics.Gloss.Internals.Data.Picture.Picture
+                   = Graphics.Gloss.Internals.Data.Picture.Text _x
+                 } in
+                 let {
+                   _x2 :: Graphics.Gloss.Internals.Data.Picture.Picture
+                   = Graphics.Gloss.Internals.Data.Picture.Scale
+                       Main.testPromptC17
+                       Main.testPromptC17
+                       _x1
+                 } in
+                 let {
+                   _x3 :: Graphics.Gloss.Internals.Data.Picture.Picture
+                   = Graphics.Gloss.Internals.Data.Picture.Translate
+                       Main.testPromptC16
+                       Main.testPromptC15
+                       _x2
+                 } in
+                 \ (ds2 :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
+                 case ds2 of wild {
+                   [] -> GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   : y ys
+                   -> GHC.Types.:
+                        @ Graphics.Gloss.Internals.Data.Picture.Picture
+                        (Graphics.Gloss.Internals.Data.Picture.Pictures
+                           (GHC.Types.:
+                              @ Graphics.Gloss.Internals.Data.Picture.Picture
+                              _x3
+                              (GHC.Types.:
+                                 @ Graphics.Gloss.Internals.Data.Picture.Picture
+                                 y
+                                 (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture))))
+                        (ds1 ys) }) -}
+710694eb62a7b7ac711d38a0854b4071
+  testPromptC15 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 36.0#) -}
+e8ed30d7b3b6982d1172ff8afcc55a30
+  testPromptC16 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 20.0#) -}
+b2194b34e594dfb43303e0aff8038f72
+  testPromptC17 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.1#) -}
+eec29b30eb8254eee509a172b66707b3
+  testPromptC18 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
+                 case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
+                 GHC.Types.F#
+                   (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) 16.0#) }) -}
+f41ee02ae7025b2f2c0057e8f19945d7
+  testPromptC19 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
+                 case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
+                 GHC.Types.F#
+                   (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) -8.0#) }) -}
+8e942f61282e352cde084dadcd2794d4
+  testPromptC2 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Main.testPromptC3
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
+ac8ecc58ffa217a832ad8ec521a910e6
+  testPromptC20 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 8.0#) -}
+d7eccd71630af82bcaba970e3f74c961
+  testPromptC21 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 104.0#) -}
+63ac9dff0d133b8ff03ec6c8be2bb163
+  testPromptC22 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (case Graphics.$wrenderBoard
+                        Main.testPromptC23 of ww { Unit# ww1 ->
+                 Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
+2093f1d360c2ffed34ef0f3d3d8deb3c
+  testPromptC23 :: PegBoard.Board
+  {- Unfolding: (case PegBoard.$wmakeBoard
+                        Main.b3 of ww { (#,#) ww1 ww2 ->
+                 PegBoard.Board ww1 ww2 }) -}
+6ae5a67d80abd2a1601a5dcf0f3fd62b
+  testPromptC3 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m10,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Main.testPromptC4) -}
+a7b9e0a2674dafc9d968d88abe5f6914
+  testPromptC4 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m11,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
+                   Main.testPromptC21
+                   Main.testPromptC20
+                   Main.testPromptC5) -}
+848cc0deb777cc2ef3761065ce58ef22
+  testPromptC5 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m14,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Main.testPromptC6) -}
+dd2ec234793baa104e4f510f95921441
+  testPromptC6 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Graphics.renderBoard_$soffsetF
+                   Main.testPromptC19
+                   Main.testPromptC18
+                   Main.testPromptC7) -}
+25a9c8cce527966b0dad2195bc992af8
+  testPromptC7 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Main.testPromptC9 Main.testPromptC8) -}
+01f303a4f4849ed03918ba9b70c1d1cb
+  testPromptC8 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Main.$wxs 5#) -}
+af0c7e887e38fc8095332c802a3e4e4e
+  testPromptC9 ::
+    [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Enum.enumDeltaToIntegerFB
+                   @ ([Graphics.Gloss.Internals.Data.Picture.Picture]
+                      -> [Graphics.Gloss.Internals.Data.Picture.Picture])
+                   Main.testPromptC14
+                   Main.testPromptC13
+                   Main.testPromptC12
+                   Main.testPromptC11
+                   Main.testPromptC10) -}
+47ad55e31e9377bde615725d4d1d47d8
+  testPromptR :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m14,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Main.testPromptR1) -}
+6b805c01d4046c3f5eb198b07995bf20
+  testPromptR1 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Graphics.renderBoard_$soffsetF
+                   Main.testPromptC18
+                   Main.testPromptR20
+                   Main.testPromptR2) -}
+5d08edb386e7d026823701abe9b9b995
+  testPromptR10 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.0#) -}
+ae4d99cfe2f886e6cc99cc343c5b6167
+  testPromptR11 :: [GHC.Types.Float]
+  {- Unfolding: (GHC.Real.numericEnumFromTo
+                   @ GHC.Types.Float
+                   GHC.Classes.$fOrdFloat
+                   GHC.Float.$fFractionalFloat
+                   Main.testPromptR13
+                   Main.testPromptR12) -}
+54930adde60bf6922d42f32ab89a2ad6
+  testPromptR12 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 5.0#) -}
+2dc39dc2b35475e5b1cce7ebd89b4c22
+  testPromptR13 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 1.0#) -}
+81e0fee92874134103df8b1605d12ddc
+  testPromptR14 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
+                   Main.testPromptR10
+                   Main.testPromptR21
+                   Main.testPromptR15) -}
+49fbdb531944ff51e52df8d0564ff62d
+  testPromptR15 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Main.testPromptR16) -}
+5a89ca1c84c24e3ee35b9a3cc36a40da
+  testPromptR16 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Main.testPromptR17) -}
+df5ab8fd08c9a37b68b4c0babba48596
+  testPromptR17 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Graphics.renderBoard_$soffsetF
+                   Main.testPromptR20
+                   Main.testPromptC18
+                   Main.testPromptR18) -}
+b64c23237684cb3f441e314c533e2bb1
+  testPromptR18 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Enum.enumDeltaToIntegerFB
+                   @ [Graphics.Gloss.Internals.Data.Picture.Picture]
+                   Main.testPromptR19
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)
+                   Main.testPromptC12
+                   Main.testPromptC11
+                   Main.testPromptC10) -}
+7bdaf42e451574bb465418475dc0dbe8
+  testPromptR19 ::
+    GHC.Integer.Type.Integer
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 2,
+     Unfolding: (\ (ds :: GHC.Integer.Type.Integer)
+                   (ds1 :: [Graphics.Gloss.Internals.Data.Picture.Picture])[OneShot] ->
+                 GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   (Graphics.Gloss.Internals.Data.Picture.Scale
+                      Main.testPromptC17
+                      Main.testPromptC17
+                      (Graphics.Gloss.Internals.Data.Picture.Text
+                         (GHC.Show.$fShowInteger_$cshow ds)))
+                   ds1) -}
+af25e9025392e510b08dc3518b0f9428
+  testPromptR2 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Main.testPromptR14
+                   Main.testPromptR3) -}
+05d0c860376b03113dcf3d2193311583
+  testPromptR20 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
+                 case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
+                 GHC.Types.F#
+                   (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) 0.0#) }) -}
+dcfa559ede1672d67c88b306187b72a5
+  testPromptR21 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# -4.0#) -}
+06a752a2de7e0cf921f0052cfc54ae06
+  testPromptR3 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Main.testPromptR5
+                   Main.testPromptR4) -}
+19e1bb4f071c7640301bbf943cc38856
+  testPromptR4 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Main.testPromptC22
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
+bc7c15f2ae96465cd2ff28070919f09f
+  testPromptR5 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Main.testPromptR6) -}
+2d4e627bd39a1987f7bf989157f6c329
+  testPromptR6 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Main.testPromptR7) -}
+6ee03f5ae14c230695a3310ee4e56860
+  testPromptR7 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Main.testPromptR_go
+                   Main.testPromptR11
+                   Main.testPromptR8) -}
+d746578b403efd5210f2723650d03051
+  testPromptR8 :: [GHC.Types.Float]
+  {- Unfolding: (GHC.Real.numericEnumFromThenTo
+                   @ GHC.Types.Float
+                   GHC.Classes.$fOrdFloat
+                   GHC.Float.$fFractionalFloat
+                   Main.testPromptR10
+                   Main.testPromptC20
+                   Main.testPromptR9) -}
+c6083e506fca7bc40a6d16c2b8af9246
+  testPromptR9 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 32.0#) -}
+091ad380088bbdbcf279f349cd8d0f81
+  testPromptR_go ::
+    [GHC.Types.Float]
+    -> [GHC.Types.Float]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:

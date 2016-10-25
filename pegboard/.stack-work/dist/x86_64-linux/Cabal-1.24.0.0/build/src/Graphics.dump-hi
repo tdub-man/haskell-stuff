@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-06 00:26:54.596309 UTC
+2016-10-25 17:09:19.173581 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 8001
-  interface hash: 7c073702be1aabaca2dca2d0cbe1d447
-  ABI hash: 7181cb82e662eb7c98d61d5ba5e1f798
-  export-list hash: ea9bce0e00ddc02437784d3d66704454
+  interface hash: 252b070bf59419b59347f73cf17ef440
+  ABI hash: c95348a5d07555ece418b9b94c5d5bd3
+  export-list hash: 3c1308225ea2e14f0de2a6b7d3a6490d
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
   sig of: Nothing
@@ -16,6 +16,7 @@ exports:
   Graphics.displayBoards
   Graphics.displayBoardsSquare
   Graphics.displayInteractive
+  Graphics.offset
   Graphics.renderBoard
   Graphics.renderBoards
   Graphics.renderBoardsSquare
@@ -353,6 +354,28 @@ e78aa3508b0dde1a749fe08edb3168b3
                            [] -> Graphics.Gloss.Internals.Data.Picture.Blank
                            : b ds2 -> Graphics.renderBoard b }
                       : a ds2 -> Graphics.renderBoard a } } #)) -}
+fb1733ba8a7693fe6d9f7d70ecaeca8c
+  offset ::
+    GHC.Types.Float
+    -> GHC.Types.Float
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+    -> [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Arity: 3, Strictness: <L,U(U)><L,U(U)><S,1*U>,
+     Unfolding: (\ (x :: GHC.Types.Float)
+                   (y :: GHC.Types.Float)
+                   (ps :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
+                 Graphics.renderBoard_$soffsetF
+                   (\ (eta :: GHC.Integer.Type.Integer) ->
+                    case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
+                    case x of wild1 { GHC.Types.F# y1 ->
+                    GHC.Types.F#
+                      (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) y1) } })
+                   (\ (eta :: GHC.Integer.Type.Integer) ->
+                    case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
+                    case y of wild1 { GHC.Types.F# y1 ->
+                    GHC.Types.F#
+                      (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) y1) } })
+                   ps) -}
 0d2534e09146a3123f8807ba63506b49
   renderBoard ::
     PegBoard.Board -> Graphics.Gloss.Internals.Data.Picture.Picture

@@ -1,5 +1,6 @@
 module Graphics
-    ( renderBoard
+    ( offset
+    , renderBoard
     , renderBoards
     , renderBoardsSquare
     , displayBoard
