@@ -64,8 +64,6 @@ renderBoardsSquare bs = bs' where
   bsrRowOff = map (pictures . offsetF offN (const 0)) bsrRow
   bs' = pictures . offsetF (const 0) offN $ reverse bsrRowOff
 
--- Animate?
-
 displayBoard :: Board -> IO ()
 displayBoard b = display
                  (InWindow "PegBoard" (600,600) (0,0))
@@ -89,7 +87,7 @@ type PBZipper = ([Board],[Board])
 
 getPB :: PBZipper -> Picture
 getPB ([],[])  = blank
-getPB ([],b:_) = renderBoard b
+getPB ([],b:_) = renderBoard b -- Add pattern match for one element in pbNext
 getPB (a:_,_)  = renderBoard a
 
 pbNext :: PBZipper -> PBZipper
@@ -110,7 +108,7 @@ displayInteractive bs =
   play
   (InWindow "PegBoard" (600,600) (0,0))
   black
-  100
+  0
   (bs,[])
   getPB
   handleEvent
