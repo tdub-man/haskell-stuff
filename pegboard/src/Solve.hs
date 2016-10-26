@@ -28,7 +28,7 @@ nextSeq (Seqs (a:as) bs) = Seqs as (a:bs)
 prevSeq :: Sequence -> Sequence
 prevSeq (Seq p) = Seq p
 prevSeq (Seqs as []) = Seqs as []
-prevSeq (Seqs as (b:bs)) = Seqs (b:bs) as
+prevSeq (Seqs as (b:bs)) = Seqs (b:as) bs
 
 seqRender :: Sequence -> Picture
 seqRender (Seq  b)     = b
@@ -91,7 +91,7 @@ inputHelper ps@(as,bs,cc)
   | coordCheck' ps = let
       start = removePeg (getCoord cc) (makeBoard 5)
       steps = solveFor start 1
-      ps'   = addSteps (as ++ [Seq blank],bs,cc) steps
+      ps'   = addSteps (as,bs,cc) steps
       in nextPrompt ps'
   | not . coordMade' $ ps = nextPrompt ps
   | otherwise = resetPrompt ps
@@ -122,22 +122,17 @@ addSteps (as,bs,cc) boards = (as ++ [renderBoardsSeq boards],bs,cc)
 -- Invalid coord resets prompt
 -- Valid coord moves to solving/diplaying board
 eventHandler :: Event -> Prompts -> Prompts
-eventHandler (EventKey (Char c) Down _ _) ps =
-  if onPrompt ps && isNumber c
-  then promptInput ps (digitToInt c)
-  else ps
-eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc) =
-  if not (onPrompt ps)
-    then (nextSeq a:as,bs,cc)
-    else ps
-eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc) =
-  if not (onPrompt ps)
-    then (prevSeq a:as,bs,cc)
-    else ps
+eventHandler (EventKey (Char c) Down _ _) ps
+  | onPrompt ps && isNumber c = promptInput ps (digitToInt c)
+  | c == 'r' || c == 'R' = promptBase
+  | otherwise = ps
+eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc)
+  | not (onPrompt ps) = (nextSeq a : as,bs,cc)
+  | otherwise = ps
+eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc)
+  | not (onPrompt ps) = (prevSeq a : as,bs,cc)
+  | otherwise = ps
 eventHandler _ ps = ps
-
--- Seems to advance to solving and diplaying steps only after number is hit again
--- Steps advance through right key, then the left key changes direction for the right key to advance
 
 rowPrompt :: Sequence
 rowPrompt = Seq labeledPrompt where
@@ -157,12 +152,15 @@ colPrompt = Seq labeledPrompt where
   colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
   labeledPrompt = pictures [board,colLabelLines']
 
+promptBase :: Prompts
+promptBase = ([rowPrompt,colPrompt],[],emptyCoordCol)
+
 promptSolve :: IO ()
 promptSolve = play
   (InWindow "SolvePrompted" (600,600) (0,0))
   black
   0
-  ([rowPrompt,colPrompt],[],emptyCoordCol)
+  promptBase
   getPrompt
   eventHandler
   (\_ x -> x)
