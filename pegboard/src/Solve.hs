@@ -134,6 +134,9 @@ eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc)
   | otherwise = ps
 eventHandler _ ps = ps
 
+-- TODO: Add zoom and move like in regular display
+-- TODO: Add prompt for desired number of end pegs
+
 rowPrompt :: Sequence
 rowPrompt = Seq labeledPrompt where
   board = renderBoard . makeBoard $ 5

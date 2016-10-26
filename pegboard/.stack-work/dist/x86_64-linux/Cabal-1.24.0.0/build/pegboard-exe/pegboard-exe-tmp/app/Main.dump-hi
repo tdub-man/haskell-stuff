@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-26 04:15:12.211496 UTC
+2016-10-26 18:29:44.657257 UTC
 
 interface main@main:Main 8001
-  interface hash: c411f53dedcd252130a1a36ee7093d09
-  ABI hash: ee423f8490a511f23a32e6c44f651fa5
+  interface hash: daa2853378de167d8445711996a0f348
+  ABI hash: fba42d20381a6cc5c6afb00d7c2e7b3a
   export-list hash: f930c9ad9f7258930bea3d9057ad8e16
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -74,9 +74,9 @@ import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4y
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 39eb14961649799faee79358a8534710
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints 3ac4b1acf8244223bf7173d25fc6c635
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics b8806d4321f7ed4c100be3f286a28657
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard e5ae7f741df6e5acec6857f64e0e15aa
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 86071671903a081dcd8b93396a3683c6
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame ea989d509c6118403d9cf21429970cf0
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 796d5dda4a7b4d4a1637ba165640b4a9
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 56b6c7adeecaabaa6f44f665ddda4d4d
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries e33bd8a3477142c6e23c8ce3a5906f5b
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
@@ -98,13 +98,13 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $wxs ::
     GHC.Prim.Int# -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
-a4a0b24e165a13e8130c590532600f8b
+8adb9232b440f9e351a8cbc6784aa1f2
   b :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
                         Main.b3 of ww { (#,#) ww1 ww2 ->
                  case PegBoard.$wremovePeg Main.b1 ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
                  PegBoard.Board ww4 ww5 } }) -}
-91b201580e879c179b1a43cd242869b1
+53a345a039de26607fc82f7c4c3ad5a0
   b' :: [PegBoard.Board]
   {- Unfolding: (case PlayGame.$wplayLog
                         Main.b'1
@@ -114,13 +114,13 @@ a4a0b24e165a13e8130c590532600f8b
                    @ PegBoard.Board
                    (GHC.Types.: @ PegBoard.Board ww1 ww2)
                    (GHC.Types.[] @ PegBoard.Board) } }) -}
-ddd71c4d8b5d705aa8b034f6925d78c1
+b313c3aee4c9f867495e7dfbeb373a13
   b'1 :: [PlayGame.BoardLog]
   {- Unfolding: (GHC.Types.:
                    @ PlayGame.BoardLog
                    Main.b'2
                    (GHC.Types.[] @ PlayGame.BoardLog)) -}
-333200f480bc177a5bcc6bb0adc08e9c
+2bed6c8d687c3deb6242d4cfaa318af1
   b'2 :: PlayGame.BoardLog
   {- Strictness: m,
      Unfolding: (PlayGame.BoardLog
@@ -135,7 +135,7 @@ ddd71c4d8b5d705aa8b034f6925d78c1
 5ccc98defcf0e6c43b885fdfd9dec78c
   b3 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
-c4bb72fabfdae00e6a251a4c2460585d
+f2d7005b5435579b8ada71736d45f5bb
   concB :: [PegBoard.Board]
   {- Unfolding: (case Main.b of ww3 { PegBoard.Board ww4 ww5 ->
                  case CriticalPoints.$wconcentricTriangles'
@@ -143,30 +143,30 @@ c4bb72fabfdae00e6a251a4c2460585d
                         ww5
                         (GHC.Types.[] @ PegBoard.Board) of ww6 { (#,#) ww7 ww8 ->
                  ww8 } }) -}
-b6489eefb669121474029a14b58eb94d
+149c8f50b6d9611e054f7bd05acadfc4
   concB' :: [PegBoard.Board]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
                    @ PegBoard.Board
                    Main.concB'2
                    Main.concB'1) -}
-f907804d569ff1f3fd23518e000e84e4
+522404602b852b073fec52c5efb1b9e0
   concB'1 :: [PegBoard.Board]
   {- Unfolding: (Helpers.Lists.compMapR
                    @ PegBoard.Board
                    @ PegBoard.Board
                    CriticalPoints.concentricTrianglesExclusive1
                    Main.concB) -}
-d72edf94a0b0d61495b3f7ca1fbf22c3
+5d3a39485939821ea5bff8951d404715
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
                    [] -> GHC.List.badHead @ PegBoard.Board : x6 ds1 -> x6 }) -}
-1689775d6977615ec60695995157aa38
+2837d32b267b98d9f9e279ec14b00f13
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-a32c0025e4f3f8ff856b47f8cb3ce1f9
+93b22733ebe323f5faabf355b8566ed4
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -174,12 +174,12 @@ a32c0025e4f3f8ff856b47f8cb3ce1f9
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
                    Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
-adef338966afccb905a4e8549ffd7e3b
+0760b33305f0bfd45e44126ce5c5dea0
   testPromptC :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Main.testPromptC1) -}
-a9b8d365f0cd599c844329fcea033486
+770d00049271b13750e1409d078b2ab2
   testPromptC1 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
@@ -290,12 +290,12 @@ ac8ecc58ffa217a832ad8ec521a910e6
 d7eccd71630af82bcaba970e3f74c961
   testPromptC21 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 104.0#) -}
-63ac9dff0d133b8ff03ec6c8be2bb163
+431610d361bddf285f0d21224084a318
   testPromptC22 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (case Graphics.$wrenderBoard
                         Main.testPromptC23 of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-2093f1d360c2ffed34ef0f3d3d8deb3c
+51080769aec46f32751e9ee76c850ab4
   testPromptC23 :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
                         Main.b3 of ww { (#,#) ww1 ww2 ->
@@ -342,12 +342,12 @@ af0c7e887e38fc8095332c802a3e4e4e
                    Main.testPromptC12
                    Main.testPromptC11
                    Main.testPromptC10) -}
-47ad55e31e9377bde615725d4d1d47d8
+ea0849ceedf8d4ee1fc95f6b3fe5fbe8
   testPromptR :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Main.testPromptR1) -}
-6b805c01d4046c3f5eb198b07995bf20
+cf2691e18f6a30c67649952b6b2f355c
   testPromptR1 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (Graphics.renderBoard_$soffsetF
                    Main.testPromptC18
@@ -416,7 +416,7 @@ b64c23237684cb3f441e314c533e2bb1
                       (Graphics.Gloss.Internals.Data.Picture.Text
                          (GHC.Show.$fShowInteger_$cshow ds)))
                    ds1) -}
-af25e9025392e510b08dc3518b0f9428
+5abeaf89c6dc477c8ced9067291ede48
   testPromptR2 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
@@ -432,13 +432,13 @@ af25e9025392e510b08dc3518b0f9428
 dcfa559ede1672d67c88b306187b72a5
   testPromptR21 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# -4.0#) -}
-06a752a2de7e0cf921f0052cfc54ae06
+56b87518d530491ba2e0acb2647d6c28
   testPromptR3 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
                    Main.testPromptR5
                    Main.testPromptR4) -}
-19e1bb4f071c7640301bbf943cc38856
+4f8c411f5279bb50af7cf5e98e1b1847
   testPromptR4 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture

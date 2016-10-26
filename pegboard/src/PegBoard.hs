@@ -55,13 +55,10 @@ showBoard (Board ps hs) = intercalate "\n" strs where
   lastLine = show . last $ allCoord'
   strs = (++ [lastLine]) . zipWith (\n cs -> spaces n ++ show cs) spaceN $ allCoord'
 
--- Pos[Left,Right] = Move along a line of positive slope
--- Zed[Left,Right] = Move along a line of zero slope
--- Neg[Left,Right] = Move along a line of negative slope
-data BoardMoves = None
-                | PosLeft | PosRight
-                | ZedLeft | ZedRight
-                | NegLeft | NegRight deriving (Eq,Enum,Show)
+-- Pos = Move along a line of positive slope
+-- Zed = Move along a line of zero slope
+-- Neg = Move along a line of negative slope
+data BoardMoves = None | Pos | Zed | Neg deriving (Eq,Enum,Show)
 
 bmAnd :: BoardMoves -> BoardMoves -> BoardMoves
 bmAnd a b = if a == b then a else None
@@ -84,13 +81,13 @@ pegCount = length . _pegs
 
 -- b's relation to a
 neighbor :: Coord -> Coord -> BoardMoves
-neighbor (Coord x1 y1) (Coord x2 y2) = case (x2-x1, y2-y1) of
-    (-1,0)  -> PosRight
-    (1,0)   -> PosLeft
-    (-1,-1) -> NegLeft
-    (1,1)   -> NegRight
-    (0,-1)  -> ZedLeft
-    (0,1)   -> ZedRight
+neighbor (Coord x1 y1) (Coord x2 y2) = case (abs (x2-x1),abs (y2-y1)) of
+    (-1,0)  -> Pos
+    (1,0)   -> Pos
+    (-1,-1) -> Neg
+    (1,1)   -> Neg
+    (0,-1)  -> Zed
+    (0,1)   -> Zed
     _       -> None
 
 validMove :: (Coord,Coord,Coord) -> BoardMoves

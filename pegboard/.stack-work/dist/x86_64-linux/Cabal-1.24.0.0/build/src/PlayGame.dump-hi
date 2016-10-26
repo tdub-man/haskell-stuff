@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-25 17:09:18.27974 UTC
+2016-10-26 18:29:43.12919 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 8001
-  interface hash: 9cb46ecd9ceaa3b050139f58514d5d3a
+  interface hash: 83ec7190f34cc40360b7075bd5f05d4c
   ABI hash: ea989d509c6118403d9cf21429970cf0
   export-list hash: db98f7a3543cf5dfbe75863e31383cd6
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -35,12 +35,12 @@ import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
-import  -/  PegBoard e5ae7f741df6e5acec6857f64e0e15aa
+import  -/  PegBoard 86071671903a081dcd8b93396a3683c6
   exports: fc07b7050cc2af4e0e64b548dbb35a86
   Board a52c37830432dd53520a978725b1b57a
   Coord e90daf56cd239fe823a66b0baea38df2
   movePegs 921ac017247f4cfc281240f437571f37
-  movePegsAll 46e66b13c1ab41517b36f58e95924bb0
+  movePegsAll 131bd4e370a40aac497921081dbe2d99
   nextMoves 9754ecfe87712f6b7f6c73c91a98e4f0
   showBoard 01bdc32339c5836085318896d3e60855
 7d759c1c7049ded22a1f49d5cf74b9a9
