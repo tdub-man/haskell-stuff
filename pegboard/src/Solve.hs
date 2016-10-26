@@ -1,5 +1,5 @@
 module Solve
-    (promptStart
+    (promptSolve
     ) where
 import PegBoard
 import PlayGame
@@ -14,6 +14,9 @@ data Sequence = Seq   Picture            -- For the prompts
               deriving (Eq)
 type CoordCollect = (Coord,Maybe Int, Bool)
 type Prompts = ([Sequence],[Sequence],CoordCollect)
+
+solveFor :: Board -> Int -> [Board]
+solveFor b n = collectLog . head . endWith n . playGameLog $ b
 
 -- SEQUENCE STUFF
 nextSeq :: Sequence -> Sequence
@@ -37,7 +40,7 @@ renderBoardsSeq bs = Seqs (map renderBoard bs) []
 
 -- COORDCOLLECT STUFF
 emptyCoordCol :: CoordCollect
-emptyCoordCol = (Coord 0 0,Nothing, False)
+emptyCoordCol = (Coord 0 0,Nothing,False)
 
 coordInput :: CoordCollect -> Int -> CoordCollect
 coordInput (c,Nothing,False) x = (c,Just x,False)
@@ -81,27 +84,17 @@ getPrompt (p:as,_,_) = seqRender p
 promptInput :: Prompts -> Int -> Prompts
 promptInput ps@(as,bs,cc) n = let
   cc' = coordInput cc n
-  -- promptsOut = nextPrompt (as,bs,cc')
   in inputHelper (as,bs,cc')
-  -- in promptsOut
-  -- in if coordCheck cc'
-  --   then let
-  --     start = removePeg (getCoord cc') (makeBoard 5)
-  --     steps = solveFor start 1
-  --     ps'   = addSteps (as,bs,cc') steps
-  --     in nextPrompt ps
-  --   else promptsOut
 
 inputHelper :: Prompts -> Prompts
 inputHelper ps@(as,bs,cc)
   | coordCheck' ps = let
       start = removePeg (getCoord cc) (makeBoard 5)
       steps = solveFor start 1
-      ps'   = addSteps (as,bs,cc) steps
-      in nextPrompt ps
+      ps'   = addSteps (as ++ [Seq blank],bs,cc) steps
+      in nextPrompt ps'
   | not . coordMade' $ ps = nextPrompt ps
   | otherwise = resetPrompt ps
--- Guard on coordCheck, then coordMade, then otherwise
 
 coordMade' :: Prompts -> Bool
 coordMade' (_,_,cc) = coordMade cc
@@ -125,13 +118,10 @@ addSteps (as,bs,cc) boards = (as ++ [renderBoardsSeq boards],bs,cc)
 --------------------------------------------------------------------------------
 
 -- Event handler
--- Return key progresses to next prompt
 -- Num keys take numbers for coord
 -- Invalid coord resets prompt
 -- Valid coord moves to solving/diplaying board
 eventHandler :: Event -> Prompts -> Prompts
--- eventHandler (EventKey (SpecialKey KeyEnter) Down _ _) ps =
---   if onPrompt ps then nextPrompt ps else ps
 eventHandler (EventKey (Char c) Down _ _) ps =
   if onPrompt ps && isNumber c
   then promptInput ps (digitToInt c)
@@ -146,7 +136,9 @@ eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc) =
     else ps
 eventHandler _ ps = ps
 
--- Prompt for Row
+-- Seems to advance to solving and diplaying steps only after number is hit again
+-- Steps advance through right key, then the left key changes direction for the right key to advance
+
 rowPrompt :: Sequence
 rowPrompt = Seq labeledPrompt where
   board = renderBoard . makeBoard $ 5
@@ -156,7 +148,6 @@ rowPrompt = Seq labeledPrompt where
   rowLines' = color white rowLines
   labeledPrompt = pictures . offset 16 0 $ [rowLabels',rowLines',board]
 
--- Prompt for Column
 colPrompt :: Sequence
 colPrompt = Seq labeledPrompt where
   board = renderBoard . makeBoard $ 5
@@ -166,26 +157,8 @@ colPrompt = Seq labeledPrompt where
   colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
   labeledPrompt = pictures [board,colLabelLines']
 
--- Display board and first prompt
--- Get input
--- Display board and second prompt
--- Get input
--- Remove peg based on given inputs
--- solve and display interactive
-getCoord' :: Prompts -> Coord
-getCoord' (_,_,cc) = getCoord cc
-
-startBoard :: Prompts -> Board
-startBoard ps = removePeg (getCoord' ps) (makeBoard 5)
-
-solveFor :: Board -> Int -> [Board]
-solveFor b n = collectLog . head . endWith n . playGameLog $ b
-
--- Play
--- Giving input progresses to next steps
-
-promptStart :: IO ()
-promptStart = play
+promptSolve :: IO ()
+promptSolve = play
   (InWindow "SolvePrompted" (600,600) (0,0))
   black
   0
@@ -193,9 +166,6 @@ promptStart = play
   getPrompt
   eventHandler
   (\_ x -> x)
---
---   let bs = collectLog . head . endWith 1 .  playGameLog $ b
---   displayInteractive bs
 
 --                            1 \
 --                           / 2 \

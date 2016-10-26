@@ -93,4 +93,4 @@ main :: IO ()
 --   black
 --   testPromptC
 
-main = promptStart
+main = promptSolve

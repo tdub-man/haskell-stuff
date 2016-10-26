@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-25 21:26:59.767508 UTC
+2016-10-26 03:49:46.208835 UTC
 
 interface main@main:Main 8001
-  interface hash: 4efac3c391eabcb71ac08a898f6e872e
-  ABI hash: 101885486bdeffa5a23b269506bdf59c
+  interface hash: 331ef6fc473f05d42dbda03941a994cc
+  ABI hash: 155bcec07f79950998c4ae623f465bc2
   export-list hash: f930c9ad9f7258930bea3d9057ad8e16
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -73,10 +73,10 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.
 import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 39eb14961649799faee79358a8534710
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints 3ac4b1acf8244223bf7173d25fc6c635
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics c95348a5d07555ece418b9b94c5d5bd3
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics b8806d4321f7ed4c100be3f286a28657
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard e5ae7f741df6e5acec6857f64e0e15aa
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame ea989d509c6118403d9cf21429970cf0
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve a75d731c22b42b944175b4bdf651a5da
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 9982b33d1bbaf01bb6e2ff0ad098dd47
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries e33bd8a3477142c6e23c8ce3a5906f5b
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
@@ -161,19 +161,19 @@ d72edf94a0b0d61495b3f7ca1fbf22c3
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
                    [] -> GHC.List.badHead @ PegBoard.Board : x6 ds1 -> x6 }) -}
-878a690e2a4959191600f0b0d4be63ab
+ca36d554ee07cca19e4d557f48c89b08
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
-                Solve.promptStart1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-f559de98d64cf88e150aa9547a3ec8af
+                Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+4d2dc9769c3d102e5d41b240be8d408b
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
-                   Solve.promptStart1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+                   Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
 adef338966afccb905a4e8549ffd7e3b
   testPromptC :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,

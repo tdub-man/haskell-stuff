@@ -88,11 +88,12 @@ type PBZipper = ([Board],[Board])
 
 getPB :: PBZipper -> Picture
 getPB ([],[])  = blank
-getPB ([],b:_) = renderBoard b -- Add pattern match for one element in pbNext
+-- getPB ([],b:_) = renderBoard b -- Add pattern match for one element in pbNext
 getPB (a:_,_)  = renderBoard a
 
 pbNext :: PBZipper -> PBZipper
 pbNext ([],bs)   = ([],bs)
+pbNext ([x],bs)  = ([x],bs)
 pbNext (x:as,bs) = (as,x:bs)
 
 pbPrev :: PBZipper -> PBZipper
