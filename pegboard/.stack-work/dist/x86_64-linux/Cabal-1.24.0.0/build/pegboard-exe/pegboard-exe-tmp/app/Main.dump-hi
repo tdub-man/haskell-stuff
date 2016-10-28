@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 16:56:47.886851 UTC
+2016-10-28 18:57:06.270255 UTC
 
 interface main@main:Main 8001
-  interface hash: 8a555f90cb8aad757c1f4a69d4f89c8c
-  ABI hash: a37942eba34d03fbe61bd2ad608ac0f3
+  interface hash: ca2933247f621fe1bce08874f33f5058
+  ABI hash: 881c442953f4864ce57f71c7b6983293
   export-list hash: 2f4a00cb3b379239210e49188c389060
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -70,10 +70,10 @@ import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics ca
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints ffe5a558df80143db396001d5f3e4fc6
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 4787c59093574d7e27cad79fcaf96c33
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard f83d3917c805320b9d1eddcc14783c79
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove dbc0da23ffafc02dd95af7c464bd5360
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 9af94e29b397921c2529de8fde3b2881
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 6b2a07cc3e4194300af399f9eca54945
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 90b8a2c11e907728616d6d622e239b7c
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 1d70b1b91902a0a783d918fd0a3b63cd
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries eb001928c9134585af2284196e971928
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries ce80aa12b18fe8f3298cb55739fa0ab9
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -135,7 +135,7 @@ ce3601dac1c38cb5950110c0e07efbb1
                         ww29
                         ww30 of ww31 { (#,#) ww32 ww33 ->
                  PegBoard.Board ww32 ww33 } } } } } } } } } } }) -}
-bee7aac1ce6165204def86a93572d7ad
+7ae4e8133089e1fe05e64ff78464d30a
   b' :: [PegBoard.Board]
   {- Unfolding: (case PlayGame.$wplayLog
                         Main.b'1

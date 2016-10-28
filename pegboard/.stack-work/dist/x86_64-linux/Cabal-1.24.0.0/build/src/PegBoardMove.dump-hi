@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 17:01:43.666617 UTC
+2016-10-28 18:57:04.923028 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 8001
-  interface hash: 681abcbb63ec248dbbaf996f54151379
-  ABI hash: dbc0da23ffafc02dd95af7c464bd5360
+  interface hash: 0ad904ff8e180d8c135f492fb14accce
+  ABI hash: 6b2a07cc3e4194300af399f9eca54945
   export-list hash: 7e04a0fdaca55b135f9b30999c563e9b
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -16,7 +16,8 @@ exports:
   PegBoardMove.movePegsAll
   PegBoardMove.nextMoves
   PegBoardMove.BoardMoves
-module dependencies: Helpers.Lists PegBoard
+module dependencies: CriticalPoints Helpers.Lists Helpers.Math
+                     PegBoard Symmetries
 package dependencies: base-4.9.0.0* ghc-prim-0.5.0.0
                       integer-gmp-1.0.0.1
 orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
@@ -27,8 +28,6 @@ family instance modules: base-4.9.0.0:Control.Applicative
                          base-4.9.0.0:GHC.TypeLits
 import  -/  base-4.9.0.0:Data.Tuple acb0ed10307ed88df6c81b8589f4de16
 import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
-import  -/  base-4.9.0.0:GHC.Enum fdf7ac3e1b0be0a4a37257601bddad14
-import  -/  base-4.9.0.0:GHC.Err 3bba35a16538d33d424682ce66876cdd
 import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
 import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
@@ -45,233 +44,17 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
   Coord 175aeaab41cec97be39a9c7cdcc5b317
   addPeg a40cccb7891721501344266eaa26c1b3
   removePeg 8152e4c979462e67a3b476c83d60dac4
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves :: GHC.Enum.Enum PegBoardMove.BoardMoves
-  DFunId
-  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
-     Unfolding: DFun:.
-                  @ PegBoardMove.BoardMoves
-                  PegBoardMove.$fEnumBoardMoves_$csucc
-                  PegBoardMove.$fEnumBoardMoves_$cpred
-                  PegBoardMove.$fEnumBoardMoves_$ctoEnum
-                  PegBoardMove.$fEnumBoardMoves_$cfromEnum
-                  PegBoardMove.$fEnumBoardMoves_$cenumFrom
-                  PegBoardMove.$fEnumBoardMoves_$cenumFromThen
-                  PegBoardMove.$fEnumBoardMoves_$cenumFromTo
-                  PegBoardMove.$fEnumBoardMoves_$cenumFromThenTo -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves1 :: [PegBoardMove.BoardMoves]
-  {- Unfolding: (PegBoardMove.$fEnumBoardMoves_go4 3#) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves2 :: [PegBoardMove.BoardMoves]
-  {- Unfolding: (PegBoardMove.$fEnumBoardMoves_go5 2#) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves3 :: [PegBoardMove.BoardMoves]
-  {- Unfolding: (PegBoardMove.$fEnumBoardMoves_go6 1#) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves4 :: [PegBoardMove.BoardMoves]
-  {- Unfolding: (PegBoardMove.$fEnumBoardMoves_go7 0#) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves5 :: GHC.Prim.Int# -> PegBoardMove.BoardMoves
-  {- Arity: 1, Strictness: <L,U>x -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves6 :: PegBoardMove.BoardMoves
-  {- Strictness: x -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves7 :: PegBoardMove.BoardMoves
-  {- Strictness: x -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cenumFrom ::
-    PegBoardMove.BoardMoves -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, Strictness: <S,1*U>,
-     Unfolding: (\ (a :: PegBoardMove.BoardMoves) ->
-                 case a of wild {
-                   PegBoardMove.None -> PegBoardMove.$fEnumBoardMoves4
-                   PegBoardMove.Pos -> PegBoardMove.$fEnumBoardMoves3
-                   PegBoardMove.Zed -> PegBoardMove.$fEnumBoardMoves2
-                   PegBoardMove.Neg -> PegBoardMove.$fEnumBoardMoves1 }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cenumFromThen ::
-    PegBoardMove.BoardMoves
-    -> PegBoardMove.BoardMoves -> [PegBoardMove.BoardMoves]
-  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
-     Unfolding: (\ (a :: PegBoardMove.BoardMoves)
-                   (b :: PegBoardMove.BoardMoves) ->
-                 let {
-                   $j :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-                     {- Arity: 1, Strictness: <S,U> -}
-                   = \ (a# :: GHC.Prim.Int#)[OneShot] ->
-                     let {
-                       $j1 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-                         {- Arity: 1, Strictness: <S,U> -}
-                       = \ (b# :: GHC.Prim.Int#)[OneShot] ->
-                         let {
-                           $j2 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-                             {- Arity: 1, Strictness: <S,U> -}
-                           = \ (y :: GHC.Prim.Int#)[OneShot] ->
-                             case GHC.Prim.tagToEnum#
-                                    @ GHC.Types.Bool
-                                    (GHC.Prim.>=# b# a#) of wild {
-                               GHC.Types.False
-                               -> GHC.Enum.efdtIntDnFB
-                                    @ [PegBoardMove.BoardMoves]
-                                    PegBoardMove.$fEnumBoardMoves_c
-                                    (GHC.Types.[] @ PegBoardMove.BoardMoves)
-                                    a#
-                                    b#
-                                    y
-                               GHC.Types.True
-                               -> GHC.Enum.efdtIntUpFB
-                                    @ [PegBoardMove.BoardMoves]
-                                    PegBoardMove.$fEnumBoardMoves_c
-                                    (GHC.Types.[] @ PegBoardMove.BoardMoves)
-                                    a#
-                                    b#
-                                    y }
-                         } in
-                         case GHC.Prim.tagToEnum#
-                                @ GHC.Types.Bool
-                                (GHC.Prim.># a# b#) of wild {
-                           GHC.Types.False -> $j2 3# GHC.Types.True -> $j2 0# }
-                     } in
-                     case b of wild {
-                       PegBoardMove.None -> $j1 0#
-                       PegBoardMove.Pos -> $j1 1#
-                       PegBoardMove.Zed -> $j1 2#
-                       PegBoardMove.Neg -> $j1 3# }
-                 } in
-                 case a of wild {
-                   PegBoardMove.None -> $j 0#
-                   PegBoardMove.Pos -> $j 1#
-                   PegBoardMove.Zed -> $j 2#
-                   PegBoardMove.Neg -> $j 3# }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cenumFromThenTo ::
-    PegBoardMove.BoardMoves
-    -> PegBoardMove.BoardMoves
-    -> PegBoardMove.BoardMoves
-    -> [PegBoardMove.BoardMoves]
-  {- Arity: 3, Strictness: <S,1*U><S,1*U><S,1*U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cenumFromTo ::
-    PegBoardMove.BoardMoves
-    -> PegBoardMove.BoardMoves -> [PegBoardMove.BoardMoves]
-  {- Arity: 2, Strictness: <S,1*U><S,1*U>,
-     Unfolding: (\ (x :: PegBoardMove.BoardMoves)
-                   (y :: PegBoardMove.BoardMoves) ->
-                 let {
-                   $j :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-                     {- Arity: 1, Strictness: <S,U> -}
-                   = \ (x1 :: GHC.Prim.Int#)[OneShot] ->
-                     case y of wild {
-                       PegBoardMove.None
-                       -> case GHC.Prim.tagToEnum#
-                                 @ GHC.Types.Bool
-                                 (GHC.Prim.># x1 0#) of wild1 {
-                            GHC.Types.False -> PegBoardMove.$fEnumBoardMoves_go3 x1
-                            GHC.Types.True -> GHC.Types.[] @ PegBoardMove.BoardMoves }
-                       PegBoardMove.Pos
-                       -> case GHC.Prim.tagToEnum#
-                                 @ GHC.Types.Bool
-                                 (GHC.Prim.># x1 1#) of wild1 {
-                            GHC.Types.False -> PegBoardMove.$fEnumBoardMoves_go2 x1
-                            GHC.Types.True -> GHC.Types.[] @ PegBoardMove.BoardMoves }
-                       PegBoardMove.Zed
-                       -> case GHC.Prim.tagToEnum#
-                                 @ GHC.Types.Bool
-                                 (GHC.Prim.># x1 2#) of wild1 {
-                            GHC.Types.False -> PegBoardMove.$fEnumBoardMoves_go1 x1
-                            GHC.Types.True -> GHC.Types.[] @ PegBoardMove.BoardMoves }
-                       PegBoardMove.Neg
-                       -> case GHC.Prim.tagToEnum#
-                                 @ GHC.Types.Bool
-                                 (GHC.Prim.># x1 3#) of wild1 {
-                            GHC.Types.False -> PegBoardMove.$fEnumBoardMoves_go x1
-                            GHC.Types.True -> GHC.Types.[] @ PegBoardMove.BoardMoves } }
-                 } in
-                 case x of wild {
-                   PegBoardMove.None -> $j 0#
-                   PegBoardMove.Pos -> $j 1#
-                   PegBoardMove.Zed -> $j 2#
-                   PegBoardMove.Neg -> $j 3# }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cfromEnum ::
-    PegBoardMove.BoardMoves -> GHC.Types.Int
-  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>m,
-     Unfolding: InlineRule (1, True, False)
-                (\ (a :: PegBoardMove.BoardMoves) ->
-                 case a of wild {
-                   PegBoardMove.None -> GHC.Types.I# 0#
-                   PegBoardMove.Pos -> GHC.Types.I# 1#
-                   PegBoardMove.Zed -> GHC.Types.I# 2#
-                   PegBoardMove.Neg -> GHC.Types.I# 3# }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$cpred ::
-    PegBoardMove.BoardMoves -> PegBoardMove.BoardMoves
-  {- Arity: 1, Strictness: <S,1*U>,
-     Unfolding: InlineRule (1, True, False)
-                (\ (a :: PegBoardMove.BoardMoves) ->
-                 case a of wild {
-                   PegBoardMove.None -> PegBoardMove.$fEnumBoardMoves6
-                   PegBoardMove.Pos -> PegBoardMove.None
-                   PegBoardMove.Zed -> PegBoardMove.Pos
-                   PegBoardMove.Neg -> PegBoardMove.Zed }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$csucc ::
-    PegBoardMove.BoardMoves -> PegBoardMove.BoardMoves
-  {- Arity: 1, Strictness: <S,1*U>,
-     Unfolding: InlineRule (1, True, False)
-                (\ (a :: PegBoardMove.BoardMoves) ->
-                 case a of wild {
-                   PegBoardMove.None -> PegBoardMove.Pos
-                   PegBoardMove.Pos -> PegBoardMove.Zed
-                   PegBoardMove.Zed -> PegBoardMove.Neg
-                   PegBoardMove.Neg -> PegBoardMove.$fEnumBoardMoves7 }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_$ctoEnum ::
-    GHC.Types.Int -> PegBoardMove.BoardMoves
-  {- Arity: 1, Strictness: <S(S),1*U(U)>, Inline: INLINE[0],
-     Unfolding: InlineRule (1, True, False)
-                (\ (w :: GHC.Types.Int) ->
-                 case w of ww { GHC.Types.I# ww1 ->
-                 PegBoardMove.$w$ctoEnum ww1 }) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_c ::
-    GHC.Types.Int
-    -> [PegBoardMove.BoardMoves] -> [PegBoardMove.BoardMoves]
-  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*U(U)><L,U>,
-     Unfolding: InlineRule (2, True, False)
-                (\ (x :: GHC.Types.Int) (ys :: [PegBoardMove.BoardMoves]) ->
-                 GHC.Types.:
-                   @ PegBoardMove.BoardMoves
-                   (case x of wild { GHC.Types.I# a ->
-                    GHC.Prim.tagToEnum# @ PegBoardMove.BoardMoves a })
-                   ys) -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go1 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go2 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go3 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go4 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, HasNoCafRefs, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go5 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, HasNoCafRefs, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go6 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, HasNoCafRefs, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
-  $fEnumBoardMoves_go7 :: GHC.Prim.Int# -> [PegBoardMove.BoardMoves]
-  {- Arity: 1, HasNoCafRefs, Strictness: <L,U> -}
-58d219e6110a896622fc7754fab45367
+import  -/  Symmetries ce80aa12b18fe8f3298cb55739fa0ab9
+  exports: f7bc392eb4f8e69204e2fc7af20ed002
+  All 319793dcabe9d84016d0eca920411067
+  Horizontal a4c540a6b3441766aa809c3642d1e290
+  Negative e362422e5a624cab880f5fdba6668bb0
+  Not cedbfabb741686509c8699e3d05e578d
+  Positive 8309fe353bdcceb2e8f457a5ca4b8770
+  Rotational 6c4a18b6ff341c4b8594452a2c33f2e4
+  Symmetries 1ac38ad02047e86b966c05d03d7a5625
+  findSymmetries c57a3f8bab362a946e483921a4a69864
+b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves :: GHC.Classes.Eq PegBoardMove.BoardMoves
   DFunId
   {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -279,49 +62,22 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
                   @ PegBoardMove.BoardMoves
                   PegBoardMove.$fEqBoardMoves_$c==
                   PegBoardMove.$fEqBoardMoves_$c/= -}
-58d219e6110a896622fc7754fab45367
+b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves_$c/= ::
     PegBoardMove.BoardMoves
     -> PegBoardMove.BoardMoves -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
-     Unfolding: (\ (a :: PegBoardMove.BoardMoves)
-                   (b :: PegBoardMove.BoardMoves) ->
-                 case a of wild {
-                   PegBoardMove.None
-                   -> case b of wild1 {
-                        DEFAULT -> GHC.Types.True PegBoardMove.None -> GHC.Types.False }
-                   PegBoardMove.Pos
-                   -> case b of wild1 {
-                        DEFAULT -> GHC.Types.True PegBoardMove.Pos -> GHC.Types.False }
-                   PegBoardMove.Zed
-                   -> case b of wild1 {
-                        DEFAULT -> GHC.Types.True PegBoardMove.Zed -> GHC.Types.False }
-                   PegBoardMove.Neg
-                   -> case b of wild1 {
-                        DEFAULT -> GHC.Types.True
-                        PegBoardMove.Neg -> GHC.Types.False } }) -}
-58d219e6110a896622fc7754fab45367
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: PegBoardMove.BoardMoves) (b :: PegBoardMove.BoardMoves) ->
+                 case PegBoardMove.$fEqBoardMoves_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves_$c== ::
     PegBoardMove.BoardMoves
     -> PegBoardMove.BoardMoves -> GHC.Types.Bool
-  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
-     Unfolding: (\ (ds :: PegBoardMove.BoardMoves)
-                   (ds1 :: PegBoardMove.BoardMoves) ->
-                 case ds of wild {
-                   PegBoardMove.None
-                   -> case ds1 of wild1 {
-                        DEFAULT -> GHC.Types.False PegBoardMove.None -> GHC.Types.True }
-                   PegBoardMove.Pos
-                   -> case ds1 of wild1 {
-                        DEFAULT -> GHC.Types.False PegBoardMove.Pos -> GHC.Types.True }
-                   PegBoardMove.Zed
-                   -> case ds1 of wild1 {
-                        DEFAULT -> GHC.Types.False PegBoardMove.Zed -> GHC.Types.True }
-                   PegBoardMove.Neg
-                   -> case ds1 of wild1 {
-                        DEFAULT -> GHC.Types.False
-                        PegBoardMove.Neg -> GHC.Types.True } }) -}
-58d219e6110a896622fc7754fab45367
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+b2720b819eefa89ed11c6c2584cbda32
   $fShowBoardMoves :: GHC.Show.Show PegBoardMove.BoardMoves
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -330,19 +86,15 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
                   PegBoardMove.$fShowBoardMoves_$cshowsPrec
                   PegBoardMove.$fShowBoardMoves_$cshow
                   PegBoardMove.$fShowBoardMoves_$cshowList -}
-e9dcc2e20ec70d97a68bd56e927273f6
-  $fShowBoardMoves1 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "Neg"#) -}
-c46399bdb1db34bfe48448ebe00e21d8
-  $fShowBoardMoves2 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "Zed"#) -}
-bb18d6da96ad155a1efaabdb570f0882
-  $fShowBoardMoves3 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "Pos"#) -}
-59abac0fb45cf1e51c74fed30991132a
-  $fShowBoardMoves4 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "None"#) -}
-58d219e6110a896622fc7754fab45367
+b2720b819eefa89ed11c6c2584cbda32
+  $fShowBoardMoves1 :: PegBoardMove.BoardMoves -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (PegBoardMove.$fShowBoardMoves_$cshowsPrec
+                   PegBoardMove.$fShowBoardMoves2) -}
+b789246a6852bf76ca64e6234194a3ce
+  $fShowBoardMoves2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+b2720b819eefa89ed11c6c2584cbda32
   $fShowBoardMoves_$cshow ::
     PegBoardMove.BoardMoves -> GHC.Base.String
   {- Arity: 1, Strictness: <S,1*U>,
@@ -352,22 +104,29 @@ bb18d6da96ad155a1efaabdb570f0882
                    GHC.Show.shows22
                    x
                    (GHC.Types.[] @ GHC.Types.Char)) -}
-58d219e6110a896622fc7754fab45367
+b2720b819eefa89ed11c6c2584cbda32
   $fShowBoardMoves_$cshowList ::
     [PegBoardMove.BoardMoves] -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (GHC.Show.showList__
                    @ PegBoardMove.BoardMoves
-                   PegBoardMove.$w$cshowsPrec) -}
-58d219e6110a896622fc7754fab45367
+                   PegBoardMove.$fShowBoardMoves1) -}
+b2720b819eefa89ed11c6c2584cbda32
   $fShowBoardMoves_$cshowsPrec ::
     GHC.Types.Int -> PegBoardMove.BoardMoves -> GHC.Show.ShowS
-  {- Arity: 3, Strictness: <L,A><S,1*U><L,1*U>, Inline: INLINE[0],
-     Unfolding: InlineRule (3, True, True)
-                (\ (w :: GHC.Types.Int)
-                   (w1 :: PegBoardMove.BoardMoves)
-                   (w2 :: GHC.Base.String) ->
-                 PegBoardMove.$w$cshowsPrec w1 w2) -}
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U> -}
+08009f898d7f81583979ba78b4c39653
+  $tc'L :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3260947470999526047##
+                   8725443339372319069##
+                   PegBoardMove.$trModule
+                   PegBoardMove.$tc'L1) -}
+f6cc4d62a9534d86a698767671816e20
+  $tc'L1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'L"#) -}
 385029f18908560937b8dcae54254cd2
   $tc'Neg :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -404,6 +163,18 @@ e942b386724b10126121a87b15bc09d0
   $tc'Pos1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "'Pos"#) -}
+ce1dec6a5b06ecec200fc747bd29bcec
+  $tc'R :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   15881927107818280482##
+                   11620028343381680920##
+                   PegBoardMove.$trModule
+                   PegBoardMove.$tc'R1) -}
+adfad8d6b5aa37e4dfe5619fce6de1a9
+  $tc'R1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'R"#) -}
 144a76264d2e694005f2caac1f9367a9
   $tc'Zed :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -443,39 +214,6 @@ af4e7792e56c28afd31978ad268d22a6
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
-58d219e6110a896622fc7754fab45367
-  $w$cshowsPrec ::
-    PegBoardMove.BoardMoves -> GHC.Base.String -> GHC.Base.String
-  {- Arity: 2, Strictness: <S,1*U><L,1*U>, Inline: [0],
-     Unfolding: (\ (w :: PegBoardMove.BoardMoves)
-                   (w1 :: GHC.Base.String) ->
-                 case w of wild {
-                   PegBoardMove.None
-                   -> GHC.Base.++ @ GHC.Types.Char PegBoardMove.$fShowBoardMoves4 w1
-                   PegBoardMove.Pos
-                   -> GHC.Base.++ @ GHC.Types.Char PegBoardMove.$fShowBoardMoves3 w1
-                   PegBoardMove.Zed
-                   -> GHC.Base.++ @ GHC.Types.Char PegBoardMove.$fShowBoardMoves2 w1
-                   PegBoardMove.Neg
-                   -> GHC.Base.++
-                        @ GHC.Types.Char
-                        PegBoardMove.$fShowBoardMoves1
-                        w1 }) -}
-58d219e6110a896622fc7754fab45367
-  $w$ctoEnum :: GHC.Prim.Int# -> PegBoardMove.BoardMoves
-  {- Arity: 1, Strictness: <S,U>, Inline: [0],
-     Unfolding: (\ (ww :: GHC.Prim.Int#) ->
-                 case GHC.Prim.tagToEnum#
-                        @ GHC.Types.Bool
-                        (GHC.Prim.>=# ww 0#) of wild {
-                   GHC.Types.False -> PegBoardMove.$fEnumBoardMoves5 ww
-                   GHC.Types.True
-                   -> case GHC.Prim.tagToEnum#
-                             @ GHC.Types.Bool
-                             (GHC.Prim.<=# ww 3#) of wild1 {
-                        GHC.Types.False -> PegBoardMove.$fEnumBoardMoves5 ww
-                        GHC.Types.True
-                        -> GHC.Prim.tagToEnum# @ PegBoardMove.BoardMoves ww } }) -}
 7ce47bde701fe6ec07b6cc876042a9d5
   $wmovePegs ::
     PegBoard.Coord
@@ -495,24 +233,28 @@ af4e7792e56c28afd31978ad268d22a6
                  case PegBoard.$waddPeg ww2 ww3 ww4 of ww5 { (#,#) ww6 ww7 ->
                  case PegBoard.$wremovePeg ww1 ww6 ww7 of ww8 { (#,#) ww9 ww10 ->
                  PegBoard.$wremovePeg ww ww9 ww10 } }) -}
-87bc5064ac86c9b262cd64d9713a3bc7
+349d8d8419cba80717e282cc9e0bb585
   $wnextMoves ::
-    [PegBoard.Coord]
-    -> [PegBoard.Coord]
-    -> [(PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)]
-  {- Arity: 2, HasNoCafRefs, Strictness: <L,1*U><L,U>, Inline: [0] -}
-58d219e6110a896622fc7754fab45367
-  data BoardMoves = None | Pos | Zed | Neg
-8c67e6e7c999ad380dc536eef5d3ce20
+    [PegBoard.Coord] -> [PegBoard.Coord] -> [PegBoardMove.CoordTriple]
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: [0] -}
+b2720b819eefa89ed11c6c2584cbda32
+  data BoardMoves
+    = None
+    | Pos
+    | Zed
+    | Neg
+    | L PegBoardMove.BoardMoves
+    | R PegBoardMove.BoardMoves
+87b2a3cf9c0f2f0085aeda369c7af9d5
+  type CoordTriple = (PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)
+3286372c78300cfc66cb79b5ebb2993a
   movePegs ::
-    (PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)
-    -> PegBoard.Board -> PegBoard.Board
+    PegBoardMove.CoordTriple -> PegBoard.Board -> PegBoard.Board
   {- Arity: 2, HasNoCafRefs,
      Strictness: <S,1*U(U(U(U),U(U)),U(U(U),U(U)),U(U(U),U(U)))><S,1*U(U,U)>m,
      Inline: INLINE[0],
      Unfolding: InlineRule (2, True, False)
-                (\ (w :: (PegBoard.Coord, PegBoard.Coord, PegBoard.Coord))
-                   (w1 :: PegBoard.Board) ->
+                (\ (w :: PegBoardMove.CoordTriple) (w1 :: PegBoard.Board) ->
                  case w of ww { (,,) ww1 ww2 ww3 ->
                  case w1 of ww4 { PegBoard.Board ww5 ww6 ->
                  case PegBoardMove.$wmovePegs
@@ -522,40 +264,32 @@ af4e7792e56c28afd31978ad268d22a6
                         ww5
                         ww6 of ww7 { (#,#) ww8 ww9 ->
                  PegBoard.Board ww8 ww9 } } }) -}
-8b5a294154099ee787a74619483d47ad
+5416227d5866c8d1f2bc6d0b6040d8ec
   movePegsAll ::
-    [(PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)]
-    -> PegBoard.Board -> [PegBoard.Board]
+    [PegBoardMove.CoordTriple] -> PegBoard.Board -> [PegBoard.Board]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,U(U,U)>,
-     Unfolding: (\ (mvs :: [(PegBoard.Coord, PegBoard.Coord,
-                             PegBoard.Coord)])
+     Unfolding: (\ (mvs :: [PegBoardMove.CoordTriple])
                    (b :: PegBoard.Board) ->
                  letrec {
-                   go4 :: [(PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)]
-                          -> [PegBoard.Board]
+                   go :: [PegBoardMove.CoordTriple] -> [PegBoard.Board]
                      {- Arity: 1, Strictness: <S,1*U> -}
-                   = \ (ds :: [(PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)]) ->
+                   = \ (ds :: [PegBoardMove.CoordTriple]) ->
                      case ds of wild {
                        [] -> GHC.Types.[] @ PegBoard.Board
                        : y ys
                        -> GHC.Types.:
                             @ PegBoard.Board
                             (PegBoardMove.movePegs y b)
-                            (go4 ys) }
+                            (go ys) }
                  } in
-                 go4 mvs) -}
-4b71820c54a899108b1ac189b0f32fe7
-  nextMoves ::
-    PegBoard.Board
-    -> [(PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)]
-  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(1*U,U)>,
-     Inline: INLINE[0],
+                 go mvs) -}
+90fc00a8b4e4c63d43bb86a3a782710c
+  nextMoves :: PegBoard.Board -> [PegBoardMove.CoordTriple]
+  {- Arity: 1, Strictness: <S,1*U(U,U)>, Inline: INLINE[0],
      Unfolding: InlineRule (1, True, False)
                 (\ (w :: PegBoard.Board) ->
                  case w of ww { PegBoard.Board ww1 ww2 ->
                  PegBoardMove.$wnextMoves ww1 ww2 }) -}
-instance [safe] GHC.Enum.Enum [PegBoardMove.BoardMoves]
-  = PegBoardMove.$fEnumBoardMoves
 instance [safe] GHC.Classes.Eq [PegBoardMove.BoardMoves]
   = PegBoardMove.$fEqBoardMoves
 instance [safe] GHC.Show.Show [PegBoardMove.BoardMoves]

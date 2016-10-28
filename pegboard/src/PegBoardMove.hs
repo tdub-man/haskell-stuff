@@ -8,9 +8,6 @@ import PegBoard
 import Helpers.Lists(nPerms)
 import Symmetries
 
-allSyms :: [Symmetries]
-allSyms = [Positive,Negative,Horizontal,Rotational]
-
 -- Pos = Move along a line of positive slope
 -- Zed = Move along a line of zero slope
 -- Neg = Move along a line of negative slope
@@ -48,17 +45,7 @@ filterSym Positive   (_,mv) = mv == L Zed || mv == R Zed || mv == L Neg
 filterSym Negative   (_,mv) = mv == L Zed || mv == R Zed || mv == L Pos
 filterSym Rotational (_,mv) = mv == L Zed || mv == R Zed
 filterSym All        (_,mv) = mv == L Zed
-
-symmetricMoves :: [Symmetries] -> [(CoordTriple,BoardMoves)] -> [CoordTriple]
-symmetricMoves [] tripMv = map fst tripMv
--- symmetricMoves syms tripMv
---   | syms == allSyms = map fst . filter ((/= L Zed) . snd) $ tripMv
-symmetricMoves syms tripMv =
-  map fst . concat $ [ filter (filterSym s) tripMv | s <- syms ]
--- symmetricMoves syms tripMv =
---   if Horizontal `elem` syms
---   then map fst tripMv
---   else map fst tripMv
+filterSym Not        (_,_)  = True
 
 -- Creates a 3-tuple of two pegs and one hole
 -- First two coords are some permutation of the pegs
@@ -66,13 +53,11 @@ symmetricMoves syms tripMv =
 -- Filters these tuples by whether they are valid moves
 nextMoves :: Board -> [CoordTriple]
 nextMoves (Board ps hs) = trips' where
-  syms = findSymmetries (Board ps hs)
+  sym = findSymmetries (Board ps hs)
   pPerm = 2 `nPerms` ps
   trips = [ (a,b,c) | [a,b] <- pPerm, c <- hs ]
-  -- trips' = filter (\tri -> validMove tri /= None) trips
   tripMoves = filter ((/= None) . snd) [ (t,validMove t) | t <- trips ]
-  -- trips' = map fst tripMoves
-  trips' = symmetricMoves syms tripMoves
+  trips' = map fst . filter (filterSym sym) $ tripMoves
 -- Will need to make note of moves to be made
 -- Try to eliminate moves based on symmetry
 

@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 16:45:06.438042 UTC
+2016-10-28 18:26:08.54066 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 8001
-  interface hash: 44567782938f597d947679f859e134a9
+  interface hash: 8c015a64c40e48c6b7a2985cafcbc7cd
   ABI hash: 1d70b1b91902a0a783d918fd0a3b63cd
   export-list hash: 37f488ad4b3919da239b5a72a04fc9d7
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -15,6 +15,7 @@ exports:
   Solve.promptSolve
 module dependencies: Analytics CriticalPoints Graphics
                      Helpers.Lists Helpers.Math PegBoard PegBoardMove PlayGame
+                     Symmetries
 package dependencies: GLURaw-2.0.0.2@GLURaw-2.0.0.2-FbcPHzTa7vLEnCQ0kkJ8B4
                       GLUT-2.7.0.10@GLUT-2.7.0.10-A3NqGto8XAVI0ysflkZZW9
                       ObjectName-1.1.0.1@ObjectName-1.1.0.1-HHHIolNI8Pm5H3OGkgSUrO
@@ -86,10 +87,10 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
   Coord 175aeaab41cec97be39a9c7cdcc5b317
   makeBoard 36756d6d94bf541cdee1c47f3b41a148
   removePeg 8152e4c979462e67a3b476c83d60dac4
-import  -/  PlayGame 9af94e29b397921c2529de8fde3b2881
+import  -/  PlayGame 90b8a2c11e907728616d6d622e239b7c
   exports: db98f7a3543cf5dfbe75863e31383cd6
   collectLog a63fb5007166160ae7ce1f7c519247b1
-  playGameLog 6f75e79300b6f5c2d199fc9eb63a9641
+  playGameLog 48e36b45642b9c8a6ae46ea7bdc126d4
 02d633715151042965876b3195ad8c89
   $fEqSequence :: GHC.Classes.Eq Solve.Sequence
   DFunId

@@ -4,7 +4,7 @@ module Symmetries
     , negFlip
     , clockRotate
     , counterClockRotate
-    , Symmetries(Positive,Horizontal,Negative,Rotational,All)
+    , Symmetries(Positive,Horizontal,Negative,Rotational,All,Not)
     , posSymmetric
     , zedSymmetric
     , negSymmetric
@@ -103,13 +103,17 @@ rotSymmetric b =
   if b `boardEquals` clockRotate b
   then Rotational else Not
 
-findSymmetries :: Board -> [Symmetries]
+findSymmetries :: Board -> Symmetries
 findSymmetries b = syms' where
   syms = filter (/= Not)
     [posSymmetric b
     ,zedSymmetric b
     ,negSymmetric b
     ,rotSymmetric b]
-  syms' = if length syms == 4
-    then [All]
-    else syms
+  syms' = case syms of
+    [] -> Not
+    [x] -> x
+    [Positive,Horizontal,Negative,Rotational] -> All
+  -- syms' = if length syms == 4
+  --   then [All]
+  --   else syms
