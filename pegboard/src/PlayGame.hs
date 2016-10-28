@@ -6,7 +6,8 @@ module PlayGame
     , showBoardLog
     ) where
 import Data.List(partition)
-import PegBoard
+import PegBoard(Board,Coord,showBoard)
+import PegBoardMove(nextMoves,movePegs,movePegsAll)
 
 data BoardLog = BoardLog { _current :: Board, _history :: [Board] } deriving (Eq)
 

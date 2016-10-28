@@ -4,12 +4,12 @@ module Symmetries
     , negFlip
     , clockRotate
     , counterClockRotate
-    , Symmetries(Positive,Horizontal,Negative,Clockwise,CounterClockwise)
+    , Symmetries(Positive,Horizontal,Negative,Rotational)
     , posSymmetric
     , zedSymmetric
     , negSymmetric
-    , clockSymmetric
-    , counterClockSymmetric
+    , rotSymmetric
+    -- , counterClockSymmetric
     , findSymmetries
     , boardEquals
     ) where
@@ -66,7 +66,6 @@ clockRotate b = b' where
     hs' = map fst . filter (not . snd) $ allRows
   rings' = map rotateRing rings
   b' = foldl1 combineBoard rings'
--- losing empty coords
 
 counterClockRotate :: Board -> Board
 counterClockRotate = clockRotate . clockRotate
@@ -80,44 +79,32 @@ negFlip = clockRotate . zedFlip . counterClockRotate
 data Symmetries = Positive
                 | Horizontal
                 | Negative
-                | Clockwise
-                | CounterClockwise
-                | Not Symmetries deriving (Show)
+                | Rotational
+                | Not deriving (Eq,Show)
 
 posSymmetric :: Board -> Symmetries
 posSymmetric b =
   if b `boardEquals` posFlip b
-  then Positive
-  else Not Positive
+  then Positive else Not
 
 zedSymmetric :: Board -> Symmetries
 zedSymmetric b =
   if b `boardEquals` zedFlip b
-  then Horizontal
-  else Not Horizontal
+  then Horizontal else Not
 
 negSymmetric :: Board -> Symmetries
 negSymmetric b =
   if b `boardEquals` negFlip b
-  then Negative
-  else Not Negative
+  then Negative else Not
 
-clockSymmetric :: Board -> Symmetries
-clockSymmetric b =
+rotSymmetric :: Board -> Symmetries
+rotSymmetric b =
   if b `boardEquals` clockRotate b
-  then Clockwise
-  else Not Clockwise
-
-counterClockSymmetric :: Board -> Symmetries
-counterClockSymmetric b =
-  if b `boardEquals` counterClockRotate b
-  then CounterClockwise
-  else Not CounterClockwise
+  then Rotational else Not
 
 findSymmetries :: Board -> [Symmetries]
-findSymmetries b = [pSym,zSym,nSym,clSym,ccSym] where
-  pSym  = posSymmetric b
-  zSym  = zedSymmetric b
-  nSym  = negSymmetric b
-  clSym = clockSymmetric b
-  ccSym = counterClockSymmetric b
+findSymmetries b =
+  filter (/= Not) [posSymmetric b
+                  ,zedSymmetric b
+                  ,negSymmetric b
+                  ,rotSymmetric b]
