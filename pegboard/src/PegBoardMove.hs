@@ -6,11 +6,16 @@ module PegBoardMove
     ) where
 import PegBoard
 import Helpers.Lists(nPerms)
+import Symmetries
+
+allSyms :: [Symmetries]
+allSyms = [Positive,Negative,Horizontal,Rotational]
 
 -- Pos = Move along a line of positive slope
 -- Zed = Move along a line of zero slope
 -- Neg = Move along a line of negative slope
-data BoardMoves = None | Pos | Zed | Neg deriving (Eq,Enum,Show)
+data BoardMoves = None | Pos | Zed | Neg | L BoardMoves | R BoardMoves deriving (Eq,Show)
+type CoordTriple = (Coord,Coord,Coord)
 
 bmAnd :: BoardMoves -> BoardMoves -> BoardMoves
 bmAnd a b = if a == b then a else None
@@ -24,36 +29,59 @@ bmAnd a b = if a == b then a else None
 neighbor :: Coord -> Coord -> BoardMoves
 neighbor (Coord x1 y1) (Coord x2 y2) = let
   in case (x2-x1,y2-y1) of
-    ( 1, 0) -> Pos
-    (-1, 0) -> Pos
-    ( 0, 1) -> Zed
-    ( 0,-1) -> Zed
-    ( 1, 1) -> Neg
-    (-1,-1) -> Neg
+    ( 1, 0) -> L Pos
+    (-1, 0) -> R Pos
+    ( 0, 1) -> R Zed
+    ( 0,-1) -> L Zed
+    ( 1, 1) -> R Neg
+    (-1,-1) -> L Neg
     _       -> None
 
-validMove :: (Coord,Coord,Coord) -> BoardMoves
+validMove :: CoordTriple -> BoardMoves
 validMove (a,b,c) = ab `bmAnd` bc where
   ab = neighbor a b
   bc = neighbor b c
+
+filterSym :: Symmetries -> (a,BoardMoves) -> Bool
+filterSym Horizontal (_,mv) = mv == L Pos || mv == R Pos || mv == L Zed
+filterSym Positive   (_,mv) = mv == L Zed || mv == R Zed || mv == L Neg
+filterSym Negative   (_,mv) = mv == L Zed || mv == R Zed || mv == L Pos
+filterSym Rotational (_,mv) = mv == L Zed || mv == R Zed
+filterSym All        (_,mv) = mv == L Zed
+
+symmetricMoves :: [Symmetries] -> [(CoordTriple,BoardMoves)] -> [CoordTriple]
+symmetricMoves [] tripMv = map fst tripMv
+-- symmetricMoves syms tripMv
+--   | syms == allSyms = map fst . filter ((/= L Zed) . snd) $ tripMv
+symmetricMoves syms tripMv =
+  map fst . concat $ [ filter (filterSym s) tripMv | s <- syms ]
+-- symmetricMoves syms tripMv =
+--   if Horizontal `elem` syms
+--   then map fst tripMv
+--   else map fst tripMv
 
 -- Creates a 3-tuple of two pegs and one hole
 -- First two coords are some permutation of the pegs
 -- The 3-tuple is a cartesian product of the previous permutations and the holes
 -- Filters these tuples by whether they are valid moves
-nextMoves :: Board -> [(Coord,Coord,Coord)]
+nextMoves :: Board -> [CoordTriple]
 nextMoves (Board ps hs) = trips' where
+  syms = findSymmetries (Board ps hs)
   pPerm = 2 `nPerms` ps
   trips = [ (a,b,c) | [a,b] <- pPerm, c <- hs ]
-  trips' = filter (\tri -> validMove tri /= None) trips
+  -- trips' = filter (\tri -> validMove tri /= None) trips
+  tripMoves = filter ((/= None) . snd) [ (t,validMove t) | t <- trips ]
+  -- trips' = map fst tripMoves
+  trips' = symmetricMoves syms tripMoves
+-- Will need to make note of moves to be made
 -- Try to eliminate moves based on symmetry
 
 -- Takes the 3-tuple of two pegs and one hole
 -- Removes the pegs and adds the hole
-movePegs :: (Coord,Coord,Coord) -> Board -> Board
+movePegs :: CoordTriple -> Board -> Board
 movePegs (a,b,c) = removePeg a . removePeg b . addPeg c
 
-movePegsAll :: [(Coord,Coord,Coord)] -> Board -> [Board]
+movePegsAll :: [CoordTriple] -> Board -> [Board]
 movePegsAll mvs b = [ movePegs mv b | mv <- mvs ]
 
 -- In these definitions of nextMoves and movePegs,

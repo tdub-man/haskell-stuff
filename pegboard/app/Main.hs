@@ -49,28 +49,28 @@ main = do
 
 -- TRANSFORMATIONS
 
-  putStrLn "Base Board"
-  printBoard b
-  putStrLn "\nClockwise Rotation"
-  printBoard . clockRotate $ b
-  putStrLn "\nCounter-clockwise Rotation"
-  printBoard . counterClockRotate $ b
-  putStrLn "\nZed Flip"
-  printBoard . zedFlip $ b
-  putStrLn "\nPos Flip"
-  printBoard . posFlip $ b
-  putStrLn "\nNeg Flip"
-  printBoard . negFlip $ b
+  -- putStrLn "Base Board"
+  -- printBoard b
+  -- putStrLn "\nClockwise Rotation"
+  -- printBoard . clockRotate $ b
+  -- putStrLn "\nCounter-clockwise Rotation"
+  -- printBoard . counterClockRotate $ b
+  -- putStrLn "\nZed Flip"
+  -- printBoard . zedFlip $ b
+  -- putStrLn "\nPos Flip"
+  -- printBoard . posFlip $ b
+  -- putStrLn "\nNeg Flip"
+  -- printBoard . negFlip $ b
 --------------------------------------------------------------------------------
 
 -- SYMMETRIES
 
-  putStrLn "\nSymmetries:"
-  mapM_ print . findSymmetries $ b
+  -- putStrLn "\nSymmetries:"
+  -- mapM_ print . findSymmetries $ b
 --------------------------------------------------------------------------------
 
 -- INTERACTIVE
 
   -- displayInteractive b'
-  -- promptSolve
+  promptSolve
 --------------------------------------------------------------------------------
