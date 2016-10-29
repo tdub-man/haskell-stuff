@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 16:45:05.584186 UTC
+2016-10-28 22:22:57.726994 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 8001
-  interface hash: a1bdce7252acd9779e4b1fcb0fac44cd
+  interface hash: 143107862f821f6184903a7b4567d701
   ABI hash: cae1ad0f41e8075ed823816cc325bb32
   export-list hash: 5f24ac485a14b5105dd37a854fe5255d
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -18,7 +18,7 @@ exports:
   Analytics.shortestGame
   Analytics.uniqueEndStates
 module dependencies: CriticalPoints Helpers.Lists Helpers.Math
-                     PegBoard PegBoardMove PlayGame
+                     PegBoard PegBoardMove PlayGame Symmetries
 package dependencies: base-4.9.0.0* ghc-prim-0.5.0.0
                       integer-gmp-1.0.0.1
 orphans: base-4.9.0.0:GHC.Base base-4.9.0.0:GHC.Float
@@ -35,8 +35,8 @@ import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
 import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
-import  -/  CriticalPoints ffe5a558df80143db396001d5f3e4fc6
-  exports: 80fdacf561ce6b6b953c62c7fe395c77
+import  -/  CriticalPoints af57f81cf1244d8ee38733403d6a3642
+  exports: 062caa36d150055fae0d4d8d1aee2142
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
 import  -/  Helpers.Math 90663dbd1f1fc19916d7ba5eca912c3f
@@ -46,7 +46,7 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
   Board 811b281511fb95d934048eb55c0228c6
   Board c47801c17d6fbde18b84e473ce510507
   pegCount d5239ba2220de571e91ab26df5e041e6
-import  -/  PlayGame 9af94e29b397921c2529de8fde3b2881
+import  -/  PlayGame 90b8a2c11e907728616d6d622e239b7c
   exports: db98f7a3543cf5dfbe75863e31383cd6
   BoardLog 732e9132cfb50a4eba69539624db98a2
   _current 61ecffc7d3c06b020e15147b2eaf8156

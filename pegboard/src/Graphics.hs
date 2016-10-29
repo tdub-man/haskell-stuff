@@ -29,7 +29,7 @@ offsetF fx fy ps = ps' where
 
 renderBoard :: Board -> Picture
 renderBoard b = b' where
-  rs = rows' b
+  rs = toBoolRows b
   rs' = map (map snd) rs
   assignCircle c = if c
     then color green (circleSolid 8)
@@ -47,7 +47,7 @@ renderBoards :: [Board] -> Picture
 renderBoards [] = blank
 renderBoards bs = bs' where
   bsR = rBoards bs
-  nRows = fromIntegral . length . rows' . head $ bs
+  nRows = fromIntegral . length . toBoolRows . head $ bs
   offN n = fromIntegral (16 * n) * (nRows + 1)
   bsrOff = offsetF (const 0) offN (reverse bsR)
   bs' = pictures bsrOff
@@ -56,7 +56,7 @@ renderBoardsSquare :: [Board] -> Picture
 renderBoardsSquare [] = blank
 renderBoardsSquare bs = bs' where
   sqLen = ceiling . sqrt . fromIntegral . length $ bs
-  nRows = fromIntegral . length . rows' . head $ bs
+  nRows = fromIntegral . length . toBoolRows . head $ bs
   bsR = rBoards bs
   offN n = (16 * fromIntegral n) * (nRows + 1)
   bsrRow = subDivide sqLen bsR

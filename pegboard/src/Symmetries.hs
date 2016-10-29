@@ -14,11 +14,12 @@ module Symmetries
     , boardEquals
     ) where
 import PegBoard
-import CriticalPoints( rows
+import CriticalPoints( rows, boolRows, toBoolRows
                      , concentricTrianglesExclusive
-                     , topRightRow, bottomRow, topLeftRow)
+                     , topRightRow, bottomRow, topLeftRow
+                     , topLeftRowBR', bottomRowBR', topRightRowBR')
 import Helpers.Lists(middleElem)
-import Data.List(nubBy,nub,sort)
+import Data.List(groupBy,sortBy,nubBy,nub,sort)
 
 sortBoard :: Board -> Board
 sortBoard (Board ps hs) = Board ps' hs' where
@@ -37,33 +38,40 @@ combineBoard (Board p1 h1) (Board p2 h2) = Board ps hs where
   ps = nub $ p1 ++ p2
   hs = nub $ h1 ++ h2
 
+swapCoords :: Coord -> (a,Bool) -> (Coord,Bool)
+swapCoords c (_,p) = (c,p)
+
 zedFlip :: Board -> Board
 zedFlip b@(Board ps hs) = Board ps' hs' where
-  isPeg x = (x,x `elem` ps)
-  pRows = rows $ ps ++ hs
-  isPegRows = map (map isPeg) pRows
-  revRows = map reverse isPegRows
-  swapCoords (_,p) c = (c,p)
-  pshs = concat $ zipWith (zipWith swapCoords) revRows pRows
+  normalRows = rows $ ps ++ hs
+  pRows = toBoolRows b
+  revRows = map reverse pRows
+  newCoords = concat $ zipWith (zipWith swapCoords) normalRows revRows
   extract (c,_) = c
-  ps' = map extract . filter snd $ pshs
-  hs' = map extract . filter (not . snd) $ pshs
-  -- [[ (C1,True) ], [ (C22,False),(C21,True) ]]
-  -- [[ C1        ], [ C21,        C22        ]]
+  ps' = map extract . filter snd $ newCoords
+  hs' = map extract . filter (not . snd) $ newCoords
+
+rotateRing :: Board -> Board
+rotateRing x = Board ps' hs' where
+  -- Change board into list of coord-bool for each side
+  -- all of these read counter-clockwise except topRight, so we reverse it
+  (trRow,btRow,tlRow) = (reverse $ topRightRowBR' x,bottomRowBR' x,topLeftRowBR' x)
+  -- Extract the coords
+  (trCoord,btCoord,tlCoord) = (map fst trRow,map fst btRow,map fst tlRow)
+  -- Swap the coords of the sides (this assigns the "pegged" boolean to the next side)
+  zipSwap = zipWith swapCoords
+  (trRow',btRow',tlRow') = (zipSwap trCoord tlRow,zipSwap btCoord trRow, zipSwap tlCoord btRow)
+  sameCoords a b = fst a == fst b
+  -- Remove duplicates at corners
+  allRows = nubBy sameCoords $ trRow' ++ btRow' ++ tlRow'
+  -- Split the list into pegs and holes
+  ps' = map fst . filter snd $ allRows
+  hs' = map fst . filter (not . snd) $ allRows
 
 -- rotate concentric triangles
 clockRotate :: Board -> Board
 clockRotate b = b' where
   rings = concentricTrianglesExclusive b
-  rotateRing x@(Board ps _) = Board ps' hs' where
-    isPeg = (`elem` ps)
-    (trRow,btRow,tlRow) = (topRightRow x,bottomRow x,topLeftRow x)
-    (trRow',btRow',tlRow') = (map isPeg trRow, map isPeg btRow, map isPeg tlRow)
-    (trRow'',btRow'',tlRow'') = (zip trRow tlRow', zip btRow trRow', zip tlRow btRow')
-    sameCoords a b = fst a == fst b
-    allRows = nubBy sameCoords $ trRow'' ++ btRow'' ++ tlRow''
-    ps' = map fst . filter snd $ allRows
-    hs' = map fst . filter (not . snd) $ allRows
   rings' = map rotateRing rings
   b' = foldl1 combineBoard rings'
 

@@ -1,5 +1,6 @@
 module CriticalPoints
-    ( rows, rows'
+    ( rows
+    , toBoolRow, boolRows, toBoolRows
     , innerTriangle
     , concentricTriangles
     , concentricTrianglesExclusive
@@ -7,9 +8,11 @@ module CriticalPoints
     -- , insideShift
     , critPoints
     , topLeftRow, bottomRow, topRightRow
+    , topLeftRowBR, bottomRowBR, topRightRowBR
+    , topLeftRowBR', bottomRowBR', topRightRowBR'
     ) where
 import PegBoard
-import Data.List(groupBy,sort)
+import Data.List(sortBy,groupBy,sort)
 import Helpers.Lists(middle,compR)
 import Helpers.Math(ceilDiv)
 
@@ -18,18 +21,30 @@ import Helpers.Math(ceilDiv)
 -- Minimal unique starting coords,
 -- others can be found by roatating/flipping these
 
+type BoolRow = [(Coord,Bool)]
+
 rows :: [Coord] -> [[Coord]]
 rows cs = groupBy (\(Coord a _) (Coord b _) -> a == b) $ sort cs
 
-rows' :: Board -> [[ (Coord,Bool) ]]
-rows' (Board ps hs) = rPsHs' where
-  rPsHs = rows $ ps ++ hs
-  isPeg x = (x,x `elem` ps)
-  rPsHs' = map (map isPeg) rPsHs
+toBoolRow :: Board -> BoolRow
+toBoolRow (Board ps hs) = pBool ++ hBool where
+  pBool = map (\x -> (x,True )) ps
+  hBool = map (\x -> (x,False)) hs
+
+boolRows :: BoolRow -> [BoolRow]
+boolRows = groupBy (\(Coord a _,_) (Coord b _,_) -> a == b)
+         . sortBy (\(c1,_) (c2,_) -> compare c1 c2)
+
+toBoolRows :: Board -> [BoolRow]
+toBoolRows = boolRows . toBoolRow
+-- toBoolRows (Board ps hs) = rPsHs' where
+--  rPsHs = rows $ ps ++ hs
+--  isPeg x = (x,x `elem` ps)
+--  rPsHs' = map (map isPeg) rPsHs
 
 innerTriangle :: Board -> Board
 innerTriangle b = Board ps hs where
-  mids = concatMap middle . middle . rows' $ b
+  mids = concatMap middle . middle . toBoolRows $ b
   ps = map fst . filter snd $ mids
   hs = map fst . filter (not . snd) $ mids
 -- innerTriangle (Board ps hs) = Board ps' hs' where
@@ -54,43 +69,66 @@ concentricTrianglesExclusive b = concs' where
     hs = filter (`notElem` h2) h1
   concs' = head concs:compR remPsHs concs
 
-originShiftC :: [Coord] -> [Coord]
-originShiftC = map (\(Coord x y) -> Coord (x-2) (y-1))
+-- originShiftC :: [Coord] -> [Coord]
+-- originShiftC = map (\(Coord x y) -> Coord (x-2) (y-1))
+--
+-- originShift :: Board -> Board
+-- originShift (Board ps _) = Board ps' [] where
+--   ps' = originShiftC ps
+--
+-- insideShiftC :: [Coord] -> [Coord]
+-- insideShiftC = map (\(Coord x y) -> Coord (x+2) (y+1))
+--
+-- insideShift :: Board -> Board
+-- insideShift (Board ps _) = Board ps' [] where
+--   ps' = insideShiftC ps
 
-originShift :: Board -> Board
-originShift (Board ps _) = Board ps' [] where
-  ps' = originShiftC ps
-
-insideShiftC :: [Coord] -> [Coord]
-insideShiftC = map (\(Coord x y) -> Coord (x+2) (y+1))
-
-insideShift :: Board -> Board
-insideShift (Board ps _) = Board ps' [] where
-  ps' = insideShiftC ps
-
--- Alter for pegs and holes
 topLeftRow :: Board -> [Coord]
 topLeftRow (Board [] []) = []
 topLeftRow b = cs where
-  rs = rows' b
+  rs = toBoolRows b
   rs' = map head rs
   cs = map fst rs'
 -- topLeftRow (Board ps@(Coord _ y:_) _) = filter (\(Coord _ y') -> y' == y) ps
 
+topLeftRowBR :: BoolRow -> BoolRow
+topLeftRowBR br = tlBr where
+  brs = boolRows br
+  tlBr = map head brs
+
+topLeftRowBR' :: Board -> BoolRow
+topLeftRowBR' = topLeftRowBR . toBoolRow
+
 bottomRow :: Board -> [Coord]
 bottomRow (Board [] []) = []
 bottomRow b = bottomR' where
-  rs = rows' b
+  rs = toBoolRows b
   bottomR = last rs
   bottomR' = map fst bottomR
 -- bottomRow (Board ps hs) = last . rows $ ps ++ hs
 
+bottomRowBR :: BoolRow -> BoolRow
+bottomRowBR br = bBr where
+  brs = boolRows br
+  bBr = last brs
+
+bottomRowBR' :: Board -> BoolRow
+bottomRowBR' = bottomRowBR . toBoolRow
+
 topRightRow :: Board -> [Coord]
 topRightRow (Board [] []) = []
 topRightRow b = reverse trRow' where
-  rs = rows' b
+  rs = toBoolRows b
   trRow = map last rs
   trRow' = map fst trRow
+
+topRightRowBR :: BoolRow -> BoolRow
+topRightRowBR br = trBr where
+  brs = boolRows br
+  trBr = map last brs
+
+topRightRowBR' :: Board -> BoolRow
+topRightRowBR' = topRightRowBR . toBoolRow
 
 critPoints :: Board -> [Coord]
 critPoints b = cs where
