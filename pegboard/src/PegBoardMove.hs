@@ -58,8 +58,6 @@ nextMoves (Board ps hs) = trips' where
   trips = [ (a,b,c) | [a,b] <- pPerm, c <- hs ]
   tripMoves = filter ((/= None) . snd) [ (t,validMove t) | t <- trips ]
   trips' = map fst . filter (filterSym sym) $ tripMoves
--- Will need to make note of moves to be made
--- Try to eliminate moves based on symmetry
 
 -- Takes the 3-tuple of two pegs and one hole
 -- Removes the pegs and adds the hole

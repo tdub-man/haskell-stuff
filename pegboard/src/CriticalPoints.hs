@@ -4,12 +4,10 @@ module CriticalPoints
     , innerTriangle
     , concentricTriangles
     , concentricTrianglesExclusive
-    -- , originShift
-    -- , insideShift
-    , critPoints
     , topLeftRow, bottomRow, topRightRow
     , topLeftRowBR, bottomRowBR, topRightRowBR
     , topLeftRowBR', bottomRowBR', topRightRowBR'
+    , critPoints
     ) where
 import PegBoard
 import Data.List(sortBy,groupBy,sort)
@@ -17,7 +15,6 @@ import Helpers.Lists(middle,compR)
 import Helpers.Math(ceilDiv)
 
 -- CRITICAL POINTS
--- Assuming full board
 -- Minimal unique starting coords,
 -- others can be found by roatating/flipping these
 
@@ -37,20 +34,12 @@ boolRows = groupBy (\(Coord a _,_) (Coord b _,_) -> a == b)
 
 toBoolRows :: Board -> [BoolRow]
 toBoolRows = boolRows . toBoolRow
--- toBoolRows (Board ps hs) = rPsHs' where
---  rPsHs = rows $ ps ++ hs
---  isPeg x = (x,x `elem` ps)
---  rPsHs' = map (map isPeg) rPsHs
 
 innerTriangle :: Board -> Board
 innerTriangle b = Board ps hs where
   mids = concatMap middle . middle . toBoolRows $ b
   ps = map fst . filter snd $ mids
   hs = map fst . filter (not . snd) $ mids
--- innerTriangle (Board ps hs) = Board ps' hs' where
---   mids = concatMap middle . middle . rows $ ps ++ hs
---   ps' = filter (`elem` ps) mids
---   hs' = filter (`elem` hs) mids
 
 concentricTriangles' :: (Board,[Board]) -> (Board,[Board])
 concentricTriangles' (Board [] [],bs) = (Board [] [],bs)
@@ -69,27 +58,12 @@ concentricTrianglesExclusive b = concs' where
     hs = filter (`notElem` h2) h1
   concs' = head concs:compR remPsHs concs
 
--- originShiftC :: [Coord] -> [Coord]
--- originShiftC = map (\(Coord x y) -> Coord (x-2) (y-1))
---
--- originShift :: Board -> Board
--- originShift (Board ps _) = Board ps' [] where
---   ps' = originShiftC ps
---
--- insideShiftC :: [Coord] -> [Coord]
--- insideShiftC = map (\(Coord x y) -> Coord (x+2) (y+1))
---
--- insideShift :: Board -> Board
--- insideShift (Board ps _) = Board ps' [] where
---   ps' = insideShiftC ps
-
 topLeftRow :: Board -> [Coord]
 topLeftRow (Board [] []) = []
 topLeftRow b = cs where
   rs = toBoolRows b
   rs' = map head rs
   cs = map fst rs'
--- topLeftRow (Board ps@(Coord _ y:_) _) = filter (\(Coord _ y') -> y' == y) ps
 
 topLeftRowBR :: BoolRow -> BoolRow
 topLeftRowBR br = tlBr where
@@ -105,7 +79,6 @@ bottomRow b = bottomR' where
   rs = toBoolRows b
   bottomR = last rs
   bottomR' = map fst bottomR
--- bottomRow (Board ps hs) = last . rows $ ps ++ hs
 
 bottomRowBR :: BoolRow -> BoolRow
 bottomRowBR br = bBr where

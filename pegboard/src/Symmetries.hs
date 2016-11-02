@@ -51,6 +51,7 @@ zedFlip b@(Board ps hs) = Board ps' hs' where
   ps' = map extract . filter snd $ newCoords
   hs' = map extract . filter (not . snd) $ newCoords
 
+-- Rotates the outer edges (sides) of a board
 rotateRing :: Board -> Board
 rotateRing x = Board ps' hs' where
   -- Change board into list of coord-bool for each side
@@ -122,6 +123,3 @@ findSymmetries b = syms' where
     [] -> Not
     [x] -> x
     [Positive,Horizontal,Negative,Rotational] -> All
-  -- syms' = if length syms == 4
-  --   then [All]
-  --   else syms
