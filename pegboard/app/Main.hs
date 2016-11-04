@@ -1,7 +1,5 @@
 module Main where
 
-import Graphics.Gloss
-
 import PegBoard
 import PegBoardMove
 import PlayGame
@@ -11,12 +9,15 @@ import Symmetries
 import Graphics
 import Solve
 
+import Graphics.Gloss
+import Helpers.Lists(concatZip)
+
 b =
-  removePeg (Coord 1 1) .
-  removePeg (Coord 2 1) .
-  removePeg (Coord 2 2) $
+  removePeg (Coord 1 1) $
+  -- removePeg (Coord 2 1) .
+  -- removePeg (Coord 2 2) $
   -- removePeg (Coord 3 1) .
-  -- removePeg (Coord 3 2) .
+  -- removePeg (Coord 3 2) $
   -- removePeg (Coord 3 3) .
   -- removePeg (Coord 4 1) .
   -- removePeg (Coord 4 2) .
@@ -31,11 +32,27 @@ b =
 concB = concentricTriangles b
 concB' = concentricTrianglesExclusive b
 
+solveFor :: Board -> Int -> BoardLog
+solveFor b n = head . endWith n . playGameLog $ b
+
+solution :: Board -> Int -> [Board]
+solution b = collectLog . solveFor b
+
+bl :: BoardLog
+bl = solveFor b 1
+
 b' :: [Board]
-b' = collectLog . head . endWith 1 .  playGameLog $ b
+b' = collectLog bl
 
 printBoard :: Board -> IO ()
 printBoard = putStrLn . showBoard
+
+boardInfo :: BoardLog -> [String]
+boardInfo blog = let
+  prsym = zipWith (curry show) (movePegRatios bl) (boardSymmetries bl)
+  prsym' = map ("\n" ++) prsym
+  boards = showBoardLog bl
+  in concatZip prsym' boards
 
 main :: IO ()
 main = do
@@ -82,3 +99,16 @@ main = do
   -- displayInteractive b'
   promptSolve
 --------------------------------------------------------------------------------
+
+-- ANALYTICS
+
+  -- let
+  --   points = critPoints $ makeBoard 5
+  --   boards = map (`removePeg` makeBoard 5) points
+  --   blogs = map (`solveFor` 1) boards
+  --   infos = map boardInfo blogs
+  -- mapM_ (mapM_ putStrLn) infos
+--------------------------------------------------------------------------------
+
+-- Transform board to a critical point form
+-- Solve special cases (the critical point forms)

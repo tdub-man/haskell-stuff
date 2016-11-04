@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-29 02:22:05.664017 UTC
+2016-11-02 18:03:20.108154 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 8001
-  interface hash: b269458db798dc3a58cd6bbd020a8987
+  interface hash: 9a5844f795a2401db7ef86e37f8bd230
   ABI hash: 6b2a07cc3e4194300af399f9eca54945
   export-list hash: 7e04a0fdaca55b135f9b30999c563e9b
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -44,7 +44,7 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
   Coord 175aeaab41cec97be39a9c7cdcc5b317
   addPeg a40cccb7891721501344266eaa26c1b3
   removePeg 8152e4c979462e67a3b476c83d60dac4
-import  -/  Symmetries 43d50c3ea16dc64b5fb0c4d22459e293
+import  -/  Symmetries 59509b803e0701c0fd42c318a7f26e01
   exports: f7bc392eb4f8e69204e2fc7af20ed002
   All 319793dcabe9d84016d0eca920411067
   Horizontal a4c540a6b3441766aa809c3642d1e290
@@ -53,7 +53,7 @@ import  -/  Symmetries 43d50c3ea16dc64b5fb0c4d22459e293
   Positive 8309fe353bdcceb2e8f457a5ca4b8770
   Rotational 6c4a18b6ff341c4b8594452a2c33f2e4
   Symmetries 1ac38ad02047e86b966c05d03d7a5625
-  findSymmetries c0070d2c309467df1304c681931e815e
+  findSymmetries cf6b41a18bda35ed49feba3c3f845d7a
 b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves :: GHC.Classes.Eq PegBoardMove.BoardMoves
   DFunId

@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 22:02:35.077132 UTC
+2016-11-02 18:08:34.182702 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 8001
-  interface hash: eef335b473273e3159f519284495bf38
+  interface hash: 41dbabce67c97f34592f013abebd2326
   ABI hash: b61452cd6cd2d8417455d0e78366869f
   export-list hash: 37f488ad4b3919da239b5a72a04fc9d7
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -72,8 +72,8 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Internals.Interface.Backend.Types 6dedaa7d5ac2b54ee5c9eafd16b95468
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Internals.Interface.Event 72f0eabd47b5e04e08135dc87ef0ee7a
 import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
-import  -/  Analytics cae1ad0f41e8075ed823816cc325bb32
-  exports: 5f24ac485a14b5105dd37a854fe5255d
+import  -/  Analytics c337e057a4fc773bbf2eda70214c541c
+  exports: f7e9d11b8ff150a18249c1b08395b5a8
   endWith a2a1c0085e9cc968d6e4ddfe90b5ea03
 import  -/  Graphics e547fb6ef30841409dde2abfedf11d16
   exports: 3c1308225ea2e14f0de2a6b7d3a6490d

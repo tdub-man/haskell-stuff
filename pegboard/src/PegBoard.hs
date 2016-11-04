@@ -29,11 +29,56 @@ instance Ord Coord where
     yComp = y1 `compare` y2
     in xComp `mappend` yComp
 
--- compareCoord :: Coord -> Coord -> Ordering
--- compareCoord (Coord x1 y1) (Coord x2 y2) = let
---   xComp = x1 `compare` x2
---   yComp = y1 `compare` y2
---   in xComp `mappend` yComp
+-- xs GT && ys GT == GT : Greater zed row
+-- xs GT && ys EQ == GT : Greater zed row
+-- xs GT && ys LT == GT : Greater zed row
+-- xs EQ && ys GT == GT : Same zed row, greater
+-- xs EQ && ys EQ == EQ : Same coord
+-- xs EQ && ys LT == LT : Same zed row, lesser
+-- xs LT && ys GT == LT : Lesser zed row
+-- xs LT && ys EQ == LT : Lesser zed row
+-- xs LT && ys LT == LT : Lesser zed row
+-- Compares in the zed rows
+compareZ :: Coord -> Coord -> Ordering
+compareZ = compare
+
+-- xs GT && ys GT == LT : Lesser pos row
+-- xs EQ && ys GT == LT : Lesser pos row
+-- xs LT && ys GT == LT : Lesser pos row
+-- xs GT && ys EQ == GT : Same pos row, greater
+-- xs EQ && ys EQ == EQ : Same coord
+-- xs LT && ys EQ == LT : Same pos row, lesser
+-- xs GT && ys LT == GT : Greater pos row
+-- xs EQ && ys LT == GT : Greater pos row
+-- xs LT && ys LT == GT : Greater pos row
+-- Compares in the pos rows
+compareP :: Coord -> Coord -> Ordering
+compareP (Coord x1 y1) (Coord x2 y2) = let
+  xComp = x1 `compare` x2
+  yComp = y1 `compare` y2
+  in case (yComp,xComp) of
+    (GT,_) -> LT
+    (EQ,x) -> x
+    (LT,_) -> GT
+
+-- xs GT && ys GT == LT : Same neg row, lesser
+-- xs GT && ys EQ == LT : Lesser neg row
+-- xs GT && ys LT == LT : Lesser neg row
+-- xs EQ && ys GT == GT : Greater neg row
+-- xs EQ && ys EQ == EQ : Same coord
+-- xs EQ && ys LT == LT : Lesser neg row
+-- xs LT && ys GT == GT : Greater neg row
+-- xs LT && ys EQ == GT : Greater neg row
+-- xs LT && ys LT == GT : Same neg row, greater
+-- Compares in the neg rows
+compareN :: Coord -> Coord -> Ordering
+compareN (Coord x1 y1) (Coord x2 y2) = let
+  xComp = x1 `compare` x2
+  yComp = y1 `compare` y2
+  in case (xComp,yComp) of
+    (GT,_) -> LT
+    (EQ,x) -> x
+    (LT,_) -> GT
 
 groupTri :: [a] -> [[a]]
 groupTri as = groupWithNs as [1..]

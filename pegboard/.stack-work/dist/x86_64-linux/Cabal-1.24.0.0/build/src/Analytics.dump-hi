@@ -1,19 +1,22 @@
 
 ==================== FINAL INTERFACE ====================
-2016-10-28 22:22:57.726994 UTC
+2016-11-02 18:08:33.913154 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 8001
-  interface hash: 143107862f821f6184903a7b4567d701
-  ABI hash: cae1ad0f41e8075ed823816cc325bb32
-  export-list hash: 5f24ac485a14b5105dd37a854fe5255d
+  interface hash: dc21e54576fe0652ccd0927e06bd4a72
+  ABI hash: c337e057a4fc773bbf2eda70214c541c
+  export-list hash: f7e9d11b8ff150a18249c1b08395b5a8
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
   sig of: Nothing
   used TH splices: False
   where
 exports:
+  Analytics.boardSymmetries
   Analytics.endState
   Analytics.endWith
+  Analytics.movePegRatio
+  Analytics.movePegRatios
   Analytics.numEndStates
   Analytics.shortestGame
   Analytics.uniqueEndStates
@@ -46,11 +49,18 @@ import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
   Board 811b281511fb95d934048eb55c0228c6
   Board c47801c17d6fbde18b84e473ce510507
   pegCount d5239ba2220de571e91ab26df5e041e6
+import  -/  PegBoardMove 6b2a07cc3e4194300af399f9eca54945
+  exports: 7e04a0fdaca55b135f9b30999c563e9b
+  nextMoves 90fc00a8b4e4c63d43bb86a3a782710c
 import  -/  PlayGame 90b8a2c11e907728616d6d622e239b7c
   exports: db98f7a3543cf5dfbe75863e31383cd6
   BoardLog 732e9132cfb50a4eba69539624db98a2
   _current 61ecffc7d3c06b020e15147b2eaf8156
   collectLog a63fb5007166160ae7ce1f7c519247b1
+import  -/  Symmetries 59509b803e0701c0fd42c318a7f26e01
+  exports: f7bc392eb4f8e69204e2fc7af20ed002
+  Symmetries 1ac38ad02047e86b966c05d03d7a5625
+  findSymmetries cf6b41a18bda35ed49feba3c3f845d7a
 0c3639da19593b5d6c2b595e2548bd16
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -126,6 +136,31 @@ add93bc54a0b033229d1e6dbeb453788
                            @ PegBoard.Coord
                            PegBoard.$fOrdCoord_$ccompare
                            hs1) } } }) -}
+8b601ca4a37c41b73d84c0764342d677
+  boardSymmetries :: PlayGame.BoardLog -> [Symmetries.Symmetries]
+  {- Arity: 1, Strictness: <S,1*U(U,U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PlayGame.BoardLog) ->
+                 case x of wild { PlayGame.BoardLog b bl ->
+                 GHC.Base.build
+                   @ Symmetries.Symmetries
+                   (\ @ b1
+                      (c :: Symmetries.Symmetries -> b1 -> b1)[OneShot]
+                      (n :: b1)[OneShot] ->
+                    GHC.Base.foldr
+                      @ PegBoard.Board
+                      @ b1
+                      (GHC.Base.mapFB
+                         @ Symmetries.Symmetries
+                         @ b1
+                         @ PegBoard.Board
+                         c
+                         Symmetries.findSymmetries)
+                      n
+                      (GHC.List.reverse1
+                         @ PegBoard.Board
+                         (GHC.Types.: @ PegBoard.Board b bl)
+                         (GHC.Types.[] @ PegBoard.Board))) }) -}
 a7ef9b0092a06eb7a648ea9f587ede22
   endState :: PlayGame.BoardLog -> PegBoard.Board
   {- Arity: 1, Strictness: <S,1*U(U,U)>, Inline: INLINE[0],
@@ -150,6 +185,45 @@ a2a1c0085e9cc968d6e4ddfe90b5ea03
                     case n of wild2 { GHC.Types.I# y ->
                     GHC.Prim.tagToEnum# @ GHC.Types.Bool (GHC.Prim.==# ww2 y) } } } })
                    eta) -}
+6772d3a9c7e5743b2fbbf3275d35d722
+  movePegRatio :: PegBoard.Board -> (GHC.Types.Int, GHC.Types.Int)
+  {- Arity: 1, Strictness: <S,1*U(U,U)>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: PegBoard.Board) ->
+                 case w of ww { PegBoard.Board ww1 ww2 ->
+                 (case GHC.List.$wlenAcc
+                         @ (PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)
+                         (PegBoardMove.$wnextMoves ww1 ww2)
+                         0# of ww3 { DEFAULT ->
+                  GHC.Types.I# ww3 },
+                  case GHC.List.$wlenAcc @ PegBoard.Coord ww1 0# of ww3 { DEFAULT ->
+                  GHC.Types.I# ww3 }) }) -}
+be26c75e2f7d570bc7a110ba93f4cf1a
+  movePegRatios ::
+    PlayGame.BoardLog -> [(GHC.Types.Int, GHC.Types.Int)]
+  {- Arity: 1, Strictness: <S,1*U(U,U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: PlayGame.BoardLog) ->
+                 case x of wild { PlayGame.BoardLog b bl ->
+                 GHC.Base.build
+                   @ (GHC.Types.Int, GHC.Types.Int)
+                   (\ @ b1
+                      (c :: (GHC.Types.Int, GHC.Types.Int) -> b1 -> b1)[OneShot]
+                      (n :: b1)[OneShot] ->
+                    GHC.Base.foldr
+                      @ PegBoard.Board
+                      @ b1
+                      (GHC.Base.mapFB
+                         @ (GHC.Types.Int, GHC.Types.Int)
+                         @ b1
+                         @ PegBoard.Board
+                         c
+                         Analytics.movePegRatio)
+                      n
+                      (GHC.List.reverse1
+                         @ PegBoard.Board
+                         (GHC.Types.: @ PegBoard.Board b bl)
+                         (GHC.Types.[] @ PegBoard.Board))) }) -}
 67a289bf62655c3ce5936490b1abfa69
   numEndStates ::
     [PlayGame.BoardLog] -> [(GHC.Types.Int, GHC.Types.Int)]
