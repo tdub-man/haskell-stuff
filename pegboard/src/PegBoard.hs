@@ -1,7 +1,8 @@
 module PegBoard
     ( Coord(Coord)
     , Board(Board)
-    -- , compareCoord
+    , compareZ, compareP, compareN
+    , groupTri
     , makeBoard
     , removePeg
     , addPeg
@@ -54,31 +55,22 @@ compareZ = compare
 -- Compares in the pos rows
 compareP :: Coord -> Coord -> Ordering
 compareP (Coord x1 y1) (Coord x2 y2) = let
-  xComp = x1 `compare` x2
-  yComp = y1 `compare` y2
-  in case (yComp,xComp) of
-    (GT,_) -> LT
-    (EQ,x) -> x
-    (LT,_) -> GT
+  yComp = y2 `compare` y1
+  xComp = x2 `compare` x1
+  in yComp `mappend` xComp
 
--- xs GT && ys GT == LT : Same neg row, lesser
--- xs GT && ys EQ == LT : Lesser neg row
--- xs GT && ys LT == LT : Lesser neg row
--- xs EQ && ys GT == GT : Greater neg row
--- xs EQ && ys EQ == EQ : Same coord
--- xs EQ && ys LT == LT : Lesser neg row
--- xs LT && ys GT == GT : Greater neg row
--- xs LT && ys EQ == GT : Greater neg row
--- xs LT && ys LT == GT : Same neg row, greater
+-- 5,1                 : x-y= 4
+-- 5,2 4,1             : x-y= 3
+-- 5,3 4,2 3,1         : x-y= 2
+-- 5,4 4,3 3,2 2,1     : x-y= 1
+-- 5,5 4,4 3,3 2,2 1,1 : x-y= 0
+-- Within the rows, x is greater
 -- Compares in the neg rows
 compareN :: Coord -> Coord -> Ordering
 compareN (Coord x1 y1) (Coord x2 y2) = let
-  xComp = x1 `compare` x2
-  yComp = y1 `compare` y2
-  in case (xComp,yComp) of
-    (GT,_) -> LT
-    (EQ,x) -> x
-    (LT,_) -> GT
+  diffComp = (x2 - y2) `compare` (x1 - y1)
+  xComp    = x2 `compare` x1
+  in diffComp `mappend` xComp
 
 groupTri :: [a] -> [[a]]
 groupTri as = groupWithNs as [1..]

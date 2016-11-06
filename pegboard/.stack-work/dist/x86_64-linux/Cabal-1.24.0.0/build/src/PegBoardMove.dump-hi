@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-02 18:03:20.108154 UTC
+2016-11-06 21:48:21.380894 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 8001
-  interface hash: 9a5844f795a2401db7ef86e37f8bd230
-  ABI hash: 6b2a07cc3e4194300af399f9eca54945
+  interface hash: 91c1b583d385b4b7aa919e496aa5ec01
+  ABI hash: 916e67d09fe4159a916059e4bcb4c825
   export-list hash: 7e04a0fdaca55b135f9b30999c563e9b
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -36,15 +36,15 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
   nPerms 7a59ca7f41d7481e845a6ad3b52e5c7d
-import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
-  exports: 019cb6a33f1bb6c7b9bb5da6116f70e8
-  Board 811b281511fb95d934048eb55c0228c6
-  Board c47801c17d6fbde18b84e473ce510507
-  Coord a7a7404edac42fd75996faf0c0163f41
-  Coord 175aeaab41cec97be39a9c7cdcc5b317
-  addPeg a40cccb7891721501344266eaa26c1b3
-  removePeg 8152e4c979462e67a3b476c83d60dac4
-import  -/  Symmetries 59509b803e0701c0fd42c318a7f26e01
+import  -/  PegBoard 16e7d4772b49b52e123defa9df61cd8c
+  exports: d9e5ef2267766e7ae3b457c51282f54d
+  Board dd84e3e13f591df253c023fdeb6d0fac
+  Board 88c3b97cf1f38c14492f474b5ab8ce85
+  Coord da8073910dff9584368414866999997b
+  Coord e848d92561720a4b1c6dee3cfa88409d
+  addPeg adc7a7339ea353f667c839903f5f8771
+  removePeg ea1cb54766fa6f4c220bfea2979e5c89
+import  -/  Symmetries 7fb9a7b1bcbe991b68023121dbc5d406
   exports: f7bc392eb4f8e69204e2fc7af20ed002
   All 319793dcabe9d84016d0eca920411067
   Horizontal a4c540a6b3441766aa809c3642d1e290
@@ -53,7 +53,7 @@ import  -/  Symmetries 59509b803e0701c0fd42c318a7f26e01
   Positive 8309fe353bdcceb2e8f457a5ca4b8770
   Rotational 6c4a18b6ff341c4b8594452a2c33f2e4
   Symmetries 1ac38ad02047e86b966c05d03d7a5625
-  findSymmetries cf6b41a18bda35ed49feba3c3f845d7a
+  findSymmetries cff7c08f90b3bf39202e844e1bfd0c2d
 b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves :: GHC.Classes.Eq PegBoardMove.BoardMoves
   DFunId
@@ -214,7 +214,7 @@ af4e7792e56c28afd31978ad268d22a6
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
-7ce47bde701fe6ec07b6cc876042a9d5
+2a458899d74f6d61a2cd4b577dc7a60a
   $wmovePegs ::
     PegBoard.Coord
     -> PegBoard.Coord
@@ -233,7 +233,7 @@ af4e7792e56c28afd31978ad268d22a6
                  case PegBoard.$waddPeg ww2 ww3 ww4 of ww5 { (#,#) ww6 ww7 ->
                  case PegBoard.$wremovePeg ww1 ww6 ww7 of ww8 { (#,#) ww9 ww10 ->
                  PegBoard.$wremovePeg ww ww9 ww10 } }) -}
-349d8d8419cba80717e282cc9e0bb585
+62e4d343b71eebe639aadc5ab8f17905
   $wnextMoves ::
     [PegBoard.Coord] -> [PegBoard.Coord] -> [PegBoardMove.CoordTriple]
   {- Arity: 2, Strictness: <L,U><L,U>, Inline: [0] -}
@@ -245,9 +245,9 @@ b2720b819eefa89ed11c6c2584cbda32
     | Neg
     | L PegBoardMove.BoardMoves
     | R PegBoardMove.BoardMoves
-87b2a3cf9c0f2f0085aeda369c7af9d5
+197c66bdc421493b73c719a69b8086ea
   type CoordTriple = (PegBoard.Coord, PegBoard.Coord, PegBoard.Coord)
-3286372c78300cfc66cb79b5ebb2993a
+3ec69a881cc19e43bb95efa347e6ec3a
   movePegs ::
     PegBoardMove.CoordTriple -> PegBoard.Board -> PegBoard.Board
   {- Arity: 2, HasNoCafRefs,
@@ -264,7 +264,7 @@ b2720b819eefa89ed11c6c2584cbda32
                         ww5
                         ww6 of ww7 { (#,#) ww8 ww9 ->
                  PegBoard.Board ww8 ww9 } } }) -}
-5416227d5866c8d1f2bc6d0b6040d8ec
+23a649ff4a27edeaa206ba01e19b835d
   movePegsAll ::
     [PegBoardMove.CoordTriple] -> PegBoard.Board -> [PegBoard.Board]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,U(U,U)>,
@@ -283,7 +283,7 @@ b2720b819eefa89ed11c6c2584cbda32
                             (go ys) }
                  } in
                  go mvs) -}
-90fc00a8b4e4c63d43bb86a3a782710c
+57184a84fb1567c4c39a1494e7191738
   nextMoves :: PegBoard.Board -> [PegBoardMove.CoordTriple]
   {- Arity: 1, Strictness: <S,1*U(U,U)>, Inline: INLINE[0],
      Unfolding: InlineRule (1, True, False)

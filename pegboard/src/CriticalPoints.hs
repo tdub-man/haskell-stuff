@@ -1,5 +1,8 @@
 module CriticalPoints
-    ( rows
+    ( BoolRow
+    , brCoord, brBool
+    , rows
+    , rowsZ, rowsP, rowsN
     , toBoolRow, boolRows, toBoolRows
     , innerTriangle
     , concentricTriangles
@@ -19,6 +22,30 @@ import Helpers.Math(ceilDiv)
 -- others can be found by roatating/flipping these
 
 type BoolRow = [(Coord,Bool)]
+
+brCoord :: BoolRow -> [Coord]
+brCoord = map fst
+
+brBool :: BoolRow -> [Bool]
+brBool = map snd
+
+rowsZ :: Board -> [BoolRow]
+rowsZ b = let
+  br = toBoolRow b
+  br' = sortBy (\(c1,_) (c2,_) -> c1 `compareZ` c2) br
+  in groupTri br'
+
+rowsP :: Board -> [BoolRow]
+rowsP b = let
+  br = toBoolRow b
+  br' = sortBy (\(c1,_) (c2,_) -> c1 `compareP` c2) br
+  in groupTri br'
+
+rowsN :: Board -> [BoolRow]
+rowsN b = let
+  br = toBoolRow b
+  br' = sortBy (\(c1,_) (c2,_) -> c1 `compareN` c2) br
+  in groupTri br'
 
 rows :: [Coord] -> [[Coord]]
 rows cs = groupBy (\(Coord a _) (Coord b _) -> a == b) $ sort cs

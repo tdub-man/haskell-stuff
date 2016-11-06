@@ -14,7 +14,9 @@ module Symmetries
     , boardEquals
     ) where
 import PegBoard
-import CriticalPoints( rows, boolRows, toBoolRows
+import CriticalPoints( rows, rowsZ, rowsP, rowsN
+                     , BoolRow, brCoord
+                     , boolRows, toBoolRows
                      , concentricTrianglesExclusive
                      , topRightRow, bottomRow, topLeftRow
                      , topLeftRowBR', bottomRowBR', topRightRowBR')
@@ -41,15 +43,22 @@ combineBoard (Board p1 h1) (Board p2 h2) = Board ps hs where
 swapCoords :: Coord -> (a,Bool) -> (Coord,Bool)
 swapCoords c (_,p) = (c,p)
 
+reverseBRs :: [BoolRow] -> Board
+reverseBRs brs = Board ps hs where
+  normalRows = map brCoord brs
+  brFlip = map reverse brs
+  newCoords = concat $ zipWith (zipWith swapCoords) normalRows brFlip
+  ps = brCoord . filter snd $ newCoords
+  hs = brCoord . filter (not . snd) $ newCoords
+
 zedFlip :: Board -> Board
-zedFlip b@(Board ps hs) = Board ps' hs' where
-  normalRows = rows $ ps ++ hs
-  pRows = toBoolRows b
-  revRows = map reverse pRows
-  newCoords = concat $ zipWith (zipWith swapCoords) normalRows revRows
-  extract (c,_) = c
-  ps' = map extract . filter snd $ newCoords
-  hs' = map extract . filter (not . snd) $ newCoords
+zedFlip = reverseBRs . rowsZ
+
+posFlip :: Board -> Board
+posFlip = reverseBRs . rowsN -- Pos direction has neg rows
+
+negFlip :: Board -> Board
+negFlip = reverseBRs . rowsP -- Neg direction has pos rows
 
 -- Rotates the outer edges (sides) of a board
 rotateRing :: Board -> Board
@@ -78,12 +87,6 @@ clockRotate b = b' where
 
 counterClockRotate :: Board -> Board
 counterClockRotate = clockRotate . clockRotate
-
-posFlip :: Board -> Board
-posFlip = counterClockRotate . zedFlip . clockRotate
-
-negFlip :: Board -> Board
-negFlip = clockRotate . zedFlip . counterClockRotate
 
 data Symmetries = Positive
                 | Horizontal

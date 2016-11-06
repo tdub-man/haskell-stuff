@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-02 18:08:34.182702 UTC
+2016-11-04 16:56:31.595249 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 8001
-  interface hash: 41dbabce67c97f34592f013abebd2326
-  ABI hash: b61452cd6cd2d8417455d0e78366869f
+  interface hash: 191d6c6125427e9a4517e23a0b0e0710
+  ABI hash: 142e584bd122979c9020137bb74ae454
   export-list hash: 37f488ad4b3919da239b5a72a04fc9d7
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -72,25 +72,25 @@ import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Internals.Interface.Backend.Types 6dedaa7d5ac2b54ee5c9eafd16b95468
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss.Internals.Interface.Event 72f0eabd47b5e04e08135dc87ef0ee7a
 import  -/  gloss-rendering-1.10.3.3@gloss-rendering-1.10.3.3-5PiCamqHfbt8xiRs4ymvLr:Graphics.Gloss.Internals.Data.Picture 1b8e2c645c53408a68ac59ac66e45f2b
-import  -/  Analytics c337e057a4fc773bbf2eda70214c541c
+import  -/  Analytics 915c46e4e13ae52faf1cdcea21251029
   exports: f7e9d11b8ff150a18249c1b08395b5a8
-  endWith a2a1c0085e9cc968d6e4ddfe90b5ea03
-import  -/  Graphics e547fb6ef30841409dde2abfedf11d16
+  endWith 4bd0c3b8f21ef251c9d11570450595ee
+import  -/  Graphics 0bde4143f519ae9bcb6cc3f2ae806160
   exports: 3c1308225ea2e14f0de2a6b7d3a6490d
   offset fb1733ba8a7693fe6d9f7d70ecaeca8c
-  renderBoard 9530f5fa1200e64913dafbfb931bd7f8
-import  -/  PegBoard f83d3917c805320b9d1eddcc14783c79
-  exports: 019cb6a33f1bb6c7b9bb5da6116f70e8
-  Board 811b281511fb95d934048eb55c0228c6
-  Board c47801c17d6fbde18b84e473ce510507
-  Coord a7a7404edac42fd75996faf0c0163f41
-  Coord 175aeaab41cec97be39a9c7cdcc5b317
-  makeBoard 36756d6d94bf541cdee1c47f3b41a148
-  removePeg 8152e4c979462e67a3b476c83d60dac4
-import  -/  PlayGame 90b8a2c11e907728616d6d622e239b7c
+  renderBoard 8ed355beea3e14b7e862959664c6aa97
+import  -/  PegBoard 5e94c5617cf4c05508153d96394b5949
+  exports: d9e5ef2267766e7ae3b457c51282f54d
+  Board dd84e3e13f591df253c023fdeb6d0fac
+  Board 88c3b97cf1f38c14492f474b5ab8ce85
+  Coord da8073910dff9584368414866999997b
+  Coord e848d92561720a4b1c6dee3cfa88409d
+  makeBoard bc525de14674e773a0394f15339e38fe
+  removePeg ea1cb54766fa6f4c220bfea2979e5c89
+import  -/  PlayGame 33dcc890daf23cb58c28e0429f285f74
   exports: db98f7a3543cf5dfbe75863e31383cd6
-  collectLog a63fb5007166160ae7ce1f7c519247b1
-  playGameLog 48e36b45642b9c8a6ae46ea7bdc126d4
+  collectLog d50cb14233bc66d28cd8bfc3ee05c610
+  playGameLog 57bb2db0471df9649c8412185aa8700d
 02d633715151042965876b3195ad8c89
   $fEqSequence :: GHC.Classes.Eq Solve.Sequence
   DFunId
@@ -186,10 +186,10 @@ a8fb7c5b426d4d381899bce7bc3b9e69
   $wxs ::
     GHC.Prim.Int# -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>, Inline: [0] -}
-069b5ed39b7813216bf5777a88d54317
+1c5a490cd84501b300d4609ad45c38d1
   type CoordCollect =
     (PegBoard.Coord, GHC.Base.Maybe GHC.Types.Int, GHC.Types.Bool)
-96387c15616547148500acaafe9c160e
+7832f961e9357915c88bdfa63a568635
   type Prompts =
     ([Solve.Sequence], [Solve.Sequence], Solve.CoordCollect)
 02d633715151042965876b3195ad8c89
@@ -197,22 +197,22 @@ a8fb7c5b426d4d381899bce7bc3b9e69
     = Seq Graphics.Gloss.Internals.Data.Picture.Picture
     | Seqs [Graphics.Gloss.Internals.Data.Picture.Picture]
            [Graphics.Gloss.Internals.Data.Picture.Picture]
-40974333cb61709e5b1b1455afe2e9a0
+ab405fdbd68577004673622dc0e72550
   emptyCoordCol :: Solve.CoordCollect
   {- HasNoCafRefs, Strictness: m,
      Unfolding: ((Solve.promptSolve5, GHC.Base.Nothing @ GHC.Types.Int,
                   GHC.Types.False)) -}
-eeaf0a75804abb8a87a456c0e1945073
+2a7bb755c98c866fcad0a4bcd51834f8
   promptBase :: Solve.Prompts
   {- Strictness: m,
      Unfolding: ((Solve.promptSolve7, GHC.Types.[] @ Solve.Sequence,
                   Solve.emptyCoordCol)) -}
-3cffcada30d518fe704bad9be410e9cf
+1b201d6881099dfc139f372e9b9c836d
   promptSolve :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-febae7db7ce9549479e04094960e79ab
+df49c0f700c1d3bae71ab2e93f832a87
   promptSolve1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -246,12 +246,12 @@ febae7db7ce9549479e04094960e79ab
                         GHC.Types.True
                         eta of ds1 { (#,#) ipv ipv1 ->
                  (# ipv, GHC.Tuple.() #) }) -}
-495557d6b3b03e1b292d30af1806c848
+399efae1b05b4985c5bab24bda8e3161
   promptSolve10 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Solve.promptSolve11) -}
-ed98a398534d0084cf4c85133ea734de
+2d86b7d59c307cf0a8ce0618e0b0674f
   promptSolve11 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
@@ -307,7 +307,7 @@ b768c7f50b4d255aa1e92f63acc68c10
                    Solve.promptSolve22
                    Solve.promptSolve21
                    Solve.promptSolve20) -}
-08dabfc2788ec1f8c2b6437bc336ed77
+bbd19e19869e6fefa67c97908570ac14
   promptSolve2 ::
     GHC.Types.Float
     -> Solve.Prompts
@@ -409,7 +409,7 @@ d1ff92e4f72dde81e815c11678027a83
                  case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
                  GHC.Types.F#
                    (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) -8.0#) }) -}
-6f98dc4f2903412c838e59bc2f45d4b3
+0f0af79435d0d04466370938ead2d1c8
   promptSolve3 ::
     Graphics.Gloss.Internals.Interface.Event.Event
     -> Solve.Prompts
@@ -422,12 +422,12 @@ d1ff92e4f72dde81e815c11678027a83
 ac17bfe4fde25e4b64f5914be811a123
   promptSolve31 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 104.0#) -}
-9158aaf06fa33ded03f80c02456a87db
+ceda98cf55d0a0bf697e1ed630ae6c47
   promptSolve32 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (case Graphics.$wrenderBoard
                         Solve.promptSolve33 of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-bae57813a2b46f9f8325fd0dffcf5191
+7cb9f89da84749ddd0f696ca542ac466
   promptSolve33 :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
                         Solve.promptSolve34 of ww { (#,#) ww1 ww2 ->
@@ -435,33 +435,33 @@ bae57813a2b46f9f8325fd0dffcf5191
 f51bceb7742e31ec828dfdca3e60383a
   promptSolve34 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
-a8ff7415d812c7f7b48aaf919093ec27
+b2fe5c230eb80a49a19b7322d8bc8a8d
   promptSolve35 :: Solve.Sequence
   {- Strictness: m1, Unfolding: (Solve.Seq Solve.promptSolve36) -}
-2d9f24482d8c367c12710f843988ba39
+6a99e8683a9ea371703af2b4241defb0
   promptSolve36 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Solve.promptSolve37) -}
-266bb00b074295a6ee37aed06db50b98
+8b903d76e94718c69f9f046b6bb1f349
   promptSolve37 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (Graphics.renderBoard_$soffsetF
                    Solve.promptSolve28
                    Solve.promptSolve56
                    Solve.promptSolve38) -}
-e9cfc348bb974b47a519ddf339303a2c
+939ff03fe7b3d24d378eaa0892a59d9a
   promptSolve38 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
                    Solve.promptSolve50
                    Solve.promptSolve39) -}
-7ab5156b5669a2f3f83d2ab8e28b1b09
+d107a8f1ded0f964f386271c7e83a595
   promptSolve39 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
                    Solve.promptSolve41
                    Solve.promptSolve40) -}
-eab22510230e47c4e0d9ebf368924012
+2dfcd9071312c2e6b15364fac2bbe404
   promptSolve4 ::
     Solve.Prompts
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -481,7 +481,7 @@ eab22510230e47c4e0d9ebf368924012
                            -> GHC.List.head
                                 @ Graphics.Gloss.Internals.Data.Picture.Picture
                                 as1 } } } #)) -}
-58cfb3e5aabb1d24d4af972dfa305139
+bfbd579bd200dffd79412f5303480c05
   promptSolve40 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
@@ -530,7 +530,7 @@ a12650abe23ba25b15d8b7e3a6c128a2
 e515fd2bb16b7cd260a47e3e11e3c10d
   promptSolve49 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# 1.0#) -}
-9fa297c25592e5d561942f050a1d89ff
+0eac4d3a0e6d24c0b73dfeec8164786f
   promptSolve5 :: PegBoard.Coord
   {- HasNoCafRefs, Strictness: m,
      Unfolding: (PegBoard.Coord
@@ -615,21 +615,21 @@ a4d2aa02ce5e7b8d078f347d29bb7249
 b89386da8f297e1933e6a3a60a0a8249
   promptSolve62 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "SolvePrompted"#) -}
-6790c7c30bf504fdf6fe7a4d5f01890c
+b89f9b6ed5608453603b7639571bb590
   promptSolve7 :: [Solve.Sequence]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
                    @ Solve.Sequence
                    Solve.promptSolve35
                    Solve.promptSolve8) -}
-6e120eb1761f9c107aec820fc24f1cb3
+2324bee3a45e72b38a4c4c03e4ffc769
   promptSolve8 :: [Solve.Sequence]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
                    @ Solve.Sequence
                    Solve.promptSolve9
                    (GHC.Types.[] @ Solve.Sequence)) -}
-956710fa6423fafad772b02fb06e2cd3
+987822c6e55ed6cac2ed092dafbc58d5
   promptSolve9 :: Solve.Sequence
   {- Strictness: m1, Unfolding: (Solve.Seq Solve.promptSolve10) -}
 017471430e184176daeb8868317324e9

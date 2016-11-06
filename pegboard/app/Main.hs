@@ -13,11 +13,11 @@ import Graphics.Gloss
 import Helpers.Lists(concatZip)
 
 b =
-  removePeg (Coord 1 1) $
-  -- removePeg (Coord 2 1) .
+  removePeg (Coord 1 1) .
+  removePeg (Coord 2 1) .
   -- removePeg (Coord 2 2) $
-  -- removePeg (Coord 3 1) .
-  -- removePeg (Coord 3 2) $
+  removePeg (Coord 3 1) .
+  removePeg (Coord 3 2) $
   -- removePeg (Coord 3 3) .
   -- removePeg (Coord 4 1) .
   -- removePeg (Coord 4 2) .
@@ -62,6 +62,9 @@ main = do
   -- mapM_ printBoard concB
   -- mapM_ printBoard concB'
   -- mapM_ print [topLeftRowBR' b, topRightRowBR' b, bottomRowBR' b]
+  -- print . map brCoord . rowsZ $ b
+  -- print . map brCoord . rowsP $ b
+  -- print . map brCoord . rowsN $ b
 
 --------------------------------------------------------------------------------
 
