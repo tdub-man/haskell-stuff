@@ -1,27 +1,15 @@
 module Symmetries
-    ( zedFlip
-    , posFlip
-    , negFlip
-    , clockRotate
-    , counterClockRotate
+    ( zedFlip, posFlip, negFlip
+    , clockRotate, counterClockRotate
     , Symmetries(Positive,Horizontal,Negative,Rotational,All,Not)
-    , posSymmetric
-    , zedSymmetric
-    , negSymmetric
-    , rotSymmetric
-    -- , counterClockSymmetric
+    , posSymmetric, zedSymmetric, negSymmetric, rotSymmetric
     , findSymmetries
     , boardEquals
     ) where
 import PegBoard
 import CriticalPoints( rows, rowsZ, rowsP, rowsN
-                     , BoolRow, brCoord
-                     , boolRows, toBoolRows
-                     , concentricTrianglesExclusive
-                     , topRightRow, bottomRow, topLeftRow
-                     , topLeftRowBR', bottomRowBR', topRightRowBR')
-import Helpers.Lists(middleElem)
-import Data.List(groupBy,sortBy,nubBy,nub,sort)
+                     , BoolRow, brCoord)
+import Data.List(nub,sort)
 
 sortBoard :: Board -> Board
 sortBoard (Board ps hs) = Board ps' hs' where
@@ -60,30 +48,16 @@ posFlip = reverseBRs . rowsN -- Pos direction has neg rows
 negFlip :: Board -> Board
 negFlip = reverseBRs . rowsP -- Neg direction has pos rows
 
--- Rotates the outer edges (sides) of a board
-rotateRing :: Board -> Board
-rotateRing x = Board ps' hs' where
-  -- Change board into list of coord-bool for each side
-  -- all of these read counter-clockwise except topRight, so we reverse it
-  (trRow,btRow,tlRow) = (reverse $ topRightRowBR' x,bottomRowBR' x,topLeftRowBR' x)
-  -- Extract the coords
-  (trCoord,btCoord,tlCoord) = (map fst trRow,map fst btRow,map fst tlRow)
-  -- Swap the coords of the sides (this assigns the "pegged" boolean to the next side)
-  zipSwap = zipWith swapCoords
-  (trRow',btRow',tlRow') = (zipSwap trCoord tlRow,zipSwap btCoord trRow, zipSwap tlCoord btRow)
-  sameCoords a b = fst a == fst b
-  -- Remove duplicates at corners
-  allRows = nubBy sameCoords $ trRow' ++ btRow' ++ tlRow'
-  -- Split the list into pegs and holes
-  ps' = map fst . filter snd $ allRows
-  hs' = map fst . filter (not . snd) $ allRows
-
--- rotate concentric triangles
 clockRotate :: Board -> Board
-clockRotate b = b' where
-  rings = concentricTrianglesExclusive b
-  rings' = map rotateRing rings
-  b' = foldl1 combineBoard rings'
+clockRotate b = Board ps hs where
+  (rp,rz,rn) = (rowsP b,rowsZ b,rowsN b) -- BoolRows stuff ([BoolRow],[BoolRow],[BoolRow])
+  zipSwap = zipWith (zipWith swapCoords)
+  (cp,cz,cn) = (map brCoord rp,map brCoord rz,map brCoord rn) -- Coord stuff, ([[Coord]],[[Coord]],[[Coord]])
+  (np,nz,nn) = (zipSwap cp rz,zipSwap cz rn,zipSwap cn rp) -- New BoolRows, ([BoolRow],[BoolRow],[BoolRow])
+  mapTail = map tail
+  newCoords = concat $ mapTail np ++ mapTail nz ++ mapTail nn -- Removes duplicate corners
+  ps = map fst . filter snd $ newCoords
+  hs = map fst . filter (not . snd) $ newCoords
 
 counterClockRotate :: Board -> Board
 counterClockRotate = clockRotate . clockRotate

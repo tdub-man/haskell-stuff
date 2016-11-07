@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-06 21:49:27.87842 UTC
+2016-11-07 21:36:30.954651 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 8001
-  interface hash: 3e7e5747d6853b0daf22c17675b2a587
-  ABI hash: 16e7d4772b49b52e123defa9df61cd8c
+  interface hash: a7cd0d8d514cfe1996c1b7d3e7702d68
+  ABI hash: 700fa327013234a57c766ef736b97bb2
   export-list hash: d9e5ef2267766e7ae3b457c51282f54d
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -950,7 +950,7 @@ ff255383bd3625bbd068fe683fbb577c
                         GHC.Types.False -> GHC.Types.GT
                         GHC.Types.True -> GHC.Classes.compareInt# ww2 ww }
                    GHC.Types.True -> GHC.Types.LT }) -}
-31b7cb17b592150b4ab168965069a673
+dc2deb3c71affc84be894a310c7f3863
   $wcompareP ::
     GHC.Types.Int
     -> GHC.Prim.Int#
@@ -971,7 +971,7 @@ ff255383bd3625bbd068fe683fbb577c
                              @ GHC.Types.Bool
                              (GHC.Prim.==# ww3 ww1) of wild1 {
                         GHC.Types.False -> GHC.Types.GT
-                        GHC.Types.True -> GHC.Classes.compareInt ww2 ww }
+                        GHC.Types.True -> GHC.Classes.compareInt ww ww2 }
                    GHC.Types.True -> GHC.Types.LT }) -}
 4db24a220900ac1c5412e58503e34310
   $wcompareZ ::
@@ -1162,7 +1162,7 @@ adc7a7339ea353f667c839903f5f8771
                  case ww8 of ww10 { GHC.Types.I# ww11 ->
                  case ww9 of ww12 { GHC.Types.I# ww13 ->
                  PegBoard.$wcompareN ww4 ww6 ww11 ww13 } } } } } }) -}
-b58e03bab5537bddbca6111613617eb9
+861655603a31fbd069fb0eac5a7de2cd
   compareP :: PegBoard.Coord -> PegBoard.Coord -> GHC.Types.Ordering
   {- Arity: 2, HasNoCafRefs,
      Strictness: <S(LS(S)),1*U(1*U(U),1*U(U))><S(LS(S)),1*U(1*U(U),1*U(U))>,

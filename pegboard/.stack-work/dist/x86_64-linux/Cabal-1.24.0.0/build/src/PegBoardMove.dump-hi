@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-06 21:48:21.380894 UTC
+2016-11-07 22:34:31.402219 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 8001
-  interface hash: 91c1b583d385b4b7aa919e496aa5ec01
+  interface hash: 26c5f97cc0191033dc2b4745366e73d5
   ABI hash: 916e67d09fe4159a916059e4bcb4c825
   export-list hash: 7e04a0fdaca55b135f9b30999c563e9b
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -36,7 +36,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
   nPerms 7a59ca7f41d7481e845a6ad3b52e5c7d
-import  -/  PegBoard 16e7d4772b49b52e123defa9df61cd8c
+import  -/  PegBoard 700fa327013234a57c766ef736b97bb2
   exports: d9e5ef2267766e7ae3b457c51282f54d
   Board dd84e3e13f591df253c023fdeb6d0fac
   Board 88c3b97cf1f38c14492f474b5ab8ce85
@@ -44,7 +44,7 @@ import  -/  PegBoard 16e7d4772b49b52e123defa9df61cd8c
   Coord e848d92561720a4b1c6dee3cfa88409d
   addPeg adc7a7339ea353f667c839903f5f8771
   removePeg ea1cb54766fa6f4c220bfea2979e5c89
-import  -/  Symmetries 7fb9a7b1bcbe991b68023121dbc5d406
+import  -/  Symmetries baafbbce683d8abf68a9b39b742d3ee6
   exports: f7bc392eb4f8e69204e2fc7af20ed002
   All 319793dcabe9d84016d0eca920411067
   Horizontal a4c540a6b3441766aa809c3642d1e290
@@ -53,7 +53,7 @@ import  -/  Symmetries 7fb9a7b1bcbe991b68023121dbc5d406
   Positive 8309fe353bdcceb2e8f457a5ca4b8770
   Rotational 6c4a18b6ff341c4b8594452a2c33f2e4
   Symmetries 1ac38ad02047e86b966c05d03d7a5625
-  findSymmetries cff7c08f90b3bf39202e844e1bfd0c2d
+  findSymmetries 246129b29ffdfc5af6da655dba5cef82
 b2720b819eefa89ed11c6c2584cbda32
   $fEqBoardMoves :: GHC.Classes.Eq PegBoardMove.BoardMoves
   DFunId

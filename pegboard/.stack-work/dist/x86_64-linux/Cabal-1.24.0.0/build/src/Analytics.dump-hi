@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-06 21:48:21.540022 UTC
+2016-11-07 22:34:31.57179 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 8001
-  interface hash: cba8c190f144a93190be254e34bffaba
-  ABI hash: 1543e36474362e7448e76534aa15995b
+  interface hash: 15866e3e0a1ab2ad4311b37246d6e9f7
+  ABI hash: f838ffe95c81d62560a8c6b5498ee6f3
   export-list hash: f7e9d11b8ff150a18249c1b08395b5a8
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -38,13 +38,13 @@ import  -/  base-4.9.0.0:GHC.Base 8ed3be81c0707b322f975a84ae1bb816
 import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
-import  -/  CriticalPoints 84f450c5d723c42b7e1981428257d307
+import  -/  CriticalPoints c3e53a0e3bd0bca06547280d7400d1b6
   exports: c2877d10d1df7ea97aa94d67af9503b6
 import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
   exports: 975c27250cc63b29bcdfa4d36e613251
 import  -/  Helpers.Math 90663dbd1f1fc19916d7ba5eca912c3f
   exports: 855ca1e90ac297801c0ea414b55a5b9e
-import  -/  PegBoard 16e7d4772b49b52e123defa9df61cd8c
+import  -/  PegBoard 700fa327013234a57c766ef736b97bb2
   exports: d9e5ef2267766e7ae3b457c51282f54d
   Board dd84e3e13f591df253c023fdeb6d0fac
   Board 88c3b97cf1f38c14492f474b5ab8ce85
@@ -57,10 +57,10 @@ import  -/  PlayGame 33dcc890daf23cb58c28e0429f285f74
   BoardLog df8ca795fb7203d9569bd5ca9c743888
   _current 68c497c7a0d638c2ded461615b7f6b25
   collectLog d50cb14233bc66d28cd8bfc3ee05c610
-import  -/  Symmetries 7fb9a7b1bcbe991b68023121dbc5d406
+import  -/  Symmetries baafbbce683d8abf68a9b39b742d3ee6
   exports: f7bc392eb4f8e69204e2fc7af20ed002
   Symmetries 1ac38ad02047e86b966c05d03d7a5625
-  findSymmetries cff7c08f90b3bf39202e844e1bfd0c2d
+  findSymmetries 246129b29ffdfc5af6da655dba5cef82
 0c3639da19593b5d6c2b595e2548bd16
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -130,7 +130,7 @@ e7d49f4225e0633f5010a1ceb9026b7c
                            @ PegBoard.Coord
                            PegBoard.compareZ
                            hs1) } } }) -}
-cb04fc6f374afd45912eafa90bf905c4
+b5e9f7a83319ef59b587992eb24bce05
   boardSymmetries :: PlayGame.BoardLog -> [Symmetries.Symmetries]
   {- Arity: 1, Strictness: <S,1*U(U,U)>,
      Unfolding: InlineRule (1, True, False)

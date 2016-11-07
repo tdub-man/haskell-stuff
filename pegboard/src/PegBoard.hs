@@ -56,7 +56,7 @@ compareZ = compare
 compareP :: Coord -> Coord -> Ordering
 compareP (Coord x1 y1) (Coord x2 y2) = let
   yComp = y2 `compare` y1
-  xComp = x2 `compare` x1
+  xComp = x1 `compare` x2
   in yComp `mappend` xComp
 
 -- 5,1                 : x-y= 4

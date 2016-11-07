@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-06 21:51:39.804295 UTC
+2016-11-07 22:34:32.715404 UTC
 
 interface main@main:Main 8001
-  interface hash: 173a5691710d6bcbf96f925e0ceb0bdd
-  ABI hash: 921a56140cbcaad5728a07f9cc6ce1e6
+  interface hash: 8eed5785f6fad753e763fee277d1102c
+  ABI hash: a61760eac678665f1e3ecd010089e7f1
   export-list hash: e44e0e9f2cfd601fc41ac3b7d783e331
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -72,15 +72,15 @@ import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  base-4.9.0.0:System.IO eb1d40aa793a4047069a5023f2ebcfe3
 import  -/  ghc-prim-0.5.0.0:GHC.Types 7378e41b7749213c8c88ceb6b0665d4c
 import  -/  gloss-1.10.2.3@gloss-1.10.2.3-1DblAUc5fHk3Q1eprjU9FB:Graphics.Gloss d5b982018b0c758f00994fce74453c04
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics 1543e36474362e7448e76534aa15995b
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints 84f450c5d723c42b7e1981428257d307
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Analytics f838ffe95c81d62560a8c6b5498ee6f3
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:CriticalPoints c3e53a0e3bd0bca06547280d7400d1b6
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Graphics 0bde4143f519ae9bcb6cc3f2ae806160
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 16e7d4772b49b52e123defa9df61cd8c
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 700fa327013234a57c766ef736b97bb2
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 916e67d09fe4159a916059e4bcb4c825
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 33dcc890daf23cb58c28e0429f285f74
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 142e584bd122979c9020137bb74ae454
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries 7fb9a7b1bcbe991b68023121dbc5d406
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries baafbbce683d8abf68a9b39b742d3ee6
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -93,31 +93,58 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
-c681d1246b9773546f1df5616aa1ae7b
+199df1e2524067a7e08b28697d87ce5b
   b :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
-                        Main.b8 of ww { (#,#) ww1 ww2 ->
-                 case PegBoard.$wremovePeg Main.b7 ww1 ww2 of ww3 { (#,#) ww4 ww5 ->
-                 case PegBoard.$wremovePeg Main.b5 ww4 ww5 of ww7 { (#,#) ww8 ww9 ->
+                        Main.b10 of ww { (#,#) ww1 ww2 ->
                  case PegBoard.$wremovePeg
-                        Main.b3
+                        Main.b12
+                        ww1
+                        ww2 of ww3 { (#,#) ww4 ww5 ->
+                 case PegBoard.$wremovePeg
+                        Main.b11
+                        ww4
+                        ww5 of ww7 { (#,#) ww8 ww9 ->
+                 case PegBoard.$wremovePeg
+                        Main.b9
                         ww8
                         ww9 of ww10 { (#,#) ww11 ww12 ->
                  case PegBoard.$wremovePeg
-                        Main.b1
+                        Main.b7
                         ww11
                         ww12 of ww13 { (#,#) ww14 ww15 ->
-                 PegBoard.Board ww14 ww15 } } } } }) -}
-4f0817963a4bc189ad738695ce1067ca
+                 case PegBoard.$wremovePeg
+                        Main.b5
+                        ww14
+                        ww15 of ww16 { (#,#) ww17 ww18 ->
+                 case PegBoard.$wremovePeg
+                        Main.b3
+                        ww17
+                        ww18 of ww19 { (#,#) ww20 ww21 ->
+                 case PegBoard.$wremovePeg
+                        Main.b1
+                        ww20
+                        ww21 of ww22 { (#,#) ww23 ww24 ->
+                 PegBoard.Board ww23 ww24 } } } } } } } }) -}
+e093a75da66b9f15261998710cbb5298
   b' :: [PegBoard.Board]
-  {- Unfolding: (case Main.bl of wild { PlayGame.BoardLog b9 bl1 ->
+  {- Unfolding: (case Main.bl of wild { PlayGame.BoardLog b13 bl1 ->
                  GHC.List.reverse1
                    @ PegBoard.Board
-                   (GHC.Types.: @ PegBoard.Board b9 bl1)
+                   (GHC.Types.: @ PegBoard.Board b13 bl1)
                    (GHC.Types.[] @ PegBoard.Board) }) -}
 9570a8d266f522d8aa853ddeeccaca06
   b1 :: PegBoard.Coord
   {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b2 Main.b2) -}
+841ebf007c57a187f929d8e0fb714128
+  b10 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
+56b5ee9a1fe2b6164e780373e8f08193
+  b11 :: PegBoard.Coord
+  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b10 Main.b4) -}
+ce873732a2e29c17de93c8d2ad59c1ae
+  b12 :: PegBoard.Coord
+  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b10 Main.b10) -}
 47bad64b76482af8b80d6600a4029f6e
   b2 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 1#) -}
@@ -127,35 +154,38 @@ c681d1246b9773546f1df5616aa1ae7b
 b381b53e9e60e516906f598ee3d36128
   b4 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 2#) -}
-2844463fc9931d91a0caaaf85a1eb8c5
+79a96b53ffb251f50aeccf77a0c44914
   b5 :: PegBoard.Coord
-  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b6 Main.b2) -}
+  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b6 Main.b4) -}
 05cb7eb6f792b356b59808d74ff13672
   b6 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 3#) -}
-e8ba992b1b11037b698976b004525c9c
+92b3b96fe0f3d8ff43a4d3fc964b085c
   b7 :: PegBoard.Coord
-  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b6 Main.b4) -}
-fbf57d36422cb9ed55c20a0fdf59ee33
+  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b8 Main.b8) -}
+28c56ac453e24bc0d6e5f05256bba453
   b8 :: GHC.Types.Int
-  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
-f96d2b0c8dead0c3278f37587c2d343f
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 4#) -}
+a16cfe8da36d599752007f9d53bf91f7
+  b9 :: PegBoard.Coord
+  {- HasNoCafRefs, Unfolding: (PegBoard.Coord Main.b10 Main.b2) -}
+7f7786ff4de8d4791b3b19c49e5d9758
   bl :: PlayGame.BoardLog
   {- Unfolding: (Main.solveFor Main.b Main.b2) -}
-0cfd701814fe684532435565ef608635
+e8c50f676015eded4342ca2920579f11
   boardInfo :: PlayGame.BoardLog -> [GHC.Base.String]
   {- Arity: 1, Strictness: <L,A>,
      Unfolding: InlineRule (1, True, True)
                 (\ (blog :: PlayGame.BoardLog) -> Main.boardInfo1) -}
-28c920b9cf78bb7d542a9abac6023049
+8368e666318cfae1f2d023fa5cf6b473
   boardInfo1 :: [[GHC.Types.Char]]
-  {- Unfolding: (case Main.bl of wild { PlayGame.BoardLog b9 bl1 ->
+  {- Unfolding: (case Main.bl of wild { PlayGame.BoardLog b13 bl1 ->
                  Helpers.Lists.concatZip1
                    @ [GHC.Types.Char]
                    (Main.boardInfo_go
                       (GHC.List.reverse1
                          @ PegBoard.Board
-                         (GHC.Types.: @ PegBoard.Board b9 bl1)
+                         (GHC.Types.: @ PegBoard.Board b13 bl1)
                          (GHC.Types.[] @ PegBoard.Board))
                       (GHC.Base.map
                          @ PegBoard.Board
@@ -163,7 +193,7 @@ f96d2b0c8dead0c3278f37587c2d343f
                          Symmetries.findSymmetries
                          (GHC.List.reverse1
                             @ PegBoard.Board
-                            (GHC.Types.: @ PegBoard.Board b9 bl1)
+                            (GHC.Types.: @ PegBoard.Board b13 bl1)
                             (GHC.Types.[] @ PegBoard.Board))))
                    (GHC.Base.map
                       @ PegBoard.Board
@@ -171,13 +201,13 @@ f96d2b0c8dead0c3278f37587c2d343f
                       PegBoard.showBoard
                       (GHC.List.reverse1
                          @ PegBoard.Board
-                         (GHC.Types.: @ PegBoard.Board b9 bl1)
+                         (GHC.Types.: @ PegBoard.Board b13 bl1)
                          (GHC.Types.[] @ PegBoard.Board))) }) -}
 58a070345036c09d12c2d97eeae4eb3e
   boardInfo_go ::
     [PegBoard.Board] -> [Symmetries.Symmetries] -> [[GHC.Types.Char]]
   {- Arity: 2, Strictness: <S,1*U><L,1*U> -}
-766dce05753ca2dca59367b95cf5bf34
+1e72880955f137dabe5d95904f7d961f
   concB :: [PegBoard.Board]
   {- Unfolding: (case Main.b of ww3 { PegBoard.Board ww4 ww5 ->
                  case CriticalPoints.$wconcentricTriangles'
@@ -185,21 +215,21 @@ f96d2b0c8dead0c3278f37587c2d343f
                         ww5
                         (GHC.Types.[] @ PegBoard.Board) of ww6 { (#,#) ww7 ww8 ->
                  ww8 } }) -}
-dd5717e6c8b8cb505f322d792398b3c9
+90cc386b50347529c1241a37a7e0165d
   concB' :: [PegBoard.Board]
   {- Strictness: m2,
      Unfolding: (GHC.Types.:
                    @ PegBoard.Board
                    Main.concB'2
                    Main.concB'1) -}
-6c1208310fd98a83badd5348f8fa6154
+20bb50423d84bf3c3a90a1433f75fea3
   concB'1 :: [PegBoard.Board]
   {- Unfolding: (Helpers.Lists.compMapR
                    @ PegBoard.Board
                    @ PegBoard.Board
                    CriticalPoints.concentricTrianglesExclusive1
                    Main.concB) -}
-8b5f27b8228f177152746a671652f2d4
+5403e17ae092b94fd9f0b44e4fcdec76
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
                    [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x }) -}
@@ -237,24 +267,24 @@ b88dfb5c3f24900e152e36c5e1d63ad8
                    (PegBoard.showBoard x)
                    GHC.Types.True
                    eta) -}
-9601062264d3928a743804c7f7e6c115
+be2390f222ba1e668b467f6d09841b45
   solution :: PegBoard.Board -> GHC.Types.Int -> [PegBoard.Board]
   {- Arity: 2, Strictness: <L,U><L,U(U)>,
      Unfolding: InlineRule (2, True, False)
-                (\ (b9 :: PegBoard.Board) (eta :: GHC.Types.Int) ->
-                 case Main.solveFor b9 eta of wild { PlayGame.BoardLog b10 bl1 ->
+                (\ (b13 :: PegBoard.Board) (eta :: GHC.Types.Int) ->
+                 case Main.solveFor b13 eta of wild { PlayGame.BoardLog b14 bl1 ->
                  GHC.List.reverse1
                    @ PegBoard.Board
-                   (GHC.Types.: @ PegBoard.Board b10 bl1)
+                   (GHC.Types.: @ PegBoard.Board b14 bl1)
                    (GHC.Types.[] @ PegBoard.Board) }) -}
-b9318f751032920619debba88fd7f4e4
+b354f88eacaada228b407554879866c4
   solveFor :: PegBoard.Board -> GHC.Types.Int -> PlayGame.BoardLog
   {- Arity: 2, Strictness: <L,U><L,U(U)>,
-     Unfolding: (\ (b9 :: PegBoard.Board) (n :: GHC.Types.Int) ->
+     Unfolding: (\ (b13 :: PegBoard.Board) (n :: GHC.Types.Int) ->
                  case PlayGame.$wplayLog
                         (GHC.Types.:
                            @ PlayGame.BoardLog
-                           (PlayGame.BoardLog b9 (GHC.Types.[] @ PegBoard.Board))
+                           (PlayGame.BoardLog b13 (GHC.Types.[] @ PegBoard.Board))
                            (GHC.Types.[] @ PlayGame.BoardLog))
                         (GHC.Types.[] @ PlayGame.BoardLog) of ww3 { (#,#) ww4 ww5 ->
                  case Analytics.endWith n ww5 of wild {
