@@ -1,9 +1,9 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-07 22:34:31.107139 UTC
+2016-11-07 22:43:09.545708 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries 8001
-  interface hash: 1d601f2a6961b1176baa7c1f9772b3b8
+  interface hash: 20a1449842ed90e386d8fba504de833d
   ABI hash: baafbbce683d8abf68a9b39b742d3ee6
   export-list hash: f7bc392eb4f8e69204e2fc7af20ed002
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
@@ -46,15 +46,10 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  CriticalPoints c3e53a0e3bd0bca06547280d7400d1b6
   exports: c2877d10d1df7ea97aa94d67af9503b6
   BoolRow 5116470cb4e14d8837d507287f8c4bce
-  bottomRowBR' e9a27b72cafd97784295d2b76364e9d5
   brCoord aac28ec51ce7da9c71584a8de082e423
   rowsN 268bea015779291b9597aae34b6fadfc
   rowsP a45ae3b1e67cd920e91dfbdedb7e4910
   rowsZ 512e72f69f168ef893e22280332281d5
-  topLeftRowBR' 253588568ff4a6394d3f680209df754b
-  topRightRowBR' 6910bd66af029fcbee1ffb677d2b8d07
-import  -/  Helpers.Lists 9c52ca015466111e8d572aeb56cfef86
-  exports: 975c27250cc63b29bcdfa4d36e613251
 import  -/  PegBoard 700fa327013234a57c766ef736b97bb2
   exports: d9e5ef2267766e7ae3b457c51282f54d
   Board dd84e3e13f591df253c023fdeb6d0fac

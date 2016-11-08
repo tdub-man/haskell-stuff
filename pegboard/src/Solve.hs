@@ -13,7 +13,13 @@ data Sequence = Seq   Picture            -- For the prompts
               | Seqs [Picture] [Picture] -- For the solving steps
               deriving (Eq)
 type CoordCollect = (Coord,Maybe Int, Bool)
-type Prompts = ([Sequence],[Sequence],CoordCollect)
+
+type MouseMove = (Bool,Float,Float)
+type Scale = (Float,Float)
+type Translate = (Float,Float)
+type WorldTrans = (Scale,Translate,MouseMove) -- Scale, Translate, MouseStart
+
+type Prompts = ([Sequence],[Sequence],CoordCollect,WorldTrans)
 
 solveFor :: Board -> Int -> [Board]
 solveFor b n = collectLog . head . endWith n . playGameLog $ b
@@ -65,42 +71,43 @@ coordCheck cc = coordMade cc && validCoord cc
 
 -- PROMPTS STUFF
 nextPrompt :: Prompts -> Prompts
-nextPrompt ([],  bs,cc) = ([],   bs,cc)
-nextPrompt ([p], bs,cc) = ([p],  bs,cc)
-nextPrompt (p:as,bs,cc) = (as, p:bs,cc)
+nextPrompt ([],  bs,cc,wt) = ([],   bs,cc,wt)
+nextPrompt ([p], bs,cc,wt) = ([p],  bs,cc,wt)
+nextPrompt (p:as,bs,cc,wt) = (as, p:bs,cc,wt)
 
 prevPrompt :: Prompts -> Prompts
-prevPrompt (as,[],cc) = (as,[],cc)
-prevPrompt (as,p:bs,cc) = (p:as,bs,cc)
+prevPrompt (as,[],cc,wt) = (as,[],cc,wt)
+prevPrompt (as,p:bs,cc,wt) = (p:as,bs,cc,wt)
 
 resetPrompt :: Prompts -> Prompts
-resetPrompt (as,bs,_) = (ps,[],emptyCoordCol) where
+resetPrompt (as,bs,_,wt) = (ps,[],emptyCoordCol,wt) where
   ps = reverse bs ++ as
 
+-- Add in transformations
 getPrompt :: Prompts -> Picture
-getPrompt ([],_,_)   = blank
-getPrompt (p:as,_,_) = seqRender p
+getPrompt ([],_,_,_)    = blank
+getPrompt (p:as,_,_,wt) = transPicture wt . seqRender $ p
 
 promptInput :: Prompts -> Int -> Prompts
-promptInput ps@(as,bs,cc) n = let
+promptInput ps@(as,bs,cc,wt) n = let
   cc' = coordInput cc n
-  in inputHelper (as,bs,cc')
+  in inputHelper (as,bs,cc',wt)
 
 inputHelper :: Prompts -> Prompts
-inputHelper ps@(as,bs,cc)
+inputHelper ps@(as,bs,cc,wt)
   | coordCheck' ps = let
       start = removePeg (getCoord cc) (makeBoard 5)
       steps = solveFor start 1
-      ps'   = addSteps (as,bs,cc) steps
+      ps'   = addSteps (as,bs,cc,wt) steps
       in nextPrompt ps'
   | not . coordMade' $ ps = nextPrompt ps
   | otherwise = resetPrompt ps
 
 coordMade' :: Prompts -> Bool
-coordMade' (_,_,cc) = coordMade cc
+coordMade' (_,_,cc,_) = coordMade cc
 
 validCoordP :: Prompts -> Bool
-validCoordP (_,_,cc) = validCoord cc
+validCoordP (_,_,cc,_) = validCoord cc
 
 coordCheck' :: Prompts -> Bool
 coordCheck' ps = coordMade' ps && validCoordP ps
@@ -109,12 +116,39 @@ promptCheck :: Prompts -> Prompts
 promptCheck ps = if coordCheck' ps then ps else resetPrompt ps
 
 onPrompt :: Prompts -> Bool
-onPrompt ([],_,_)      = False
-onPrompt (Seq _:_,_,_) = True
-onPrompt _             = False
+onPrompt ([],_,_,_)      = False
+onPrompt (Seq _:_,_,_,_) = True
+onPrompt _               = False
 
 addSteps :: Prompts -> [Board] -> Prompts
-addSteps (as,bs,cc) boards = (as ++ [renderBoardsSeq boards],bs,cc)
+addSteps (as,bs,cc,wt) boards = (as ++ [renderBoardsSeq boards],bs,cc,wt)
+--------------------------------------------------------------------------------
+
+-- World Transformation
+baseTrans :: WorldTrans
+baseTrans = (baseScale,baseTranslate,baseMouse) where
+  baseScale = (1,1)
+  baseTranslate = (0,0)
+  baseMouse = (False,0,0)
+
+setMouse :: WorldTrans -> (Float,Float) -> WorldTrans
+setMouse (s,t,_) (mx,my) = (s,t,(True,mx,my))
+
+resetMouse :: WorldTrans -> WorldTrans
+resetMouse (s,t,_) = (s,t,(False,0,0))
+
+moveMouse :: WorldTrans -> (Float,Float) -> WorldTrans
+moveMouse wt@(s,(tx,ty),(ms,mx,my)) (x,y) =
+  if ms
+    then (s,(tx+x-mx,ty+y-my),(ms,x,y))
+    else wt
+
+-- Translate persists after each translation
+-- Click the mouse to set mx and my
+-- When mouse is moved, new position is subtracted from start
+-- to find delta, which is added to translate
+transPicture :: WorldTrans -> Picture -> Picture
+transPicture ((sx,sy),(tx,ty),_) = scale sx sy . translate tx ty
 --------------------------------------------------------------------------------
 
 -- Event handler
@@ -126,12 +160,17 @@ eventHandler (EventKey (Char c) Down _ _) ps
   | onPrompt ps && isNumber c = promptInput ps (digitToInt c)
   | c == 'r' || c == 'R' = promptBase
   | otherwise = ps
-eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc)
-  | not (onPrompt ps) = (nextSeq a : as,bs,cc)
+eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc,wt)
+  | not (onPrompt ps) = (nextSeq a : as,bs,cc,wt)
   | otherwise = ps
-eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc)
-  | not (onPrompt ps) = (prevSeq a : as,bs,cc)
+eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc,wt)
+  | not (onPrompt ps) = (prevSeq a : as,bs,cc,wt)
   | otherwise = ps
+eventHandler (EventKey (MouseButton LeftButton) Down _ m) (as,bs,cc,wt) =
+  (as,bs,cc,setMouse wt m)
+eventHandler (EventKey (MouseButton LeftButton) Up _ _) (as,bs,cc,wt) =
+  (as,bs,cc,resetMouse wt)
+eventHandler (EventMotion m) (as,bs,cc,wt) = (as,bs,cc,moveMouse wt m)
 eventHandler _ ps = ps
 
 -- TODO: Add zoom and move like in regular display
@@ -144,7 +183,7 @@ rowPrompt = Seq labeledPrompt where
   rowLabels' = translate 0 (-4) . color white $ rowLabels
   rowLines  = pictures [ Line [(0,16*n),(l+16,16*n)] | (n,l) <- zip [1..5] [0,8..32] ]
   rowLines' = color white rowLines
-  labeledPrompt = pictures . offset 16 0 $ [rowLabels',rowLines',board]
+  labeledPrompt = translate (-48) 0 . pictures . offset 16 0 $ [rowLabels',rowLines',board]
 
 colPrompt :: Sequence
 colPrompt = Seq labeledPrompt where
@@ -156,7 +195,7 @@ colPrompt = Seq labeledPrompt where
   labeledPrompt = pictures [board,colLabelLines']
 
 promptBase :: Prompts
-promptBase = ([rowPrompt,colPrompt],[],emptyCoordCol)
+promptBase = ([rowPrompt,colPrompt],[],emptyCoordCol,baseTrans)
 
 promptSolve :: IO ()
 promptSolve = play
