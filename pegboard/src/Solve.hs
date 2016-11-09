@@ -15,7 +15,7 @@ data Sequence = Seq   Picture            -- For the prompts
 type CoordCollect = (Coord,Maybe Int, Bool)
 
 type MouseMove = (Bool,Float,Float)
-type Scale = (Float,Float)
+type Scale = Float
 type Translate = (Float,Float)
 type WorldTrans = (Scale,Translate,MouseMove) -- Scale, Translate, MouseStart
 
@@ -125,9 +125,14 @@ addSteps (as,bs,cc,wt) boards = (as ++ [renderBoardsSeq boards],bs,cc,wt)
 --------------------------------------------------------------------------------
 
 -- World Transformation
+-- Click the mouse to set mx and my
+-- When mouse is moved, new position is subtracted from start
+-- to find delta, which is added to translate
+
+
 baseTrans :: WorldTrans
 baseTrans = (baseScale,baseTranslate,baseMouse) where
-  baseScale = (1,1)
+  baseScale = 1
   baseTranslate = (0,0)
   baseMouse = (False,0,0)
 
@@ -143,12 +148,24 @@ moveMouse wt@(s,(tx,ty),(ms,mx,my)) (x,y) =
     then (s,(tx+x-mx,ty+y-my),(ms,x,y))
     else wt
 
--- Translate persists after each translation
--- Click the mouse to set mx and my
--- When mouse is moved, new position is subtracted from start
--- to find delta, which is added to translate
+scaleUp :: WorldTrans -> WorldTrans
+scaleUp (s,t,m) = (s+0.1,t,m)
+
+scaleDown :: WorldTrans -> WorldTrans
+scaleDown (s,t,m) = if s <= 0 then (0,t,m) else (s-0.1,t,m)
+-- Stop at zero to prevent flipping
+
 transPicture :: WorldTrans -> Picture -> Picture
-transPicture ((sx,sy),(tx,ty),_) = scale sx sy . translate tx ty
+transPicture (s,(tx,ty),_) = scale s s . translate (tx/s) (ty/s)
+-- Divide translate by scale to prevent "tracking",
+-- moving more than it should when scaled greater than 1 and
+-- moving less than it should when scaled less than 1
+
+getTrans :: Prompts -> WorldTrans
+getTrans (_,_,_,wt) = wt
+
+setTrans :: Prompts -> WorldTrans -> Prompts
+setTrans (as,bs,cc,_) wt = (as,bs,cc,wt)
 --------------------------------------------------------------------------------
 
 -- Event handler
@@ -158,7 +175,7 @@ transPicture ((sx,sy),(tx,ty),_) = scale sx sy . translate tx ty
 eventHandler :: Event -> Prompts -> Prompts
 eventHandler (EventKey (Char c) Down _ _) ps
   | onPrompt ps && isNumber c = promptInput ps (digitToInt c)
-  | c == 'r' || c == 'R' = promptBase
+  | c == 'r' || c == 'R' = setTrans promptBase . getTrans $ ps
   | otherwise = ps
 eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc,wt)
   | not (onPrompt ps) = (nextSeq a : as,bs,cc,wt)
@@ -170,6 +187,10 @@ eventHandler (EventKey (MouseButton LeftButton) Down _ m) (as,bs,cc,wt) =
   (as,bs,cc,setMouse wt m)
 eventHandler (EventKey (MouseButton LeftButton) Up _ _) (as,bs,cc,wt) =
   (as,bs,cc,resetMouse wt)
+eventHandler (EventKey (MouseButton WheelUp) _ _ _) (as,bs,cc,wt) =
+  (as,bs,cc,scaleUp wt)
+eventHandler (EventKey (MouseButton WheelDown) _ _ _) (as,bs,cc,wt) =
+  (as,bs,cc,scaleDown wt)
 eventHandler (EventMotion m) (as,bs,cc,wt) = (as,bs,cc,moveMouse wt m)
 eventHandler _ ps = ps
 
@@ -220,13 +241,3 @@ promptSolve = play
 -- Coordinates go by (row,column)
 -- A in the diagram would be (1,1)
 -- B would be (3,2) and C would be (4,3)
-
--- promptSolve :: IO ()
--- promptSolve = play
---   (InWindow "SolveBoard" (600,600) (0,0))
---   black
---   0
---   prompts
---   getPrompt
---   eventHandler
---   (\_ x -> x)
