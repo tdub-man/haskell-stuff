@@ -12,17 +12,24 @@ import Data.Char
 data Sequence = Seq   Picture            -- For the prompts
               | Seqs [Picture] [Picture] -- For the solving steps
               deriving (Eq)
-type CoordCollect = (Coord,Maybe Int, Bool)
+type CountCollect = (Int,Bool)
+type CoordCollect = (Coord,Maybe Int,Bool)
+type InputCollect = (CountCollect,CoordCollect)
+-- PegCount,CountMade,StartCoord,PartialCoord,CoordMade
 
 type MouseMove = (Bool,Float,Float)
 type Scale = Float
 type Translate = (Float,Float)
 type WorldTrans = (Scale,Translate,MouseMove) -- Scale, Translate, MouseStart
 
-type Prompts = ([Sequence],[Sequence],CoordCollect,WorldTrans)
+type Prompts = ([Sequence],[Sequence],InputCollect,WorldTrans)
 
-solveFor :: Board -> Int -> [Board]
-solveFor b n = collectLog . head . endWith n . playGameLog $ b
+solveFor :: Board -> Int -> Maybe [Board]
+solveFor b n = solution where
+  ends = endWith n . playGameLog $ b
+  solution = case ends of
+    [] -> Nothing
+    _  -> Just . collectLog . head $ ends
 
 -- SEQUENCE STUFF
 nextSeq :: Sequence -> Sequence
@@ -44,43 +51,63 @@ renderBoardsSeq :: [Board] -> Sequence
 renderBoardsSeq bs = Seqs (map renderBoard bs) []
 --------------------------------------------------------------------------------
 
--- COORDCOLLECT STUFF
-emptyCoordCol :: CoordCollect
-emptyCoordCol = (Coord 0 0,Nothing,False)
+-- INPUTCOLLECT STUFF
+emptyInputCol :: InputCollect
+emptyInputCol = ((0,False),(Coord 0 0,Nothing,False))
 
-coordInput :: CoordCollect -> Int -> CoordCollect
-coordInput (c,Nothing,False) x = (c,Just x,False)
-coordInput (_,Just x, False) y = (Coord x y,Nothing,True)
-coordInput cc@(_,_,True)     _ = cc
+getCount :: InputCollect -> Int
+getCount ((c,_),_) = c
 
-getCoord :: CoordCollect -> Coord
-getCoord (c,_,_) = c
+countInput :: InputCollect -> Int -> InputCollect
+countInput ((_,False),cd) x = ((x,True),cd)
+-- countInput ic@((_,True),_) _ = ic
 
-coordMade :: CoordCollect -> Bool
-coordMade (_,_,made) = made
+countSelected :: InputCollect -> Bool
+countSelected ((_,cs),_) = cs
+
+coordInput :: InputCollect -> Int -> InputCollect
+coordInput (ct,(c,Nothing,False)) x = (ct,(c,Just x,False))
+coordInput (ct,(_,Just x, False)) y = (ct,(Coord x y,Nothing,True))
+-- coordInput ic@(_,(_,_,True))     _ = ic
+
+getCoord :: InputCollect -> Coord
+getCoord (_,(c,_,_)) = c
+
+coordMade :: InputCollect -> Bool
+coordMade (_,(_,_,made)) = made
+
+input :: InputCollect -> Int -> InputCollect
+input ic n
+  | not (countSelected ic) = countInput ic n
+  | not (coordMade ic)     = coordInput ic n
+  | otherwise              = ic
+
+validCount :: InputCollect -> Bool
+validCount ((c,_),_) = c >= 1 && c <= 9
+-- What is the max you can end with on a 5 board?
 
 onBoard :: Coord -> Board -> Bool
 onBoard c (Board ps hs) = c `elem` (ps ++ hs)
 
-validCoord :: CoordCollect -> Bool
-validCoord (c,_,_) = onBoard c (makeBoard 5)
+validCoord :: InputCollect -> Bool
+validCoord (_,(c,_,_)) = onBoard c (makeBoard 5)
 
-coordCheck :: CoordCollect -> Bool
-coordCheck cc = coordMade cc && validCoord cc
+coordCheck :: InputCollect -> Bool
+coordCheck ic = coordMade ic && validCoord ic
 --------------------------------------------------------------------------------
 
 -- PROMPTS STUFF
 nextPrompt :: Prompts -> Prompts
-nextPrompt ([],  bs,cc,wt) = ([],   bs,cc,wt)
-nextPrompt ([p], bs,cc,wt) = ([p],  bs,cc,wt)
-nextPrompt (p:as,bs,cc,wt) = (as, p:bs,cc,wt)
+nextPrompt ([],  bs,ic,wt) = ([],   bs,ic,wt)
+nextPrompt ([p], bs,ic,wt) = ([p],  bs,ic,wt)
+nextPrompt (p:as,bs,ic,wt) = (as, p:bs,ic,wt)
 
 prevPrompt :: Prompts -> Prompts
-prevPrompt (as,[],cc,wt) = (as,[],cc,wt)
-prevPrompt (as,p:bs,cc,wt) = (p:as,bs,cc,wt)
+prevPrompt (as,[],ic,wt) = (as,[],ic,wt)
+prevPrompt (as,p:bs,ic,wt) = (p:as,bs,ic,wt)
 
 resetPrompt :: Prompts -> Prompts
-resetPrompt (as,bs,_,wt) = (ps,[],emptyCoordCol,wt) where
+resetPrompt (as,bs,_,wt) = (ps,[],emptyInputCol,wt) where
   ps = reverse bs ++ as
 
 -- Add in transformations
@@ -89,39 +116,53 @@ getPrompt ([],_,_,_)    = blank
 getPrompt (p:as,_,_,wt) = transPicture wt . seqRender $ p
 
 promptInput :: Prompts -> Int -> Prompts
-promptInput ps@(as,bs,cc,wt) n = let
-  cc' = coordInput cc n
-  in inputHelper (as,bs,cc',wt)
+promptInput ps@(as,bs,ic,wt) n = let
+  ic' = input ic n
+  in inputHelper (as,bs,ic',wt)
 
 inputHelper :: Prompts -> Prompts
-inputHelper ps@(as,bs,cc,wt)
-  | coordCheck' ps = let
-      start = removePeg (getCoord cc) (makeBoard 5)
-      steps = solveFor start 1
-      ps'   = addSteps (as,bs,cc,wt) steps
+inputHelper ps@(as,bs,ic,wt)
+  | inputCheck ps = let -- Everything's good to go
+      start = removePeg (getCoord ic) (makeBoard 5)
+      steps = solveFor start (getCount ic)
+      ps'   = addSteps (as,bs,ic,wt) steps
       in nextPrompt ps'
-  | not . coordMade' $ ps = nextPrompt ps
+  | validCountP ps && not (coordMade' ps) = nextPrompt ps -- We got the count, but not the coord
+  | not . coordMade' $ ps = nextPrompt ps -- In the middle of getting coord, its okay
   | otherwise = resetPrompt ps
 
+countSelected' :: Prompts -> Bool
+countSelected' (_,_,ic,_) = countSelected ic
+
 coordMade' :: Prompts -> Bool
-coordMade' (_,_,cc,_) = coordMade cc
+coordMade' (_,_,ic,_) = coordMade ic
+
+validCountP :: Prompts -> Bool
+validCountP (_,_,ic,_) = validCount ic
 
 validCoordP :: Prompts -> Bool
-validCoordP (_,_,cc,_) = validCoord cc
+validCoordP (_,_,ic,_) = validCoord ic
 
-coordCheck' :: Prompts -> Bool
-coordCheck' ps = coordMade' ps && validCoordP ps
+inputCheck :: Prompts -> Bool
+inputCheck ps =  countSelected' ps
+              && validCountP ps
+              && coordMade' ps -- Check
+              && validCoordP ps
 
 promptCheck :: Prompts -> Prompts
-promptCheck ps = if coordCheck' ps then ps else resetPrompt ps
+promptCheck ps = if inputCheck ps then ps else resetPrompt ps
 
 onPrompt :: Prompts -> Bool
 onPrompt ([],_,_,_)      = False
 onPrompt (Seq _:_,_,_,_) = True
 onPrompt _               = False
 
-addSteps :: Prompts -> [Board] -> Prompts
-addSteps (as,bs,cc,wt) boards = (as ++ [renderBoardsSeq boards],bs,cc,wt)
+addSteps :: Prompts -> Maybe [Board] -> Prompts
+addSteps (as,bs,ic@((ct,_),(cd,_,_)),wt) Nothing = (as ++ failed,bs,ic,wt) where
+  msg = "No results for starting from " ++ show cd
+        ++ " and ending with " ++ show ct
+  failed = (:[]) . Seq . color white . scale 0.1 0.1 $ Text msg
+addSteps (as,bs,ic,wt) (Just boards) = (as ++ [renderBoardsSeq boards],bs,ic,wt)
 --------------------------------------------------------------------------------
 
 -- World Transformation
@@ -165,7 +206,7 @@ getTrans :: Prompts -> WorldTrans
 getTrans (_,_,_,wt) = wt
 
 setTrans :: Prompts -> WorldTrans -> Prompts
-setTrans (as,bs,cc,_) wt = (as,bs,cc,wt)
+setTrans (as,bs,ic,_) wt = (as,bs,ic,wt)
 --------------------------------------------------------------------------------
 
 -- Event handler
@@ -177,25 +218,28 @@ eventHandler (EventKey (Char c) Down _ _) ps
   | onPrompt ps && isNumber c = promptInput ps (digitToInt c)
   | c == 'r' || c == 'R' = setTrans promptBase . getTrans $ ps
   | otherwise = ps
-eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,cc,wt)
-  | not (onPrompt ps) = (nextSeq a : as,bs,cc,wt)
+eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,ic,wt)
+  | not (onPrompt ps) = (nextSeq a : as,bs,ic,wt)
   | otherwise = ps
-eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,cc,wt)
-  | not (onPrompt ps) = (prevSeq a : as,bs,cc,wt)
+eventHandler (EventKey (SpecialKey KeyLeft) Down _ _) ps@(a:as,bs,ic,wt)
+  | not (onPrompt ps) = (prevSeq a : as,bs,ic,wt)
   | otherwise = ps
-eventHandler (EventKey (MouseButton LeftButton) Down _ m) (as,bs,cc,wt) =
-  (as,bs,cc,setMouse wt m)
-eventHandler (EventKey (MouseButton LeftButton) Up _ _) (as,bs,cc,wt) =
-  (as,bs,cc,resetMouse wt)
-eventHandler (EventKey (MouseButton WheelUp) _ _ _) (as,bs,cc,wt) =
-  (as,bs,cc,scaleUp wt)
-eventHandler (EventKey (MouseButton WheelDown) _ _ _) (as,bs,cc,wt) =
-  (as,bs,cc,scaleDown wt)
-eventHandler (EventMotion m) (as,bs,cc,wt) = (as,bs,cc,moveMouse wt m)
+eventHandler (EventKey (MouseButton LeftButton) Down _ m) (as,bs,ic,wt) =
+  (as,bs,ic,setMouse wt m)
+eventHandler (EventKey (MouseButton LeftButton) Up _ _) (as,bs,ic,wt) =
+  (as,bs,ic,resetMouse wt)
+eventHandler (EventKey (MouseButton WheelUp) _ _ _) (as,bs,ic,wt) =
+  (as,bs,ic,scaleUp wt)
+eventHandler (EventKey (MouseButton WheelDown) _ _ _) (as,bs,ic,wt) =
+  (as,bs,ic,scaleDown wt)
+eventHandler (EventMotion m) (as,bs,ic,wt) = (as,bs,ic,moveMouse wt m)
 eventHandler _ ps = ps
 
--- TODO: Add zoom and move like in regular display
 -- TODO: Add prompt for desired number of end pegs
+
+pegCountPrompt :: Sequence
+pegCountPrompt = Seq msg where
+  msg = color white . scale 0.1 0.1 $ Text "Enter number of pegs to end with"
 
 rowPrompt :: Sequence
 rowPrompt = Seq labeledPrompt where
@@ -216,7 +260,7 @@ colPrompt = Seq labeledPrompt where
   labeledPrompt = pictures [board,colLabelLines']
 
 promptBase :: Prompts
-promptBase = ([rowPrompt,colPrompt],[],emptyCoordCol,baseTrans)
+promptBase = ([pegCountPrompt,rowPrompt,colPrompt],[],emptyInputCol,baseTrans)
 
 promptSolve :: IO ()
 promptSolve = play
