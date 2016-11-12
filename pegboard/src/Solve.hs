@@ -12,9 +12,9 @@ import Data.Char
 data Sequence = Seq   Picture            -- For the prompts
               | Seqs [Picture] [Picture] -- For the solving steps
               deriving (Eq)
-type CountCollect = (Int,Bool)
-type CoordCollect = (Coord,Maybe Int,Bool)
-type InputCollect = (CountCollect,CoordCollect)
+type CountCollect = (Int,Bool) -- Count, count selected flag
+type CoordCollect = (Coord,Maybe Int,Bool) -- Coord, x holder, coord made flag
+type InputCollect = (CountCollect,CoordCollect,[Int]) -- [int] for holding inut digits
 -- PegCount,CountMade,StartCoord,PartialCoord,CoordMade
 
 type MouseMove = (Bool,Float,Float)
@@ -24,12 +24,18 @@ type WorldTrans = (Scale,Translate,MouseMove) -- Scale, Translate, MouseStart
 
 type Prompts = ([Sequence],[Sequence],InputCollect,WorldTrans)
 
+-- TODO Take input greater than one digit
+-- put numbers onto a list
+-- process list on RETURN
+
 solveFor :: Board -> Int -> Maybe [Board]
 solveFor b n = solution where
   ends = endWith n . playGameLog $ b
   solution = case ends of
     [] -> Nothing
     _  -> Just . collectLog . head $ ends
+
+--------------------------------------------------------------------------------
 
 -- SEQUENCE STUFF
 nextSeq :: Sequence -> Sequence
@@ -53,44 +59,59 @@ renderBoardsSeq bs = Seqs (map renderBoard bs) []
 
 -- INPUTCOLLECT STUFF
 emptyInputCol :: InputCollect
-emptyInputCol = ((0,False),(Coord 0 0,Nothing,False))
+emptyInputCol = ((0,False),(Coord 0 0,Nothing,False),[])
 
 getCount :: InputCollect -> Int
-getCount ((c,_),_) = c
-
-countInput :: InputCollect -> Int -> InputCollect
-countInput ((_,False),cd) x = ((x,True),cd)
--- countInput ic@((_,True),_) _ = ic
+getCount ((c,_),_,_) = c
 
 countSelected :: InputCollect -> Bool
-countSelected ((_,cs),_) = cs
+countSelected ((_,cs),_,_) = cs
 
-coordInput :: InputCollect -> Int -> InputCollect
-coordInput (ct,(c,Nothing,False)) x = (ct,(c,Just x,False))
-coordInput (ct,(_,Just x, False)) y = (ct,(Coord x y,Nothing,True))
--- coordInput ic@(_,(_,_,True))     _ = ic
+digitInput :: InputCollect -> Int -> InputCollect
+digitInput (ct,cd,ds) x = (ct,cd,x:ds)
+
+-- Least significant digit first
+makeInt :: [Int] -> Int
+makeInt = sum . zipWith (*) (iterate (*10) 1)
+
+-- Call when return is hit
+processCount :: InputCollect -> InputCollect
+-- We've already processed count
+processCount ic@((_,True),_,_) = ic
+-- There is nothing to process
+processCount ic@(_,_,[]) = ic
+-- Collect digits into a count
+processCount (_,cd,ds) = ((makeInt ds,True),cd,[])
+
+-- Call when return is hit
+processCoord :: InputCollect -> InputCollect
+-- We've already processed the coord
+processCoord ic@(_,(_,_,True),_) = ic
+-- There is nothing to process
+processCoord ic@(_,_,[]) = ic
+-- Collect digits into the x coord
+processCoord (ct,(c,Nothing,_),ds) = (ct,(c,Just $ makeInt ds,False),[])
+-- Collect digits into the y coord
+processCoord (ct,(_,Just x,_),ds) = (ct,(Coord x . makeInt $ ds,Nothing,True),[])
 
 getCoord :: InputCollect -> Coord
-getCoord (_,(c,_,_)) = c
+getCoord (_,(c,_,_),_) = c
+
+rowSelected :: InputCollect -> Bool
+rowSelected (_,(_,Nothing,_),_) = False
+rowSelected (_,(_,Just _,_),_) = True
 
 coordMade :: InputCollect -> Bool
-coordMade (_,(_,_,made)) = made
-
-input :: InputCollect -> Int -> InputCollect
-input ic n
-  | not (countSelected ic) = countInput ic n
-  | not (coordMade ic)     = coordInput ic n
-  | otherwise              = ic
+coordMade (_,(_,_,made),_) = made
 
 validCount :: InputCollect -> Bool
-validCount ((c,_),_) = c >= 1 && c <= 9
+validCount ((c,_),_,_) = c >= 1 && c <= 9
 -- What is the max you can end with on a 5 board?
 
-onBoard :: Coord -> Board -> Bool
-onBoard c (Board ps hs) = c `elem` (ps ++ hs)
-
 validCoord :: InputCollect -> Bool
-validCoord (_,(c,_,_)) = onBoard c (makeBoard 5)
+validCoord (_,(c,_,_),_) = onBoard c (makeBoard 5) where
+  -- Can just do greater than/less than compare of x and y
+  onBoard c (Board ps hs) = c `elem` (ps ++ hs)
 
 coordCheck :: InputCollect -> Bool
 coordCheck ic = coordMade ic && validCoord ic
@@ -99,6 +120,7 @@ coordCheck ic = coordMade ic && validCoord ic
 -- PROMPTS STUFF
 nextPrompt :: Prompts -> Prompts
 nextPrompt ([],  bs,ic,wt) = ([],   bs,ic,wt)
+-- Keep at least one prompt in the current list
 nextPrompt ([p], bs,ic,wt) = ([p],  bs,ic,wt)
 nextPrompt (p:as,bs,ic,wt) = (as, p:bs,ic,wt)
 
@@ -107,58 +129,68 @@ prevPrompt (as,[],ic,wt) = (as,[],ic,wt)
 prevPrompt (as,p:bs,ic,wt) = (p:as,bs,ic,wt)
 
 resetPrompt :: Prompts -> Prompts
-resetPrompt (as,bs,_,wt) = (ps,[],emptyInputCol,wt) where
-  ps = reverse bs ++ as
+-- Hard reset everything, but keep WorldTrans
+resetPrompt = setTrans promptBase . getTrans
+-- -- Reverses the past prompts to put them at the beginning (zipper)
+-- -- Resets InputCollect to its empty state
+-- -- Preserves WorldTrans
+-- resetPrompt (as,bs,_,wt) = (ps,[],emptyInputCol,wt) where
+--   ps = reverse bs ++ as
 
--- Add in transformations
 getPrompt :: Prompts -> Picture
 getPrompt ([],_,_,_)    = blank
 getPrompt (p:as,_,_,wt) = transPicture wt . seqRender $ p
 
-promptInput :: Prompts -> Int -> Prompts
-promptInput ps@(as,bs,ic,wt) n = let
-  ic' = input ic n
-  in inputHelper (as,bs,ic',wt)
+-- Call on valid digit input
+digitInputP :: Prompts -> Int -> Prompts
+digitInputP (as,bs,ic,wt) n = (as,bs,digitInput ic n,wt)
 
-inputHelper :: Prompts -> Prompts
-inputHelper ps@(as,bs,ic,wt)
+-- Call on ENTER
+processInputP :: Prompts -> Prompts
+processInputP (as,bs,ic,wt)
+  -- We want to select a count first
+  -- The count must not be made (flag not set) in order to make it
+  -- Making the count will set the flag
+  -- We then go on to the next prompt
+  | not (countSelected ic) = nextPrompt (as,bs,processCount ic,wt)
+  -- After count is selected, make a coord
+  -- The coord must not be made (flag not set) in order to make it
+  -- We must processCoord TWICE, once for the row, once for the col
+
+  -- We haven't selected the row
+  -- Process the input, but don't try to solve,just prompt col
+  | not (coordMade ic) && not (rowSelected ic) = nextPrompt (as,bs,processCoord ic,wt)
+  -- We have selected the row, but not the col
+  -- Process the input, then solve
+  -- Solve helper will move to next
+  | not (coordMade ic) = solveHelper (as,bs,processCoord ic,wt)
+  -- Why are you hitting ENTER? There is nothing more to make
+  | otherwise = (as,bs,ic,wt) -- Maybe move next here?
+-- Maybe add intermediate prompt to start solving?
+
+solveHelper :: Prompts -> Prompts
+solveHelper ps@(as,bs,ic,wt)
   | inputCheck ps = let -- Everything's good to go
       start = removePeg (getCoord ic) (makeBoard 5)
       steps = solveFor start (getCount ic)
       ps'   = addSteps (as,bs,ic,wt) steps
       in nextPrompt ps'
-  | validCountP ps && not (coordMade' ps) = nextPrompt ps -- We got the count, but not the coord
-  | not . coordMade' $ ps = nextPrompt ps -- In the middle of getting coord, its okay
-  | otherwise = resetPrompt ps
-
-countSelected' :: Prompts -> Bool
-countSelected' (_,_,ic,_) = countSelected ic
-
-coordMade' :: Prompts -> Bool
-coordMade' (_,_,ic,_) = coordMade ic
-
-validCountP :: Prompts -> Bool
-validCountP (_,_,ic,_) = validCount ic
-
-validCoordP :: Prompts -> Bool
-validCoordP (_,_,ic,_) = validCoord ic
+  | otherwise = resetPrompt ps -- You messed up somewhere
 
 inputCheck :: Prompts -> Bool
-inputCheck ps =  countSelected' ps
-              && validCountP ps
-              && coordMade' ps -- Check
-              && validCoordP ps
+inputCheck (_,_,ic,_) =
+  countSelected ic && validCount ic -- Do we have a good count?
+  && coordMade ic && validCoord ic  -- Do we have a good coord?
 
-promptCheck :: Prompts -> Prompts
-promptCheck ps = if inputCheck ps then ps else resetPrompt ps
-
+-- Seq will include countPrompt, rowPrompt, and colPrompt
+-- Seqs is reserved for the solving steps
 onPrompt :: Prompts -> Bool
 onPrompt ([],_,_,_)      = False
 onPrompt (Seq _:_,_,_,_) = True
 onPrompt _               = False
 
 addSteps :: Prompts -> Maybe [Board] -> Prompts
-addSteps (as,bs,ic@((ct,_),(cd,_,_)),wt) Nothing = (as ++ failed,bs,ic,wt) where
+addSteps (as,bs,ic@((ct,_),(cd,_,_),_),wt) Nothing = (as ++ failed,bs,ic,wt) where
   msg = "No results for starting from " ++ show cd
         ++ " and ending with " ++ show ct
   failed = (:[]) . Seq . color white . scale 0.1 0.1 $ Text msg
@@ -169,7 +201,6 @@ addSteps (as,bs,ic,wt) (Just boards) = (as ++ [renderBoardsSeq boards],bs,ic,wt)
 -- Click the mouse to set mx and my
 -- When mouse is moved, new position is subtracted from start
 -- to find delta, which is added to translate
-
 
 baseTrans :: WorldTrans
 baseTrans = (baseScale,baseTranslate,baseMouse) where
@@ -215,8 +246,18 @@ setTrans (as,bs,ic,_) wt = (as,bs,ic,wt)
 -- Valid coord moves to solving/diplaying board
 eventHandler :: Event -> Prompts -> Prompts
 eventHandler (EventKey (Char c) Down _ _) ps
-  | onPrompt ps && isNumber c = promptInput ps (digitToInt c)
-  | c == 'r' || c == 'R' = setTrans promptBase . getTrans $ ps
+  -- We are looking for numbers and we got one
+  | onPrompt ps && isNumber c = digitInputP ps (digitToInt c)
+  -- Wherever we are, we want to start over
+  | c == 'r' || c == 'R' = resetPrompt ps
+  -- Character pressed is no good
+  | otherwise = ps
+eventHandler (EventKey (SpecialKey KeyEnter) Down _ _) ps
+  -- We are still looking for input, sowe can advance to the next stage
+  | onPrompt ps = processInputP ps
+  | otherwise = ps
+eventHandler (EventKey (SpecialKey KeyPadEnter) Down _ _) ps
+  | onPrompt ps = processInputP ps
   | otherwise = ps
 eventHandler (EventKey (SpecialKey KeyRight) Down _ _) ps@(a:as,bs,ic,wt)
   | not (onPrompt ps) = (nextSeq a : as,bs,ic,wt)
@@ -234,8 +275,9 @@ eventHandler (EventKey (MouseButton WheelDown) _ _ _) (as,bs,ic,wt) =
   (as,bs,ic,scaleDown wt)
 eventHandler (EventMotion m) (as,bs,ic,wt) = (as,bs,ic,moveMouse wt m)
 eventHandler _ ps = ps
-
--- TODO: Add prompt for desired number of end pegs
+-- Can hit enter without entering numbers
+-- Giving invalid coord resets to row prompt
+--   Accepts inputs in proper order though (count,row,col)
 
 pegCountPrompt :: Sequence
 pegCountPrompt = Seq msg where

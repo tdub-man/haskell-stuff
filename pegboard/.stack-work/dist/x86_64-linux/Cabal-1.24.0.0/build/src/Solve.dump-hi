@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-09 05:29:18.012515 UTC
+2016-11-12 22:41:08.996461 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 8001
-  interface hash: f3c8ed3ed5f8a8a95f49f5a09f9c4fe3
-  ABI hash: 94fd34708324cd464ff92f03adfd625e
+  interface hash: 96d278f2fa0cf863875b40a763915008
+  ABI hash: def08dbf49d80800e537abe23f98fcce
   export-list hash: 37f488ad4b3919da239b5a72a04fc9d7
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -192,11 +192,12 @@ a8fb7c5b426d4d381899bce7bc3b9e69
     (PegBoard.Coord, GHC.Base.Maybe GHC.Types.Int, GHC.Types.Bool)
 c32df30503eec86196c8fef8959ea327
   type CountCollect = (GHC.Types.Int, GHC.Types.Bool)
-ace9c7b7d68b72d213327f3cd69bff12
-  type InputCollect = (Solve.CountCollect, Solve.CoordCollect)
+0e8c9894f1def2b1a8b36f66a149971c
+  type InputCollect =
+    (Solve.CountCollect, Solve.CoordCollect, [GHC.Types.Int])
 fcf146e5f3506c1dae1db0a963fa118b
   type MouseMove = (GHC.Types.Bool, GHC.Types.Float, GHC.Types.Float)
-f7613eadd31bfba6ae627c576d6f2fc3
+eafbd83c9ee212fc49b55827e81f097b
   type Prompts =
     ([Solve.Sequence], [Solve.Sequence], Solve.InputCollect,
      Solve.WorldTrans)
@@ -211,16 +212,17 @@ f7613eadd31bfba6ae627c576d6f2fc3
   type Translate = (GHC.Types.Float, GHC.Types.Float)
 75fcf3f4c67df13dfd10b749bf0e20bc
   type WorldTrans = (Solve.Scale, Solve.Translate, Solve.MouseMove)
-8f81f3644754c35fc54912c72b383990
+0d843803ba0f62dafa222972fb1a7a0f
   emptyInputCol :: Solve.InputCollect
   {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((Solve.promptSolve14, Solve.promptSolve11)) -}
-a8d54aed251cf2f61fe7f4d0b4df8211
+     Unfolding: ((Solve.promptSolve14, Solve.promptSolve11,
+                  GHC.Types.[] @ GHC.Types.Int)) -}
+5ee552d89ba5185f5083461449a8b737
   promptSolve :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-7f84ffb5d898ef038ade9ff14e99d903
+321c23776a9c540b7c41885a960b9f8d
   promptSolve1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -305,7 +307,7 @@ fc6aa2a46c333464c5cf4b91826181ef
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Solve.promptSolve20) -}
-e3bf223983b9bbc7b741c4b8ae8b4265
+b4f031ff04f40509a9829236757bcb61
   promptSolve2 ::
     GHC.Types.Float
     -> Solve.Prompts
@@ -375,7 +377,7 @@ ad4329aab74a02d88cc7500adf6313e5
 09008205ef4deb8a59f6cbdb4cab53c7
   promptSolve29 :: GHC.Integer.Type.Integer
   {- HasNoCafRefs, Unfolding: (1) -}
-e4720d7b194d2e36686185c84aa4713e
+30d3ba6df85ec6cda26218745d1d0360
   promptSolve3 ::
     Graphics.Gloss.Internals.Interface.Event.Event
     -> Solve.Prompts
@@ -473,7 +475,7 @@ ae0cfbe5c32b907c2320cc694b070296
 33a45c069433b180b2161ff14ae391d1
   promptSolve39 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# 8.0#) -}
-fcc57f0a8b48ccb9a65402068f22a62e
+57b2ce0711ab6505c65c9db5359250f8
   promptSolve4 ::
     Solve.Prompts
     -> GHC.Prim.State# GHC.Prim.RealWorld
@@ -550,7 +552,7 @@ c11ba574af4b9271fa3cecf43f75691b
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
                    Solve.promptSolve51
                    Solve.promptSolve50) -}
-85a89384e1260a18c469842183be2866
+3462f3a4a96424ce5d23b52cf38cb188
   promptSolve5 ::
     ([Solve.Sequence], [Solve.Sequence], Solve.InputCollect,
      Solve.WorldTrans)
