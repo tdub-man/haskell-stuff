@@ -9,9 +9,93 @@ import Graphics.Gloss
 import Graphics.Gloss.Interface.Pure.Game
 import Data.Char
 
-data Sequence = Seq   Picture            -- For the prompts
-              | Seqs [Picture] [Picture] -- For the solving steps
-              deriving (Eq)
+type Digits = [Int]
+
+data Inputs = InputCount { count :: Int
+                         , digits :: Digits
+                         }
+            | InputCoord { coord :: Coord
+                         , xCoord :: Maybe Int
+                         , digits :: Digits
+                         }
+            | InputSolve [Picture]
+            | None deriving (Eq)
+
+data PSequence = PSeq   Picture            -- For the prompts
+               | PSeqs [Picture] [Picture] -- For the solving steps
+               deriving (Eq)
+
+data Prompt = Prompt {
+    input :: Inputs -- Holds the input stuff
+  , handle :: Prompt -> Event -> Prompt -- Pass numbers to input, change display, process, check
+  , process :: Inputs -> Inputs -- Processes input values into an output value
+  , display :: PSequence -- The prompt/display
+  , check :: Inputs -> Bool -- Check if input gathered
+  , completed :: Bool -- Completion flag
+  }
+
+--------------------------------------------------------------------------------
+
+-- Prompts
+-- Should a prompt reset after invalid input? Better than waiting til the end?
+-- If we dont advance to next prompt until current is completed, we have to
+
+countPrompt :: Prompt
+countPrompt =
+  Prompt baseInput handler proc disp chck comp where
+    baseInput = InputCount 0 []
+    handler (Prompt (InputCount ct ds) h p d ck cp) (EventKey (Char c) Down _ _)
+      | not cp && isDigit c = Prompt i h p d ck cp where
+          i = InputCount ct (digitToInt c : ds)
+    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck cp' where
+          i' = p i
+          cp' = ck i'
+    handler pt _ = pt
+    proc (InputCount _ ds) = InputCount (makeInt ds) []
+    disp = pegCountPrompt
+    chck (InputCount 0 []) = False
+    chck (InputCount ct _) = ct >= 1 && ct <= 13 -- Maximum end pegs?
+    comp = False
+
+coordPrompt :: Prompt
+coordPrompt =
+  Prompt baseInput handler proc disp chck comp where
+    baseInput = InputCoord (Coord 0 0) Nothing []
+    handler (Prompt (InputCoord cd x ds) h p d ck cp) (EventKey (Char c) Down _ _)
+      | not cp && isDigit c = Prompt i h p d ck cp where
+          i = InputCoord cd x (digitToInt c : ds)
+    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck cp' where
+          i' = p i
+          cp' = ck i'
+    handler pt _ = pt
+    proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
+    proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
+    disp = rowPrompt -- Combine rowPrompt and colPrompt
+    chck (InputCoord (Coord 0 0) _ _) = False
+    chck (InputCoord c _ _) = c `elem` (ps ++ hs) where
+      (Board ps hs) = makeBoard 5
+    comp = False
+
+solvePrompt :: Prompt
+solvePrompt =
+  Prompt baseInput handler proc disp chck comp where
+    baseInput = InputSolve []
+    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck True where
+          i' = p i -- How do I get the coord and count here?
+    handler pt _ = pt
+    proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
+    proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
+    disp = rowPrompt -- Combine rowPrompt and colPrompt
+    chck (InputCoord (Coord 0 0) _ _) = False
+    chck (InputCoord c _ _) = c `elem` (ps ++ hs) where
+      (Board ps hs) = makeBoard 5
+    comp = False
+
+--------------------------------------------------------------------------------
+
 type CountCollect = (Int,Bool) -- Count, count selected flag
 type CoordCollect = (Coord,Maybe Int,Bool) -- Coord, x holder, coord made flag
 type InputCollect = (CountCollect,CoordCollect,[Int]) -- [int] for holding inut digits
@@ -22,7 +106,7 @@ type Scale = Float
 type Translate = (Float,Float)
 type WorldTrans = (Scale,Translate,MouseMove) -- Scale, Translate, MouseStart
 
-type Prompts = ([Sequence],[Sequence],InputCollect,WorldTrans)
+type Prompts = ([PSequence],[PSequence],InputCollect,WorldTrans)
 
 -- TODO Take input greater than one digit
 -- put numbers onto a list
@@ -38,23 +122,23 @@ solveFor b n = solution where
 --------------------------------------------------------------------------------
 
 -- SEQUENCE STUFF
-nextSeq :: Sequence -> Sequence
-nextSeq (Seq p) = Seq p
-nextSeq (Seqs [] bs) = Seqs [] bs
-nextSeq (Seqs [a] bs) = Seqs [a] bs
-nextSeq (Seqs (a:as) bs) = Seqs as (a:bs)
+nextSeq :: PSequence -> PSequence
+nextSeq (PSeq p) = PSeq p
+nextSeq (PSeqs [] bs) = PSeqs [] bs
+nextSeq (PSeqs [a] bs) = PSeqs [a] bs
+nextSeq (PSeqs (a:as) bs) = PSeqs as (a:bs)
 
-prevSeq :: Sequence -> Sequence
-prevSeq (Seq p) = Seq p
-prevSeq (Seqs as []) = Seqs as []
-prevSeq (Seqs as (b:bs)) = Seqs (b:as) bs
+prevSeq :: PSequence -> PSequence
+prevSeq (PSeq p) = PSeq p
+prevSeq (PSeqs as []) = PSeqs as []
+prevSeq (PSeqs as (b:bs)) = PSeqs (b:as) bs
 
-seqRender :: Sequence -> Picture
-seqRender (Seq  b)     = b
-seqRender (Seqs as bs) = head as
+seqRender :: PSequence -> Picture
+seqRender (PSeq  b)     = b
+seqRender (PSeqs as bs) = head as
 
-renderBoardsSeq :: [Board] -> Sequence
-renderBoardsSeq bs = Seqs (map renderBoard bs) []
+renderBoardsSeq :: [Board] -> PSequence
+renderBoardsSeq bs = PSeqs (map renderBoard bs) []
 --------------------------------------------------------------------------------
 
 -- INPUTCOLLECT STUFF
@@ -72,7 +156,8 @@ digitInput (ct,cd,ds) x = (ct,cd,x:ds)
 
 -- Least significant digit first
 makeInt :: [Int] -> Int
-makeInt = sum . zipWith (*) (iterate (*10) 1)
+makeInt [] = 0
+makeInt ds = sum . zipWith (*) (iterate (*10) 1) $ ds
 
 -- Call when return is hit
 processCount :: InputCollect -> InputCollect
@@ -182,18 +267,18 @@ inputCheck (_,_,ic,_) =
   countSelected ic && validCount ic -- Do we have a good count?
   && coordMade ic && validCoord ic  -- Do we have a good coord?
 
--- Seq will include countPrompt, rowPrompt, and colPrompt
--- Seqs is reserved for the solving steps
+-- PSeq will include countPrompt, rowPrompt, and colPrompt
+-- PSeqs is reserved for the solving steps
 onPrompt :: Prompts -> Bool
 onPrompt ([],_,_,_)      = False
-onPrompt (Seq _:_,_,_,_) = True
+onPrompt (PSeq _:_,_,_,_) = True
 onPrompt _               = False
 
 addSteps :: Prompts -> Maybe [Board] -> Prompts
 addSteps (as,bs,ic@((ct,_),(cd,_,_),_),wt) Nothing = (as ++ failed,bs,ic,wt) where
   msg = "No results for starting from " ++ show cd
         ++ " and ending with " ++ show ct
-  failed = (:[]) . Seq . color white . scale 0.1 0.1 $ Text msg
+  failed = (:[]) . PSeq . color white . scale 0.1 0.1 $ Text msg
 addSteps (as,bs,ic,wt) (Just boards) = (as ++ [renderBoardsSeq boards],bs,ic,wt)
 --------------------------------------------------------------------------------
 
@@ -249,7 +334,7 @@ eventHandler (EventKey (Char c) Down _ _) ps
   -- We are looking for numbers and we got one
   | onPrompt ps && isNumber c = digitInputP ps (digitToInt c)
   -- Wherever we are, we want to start over
-  | c == 'r' || c == 'R' = resetPrompt ps
+  | c == 'r' || c == 'R' = resetPrompt ps -- Keep global reset check, otherwise pass the event
   -- Character pressed is no good
   | otherwise = ps
 eventHandler (EventKey (SpecialKey KeyEnter) Down _ _) ps
@@ -279,12 +364,12 @@ eventHandler _ ps = ps
 -- Giving invalid coord resets to row prompt
 --   Accepts inputs in proper order though (count,row,col)
 
-pegCountPrompt :: Sequence
-pegCountPrompt = Seq msg where
+pegCountPrompt :: PSequence
+pegCountPrompt = PSeq msg where
   msg = color white . scale 0.1 0.1 $ Text "Enter number of pegs to end with"
 
-rowPrompt :: Sequence
-rowPrompt = Seq labeledPrompt where
+rowPrompt :: PSequence
+rowPrompt = PSeq labeledPrompt where
   board = renderBoard . makeBoard $ 5
   rowLabels = pictures . offset 0 16 $ [ scale 0.1 0.1 $ Text (show n) | n <- [5,4..1] ]
   rowLabels' = translate 0 (-4) . color white $ rowLabels
@@ -292,8 +377,8 @@ rowPrompt = Seq labeledPrompt where
   rowLines' = color white rowLines
   labeledPrompt = translate (-48) 0 . pictures . offset 16 0 $ [rowLabels',rowLines',board]
 
-colPrompt :: Sequence
-colPrompt = Seq labeledPrompt where
+colPrompt :: PSequence
+colPrompt = PSeq labeledPrompt where
   board = renderBoard . makeBoard $ 5
   colLabels = [ translate 20 36 . scale 0.1 0.1 . Text $ show n | n <- [5,4..1] ]
   colLines = replicate 5 (Line [(0,0),(16,32)])
