@@ -137,6 +137,16 @@ stepsPrompt =
     chck _ = False
     comp = False
 
+nonePrompt :: Prompt
+nonePrompt =
+  Prompt baseInput handler proc sdisp chck comp where
+    baseInput = None
+    handler pt _ = pt
+    proc = id
+    sdisp = PSeq failPic where
+      failPic = color white . scale 0.1 0.1 $ Text "Failed to find solution"
+    chck _ = False
+    comp = False
 --------------------------------------------------------------------------------
 
 type CountCollect = (Int,Bool) -- Count, count selected flag
@@ -258,7 +268,7 @@ prevPrompt (as,p:bs,ic,wt) = (p:as,bs,ic,wt)
 
 resetPrompt :: Prompts -> Prompts
 -- Hard reset everything, but keep WorldTrans
-resetPrompt = setTrans promptBase . getTrans
+resetPrompt p = setTrans p . getTrans $ p
 -- -- Reverses the past prompts to put them at the beginning (zipper)
 -- -- Resets InputCollect to its empty state
 -- -- Preserves WorldTrans
@@ -434,17 +444,58 @@ colPrompt = PSeq labeledPrompt where
 
 -- Will need special type to hold prompt zipper and worldTrans
 
-promptBase :: ([Prompt],[Prompt])
-promptBase = ([countPrompt,coordPrompt,solvePrompt,stepsPrompt],[])
+-- type PromptZip = ([Prompt],[Prompt])
+data PromptZip = PromptZip { current :: Prompt
+                           , next :: [Prompt]
+                           , prev :: [Prompt]
+                           }
 
-promptNext :: ([Prompt],[Prompt]) -> ([Prompt],[Prompt])
-promptNext pt@([],_) = pt
-promptNext pt@([x],_) = pt
-promptNext (x:xs,ys) = (xs,x:ys)
+promptBase :: PromptZip
+promptBase = PromptZip countPrompt [coordPrompt,solvePrompt,stepsPrompt,nonePrompt] []
 
-promptPrev :: ([Prompt],[Prompt]) -> ([Prompt],[Prompt])
-promptPrev pt@(_,[]) = pt
-promptPrev (xs,y:ys) = (y:xs,ys)
+promptNext :: PromptZip -> PromptZip
+promptNext pz
+  | null . next $ pz = pz
+  | otherwise = PromptZip (head nxt) (tail nxt) (current pz : prev pz) where
+      nxt = next pz
+
+promptPrev :: PromptZip -> PromptZip
+promptPrev pz
+  | null . prev $ pz = pz
+  | otherwise = PromptZip (head prv) (current pz : next pz) (tail prv) where
+      prv = prev pz
+
+resetPromptZip :: PromptZip -> PromptZip
+resetPromptZip pz = PromptZip cur nxt' [] where
+  prv = reverse . prev $ pz
+  nxt = prv ++ [current pz] ++ next pz
+  cur = head nxt -- Impossible for nxt to be empty, there must be something in old current
+  nxt' = tail nxt
+
+eventHandler' :: Event -> PromptZip -> PromptZip
+eventHandler' (EventKey (Char 'r') Down _ _) pz = resetPromptZip pz
+eventHandler' (EventKey (Char 'R') Down _ _) pz = resetPromptZip pz
+-- Pass input between prompts, switching between contexts?
+-- Pattern match on promptSolve, get data from previous prompts, solve, set steps on next prompt (promptSteps)
+eventHandler' event pz -- guard promptSolve on ENTER keys
+  | (input . current $ pz) == InputSolve = let
+      crd = coord . input . current . promptPrev $ pz
+      cnt = count . input . current . promptPrev . promptPrev $ pz
+      brd = makeBoard 5
+      boards = (removePeg crd brd) `solveFor` cnt
+      in case boards of
+              Nothing -> promptNext . promptNext $ pz -- Skip to nonePrompt
+              Just bs -> pnxt { current = cur' } where
+                pnxt = promptNext pz -- move zipper to stepsPrompt
+                cur = current pnxt -- get stepsPrompt
+                cur' = cur { seqDisp = PSeqs (map renderBoard bs) [] } -- Updated current
+  | otherwise = pz'' where
+      cur = current pz
+      cur' = (handle cur) cur event
+      pz' = pz { current = cur' }
+      pz'' = if (completed cur')
+            then promptNext pz'
+            else pz'
 
 promptSolve :: IO ()
 promptSolve = play
@@ -452,8 +503,8 @@ promptSolve = play
   black
   0
   promptBase -- world
-  getPrompt -- world -> Picture
-  eventHandler -- Event -> world -> world
+  (seqRender . seqDisp . current)
+  eventHandler' -- Event -> world -> world
   (\_ x -> x)
 
 --                            1 \
