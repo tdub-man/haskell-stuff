@@ -283,8 +283,11 @@ resetPromptZip pz = PromptZip cur nxt' [] (worldT pz) where
 eventHandler' :: Event -> PromptZip -> PromptZip
 eventHandler' (EventKey (Char 'r') Down _ _) pz = resetPromptZip pz
 eventHandler' (EventKey (Char 'R') Down _ _) pz = resetPromptZip pz
--- Pass input between prompts, switching between contexts?
--- Pattern match on promptSolve, get data from previous prompts, solve, set steps on next prompt (promptSteps)
+eventHandler' (EventKey (MouseButton LeftButton) Down _ m) pz = pz { worldT = setMouse (worldT pz) m }
+eventHandler' (EventKey (MouseButton LeftButton) Up _ m) pz = pz { worldT = resetMouse (worldT pz) }
+eventHandler' (EventKey (MouseButton WheelUp) _ _ _) pz = pz { worldT = scaleUp (worldT pz) }
+eventHandler' (EventKey (MouseButton WheelDown) _ _ _) pz = pz { worldT = scaleDown (worldT pz) }
+eventHandler' (EventMotion m) pz = pz { worldT = moveMouse (worldT pz) m }
 eventHandler' event pz -- guard promptSolve on ENTER keys
   | (input . current $ pz) == InputSolve = let
       crd = coord . input . current . promptPrev $ pz
