@@ -18,8 +18,15 @@ data Inputs = InputCount { count :: Int
                          , xCoord :: Maybe Int
                          , digits :: Digits
                          }
-            | InputSolve [Picture]
+            | InputSolve
+            | InputSteps
             | None deriving (Eq)
+
+defaultInputCount :: Inputs
+defaultInputCount = InputCount 0 []
+
+defaultInputCoord :: Inputs
+defaultInputCoord = InputCoord (Coord 0 0) Nothing []
 
 data PSequence = PSeq   Picture            -- For the prompts
                | PSeqs [Picture] [Picture] -- For the solving steps
@@ -27,9 +34,9 @@ data PSequence = PSeq   Picture            -- For the prompts
 
 data Prompt = Prompt {
     input :: Inputs -- Holds the input stuff
-  , handle :: Prompt -> Event -> Prompt -- Pass numbers to input, change display, process, check
+  , handle :: Prompt -> Event -> Prompt -- Pass numbers to input, change seqDisp, process, check
   , process :: Inputs -> Inputs -- Processes input values into an output value
-  , display :: PSequence -- The prompt/display
+  , seqDisp :: PSequence -- The prompt/seqDisp, these should really be one thing for the prompts, so nothing to reset
   , check :: Inputs -> Bool -- Check if input gathered
   , completed :: Bool -- Completion flag
   }
@@ -40,17 +47,33 @@ data Prompt = Prompt {
 -- Should a prompt reset after invalid input? Better than waiting til the end?
 -- If we dont advance to next prompt until current is completed, we have to
 
+coordSeq :: PSequence
+coordSeq = PSeq labeledPrompt' where
+  board = renderBoard . makeBoard $ 5
+  rowLabels = pictures . offset 0 16 $ [ scale 0.1 0.1 $ Text (show n) | n <- [5,4..1] ]
+  rowLabels' = translate 0 (-4) . color white $ rowLabels
+  rowLines  = pictures [ Line [(0,16*n),(l+16,16*n)] | (n,l) <- zip [1..5] [0,8..32] ]
+  rowLines' = color white rowLines
+  colLabels = [ translate 20 36 . scale 0.1 0.1 . Text $ show n | n <- [5,4..1] ]
+  colLines = replicate 5 (Line [(0,0),(16,32)])
+  colLabelLines = [ pictures [lb,ln] | (lb,ln) <- zip colLabels colLines ]
+  colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
+  labeledPrompt = pictures [board,colLabelLines']
+  labeledPrompt' = translate (-48) 0 . pictures . offset 16 0 $ [rowLabels',rowLines',labeledPrompt]
+
 countPrompt :: Prompt
 countPrompt =
   Prompt baseInput handler proc disp chck comp where
-    baseInput = InputCount 0 []
-    handler (Prompt (InputCount ct ds) h p d ck cp) (EventKey (Char c) Down _ _)
-      | not cp && isDigit c = Prompt i h p d ck cp where
-          i = InputCount ct (digitToInt c : ds)
-    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
-      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck cp' where
-          i' = p i
-          cp' = ck i'
+    baseInput = defaultInputCount
+    handler p (EventKey (Char c) Down _ _)
+      | not (completed p) && isDigit c = p { input = i' } where
+          i = input p
+          i' = i { digits = digitToInt c : (digits i) }
+    handler p (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = p { input = i', completed = cp } where
+          i = (process p) (input p)
+          cp = (check p) i
+          i' = if cp then i else defaultInputCount
     handler pt _ = pt
     proc (InputCount _ ds) = InputCount (makeInt ds) []
     disp = pegCountPrompt
@@ -61,37 +84,57 @@ countPrompt =
 coordPrompt :: Prompt
 coordPrompt =
   Prompt baseInput handler proc disp chck comp where
-    baseInput = InputCoord (Coord 0 0) Nothing []
-    handler (Prompt (InputCoord cd x ds) h p d ck cp) (EventKey (Char c) Down _ _)
-      | not cp && isDigit c = Prompt i h p d ck cp where
-          i = InputCoord cd x (digitToInt c : ds)
-    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
-      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck cp' where
-          i' = p i
-          cp' = ck i'
+    baseInput = defaultInputCoord
+    handler p (EventKey (Char c) Down _ _)
+      | not (completed p) && isDigit c = p { input = i' } where
+          i = input p
+          i' = i { digits = digitToInt c : (digits i) }
+    handler p (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = p { input = i', completed = cp } where
+          i = (process p) (input p)
+          cp = (check p) i'
+          i' = case (i,cp) of
+                  (InputCoord _ (Just _) _,_) -> i' -- In the middle of getting coord, don't reset
+                  (_,False) -> defaultInputCoord -- The coord is "completed", but no good, reset
+                  _ -> i' -- The coord is completed and good, don't reset
     handler pt _ = pt
     proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
     proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
-    disp = rowPrompt -- Combine rowPrompt and colPrompt
+    disp = coordSeq
     chck (InputCoord (Coord 0 0) _ _) = False
     chck (InputCoord c _ _) = c `elem` (ps ++ hs) where
       (Board ps hs) = makeBoard 5
     comp = False
 
+-- The purpose of this isn't to solve the board, only to notify
+-- the user that it is ready to be solved (and so it doesn't look
+-- stuck at the last prompt)
 solvePrompt :: Prompt
 solvePrompt =
   Prompt baseInput handler proc disp chck comp where
-    baseInput = InputSolve []
-    handler (Prompt i h p d ck cp) (EventKey (SpecialKey enter) Down _ _)
-      | enter == KeyEnter || enter == KeyPadEnter = Prompt i' h p d ck True where
-          i' = p i -- How do I get the coord and count here?
+    baseInput = InputSolve
+    handler p (EventKey (SpecialKey enter) Down _ _)
+      | enter == KeyEnter || enter == KeyPadEnter = p { completed = True }
     handler pt _ = pt
-    proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
-    proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
-    disp = rowPrompt -- Combine rowPrompt and colPrompt
-    chck (InputCoord (Coord 0 0) _ _) = False
-    chck (InputCoord c _ _) = c `elem` (ps ++ hs) where
-      (Board ps hs) = makeBoard 5
+    proc = id
+    disp = coordSeq -- Change to intermediate "solve" prompt
+    chck _ = True
+    comp = False
+
+-- Have a list of the prompts
+-- Move from one to the next when completed
+-- After solve prompt, extract info from other prompts
+-- Solve board and seqDisp results in steps prompt
+stepsPrompt :: Prompt
+stepsPrompt =
+  Prompt baseInput handler proc sdisp chck comp where
+    baseInput = InputSteps
+    handler pt (EventKey (SpecialKey KeyLeft) Down _ _) = pt { seqDisp = prevSeq (seqDisp pt) }
+    handler pt (EventKey (SpecialKey KeyRight) Down _ _) = pt { seqDisp = nextSeq (seqDisp pt) }
+    handler pt _ = pt
+    proc = id
+    sdisp = PSeqs [] [] -- Change to steps
+    chck _ = False
     comp = False
 
 --------------------------------------------------------------------------------
@@ -386,17 +429,31 @@ colPrompt = PSeq labeledPrompt where
   colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
   labeledPrompt = pictures [board,colLabelLines']
 
-promptBase :: Prompts
-promptBase = ([pegCountPrompt,rowPrompt,colPrompt],[],emptyInputCol,baseTrans)
+-- promptBase :: Prompts
+-- promptBase = ([pegCountPrompt,rowPrompt,colPrompt],[],emptyInputCol,baseTrans)
+
+-- Will need special type to hold prompt zipper and worldTrans
+
+promptBase :: ([Prompt],[Prompt])
+promptBase = ([countPrompt,coordPrompt,solvePrompt,stepsPrompt],[])
+
+promptNext :: ([Prompt],[Prompt]) -> ([Prompt],[Prompt])
+promptNext pt@([],_) = pt
+promptNext pt@([x],_) = pt
+promptNext (x:xs,ys) = (xs,x:ys)
+
+promptPrev :: ([Prompt],[Prompt]) -> ([Prompt],[Prompt])
+promptPrev pt@(_,[]) = pt
+promptPrev (xs,y:ys) = (y:xs,ys)
 
 promptSolve :: IO ()
 promptSolve = play
   (InWindow "SolvePrompted" (600,600) (0,0))
   black
   0
-  promptBase
-  getPrompt
-  eventHandler
+  promptBase -- world
+  getPrompt -- world -> Picture
+  eventHandler -- Event -> world -> world
   (\_ x -> x)
 
 --                            1 \
