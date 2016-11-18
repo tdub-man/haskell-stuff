@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-12 22:41:08.996461 UTC
+2016-11-18 22:57:31.248062 UTC
 
 interface pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve 8001
-  interface hash: 96d278f2fa0cf863875b40a763915008
-  ABI hash: def08dbf49d80800e537abe23f98fcce
+  interface hash: 75ba2ba83c82bc819371e6f2b625c311
+  ABI hash: 680f12207d788fecc15f6f05e1bb214a
   export-list hash: 37f488ad4b3919da239b5a72a04fc9d7
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: b159a15c55fa7c6870cb2eb79bbae5a5
@@ -62,6 +62,7 @@ import  -/  base-4.9.0.0:GHC.List 13d2451194c1c6e53b4f4f07947736dd
 import  -/  base-4.9.0.0:GHC.Num 48f506a8f4ecf06285d0a0706594dcc0
 import  -/  base-4.9.0.0:GHC.Real 08bf4acb5f2508f89d6fbcd57fe232e9
 import  -/  base-4.9.0.0:GHC.Show 952347a6ab730bcb25c0854d8bc6ca51
+import  -/  base-4.9.0.0:GHC.Unicode 2343b0871604cc5116abba8f24d75b42
 import  -/  base-4.9.0.0:Prelude b9bddb97799837fe67a8d00939a5b6c3
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  ghc-prim-0.5.0.0:GHC.Types 7378e41b7749213c8c88ceb6b0665d4c
@@ -92,36 +93,116 @@ import  -/  PlayGame 33dcc890daf23cb58c28e0429f285f74
   exports: db98f7a3543cf5dfbe75863e31383cd6
   collectLog d50cb14233bc66d28cd8bfc3ee05c610
   playGameLog 57bb2db0471df9649c8412185aa8700d
-02d633715151042965876b3195ad8c89
-  $fEqSequence :: GHC.Classes.Eq Solve.Sequence
+0aec2ddc30f818ff91524f0ccfdba512
+  $fEqInputs :: GHC.Classes.Eq Solve.Inputs
   DFunId
   {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
      Unfolding: DFun:.
-                  @ Solve.Sequence Solve.$fEqSequence_$c== Solve.$fEqSequence_$c/= -}
-02d633715151042965876b3195ad8c89
-  $fEqSequence_$c/= ::
-    Solve.Sequence -> Solve.Sequence -> GHC.Types.Bool
+                  @ Solve.Inputs Solve.$fEqInputs_$c== Solve.$fEqInputs_$c/= -}
+0aec2ddc30f818ff91524f0ccfdba512
+  $fEqInputs_$c/= :: Solve.Inputs -> Solve.Inputs -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
      Unfolding: InlineRule (2, True, False)
-                (\ (a :: Solve.Sequence) (b :: Solve.Sequence) ->
-                 case Solve.$fEqSequence_$c== a b of wild {
+                (\ (a :: Solve.Inputs) (b :: Solve.Inputs) ->
+                 case Solve.$fEqInputs_$c== a b of wild {
                    GHC.Types.False -> GHC.Types.True
                    GHC.Types.True -> GHC.Types.False }) -}
-02d633715151042965876b3195ad8c89
-  $fEqSequence_$c== ::
-    Solve.Sequence -> Solve.Sequence -> GHC.Types.Bool
+0aec2ddc30f818ff91524f0ccfdba512
+  $fEqInputs_$c== :: Solve.Inputs -> Solve.Inputs -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
-     Unfolding: (\ (ds :: Solve.Sequence) (ds1 :: Solve.Sequence) ->
+     Unfolding: (\ (ds :: Solve.Inputs) (ds1 :: Solve.Inputs) ->
                  case ds of wild {
-                   Solve.Seq a1
+                   Solve.InputCount a1 a2
                    -> case ds1 of wild1 {
-                        Solve.Seq b1
+                        DEFAULT -> GHC.Types.False
+                        Solve.InputCount b1 b2
+                        -> case a1 of wild2 { GHC.Types.I# x6 ->
+                           case b1 of wild3 { GHC.Types.I# y ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.==# x6 y) of wild4 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True -> GHC.Classes.$fEq[]_$s$c== a2 b2 } } } }
+                   Solve.InputCoord a1 a2 a3
+                   -> case ds1 of wild1 {
+                        DEFAULT -> GHC.Types.False
+                        Solve.InputCoord b1 b2 b3
+                        -> case a1 of ww { PegBoard.Coord ww1 ww2 ->
+                           case ww1 of ww3 { GHC.Types.I# ww4 ->
+                           case b1 of ww5 { PegBoard.Coord ww6 ww7 ->
+                           case ww6 of ww8 { GHC.Types.I# ww9 ->
+                           case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.==# ww4 ww9) of wild2 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True
+                             -> case ww2 of wild3 { GHC.Types.I# x6 ->
+                                case ww7 of wild4 { GHC.Types.I# y ->
+                                case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# x6 y) of wild5 {
+                                  GHC.Types.False -> GHC.Types.False
+                                  GHC.Types.True
+                                  -> case a2 of wild6 {
+                                       GHC.Base.Nothing
+                                       -> case b2 of wild7 {
+                                            GHC.Base.Nothing -> GHC.Classes.$fEq[]_$s$c== a3 b3
+                                            GHC.Base.Just ipv -> GHC.Types.False }
+                                       GHC.Base.Just a4
+                                       -> case b2 of wild7 {
+                                            GHC.Base.Nothing -> GHC.Types.False
+                                            GHC.Base.Just b4
+                                            -> case a4 of wild8 { GHC.Types.I# x7 ->
+                                               case b4 of wild9 { GHC.Types.I# y1 ->
+                                               case GHC.Prim.tagToEnum#
+                                                      @ GHC.Types.Bool
+                                                      (GHC.Prim.==# x7 y1) of wild10 {
+                                                 GHC.Types.False -> GHC.Types.False
+                                                 GHC.Types.True
+                                                 -> GHC.Classes.$fEq[]_$s$c==
+                                                      a3
+                                                      b3 } } } } } } } } } } } } } }
+                   Solve.InputSolve
+                   -> case ds1 of wild1 {
+                        DEFAULT -> GHC.Types.False Solve.InputSolve -> GHC.Types.True }
+                   Solve.InputSteps
+                   -> case ds1 of wild1 {
+                        DEFAULT -> GHC.Types.False Solve.InputSteps -> GHC.Types.True }
+                   Solve.None
+                   -> case ds1 of wild1 {
+                        DEFAULT -> GHC.Types.False Solve.None -> GHC.Types.True } }) -}
+ac02ef4a3ac55a14c11ce35db172d3c9
+  $fEqPSequence :: GHC.Classes.Eq Solve.PSequence
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Solve.PSequence
+                  Solve.$fEqPSequence_$c==
+                  Solve.$fEqPSequence_$c/= -}
+ac02ef4a3ac55a14c11ce35db172d3c9
+  $fEqPSequence_$c/= ::
+    Solve.PSequence -> Solve.PSequence -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: Solve.PSequence) (b :: Solve.PSequence) ->
+                 case Solve.$fEqPSequence_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+ac02ef4a3ac55a14c11ce35db172d3c9
+  $fEqPSequence_$c== ::
+    Solve.PSequence -> Solve.PSequence -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (ds :: Solve.PSequence) (ds1 :: Solve.PSequence) ->
+                 case ds of wild {
+                   Solve.PSeq a1
+                   -> case ds1 of wild1 {
+                        Solve.PSeq b1
                         -> Graphics.Gloss.Internals.Data.Picture.$fEqPicture_$c== a1 b1
-                        Solve.Seqs ipv ipv1 -> GHC.Types.False }
-                   Solve.Seqs a1 a2
+                        Solve.PSeqs ipv ipv1 -> GHC.Types.False }
+                   Solve.PSeqs a1 a2
                    -> case ds1 of wild1 {
-                        Solve.Seq ipv -> GHC.Types.False
-                        Solve.Seqs b1 b2
+                        Solve.PSeq ipv -> GHC.Types.False
+                        Solve.PSeqs b1 b2
                         -> case GHC.Classes.$fEq[]_$c==
                                   @ Graphics.Gloss.Internals.Data.Picture.Picture
                                   Graphics.Gloss.Internals.Data.Picture.$fEqPicture
@@ -134,42 +215,162 @@ import  -/  PlayGame 33dcc890daf23cb58c28e0429f285f74
                                   Graphics.Gloss.Internals.Data.Picture.$fEqPicture
                                   a2
                                   b2 } } }) -}
-6304ab382e0d433401e266af2fc6343b
-  $tc'Seq :: GHC.Types.TyCon
+463c4116cbdcf5034dc16b556c5a6a39
+  $tc'InputCoord :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
      Unfolding: (GHC.Types.TyCon
-                   1195181283107584671##
-                   5930153782961580035##
+                   13608699889093881616##
+                   14022107699697828055##
                    Solve.$trModule
-                   Solve.$tc'Seq1) -}
-76dbb0ed23172f3186d8529c48080159
-  $tc'Seq1 :: GHC.Types.TrName
+                   Solve.$tc'InputCoord1) -}
+e769e41b50a82cf11ea8b07338e595e0
+  $tc'InputCoord1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
-     Unfolding: (GHC.Types.TrNameS "'Seq"#) -}
-b676b56baaed1f612528618e635d1b3d
-  $tc'Seqs :: GHC.Types.TyCon
+     Unfolding: (GHC.Types.TrNameS "'InputCoord"#) -}
+9047130b2309778fec297f347fc71af1
+  $tc'InputCount :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
      Unfolding: (GHC.Types.TyCon
-                   4599407225449500119##
-                   3361552919252607126##
+                   6482927090694631896##
+                   13219908823712453794##
                    Solve.$trModule
-                   Solve.$tc'Seqs1) -}
-9256dd0a321b89191fb35b9b8c71f806
-  $tc'Seqs1 :: GHC.Types.TrName
+                   Solve.$tc'InputCount1) -}
+7d491b23e2af108e0542a101bb55d40f
+  $tc'InputCount1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
-     Unfolding: (GHC.Types.TrNameS "'Seqs"#) -}
-8f92de47fe94b32934b19feed5fd7b36
-  $tcSequence :: GHC.Types.TyCon
+     Unfolding: (GHC.Types.TrNameS "'InputCount"#) -}
+e0e7c51d45d43ffb3943f3f6c73f0b15
+  $tc'InputSolve :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
      Unfolding: (GHC.Types.TyCon
-                   5717712950509096092##
-                   18168109720081050818##
+                   2208985448489538222##
+                   4284280786237368022##
                    Solve.$trModule
-                   Solve.$tcSequence1) -}
-55c01a2d3db4f6cddb8d3c16c80698eb
-  $tcSequence1 :: GHC.Types.TrName
+                   Solve.$tc'InputSolve1) -}
+39aecd2bea4bce3d024967524b20a6ec
+  $tc'InputSolve1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
-     Unfolding: (GHC.Types.TrNameS "Sequence"#) -}
+     Unfolding: (GHC.Types.TrNameS "'InputSolve"#) -}
+1720dc3039cd369c5ca29cc9f564dbb7
+  $tc'InputSteps :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   18446280421618189680##
+                   2031836096807702558##
+                   Solve.$trModule
+                   Solve.$tc'InputSteps1) -}
+d65bf89907790d245f1dd30b49893013
+  $tc'InputSteps1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'InputSteps"#) -}
+8d54d81e4f4e81cd9ff7541a0b100ce6
+  $tc'None :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1402911399403184884##
+                   9635525819902261578##
+                   Solve.$trModule
+                   Solve.$tc'None1) -}
+7e699f3e9d734cbe422362ebb843ee34
+  $tc'None1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'None"#) -}
+96c01c02b9bc8f997ba383a210301bcf
+  $tc'PSeq :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   9088586458434414275##
+                   5997256383751861024##
+                   Solve.$trModule
+                   Solve.$tc'PSeq1) -}
+875d604fb8d920330250ce73874c9d65
+  $tc'PSeq1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'PSeq"#) -}
+bcef26b79d2c6b3cc91a428e842c6170
+  $tc'PSeqs :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14898890735432103176##
+                   6610427963993859011##
+                   Solve.$trModule
+                   Solve.$tc'PSeqs1) -}
+05150401453293d532eff7810f9e82f6
+  $tc'PSeqs1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'PSeqs"#) -}
+292644c2b0cfe896e6b3ab5d71587828
+  $tc'Prompt :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   13337985966064934970##
+                   5623474525244824726##
+                   Solve.$trModule
+                   Solve.$tc'Prompt1) -}
+7e43aa44bdc9eb9e334a3b545bfdb87c
+  $tc'Prompt1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Prompt"#) -}
+c85865a98ff728b84f93de4ba3cd16d3
+  $tc'PromptZip :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1497368022743324108##
+                   4402937896732163910##
+                   Solve.$trModule
+                   Solve.$tc'PromptZip1) -}
+0ae5407719fad2a2297069ce702135df
+  $tc'PromptZip1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'PromptZip"#) -}
+44f4139aeadc99ec7178b5636c90b8c5
+  $tcInputs :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   17497793890577893503##
+                   14271802020907830288##
+                   Solve.$trModule
+                   Solve.$tcInputs1) -}
+e60995dbb4943e65d697b702992c80c4
+  $tcInputs1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Inputs"#) -}
+78fdcd1f980e5c0ce832d61f0eff5cba
+  $tcPSequence :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3897156069352054819##
+                   11861045284077971628##
+                   Solve.$trModule
+                   Solve.$tcPSequence1) -}
+8cd5b5a819065460b30574ab9efd4546
+  $tcPSequence1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "PSequence"#) -}
+3fbdeb51298c619d26b542be39b3b314
+  $tcPrompt :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14455450666321732123##
+                   15500356662196496712##
+                   Solve.$trModule
+                   Solve.$tcPrompt1) -}
+a92475c5d6d8a8c6de4ccc5bfc7db1e4
+  $tcPrompt1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Prompt"#) -}
+04109219b1cb8abffddcbfda8513f169
+  $tcPromptZip :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   7077703030991376033##
+                   7451382955659025963##
+                   Solve.$trModule
+                   Solve.$tcPromptZip1) -}
+67bbae3125cca3f04b7aa87c3f7103a5
+  $tcPromptZip1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "PromptZip"#) -}
 ccdc0654fa27a18daaf9604a3871d916
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -183,6 +384,12 @@ a8fb7c5b426d4d381899bce7bc3b9e69
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2"#) -}
+42de31b8c25025bea6ce6073cba5b1a7
+  $wgo ::
+    [GHC.Types.Int]
+    -> [GHC.Types.Int] -> GHC.Prim.Int# -> GHC.Prim.Int#
+  {- Arity: 3, HasNoCafRefs, Strictness: <S,1*U><L,1*U><L,U>,
+     Inline: [0] -}
 1f47c81efe610ca8197d5784ffb0f60f
   $wxs ::
     GHC.Prim.Int# -> [Graphics.Gloss.Internals.Data.Picture.Picture]
@@ -192,37 +399,186 @@ a8fb7c5b426d4d381899bce7bc3b9e69
     (PegBoard.Coord, GHC.Base.Maybe GHC.Types.Int, GHC.Types.Bool)
 c32df30503eec86196c8fef8959ea327
   type CountCollect = (GHC.Types.Int, GHC.Types.Bool)
+589255b4ffc277a96c09158a4e45531f
+  type Digits = [GHC.Types.Int]
 0e8c9894f1def2b1a8b36f66a149971c
   type InputCollect =
     (Solve.CountCollect, Solve.CoordCollect, [GHC.Types.Int])
+0aec2ddc30f818ff91524f0ccfdba512
+  data Inputs
+    = InputCount {count :: GHC.Types.Int, digits :: Solve.Digits}
+    | InputCoord {coord :: PegBoard.Coord,
+                  xCoord :: GHC.Base.Maybe GHC.Types.Int,
+                  digits :: Solve.Digits}
+    | InputSolve
+    | InputSteps
+    | None
 fcf146e5f3506c1dae1db0a963fa118b
   type MouseMove = (GHC.Types.Bool, GHC.Types.Float, GHC.Types.Float)
-eafbd83c9ee212fc49b55827e81f097b
+ac02ef4a3ac55a14c11ce35db172d3c9
+  data PSequence
+    = PSeq Graphics.Gloss.Internals.Data.Picture.Picture
+    | PSeqs [Graphics.Gloss.Internals.Data.Picture.Picture]
+            [Graphics.Gloss.Internals.Data.Picture.Picture]
+d9495970829b275e4fdbdcfadadd13c9
+  data Prompt
+    = Prompt {input :: Solve.Inputs,
+              handle :: Solve.Prompt
+                        -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt,
+              process :: Solve.Inputs -> Solve.Inputs,
+              seqDisp :: Solve.PSequence,
+              check :: Solve.Inputs -> GHC.Types.Bool,
+              completed :: GHC.Types.Bool}
+    RecFlag: Recursive
+09cb381a94afa55f1aae4ec33e2d681e
+  data PromptZip
+    = PromptZip {current :: Solve.Prompt,
+                 next :: [Solve.Prompt],
+                 prev :: [Solve.Prompt]}
+46fab6ac5102b6eba96870b3f664b9eb
   type Prompts =
-    ([Solve.Sequence], [Solve.Sequence], Solve.InputCollect,
+    ([Solve.PSequence], [Solve.PSequence], Solve.InputCollect,
      Solve.WorldTrans)
 36b9180868c858b56dbb6a8c11f7f4b7
   type Scale = GHC.Types.Float
-02d633715151042965876b3195ad8c89
-  data Sequence
-    = Seq Graphics.Gloss.Internals.Data.Picture.Picture
-    | Seqs [Graphics.Gloss.Internals.Data.Picture.Picture]
-           [Graphics.Gloss.Internals.Data.Picture.Picture]
 8bfc9dc2b808a9a8c7b024227f728e8a
   type Translate = (GHC.Types.Float, GHC.Types.Float)
 75fcf3f4c67df13dfd10b749bf0e20bc
   type WorldTrans = (Solve.Scale, Solve.Translate, Solve.MouseMove)
-0d843803ba0f62dafa222972fb1a7a0f
-  emptyInputCol :: Solve.InputCollect
-  {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((Solve.promptSolve14, Solve.promptSolve11,
-                  GHC.Types.[] @ GHC.Types.Int)) -}
-5ee552d89ba5185f5083461449a8b737
+04e036a28d54d835bddb352a2c85fa71
+  check :: Solve.Prompt -> Solve.Inputs -> GHC.Types.Bool
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLSL),1*U(A,A,A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds5 }) -}
+e14639ec89f1419f289dd260cef9db0b
+  completed :: Solve.Prompt -> GHC.Types.Bool
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLLS),1*U(A,A,A,A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds6 }) -}
+ff5fb5c4d887eba958c0c46e648f6127
+  coord :: Solve.Inputs -> PegBoard.Coord
+  RecSel Left Solve.Inputs
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.coord1 Solve.InputCoord ds1 ds2 ds3 -> ds1 }) -}
+7916133085869ed39ca39c4643ab194f
+  coord1 :: PegBoard.Coord
+  {- Strictness: x -}
+b40e6d11f725dc04f9875a7b4e6416f7
+  coordSeq :: Solve.PSequence
+  {- Strictness: m1,
+     Unfolding: (Solve.PSeq Solve.promptSolve_labeledPrompt') -}
+1c98c86b742b208c63aa740c85efa306
+  count :: Solve.Inputs -> GHC.Types.Int
+  RecSel Left Solve.Inputs
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.count1 Solve.InputCount ds1 ds2 -> ds1 }) -}
+c2b63ee9222ecefab9ae2bcec97d91a3
+  count1 :: GHC.Types.Int
+  {- Strictness: x -}
+9bcbc6803c03800729e3aceff9561cb8
+  current :: Solve.PromptZip -> Solve.Prompt
+  RecSel Left Solve.PromptZip
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLL),1*U(1*U(U,U,U,U,U,U),A,A)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.PromptZip) ->
+                 case ds of wild { Solve.PromptZip ds1 ds2 ds3 -> ds1 }) -}
+e814b310c29dd1457c0377857af7fe95
+  defaultInputCoord :: Solve.Inputs
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (Solve.InputCoord
+                   Solve.promptSolve82
+                   (GHC.Base.Nothing @ GHC.Types.Int)
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+222e1f25290413e4b1dfdf63642368f9
+  defaultInputCount :: Solve.Inputs
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (Solve.InputCount
+                   Solve.promptSolve83
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+b0a308d686aa17185e96c84901f16984
+  digits :: Solve.Inputs -> Solve.Digits
+  RecSel Left Solve.Inputs
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.digits1
+                   Solve.InputCount ds1 ds2 -> ds2
+                   Solve.InputCoord ds1 ds2 ds3 -> ds3 }) -}
+7264ff34edc986fc1c5bbcac55cdac36
+  digits1 :: Solve.Digits
+  {- Strictness: x -}
+767c815c40a04145c517d0241894bcda
+  handle ::
+    Solve.Prompt
+    -> Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event
+    -> Solve.Prompt
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LSLLLL),1*U(A,1*U,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds2 }) -}
+085d31f179b0871b2d3398d29929ebfd
+  input :: Solve.Prompt -> Solve.Inputs
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLLLLL),1*U(1*U,A,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds1 }) -}
+d999a81bdd9ead3071c2b0c16a741fc2
+  makeInt :: [GHC.Types.Int] -> GHC.Types.Int
+  {- Arity: 1, Strictness: <S,1*U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: [GHC.Types.Int]) ->
+                 case w of wild {
+                   [] -> GHC.Types.I# 0#
+                   : ipv ipv1
+                   -> case Solve.$wgo Solve.promptSolve77 wild 0# of ww { DEFAULT ->
+                      GHC.Types.I# ww } }) -}
+180d609af40be1f1e9ec909ed9719494
+  next :: Solve.PromptZip -> [Solve.Prompt]
+  RecSel Left Solve.PromptZip
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LSL),1*U(A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.PromptZip) ->
+                 case ds of wild { Solve.PromptZip ds1 ds2 ds3 -> ds2 }) -}
+e384956908f781a5fdcca36a5ca3713e
+  prev :: Solve.PromptZip -> [Solve.Prompt]
+  RecSel Left Solve.PromptZip
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLS),1*U(A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.PromptZip) ->
+                 case ds of wild { Solve.PromptZip ds1 ds2 ds3 -> ds3 }) -}
+e47e96a3cb815afb7976bf8326cb0adc
+  process :: Solve.Prompt -> Solve.Inputs -> Solve.Inputs
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLSLLL),1*U(A,A,1*U,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds3 }) -}
+0d07eb57eaa18c2d406b554aa2806290
   promptSolve :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-321c23776a9c540b7c41885a960b9f8d
+ca50892f4223d16e0758a79fad67ebf0
   promptSolve1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -230,175 +586,331 @@ eafbd83c9ee212fc49b55827e81f097b
      Unfolding: (\ (eta :: GHC.Prim.State#
                              GHC.Prim.RealWorld)[OneShot] ->
                  case Graphics.Gloss.Internals.Interface.Game.playWithBackendIO1
-                        @ Solve.Prompts
+                        @ Solve.PromptZip
                         @ Graphics.Gloss.Internals.Interface.Backend.GLUT.GLUTState
                         Graphics.Gloss.Internals.Interface.Backend.GLUT.$fBackendGLUTState
                         Graphics.Gloss.Internals.Interface.Backend.GLUT.$fBackendGLUTState_$cinitBackendState
-                        Solve.promptSolve72
+                        Solve.promptSolve97
                         Graphics.Gloss.Data.Color.black
-                        Solve.promptSolve13
+                        Solve.promptSolve83
                         Solve.promptSolve5
                         Solve.promptSolve4
                           `cast`
-                        (<Solve.Prompts>_R
+                        (<Solve.PromptZip>_R
                          ->_R Sym (GHC.Types.N:IO[0]
                                        <Graphics.Gloss.Internals.Data.Picture.Picture>_R))
                         Solve.promptSolve3
                           `cast`
                         (<Graphics.Gloss.Internals.Interface.Event.Event>_R
-                         ->_R <Solve.Prompts>_R
-                         ->_R Sym (GHC.Types.N:IO[0] <Solve.Prompts>_R))
+                         ->_R <Solve.PromptZip>_R
+                         ->_R Sym (GHC.Types.N:IO[0] <Solve.PromptZip>_R))
                         Solve.promptSolve2
                           `cast`
                         (<GHC.Types.Float>_R
-                         ->_R <Solve.Prompts>_R
-                         ->_R Sym (GHC.Types.N:IO[0] <Solve.Prompts>_R))
+                         ->_R <Solve.PromptZip>_R
+                         ->_R Sym (GHC.Types.N:IO[0] <Solve.PromptZip>_R))
                         GHC.Types.True
                         eta of ds1 { (#,#) ipv ipv1 ->
                  (# ipv, GHC.Tuple.() #) }) -}
-ecf00f1a574e3d7eb1eb9cf2c83561d5
-  promptSolve10 :: GHC.Types.Float
-  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 1.0#) -}
-3131d71c23653d36988cc2da602a01a1
-  promptSolve11 ::
-    (PegBoard.Coord, GHC.Base.Maybe GHC.Types.Int, GHC.Types.Bool)
-  {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((Solve.promptSolve12, GHC.Base.Nothing @ GHC.Types.Int,
-                  GHC.Types.False)) -}
-9df3b0057c2abea1213cccd5e5975e70
-  promptSolve12 :: PegBoard.Coord
-  {- HasNoCafRefs, Strictness: m,
-     Unfolding: (PegBoard.Coord
-                   Solve.promptSolve13
-                   Solve.promptSolve13) -}
-18b61ef979cd2fdf03977d4a37f0fcbf
-  promptSolve13 :: GHC.Types.Int
-  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
-5bad1d0c60bb39f8fde876772ffe9ec9
-  promptSolve14 :: (GHC.Types.Int, GHC.Types.Bool)
-  {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((Solve.promptSolve13, GHC.Types.False)) -}
-a89a6b462a9d568c01aa597a1069df9d
-  promptSolve15 :: [Solve.Sequence]
-  {- Strictness: m2,
-     Unfolding: (GHC.Types.:
-                   @ Solve.Sequence
-                   Solve.promptSolve67
-                   Solve.promptSolve16) -}
-00368cd1ee970b00c07c2d1e9bffdafa
-  promptSolve16 :: [Solve.Sequence]
-  {- Strictness: m2,
-     Unfolding: (GHC.Types.:
-                   @ Solve.Sequence
-                   Solve.promptSolve44
-                   Solve.promptSolve17) -}
-6d30224280bcfc697f80c86dcf8a4dc9
-  promptSolve17 :: [Solve.Sequence]
-  {- Strictness: m2,
-     Unfolding: (GHC.Types.:
-                   @ Solve.Sequence
+c0d30cc1e704f74f5b7cf80c290874a2
+  promptSolve10 :: Solve.Prompt
+  {- Unfolding: (Solve.Prompt
+                   Solve.None
                    Solve.promptSolve18
-                   (GHC.Types.[] @ Solve.Sequence)) -}
-fc6aa2a46c333464c5cf4b91826181ef
-  promptSolve18 :: Solve.Sequence
-  {- Strictness: m1, Unfolding: (Solve.Seq Solve.promptSolve19) -}
-4fc756ceb29da47e3f467de7622ff4ba
-  promptSolve19 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m14,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
-                   Solve.promptSolve20) -}
-b4f031ff04f40509a9829236757bcb61
+                   (GHC.Base.id @ Solve.Inputs)
+                   Solve.promptSolve12
+                   Solve.promptSolve11
+                   GHC.Types.False) -}
+8b3e02b66bbaff25106fa1a90e27d353
+  promptSolve100 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 600#) -}
+91cb9206ebbd29158534da72633fda5a
+  promptSolve101 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "SolvePrompted"#) -}
+7961a254d919b335572491708733331c
+  promptSolve11 :: Solve.Inputs -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (ds :: Solve.Inputs) -> GHC.Types.False) -}
+a33f7786bbbd8c72bb8fa187df70105a
+  promptSolve12 :: Solve.PSequence
+  {- Unfolding: (Solve.PSeq Solve.promptSolve13) -}
+0deaddd272a71f58b4149de0fe5cf3d2
+  promptSolve13 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Solve.promptSolve14) -}
+6aa7c2f22fb87d470fb06f4b7ba043ba
+  promptSolve14 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Scale
+                   Solve.promptSolve17
+                   Solve.promptSolve17
+                   Solve.promptSolve15) -}
+ecf04d2c4d408cb04c5c681705344b0e
+  promptSolve15 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Text
+                   Solve.promptSolve16) -}
+f0b7ca678a4330517c22f389a0afc927
+  promptSolve16 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Failed to find solution"#) -}
+61793446ff239afa7a79d2455f627ef4
+  promptSolve17 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.1#) -}
+248239d25a8854d21faf96349bdf0a24
+  promptSolve18 ::
+    Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (\ (pt :: Solve.Prompt)
+                   (ds :: Graphics.Gloss.Internals.Interface.Event.Event) ->
+                 pt) -}
+ecc70a178d5d26d53cce1b7175712009
+  promptSolve19 :: Solve.Prompt
+  {- HasNoCafRefs,
+     Unfolding: (Solve.Prompt
+                   Solve.InputSteps
+                   Solve.promptSolve21
+                   (GHC.Base.id @ Solve.Inputs)
+                   Solve.promptSolve20
+                   Solve.promptSolve11
+                   GHC.Types.False) -}
+9465f24bc4646d4256992f159b8dcbdc
   promptSolve2 ::
     GHC.Types.Float
-    -> Solve.Prompts
+    -> Solve.PromptZip
     -> GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Solve.Prompts #)
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Solve.PromptZip #)
   {- Arity: 3, HasNoCafRefs,
      Unfolding: (\ (time :: GHC.Types.Float)
-                   (world1 :: Solve.Prompts)
+                   (world1 :: Solve.PromptZip)
                    (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
                  (# s, world1 #)) -}
-b0246326f68841f36a9d7d760809a167
-  promptSolve20 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Strictness: m2,
-     Unfolding: (GHC.Types.:
-                   @ Graphics.Gloss.Internals.Data.Picture.Picture
-                   Solve.promptSolve41
-                   Solve.promptSolve21) -}
-36c8355626cbaf5b02064fceba4397fe
-  promptSolve21 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Strictness: m2,
-     Unfolding: (GHC.Types.:
-                   @ Graphics.Gloss.Internals.Data.Picture.Picture
-                   Solve.promptSolve22
+5066e9d8aca02177deab3d50ac19db78
+  promptSolve20 :: Solve.PSequence
+  {- HasNoCafRefs,
+     Unfolding: (Solve.PSeqs
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)
                    (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
-eb3eaf13337d28f55ba7a8a32f0a600b
-  promptSolve22 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m10,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
-                   Graphics.Gloss.Data.Color.white
-                   Solve.promptSolve23) -}
-404502660cbfe1920fb57f267b6f6230
-  promptSolve23 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m11,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
-                   Solve.promptSolve40
-                   Solve.promptSolve39
-                   Solve.promptSolve24) -}
-7ebae4c2bd5d6dad12b79e19a771564f
+be0d4c0af3eab28558f514fc6200dbb8
+  promptSolve21 ::
+    Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (\ (pt :: Solve.Prompt)
+                   (ds :: Graphics.Gloss.Internals.Interface.Event.Event) ->
+                 case ds of wild {
+                   DEFAULT -> pt
+                   Graphics.Gloss.Internals.Interface.Event.EventKey ds1 ds2 ds3 ds4
+                   -> case ds1 of wild1 {
+                        DEFAULT -> pt
+                        Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey ds5
+                        -> case ds5 of wild2 {
+                             DEFAULT -> pt
+                             Graphics.Gloss.Internals.Interface.Backend.Types.KeyLeft
+                             -> case ds2 of wild3 {
+                                  Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                                  -> case pt of wild4 { Solve.Prompt ds6 ds7 ds8 ds9 ds10 ds11 ->
+                                     Solve.Prompt
+                                       ds6
+                                       ds7
+                                       ds8
+                                       (case ds9 of wild5 {
+                                          Solve.PSeq p -> wild5
+                                          Solve.PSeqs as ds12
+                                          -> case ds12 of wild6 {
+                                               []
+                                               -> Solve.PSeqs
+                                                    as
+                                                    (GHC.Types.[]
+                                                       @ Graphics.Gloss.Internals.Data.Picture.Picture)
+                                               : b bs
+                                               -> Solve.PSeqs
+                                                    (GHC.Types.:
+                                                       @ Graphics.Gloss.Internals.Data.Picture.Picture
+                                                       b
+                                                       as)
+                                                    bs } })
+                                       ds10
+                                       ds11 }
+                                  Graphics.Gloss.Internals.Interface.Backend.Types.Up -> pt }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.KeyRight
+                             -> case ds2 of wild3 {
+                                  Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                                  -> case pt of wild4 { Solve.Prompt ds6 ds7 ds8 ds9 ds10 ds11 ->
+                                     Solve.Prompt
+                                       ds6
+                                       ds7
+                                       ds8
+                                       (case ds9 of wild5 {
+                                          Solve.PSeq p -> wild5
+                                          Solve.PSeqs ds12 bs
+                                          -> case ds12 of wild6 {
+                                               []
+                                               -> Solve.PSeqs
+                                                    (GHC.Types.[]
+                                                       @ Graphics.Gloss.Internals.Data.Picture.Picture)
+                                                    bs
+                                               : a ds13
+                                               -> case ds13 of wild7 {
+                                                    []
+                                                    -> Solve.PSeqs
+                                                         (GHC.Types.:
+                                                            @ Graphics.Gloss.Internals.Data.Picture.Picture
+                                                            a
+                                                            (GHC.Types.[]
+                                                               @ Graphics.Gloss.Internals.Data.Picture.Picture))
+                                                         bs
+                                                    : ipv ipv1
+                                                    -> Solve.PSeqs
+                                                         wild7
+                                                         (GHC.Types.:
+                                                            @ Graphics.Gloss.Internals.Data.Picture.Picture
+                                                            a
+                                                            bs) } } })
+                                       ds10
+                                       ds11 }
+                                  Graphics.Gloss.Internals.Interface.Backend.Types.Up
+                                  -> pt } } } }) -}
+e284c478a49709fe50ede0ccb7711474
+  promptSolve22 :: Solve.Prompt
+  {- Unfolding: (Solve.Prompt
+                   Solve.InputSolve
+                   Solve.promptSolve71
+                   (GHC.Base.id @ Solve.Inputs)
+                   Solve.coordSeq
+                   Solve.promptSolve23
+                   GHC.Types.False) -}
+ead01077fe388984a5f2572e09a97555
+  promptSolve23 :: Solve.Inputs -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (ds :: Solve.Inputs) -> GHC.Types.True) -}
+4e9ec737ac89ad9241ee4e93cdb962a4
   promptSolve24 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Strictness: m14,
      Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
                    Solve.promptSolve25) -}
-25934e678368a3b4c4868641619fe589
+0ff76e82c2851b00367dc4c30abe8bed
   promptSolve25 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (Graphics.renderBoard_$soffsetF
-                   Solve.promptSolve38
-                   Solve.promptSolve37
+                   Solve.promptSolve46
+                   Solve.promptSolve68
                    Solve.promptSolve26) -}
-ad4329aab74a02d88cc7500adf6313e5
+3705027769d63620406b78d1ea953d96
   promptSolve26 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (Solve.promptSolve28 Solve.promptSolve27) -}
-91e6e3c8cd59df963e7c50efe68377f7
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve62
+                   Solve.promptSolve27) -}
+7cfa1e18d4de1f209538b3645c831d12
   promptSolve27 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve53
+                   Solve.promptSolve28) -}
+3b91490203cdb70e70f56fb74b1923f9
+  promptSolve28 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve29
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
+e1ee80c199c474789397ba6eff3fc30e
+  promptSolve29 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Solve.promptSolve30) -}
+05b8366378a9741b8a5f8f6276bbb4f8
+  promptSolve3 ::
+    Graphics.Gloss.Internals.Interface.Event.Event
+    -> Solve.PromptZip
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Solve.PromptZip #)
+  {- Arity: 3 -}
+925b9abadcc183436d3a6bc8fd8b0fe0
+  promptSolve30 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve50
+                   Solve.promptSolve31) -}
+012a4330e8932e9e25ee9073b9267d94
+  promptSolve31 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (GHC.Types.:
+                   @ Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve32
+                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
+6a7b6c2dd1442e39baf58a3b4dc403a8
+  promptSolve32 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Solve.promptSolve33) -}
+42bf0eb9ef5a8977ce45d59cfd593674
+  promptSolve33 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
+                   Solve.promptSolve49
+                   Solve.promptSolve48
+                   Solve.promptSolve34) -}
+16199796f4bd9d1c2c581e58b2af95a5
+  promptSolve34 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Solve.promptSolve35) -}
+3936218041fdd796d52190f1b5cdb13f
+  promptSolve35 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Graphics.renderBoard_$soffsetF
+                   Solve.promptSolve47
+                   Solve.promptSolve46
+                   Solve.promptSolve36) -}
+212bf1f0d4799ec8ba97f0e4f8ee5447
+  promptSolve36 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Solve.promptSolve38 Solve.promptSolve37) -}
+6edd1f51852c330c951bf3511e01f34c
+  promptSolve37 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (Solve.$wxs 5#) -}
-12f6a9b5f58c4b2a2c06185fafc95d2a
-  promptSolve28 ::
+316ad5733d0325c81d03385d955bdfcd
+  promptSolve38 ::
     [Graphics.Gloss.Internals.Data.Picture.Picture]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Enum.enumDeltaToIntegerFB
                    @ ([Graphics.Gloss.Internals.Data.Picture.Picture]
                       -> [Graphics.Gloss.Internals.Data.Picture.Picture])
-                   Solve.promptSolve33
-                   Solve.promptSolve32
-                   Solve.promptSolve31
-                   Solve.promptSolve30
-                   Solve.promptSolve29) -}
-09008205ef4deb8a59f6cbdb4cab53c7
-  promptSolve29 :: GHC.Integer.Type.Integer
+                   Solve.promptSolve43
+                   Solve.promptSolve42
+                   Solve.promptSolve41
+                   Solve.promptSolve40
+                   Solve.promptSolve39) -}
+6f0f748828647f276d81c94f73821989
+  promptSolve39 :: GHC.Integer.Type.Integer
   {- HasNoCafRefs, Unfolding: (1) -}
-30d3ba6df85ec6cda26218745d1d0360
-  promptSolve3 ::
-    Graphics.Gloss.Internals.Interface.Event.Event
-    -> Solve.Prompts
+53a8ab8697c071a8e35c9b70674ad057
+  promptSolve4 ::
+    Solve.PromptZip
     -> GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Solve.Prompts #)
-  {- Arity: 3 -}
-4476ba587f2dbeea1eeb48f260734608
-  promptSolve30 :: GHC.Integer.Type.Integer
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Graphics.Gloss.Internals.Data.Picture.Picture #)
+  {- Arity: 2,
+     Unfolding: (\ (x6 :: Solve.PromptZip)
+                   (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 (# s,
+                    case x6 of wild { Solve.PromptZip ds ds1 ds2 ->
+                    case ds of wild1 { Solve.Prompt ds3 ds4 ds5 ds6 ds7 ds8 ->
+                    case ds6 of wild2 {
+                      Solve.PSeq b -> b
+                      Solve.PSeqs as bs
+                      -> GHC.List.head
+                           @ Graphics.Gloss.Internals.Data.Picture.Picture
+                           as } } } #)) -}
+4828a1c90ba531860b9598dd76fdcf06
+  promptSolve40 :: GHC.Integer.Type.Integer
   {- HasNoCafRefs, Unfolding: (-1) -}
-d7170af4be5234116a1bfc568027ed97
-  promptSolve31 :: GHC.Integer.Type.Integer
+f7ed5f2a1357df143723c31c51966e24
+  promptSolve41 :: GHC.Integer.Type.Integer
   {- HasNoCafRefs, Unfolding: (5) -}
-e12d7240f3953707d8d957818aee7422
-  promptSolve32 ::
+315e2b62892acd9e8f11b45da92a8102
+  promptSolve42 ::
     [Graphics.Gloss.Internals.Data.Picture.Picture]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 1, HasNoCafRefs,
      Unfolding: (\ (ds :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
                  GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture) -}
-42397953e68b4f1f6326366492a41ee4
-  promptSolve33 ::
+56dac35f979ecf91a83c47ca03e91777
+  promptSolve43 ::
     GHC.Integer.Type.Integer
     -> ([Graphics.Gloss.Internals.Data.Picture.Picture]
         -> [Graphics.Gloss.Internals.Data.Picture.Picture])
@@ -423,15 +935,15 @@ e12d7240f3953707d8d957818aee7422
                  let {
                    _x2 :: Graphics.Gloss.Internals.Data.Picture.Picture
                    = Graphics.Gloss.Internals.Data.Picture.Scale
-                       Solve.promptSolve36
-                       Solve.promptSolve36
+                       Solve.promptSolve17
+                       Solve.promptSolve17
                        _x1
                  } in
                  let {
                    _x3 :: Graphics.Gloss.Internals.Data.Picture.Picture
                    = Graphics.Gloss.Internals.Data.Picture.Translate
-                       Solve.promptSolve35
-                       Solve.promptSolve34
+                       Solve.promptSolve45
+                       Solve.promptSolve44
                        _x2
                  } in
                  \ (ds2 :: [Graphics.Gloss.Internals.Data.Picture.Picture]) ->
@@ -449,197 +961,132 @@ e12d7240f3953707d8d957818aee7422
                                  y
                                  (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture))))
                         (ds1 ys) }) -}
-69a508dbeb00eaba4dd710970fdc96ce
-  promptSolve34 :: GHC.Types.Float
+70191aaaee86cfca092fa0b608dad0c2
+  promptSolve44 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 36.0#) -}
-333fd96f7fcd3f0c88ea25e1b39b0c3c
-  promptSolve35 :: GHC.Types.Float
+86b3d9459bf3472e841fd28052d8727e
+  promptSolve45 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 20.0#) -}
-899084635e0af31f74ae7f8ba3c64175
-  promptSolve36 :: GHC.Types.Float
-  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.1#) -}
-f80d672ed136892538917a19abb2f99e
-  promptSolve37 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+f177cd561ffd701c0a14d3ff74df9ee4
+  promptSolve46 :: GHC.Integer.Type.Integer -> GHC.Types.Float
   {- Arity: 1, HasNoCafRefs,
      Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
                  case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
                  GHC.Types.F#
                    (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) 16.0#) }) -}
-ae0cfbe5c32b907c2320cc694b070296
-  promptSolve38 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+fd71bcaead04bd2da4ee24e971013347
+  promptSolve47 :: GHC.Integer.Type.Integer -> GHC.Types.Float
   {- Arity: 1, HasNoCafRefs,
      Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
                  case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
                  GHC.Types.F#
                    (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) -8.0#) }) -}
-33a45c069433b180b2161ff14ae391d1
-  promptSolve39 :: GHC.Types.Float
+7fd8c3c0fa9a704955a5283244a268a6
+  promptSolve48 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# 8.0#) -}
-57b2ce0711ab6505c65c9db5359250f8
-  promptSolve4 ::
-    Solve.Prompts
-    -> GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
-          Graphics.Gloss.Internals.Data.Picture.Picture #)
-  {- Arity: 2,
-     Unfolding: (\ (x5 :: Solve.Prompts)
-                   (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
-                 (# s,
-                    case x5 of wild { (,,,) ds ds1 ds2 ds3 ->
-                    case ds of wild1 {
-                      [] -> Graphics.Gloss.Internals.Data.Picture.Blank
-                      : p as
-                      -> case ds3 of wild2 { (,,) s1 ds4 ds5 ->
-                         case ds4 of wild3 { (,) tx ty ->
-                         Graphics.Gloss.Internals.Data.Picture.Scale
-                           s1
-                           s1
-                           (Graphics.Gloss.Internals.Data.Picture.Translate
-                              (GHC.Float.divideFloat tx s1)
-                              (GHC.Float.divideFloat ty s1)
-                              (case p of wild4 {
-                                 Solve.Seq b -> b
-                                 Solve.Seqs as1 bs
-                                 -> GHC.List.head
-                                      @ Graphics.Gloss.Internals.Data.Picture.Picture
-                                      as1 })) } } } } #)) -}
-afc20b0b9eeb8206eabcac94587423cf
-  promptSolve40 :: GHC.Types.Float
-  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 104.0#) -}
-7668b814711627cb25681adbfd9e2e74
-  promptSolve41 :: Graphics.Gloss.Internals.Data.Picture.Picture
+766f9d83d2b495884cbe0de7f56e571c
+  promptSolve49 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 104.0#) -}
+7b0807bc12ab96b83ebf095d5aac97e3
+  promptSolve5 :: Solve.PromptZip
+  {- Unfolding: (Solve.PromptZip
+                   Solve.promptSolve85
+                   Solve.promptSolve6
+                   (GHC.Types.[] @ Solve.Prompt)) -}
+174527ba9fa1ae88b5c9a8bb969fd657
+  promptSolve50 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (case Graphics.$wrenderBoard
-                        Solve.promptSolve42 of ww { Unit# ww1 ->
+                        Solve.promptSolve51 of ww { Unit# ww1 ->
                  Graphics.Gloss.Internals.Data.Picture.Pictures ww1 }) -}
-9472059f2b404730fd743ddfca959a53
-  promptSolve42 :: PegBoard.Board
+6d491bf27988f03867f63d81aaf1ba92
+  promptSolve51 :: PegBoard.Board
   {- Unfolding: (case PegBoard.$wmakeBoard
-                        Solve.promptSolve43 of ww { (#,#) ww1 ww2 ->
+                        Solve.promptSolve52 of ww { (#,#) ww1 ww2 ->
                  PegBoard.Board ww1 ww2 }) -}
-dee06421e844e7b2ffc142d3473b1119
-  promptSolve43 :: GHC.Types.Int
+17d2a98f7df716e9cfde5e4ba22aa2b7
+  promptSolve52 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 5#) -}
-e9d95f8de32db78b33aa7c8990902ae1
-  promptSolve44 :: Solve.Sequence
-  {- Strictness: m1, Unfolding: (Solve.Seq Solve.promptSolve45) -}
-d70abeb8ff4a0b8ab7888deb2a31fc04
-  promptSolve45 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m11,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
-                   Solve.promptSolve66
-                   Solve.promptSolve8
-                   Solve.promptSolve46) -}
-540a4656a33484010989643d320d4f95
-  promptSolve46 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m14,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
-                   Solve.promptSolve47) -}
-4f2319c1b1d10ef5a4ca086d9133f69b
-  promptSolve47 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (Graphics.renderBoard_$soffsetF
-                   Solve.promptSolve37
-                   Solve.promptSolve64
-                   Solve.promptSolve48) -}
-0a4b787526bd1e105b48c479b6dfbcb5
-  promptSolve48 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (GHC.Types.:
-                   @ Graphics.Gloss.Internals.Data.Picture.Picture
-                   Solve.promptSolve58
-                   Solve.promptSolve49) -}
-c11ba574af4b9271fa3cecf43f75691b
-  promptSolve49 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (GHC.Types.:
-                   @ Graphics.Gloss.Internals.Data.Picture.Picture
-                   Solve.promptSolve51
-                   Solve.promptSolve50) -}
-3462f3a4a96424ce5d23b52cf38cb188
-  promptSolve5 ::
-    ([Solve.Sequence], [Solve.Sequence], Solve.InputCollect,
-     Solve.WorldTrans)
-  {- Unfolding: ((Solve.promptSolve15, GHC.Types.[] @ Solve.Sequence,
-                  Solve.emptyInputCol, Solve.promptSolve6)) -}
-62d88b5004f85c63272396eee23add8c
-  promptSolve50 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (GHC.Types.:
-                   @ Graphics.Gloss.Internals.Data.Picture.Picture
-                   Solve.promptSolve41
-                   (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)) -}
-1137c456e8b0fc4a864788dcbd933be4
-  promptSolve51 :: Graphics.Gloss.Internals.Data.Picture.Picture
+6e8dbca29a4b320eaad8ba42f3814535
+  promptSolve53 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
                    Graphics.Gloss.Data.Color.white
-                   Solve.promptSolve52) -}
-9ad6a1fa79b94089c3fdfcb511f5af74
-  promptSolve52 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
-                   Solve.promptSolve53) -}
-2f4a964b3c58799125d2ce8bf64d576a
-  promptSolve53 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
-  {- Unfolding: (Solve.promptSolve_go
-                   Solve.promptSolve56
                    Solve.promptSolve54) -}
-b4dc9a0082b48b9e693eb0f5a71cc933
-  promptSolve54 :: [GHC.Types.Float]
+936f4b41dab37ae12ecfee876244b01e
+  promptSolve54 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
+                   Solve.promptSolve55) -}
+a4ad037b5e2024d96a0f5b3b7a5a7078
+  promptSolve55 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+  {- Unfolding: (Solve.promptSolve_go
+                   Solve.promptSolve59
+                   Solve.promptSolve56) -}
+2b1060dc4adc8181f634d8b1e5b6fc77
+  promptSolve56 :: [GHC.Types.Float]
   {- Unfolding: (GHC.Real.numericEnumFromThenTo
                    @ GHC.Types.Float
                    GHC.Classes.$fOrdFloat
                    GHC.Float.$fFractionalFloat
-                   Solve.promptSolve8
-                   Solve.promptSolve39
-                   Solve.promptSolve55) -}
-ef2c881037d5b32236eccce91e614b59
-  promptSolve55 :: GHC.Types.Float
+                   Solve.promptSolve58
+                   Solve.promptSolve48
+                   Solve.promptSolve57) -}
+9c6621f91c1843f350aaa511aa10dcb1
+  promptSolve57 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# 32.0#) -}
-a13d15be8d8b5f1d873aa2218219fad9
-  promptSolve56 :: [GHC.Types.Float]
+e9482663851c8cb7fc9a65cba3fb70bd
+  promptSolve58 :: GHC.Types.Float
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.0#) -}
+20e213db241648e72c9334c246c91257
+  promptSolve59 :: [GHC.Types.Float]
   {- Unfolding: (GHC.Real.numericEnumFromTo
                    @ GHC.Types.Float
                    GHC.Classes.$fOrdFloat
                    GHC.Float.$fFractionalFloat
-                   Solve.promptSolve10
-                   Solve.promptSolve57) -}
-9dc181e882c903c884a187f8421e5948
-  promptSolve57 :: GHC.Types.Float
+                   Solve.promptSolve61
+                   Solve.promptSolve60) -}
+56be2b9316311484f2c6943adce5dc3e
+  promptSolve6 :: [Solve.Prompt]
+  {- Unfolding: (GHC.Types.:
+                   @ Solve.Prompt
+                   Solve.promptSolve72
+                   Solve.promptSolve7) -}
+8a2610f9e5d37c6907a5b538ed2c80dc
+  promptSolve60 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# 5.0#) -}
-8a6375b83b099f152ac52d405d2f058c
-  promptSolve58 :: Graphics.Gloss.Internals.Data.Picture.Picture
+6f2d76e265893a63d62240ce09401883
+  promptSolve61 :: GHC.Types.Float
+  {- HasNoCafRefs, Unfolding: (GHC.Types.F# 1.0#) -}
+db863b73a32ea8bf01c0c6c1d0df2714
+  promptSolve62 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
-                   Solve.promptSolve8
-                   Solve.promptSolve65
-                   Solve.promptSolve59) -}
-b9f52ab936010809e3e93b79d60807a6
-  promptSolve59 :: Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve58
+                   Solve.promptSolve69
+                   Solve.promptSolve63) -}
+1f37e24a20a41cbe04ca02e5a275bf04
+  promptSolve63 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
                    Graphics.Gloss.Data.Color.white
-                   Solve.promptSolve60) -}
-995a4939f3efefb06d75a50601b257e5
-  promptSolve6 ::
-    (Solve.Scale, (GHC.Types.Float, GHC.Types.Float),
-     (GHC.Types.Bool, GHC.Types.Float, GHC.Types.Float))
-  {- HasNoCafRefs,
-     Unfolding: ((Solve.promptSolve10, Solve.promptSolve9,
-                  Solve.promptSolve7)) -}
-6d356717268f9e698b727e0775fda6ce
-  promptSolve60 :: Graphics.Gloss.Internals.Data.Picture.Picture
+                   Solve.promptSolve64) -}
+fd97a9e3726b0dd162490aa5aca7dd9a
+  promptSolve64 :: Graphics.Gloss.Internals.Data.Picture.Picture
   {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Pictures
-                   Solve.promptSolve61) -}
-54b28996704c66ceb585749c90eef4be
-  promptSolve61 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+                   Solve.promptSolve65) -}
+7b3019616054ccfb5cb07d49b82fc161
+  promptSolve65 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (Graphics.renderBoard_$soffsetF
-                   Solve.promptSolve64
-                   Solve.promptSolve37
-                   Solve.promptSolve62) -}
-3594bff02a24a97f0c040039d1707c8c
-  promptSolve62 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
+                   Solve.promptSolve68
+                   Solve.promptSolve46
+                   Solve.promptSolve66) -}
+398f3089b2269abd0710d2deec47558d
+  promptSolve66 :: [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Unfolding: (GHC.Enum.enumDeltaToIntegerFB
                    @ [Graphics.Gloss.Internals.Data.Picture.Picture]
-                   Solve.promptSolve63
+                   Solve.promptSolve67
                    (GHC.Types.[] @ Graphics.Gloss.Internals.Data.Picture.Picture)
-                   Solve.promptSolve31
-                   Solve.promptSolve30
-                   Solve.promptSolve29) -}
-471b3b8d7138c12d91a187b93bd43bb1
-  promptSolve63 ::
+                   Solve.promptSolve41
+                   Solve.promptSolve40
+                   Solve.promptSolve39) -}
+3f057c6e3a34a430fc8d047a900ad568
+  promptSolve67 ::
     GHC.Integer.Type.Integer
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
@@ -649,88 +1096,463 @@ b9f52ab936010809e3e93b79d60807a6
                  GHC.Types.:
                    @ Graphics.Gloss.Internals.Data.Picture.Picture
                    (Graphics.Gloss.Internals.Data.Picture.Scale
-                      Solve.promptSolve36
-                      Solve.promptSolve36
+                      Solve.promptSolve17
+                      Solve.promptSolve17
                       (Graphics.Gloss.Internals.Data.Picture.Text
                          (GHC.Show.$fShowInteger_$cshow ds)))
                    ds1) -}
-a3a81f52d03dd79f82f1f98ca8d91c34
-  promptSolve64 :: GHC.Integer.Type.Integer -> GHC.Types.Float
+e7fdbd27a04b53ca81c411d1f7d22886
+  promptSolve68 :: GHC.Integer.Type.Integer -> GHC.Types.Float
   {- Arity: 1, HasNoCafRefs,
      Unfolding: (\ (eta :: GHC.Integer.Type.Integer) ->
                  case GHC.Integer.Type.doubleFromInteger eta of wild { DEFAULT ->
                  GHC.Types.F#
                    (GHC.Prim.timesFloat# (GHC.Prim.double2Float# wild) 0.0#) }) -}
-ba662f18e953e9a543707e3dea3df159
-  promptSolve65 :: GHC.Types.Float
+de49c1a38c62970e6403076a0f83d653
+  promptSolve69 :: GHC.Types.Float
   {- HasNoCafRefs, Unfolding: (GHC.Types.F# -4.0#) -}
-5b1480275909d5b7137981ba18697b4b
-  promptSolve66 :: GHC.Types.Float
+b3a0de3c3505f1cb1a16e1c46bdf9506
+  promptSolve7 :: [Solve.Prompt]
+  {- Unfolding: (GHC.Types.:
+                   @ Solve.Prompt
+                   Solve.promptSolve22
+                   Solve.promptSolve8) -}
+427aaf4fbf6320e9d45ad0c4e4d69e7b
+  promptSolve70 :: GHC.Types.Float
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# -48.0#) -}
-f602b5c4e936f14fd73f8f4b36309ce1
-  promptSolve67 :: Solve.Sequence
-  {- Strictness: m1, Unfolding: (Solve.Seq Solve.promptSolve68) -}
-603560db79cfb266fe4c8ffe3f59eb0a
-  promptSolve68 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m10,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
-                   Graphics.Gloss.Data.Color.white
-                   Solve.promptSolve69) -}
-e5ff70f5c9dfa50f6834cdfca98ce7d9
-  promptSolve69 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m13,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Scale
-                   Solve.promptSolve36
-                   Solve.promptSolve36
-                   Solve.promptSolve70) -}
-6b7b0bf8983eec731019eb81114c9c29
-  promptSolve7 :: (GHC.Types.Bool, GHC.Types.Float, GHC.Types.Float)
+ae6c391127c6f9e8b9efc945f672c540
+  promptSolve71 ::
+    Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (\ (p :: Solve.Prompt)
+                   (ds :: Graphics.Gloss.Internals.Interface.Event.Event) ->
+                 case ds of wild {
+                   DEFAULT -> p
+                   Graphics.Gloss.Internals.Interface.Event.EventKey ds1 ds2 ds3 ds4
+                   -> case ds1 of wild1 {
+                        DEFAULT -> p
+                        Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey enter
+                        -> case ds2 of wild2 {
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                             -> case GHC.Prim.dataToTag#
+                                       @ Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey
+                                       enter of wild3 {
+                                  DEFAULT -> p
+                                  33#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt ds5 ds6 ds7 ds8 ds9 GHC.Types.True }
+                                  65#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt ds5 ds6 ds7 ds8 ds9 GHC.Types.True } }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Up -> p } } }) -}
+ef8f4153b195edacecda88420cc0575c
+  promptSolve72 :: Solve.Prompt
+  {- Unfolding: (Solve.Prompt
+                   Solve.defaultInputCoord
+                   Solve.promptSolve81
+                   Solve.promptSolve76
+                   Solve.coordSeq
+                   Solve.promptSolve73
+                   GHC.Types.False) -}
+f970751dd369a0da474852197b5e161d
+  promptSolve73 :: Solve.Inputs -> GHC.Types.Bool
+  {- Arity: 1,
+     Unfolding: (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.promptSolve75
+                   Solve.InputCoord ds1 ds2 ds3
+                   -> case ds1 of wild1 { PegBoard.Coord ds4 ds5 ->
+                      case ds4 of wild2 { GHC.Types.I# ds6 ->
+                      case ds6 of ds7 {
+                        DEFAULT
+                        -> GHC.List.elem
+                             @ PegBoard.Coord
+                             PegBoard.$fEqCoord
+                             wild1
+                             Solve.promptSolve74
+                        0#
+                        -> case ds5 of wild3 { GHC.Types.I# ds8 ->
+                           case ds8 of ds9 {
+                             DEFAULT
+                             -> GHC.List.elem
+                                  @ PegBoard.Coord
+                                  PegBoard.$fEqCoord
+                                  wild1
+                                  Solve.promptSolve74
+                             0# -> GHC.Types.False } } } } } }) -}
+aa763346ee8a8eccfe92da07b90a3d0e
+  promptSolve74 :: [PegBoard.Coord]
+  {- Unfolding: (case PegBoard.$wmakeBoard
+                        Solve.promptSolve52 of ww { (#,#) ww1 ww2 ->
+                 GHC.Base.++ @ PegBoard.Coord ww1 ww2 }) -}
+c3e29438042d5f54af3b36a5c375ba57
+  promptSolve75 :: GHC.Types.Bool
+  {- Strictness: x -}
+42612d2ac9e5f08b92c1a44b0939ae20
+  promptSolve76 :: Solve.Inputs -> Solve.Inputs
+  {- Arity: 1,
+     Unfolding: (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.promptSolve80
+                   Solve.InputCoord cd ds1 ds2
+                   -> case ds1 of wild1 {
+                        GHC.Base.Nothing
+                        -> Solve.InputCoord
+                             cd
+                             (GHC.Base.Just @ GHC.Types.Int (Solve.makeInt ds2))
+                             (GHC.Types.[] @ GHC.Types.Int)
+                        GHC.Base.Just x6
+                        -> Solve.InputCoord
+                             (PegBoard.Coord x6 (Solve.makeInt ds2))
+                             (GHC.Base.Nothing @ GHC.Types.Int)
+                             (GHC.Types.[] @ GHC.Types.Int) } }) -}
+0d7de20fe79e3723c5cc34f634263aff
+  promptSolve77 :: [GHC.Types.Int]
+  {- Unfolding: (case GHC.List.$witerate
+                        @ GHC.Types.Int
+                        Solve.promptSolve79
+                        Solve.promptSolve78 of ww { (#,#) ww1 ww2 ->
+                 GHC.Types.: @ GHC.Types.Int ww1 ww2 }) -}
+42bee187fddbcd5842c32fe0a528a98e
+  promptSolve78 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 1#) -}
+4fdaf912a15865b77e26f526210c8c8d
+  promptSolve79 :: GHC.Types.Int -> GHC.Types.Int
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (\ (ds :: GHC.Types.Int) ->
+                 case ds of wild { GHC.Types.I# x6 ->
+                 GHC.Types.I# (GHC.Prim.*# x6 10#) }) -}
+2ccf9ef1332300f1c8e67f243cd5d06c
+  promptSolve8 :: [Solve.Prompt]
+  {- Unfolding: (GHC.Types.:
+                   @ Solve.Prompt
+                   Solve.promptSolve19
+                   Solve.promptSolve9) -}
+1d37ddc801024ab62290ab2b7d823665
+  promptSolve80 :: Solve.Inputs
+  {- Strictness: x -}
+c4436bacb0806e4f4a073c5d2e923d6e
+  promptSolve81 ::
+    Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt
+  {- Arity: 2,
+     Unfolding: (\ (p :: Solve.Prompt)
+                   (ds :: Graphics.Gloss.Internals.Interface.Event.Event) ->
+                 case ds of wild {
+                   DEFAULT -> p
+                   Graphics.Gloss.Internals.Interface.Event.EventKey ds1 ds2 ds3 ds4
+                   -> case ds1 of wild1 {
+                        Graphics.Gloss.Internals.Interface.Backend.Types.Char c
+                        -> case ds2 of wild2 {
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                             -> case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                case ds10 of wild4 {
+                                  GHC.Types.False
+                                  -> case c of wild5 { GHC.Types.C# c# ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.leWord#
+                                               (GHC.Prim.int2Word#
+                                                  (GHC.Prim.-# (GHC.Prim.ord# c#) 48#))
+                                               9##) of wild6 {
+                                       GHC.Types.False -> wild3
+                                       GHC.Types.True
+                                       -> Solve.Prompt
+                                            (case ds5 of wild7 {
+                                               DEFAULT -> Solve.promptSolve84
+                                               Solve.InputCount ds11 ds12
+                                               -> Solve.InputCount
+                                                    ds11
+                                                    (GHC.Types.:
+                                                       @ GHC.Types.Int
+                                                       (case Data.Char.$wdigitToInt
+                                                               c# of ww2 { DEFAULT ->
+                                                        GHC.Types.I# ww2 })
+                                                       ds12)
+                                               Solve.InputCoord ds11 ds12 ds13
+                                               -> Solve.InputCoord
+                                                    ds11
+                                                    ds12
+                                                    (GHC.Types.:
+                                                       @ GHC.Types.Int
+                                                       (case Data.Char.$wdigitToInt
+                                                               c# of ww2 { DEFAULT ->
+                                                        GHC.Types.I# ww2 })
+                                                       ds13) })
+                                            ds6
+                                            ds7
+                                            ds8
+                                            ds9
+                                            GHC.Types.False } }
+                                  GHC.Types.True -> wild3 } }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Up -> p }
+                        Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey enter
+                        -> case ds2 of wild2 {
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                             -> letrec {
+                                  cp :: GHC.Types.Bool
+                                  = case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                    ds9 i' }
+                                  i' :: Solve.Inputs
+                                  = case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                    case ds7 ds5 of wild4 {
+                                      DEFAULT
+                                      -> case cp of wild5 {
+                                           GHC.Types.False -> Solve.defaultInputCoord
+                                           GHC.Types.True -> i' }
+                                      Solve.InputCoord ds11 ds12 ds13
+                                      -> case ds12 of wild5 {
+                                           GHC.Base.Nothing
+                                           -> case cp of wild6 {
+                                                GHC.Types.False -> Solve.defaultInputCoord
+                                                GHC.Types.True -> i' }
+                                           GHC.Base.Just ds14 -> i' } } }
+                                } in
+                                case GHC.Prim.dataToTag#
+                                       @ Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey
+                                       enter of wild3 {
+                                  DEFAULT -> p
+                                  33#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt i' ds6 ds7 ds8 ds9 cp }
+                                  65#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt i' ds6 ds7 ds8 ds9 cp } }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Up -> p }
+                        Graphics.Gloss.Internals.Interface.Backend.Types.MouseButton ipv
+                        -> p } }) -}
+15b431c8b484161392b0eb1b9bd93b6b
+  promptSolve82 :: PegBoard.Coord
   {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((GHC.Types.False, Solve.promptSolve8,
-                  Solve.promptSolve8)) -}
-a872cd6b96b584a1be0b68a021a249ac
-  promptSolve70 :: Graphics.Gloss.Internals.Data.Picture.Picture
-  {- Strictness: m8,
-     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Text
-                   Solve.promptSolve71) -}
-ba7e9c4b14bdd47820715b530c75e5b5
-  promptSolve71 :: [GHC.Types.Char]
+     Unfolding: (PegBoard.Coord
+                   Solve.promptSolve83
+                   Solve.promptSolve83) -}
+6b4ada0529bb60b54a110faf356fba2f
+  promptSolve83 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+f5a734daa0b7e875faaa379c24b09895
+  promptSolve84 :: Solve.Inputs
+  {- Strictness: x -}
+40605bafdb3d00140117ad5de88e2d14
+  promptSolve85 :: Solve.Prompt
+  {- Unfolding: (Solve.Prompt
+                   Solve.defaultInputCount
+                   Solve.promptSolve95
+                   Solve.promptSolve93
+                   Solve.promptSolve88
+                   Solve.promptSolve86
+                   GHC.Types.False) -}
+73b06a7a3db3f953b502929937bbd53e
+  promptSolve86 :: Solve.Inputs -> GHC.Types.Bool
+  {- Arity: 1,
+     Unfolding: (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.promptSolve87
+                   Solve.InputCount ds1 ds2
+                   -> case ds1 of wild1 { GHC.Types.I# ds3 ->
+                      case ds3 of ds4 {
+                        DEFAULT
+                        -> case GHC.Prim.tagToEnum#
+                                  @ GHC.Types.Bool
+                                  (GHC.Prim.>=# ds4 1#) of wild2 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True
+                             -> GHC.Prim.tagToEnum# @ GHC.Types.Bool (GHC.Prim.<=# ds4 13#) }
+                        0# -> case ds2 of wild2 { DEFAULT -> GHC.Types.False } } } }) -}
+61f7bbb407798c7292b33b8dbd65b882
+  promptSolve87 :: GHC.Types.Bool
+  {- Strictness: x -}
+9b1c19ea31c12a0ce5b048dc23af901f
+  promptSolve88 :: Solve.PSequence
+  {- Unfolding: (Solve.PSeq Solve.promptSolve89) -}
+b7ef8077e3c4477ba9c69175f8e7ae4d
+  promptSolve89 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Color
+                   Graphics.Gloss.Data.Color.white
+                   Solve.promptSolve90) -}
+77a958de2e3a0c2866bf8d3a01905c06
+  promptSolve9 :: [Solve.Prompt]
+  {- Unfolding: (GHC.Types.:
+                   @ Solve.Prompt
+                   Solve.promptSolve10
+                   (GHC.Types.[] @ Solve.Prompt)) -}
+b703e9ff0438e3754ebe4c5e51d655a1
+  promptSolve90 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Scale
+                   Solve.promptSolve17
+                   Solve.promptSolve17
+                   Solve.promptSolve91) -}
+80b13e71e02b8d9b59a98f949608897d
+  promptSolve91 :: Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Unfolding: (Graphics.Gloss.Internals.Data.Picture.Text
+                   Solve.promptSolve92) -}
+1a9136b0719a09e84bd5099ea50c629c
+  promptSolve92 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString#
                    "Enter number of pegs to end with"#) -}
-4f37ab83ee320369ee8101edac2e2776
-  promptSolve72 :: Graphics.Gloss.Data.Display.Display
+a5444e44f4f8348c00eed1580476717d
+  promptSolve93 :: Solve.Inputs -> Solve.Inputs
+  {- Arity: 1,
+     Unfolding: (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.promptSolve94
+                   Solve.InputCount ds1 ds2
+                   -> Solve.InputCount
+                        (Solve.makeInt ds2)
+                        (GHC.Types.[] @ GHC.Types.Int) }) -}
+f2404b17d18f51f54f5198dc80c7252f
+  promptSolve94 :: Solve.Inputs
+  {- Strictness: x -}
+a962efb2d46fef81892337831b21c3a2
+  promptSolve95 ::
+    Solve.Prompt
+    -> Graphics.Gloss.Internals.Interface.Event.Event -> Solve.Prompt
+  {- Arity: 2,
+     Unfolding: (\ (p :: Solve.Prompt)
+                   (ds :: Graphics.Gloss.Internals.Interface.Event.Event) ->
+                 case ds of wild {
+                   DEFAULT -> p
+                   Graphics.Gloss.Internals.Interface.Event.EventKey ds1 ds2 ds3 ds4
+                   -> case ds1 of wild1 {
+                        Graphics.Gloss.Internals.Interface.Backend.Types.Char c
+                        -> case ds2 of wild2 {
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                             -> case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                case ds10 of wild4 {
+                                  GHC.Types.False
+                                  -> case c of wild5 { GHC.Types.C# c# ->
+                                     case GHC.Prim.tagToEnum#
+                                            @ GHC.Types.Bool
+                                            (GHC.Prim.leWord#
+                                               (GHC.Prim.int2Word#
+                                                  (GHC.Prim.-# (GHC.Prim.ord# c#) 48#))
+                                               9##) of wild6 {
+                                       GHC.Types.False -> wild3
+                                       GHC.Types.True
+                                       -> Solve.Prompt
+                                            (case ds5 of wild7 {
+                                               DEFAULT -> Solve.promptSolve96
+                                               Solve.InputCount ds11 ds12
+                                               -> Solve.InputCount
+                                                    ds11
+                                                    (GHC.Types.:
+                                                       @ GHC.Types.Int
+                                                       (case Data.Char.$wdigitToInt
+                                                               c# of ww2 { DEFAULT ->
+                                                        GHC.Types.I# ww2 })
+                                                       ds12)
+                                               Solve.InputCoord ds11 ds12 ds13
+                                               -> Solve.InputCoord
+                                                    ds11
+                                                    ds12
+                                                    (GHC.Types.:
+                                                       @ GHC.Types.Int
+                                                       (case Data.Char.$wdigitToInt
+                                                               c# of ww2 { DEFAULT ->
+                                                        GHC.Types.I# ww2 })
+                                                       ds13) })
+                                            ds6
+                                            ds7
+                                            ds8
+                                            ds9
+                                            GHC.Types.False } }
+                                  GHC.Types.True -> wild3 } }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Up -> p }
+                        Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey enter
+                        -> case ds2 of wild2 {
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Down
+                             -> let {
+                                  i :: Solve.Inputs
+                                  = case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                    ds7 ds5 }
+                                } in
+                                let {
+                                  cp :: GHC.Types.Bool
+                                  = case p of wild3 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                    ds9 i }
+                                } in
+                                case GHC.Prim.dataToTag#
+                                       @ Graphics.Gloss.Internals.Interface.Backend.Types.SpecialKey
+                                       enter of wild3 {
+                                  DEFAULT -> p
+                                  33#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt
+                                       (case cp of wild5 {
+                                          GHC.Types.False -> Solve.defaultInputCount
+                                          GHC.Types.True -> i })
+                                       ds6
+                                       ds7
+                                       ds8
+                                       ds9
+                                       cp }
+                                  65#
+                                  -> case p of wild4 { Solve.Prompt ds5 ds6 ds7 ds8 ds9 ds10 ->
+                                     Solve.Prompt
+                                       (case cp of wild5 {
+                                          GHC.Types.False -> Solve.defaultInputCount
+                                          GHC.Types.True -> i })
+                                       ds6
+                                       ds7
+                                       ds8
+                                       ds9
+                                       cp } }
+                             Graphics.Gloss.Internals.Interface.Backend.Types.Up -> p }
+                        Graphics.Gloss.Internals.Interface.Backend.Types.MouseButton ipv
+                        -> p } }) -}
+5ecc18a0c596a35a4b18e1dc0fdc622f
+  promptSolve96 :: Solve.Inputs
+  {- Strictness: x -}
+83c790afd254c06a18a8a4866f914ef4
+  promptSolve97 :: Graphics.Gloss.Data.Display.Display
   {- Unfolding: (Graphics.Gloss.Data.Display.InWindow
-                   Solve.promptSolve76
-                   Solve.promptSolve74
-                   Solve.promptSolve73) -}
-3fec56fb2880811a37302459f4592025
-  promptSolve73 :: (GHC.Types.Int, GHC.Types.Int)
+                   Solve.promptSolve101
+                   Solve.promptSolve99
+                   Solve.promptSolve98) -}
+e4d35667cb461360f2fa783089b1a9bc
+  promptSolve98 :: (GHC.Types.Int, GHC.Types.Int)
   {- HasNoCafRefs,
-     Unfolding: ((Solve.promptSolve13, Solve.promptSolve13)) -}
-1c9a050e62f8d500afecf15bffc22273
-  promptSolve74 :: (GHC.Types.Int, GHC.Types.Int)
+     Unfolding: ((Solve.promptSolve83, Solve.promptSolve83)) -}
+bfa9d08349f61c77d652e2e69b90e7d3
+  promptSolve99 :: (GHC.Types.Int, GHC.Types.Int)
   {- HasNoCafRefs,
-     Unfolding: ((Solve.promptSolve75, Solve.promptSolve75)) -}
-aa80f2f39b4a4049f67bbf70322bf57b
-  promptSolve75 :: GHC.Types.Int
-  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 600#) -}
-b1abb0730d918ed70149e446a75e8167
-  promptSolve76 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "SolvePrompted"#) -}
-d9b752f654573ba807f4935a0269de9d
-  promptSolve8 :: GHC.Types.Float
-  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.F# 0.0#) -}
-0d020fb69b460e4e4b72c37a55a8498e
-  promptSolve9 :: (GHC.Types.Float, GHC.Types.Float)
-  {- HasNoCafRefs, Strictness: m,
-     Unfolding: ((Solve.promptSolve8, Solve.promptSolve8)) -}
+     Unfolding: ((Solve.promptSolve100, Solve.promptSolve100)) -}
 017471430e184176daeb8868317324e9
   promptSolve_go ::
     [GHC.Types.Float]
     -> [GHC.Types.Float]
     -> [Graphics.Gloss.Internals.Data.Picture.Picture]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><L,1*U> -}
-instance GHC.Classes.Eq [Solve.Sequence] = Solve.$fEqSequence
+e28d99aa66a1cd57f86b019cf4e9e637
+  promptSolve_labeledPrompt' ::
+    Graphics.Gloss.Internals.Data.Picture.Picture
+  {- Strictness: m11,
+     Unfolding: (Graphics.Gloss.Internals.Data.Picture.Translate
+                   Solve.promptSolve70
+                   Solve.promptSolve58
+                   Solve.promptSolve24) -}
+90be328b1c7a68bb66aecf0e3d7b9c0a
+  seqDisp :: Solve.Prompt -> Solve.PSequence
+  RecSel Left Solve.Prompt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLSLL),1*U(A,A,A,1*U,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Prompt) ->
+                 case ds of wild { Solve.Prompt ds1 ds2 ds3 ds4 ds5 ds6 -> ds4 }) -}
+736075db05b23e72d8822125bc7bf4aa
+  xCoord :: Solve.Inputs -> GHC.Base.Maybe GHC.Types.Int
+  RecSel Left Solve.Inputs
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Solve.Inputs) ->
+                 case ds of wild {
+                   DEFAULT -> Solve.xCoord1 Solve.InputCoord ds1 ds2 ds3 -> ds2 }) -}
+8ee12440cdf0a943998f89040cbd1d6f
+  xCoord1 :: GHC.Base.Maybe GHC.Types.Int
+  {- Strictness: x -}
+instance GHC.Classes.Eq [Solve.Inputs] = Solve.$fEqInputs
+instance GHC.Classes.Eq [Solve.PSequence] = Solve.$fEqPSequence
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
