@@ -280,8 +280,9 @@ resetPromptZip pz = PromptZip cur nxt' [] (worldT pz) where
   cur = head nxt -- Impossible for nxt to be empty, there must be something in old current
   nxt' = tail nxt
 
+-- Not doing anything to transform renders
 eventHandler' :: Event -> PromptZip -> PromptZip
-eventHandler' (EventKey (Char 'r') Down _ _) pz = resetPromptZip pz
+eventHandler' (EventKey (Char 'r') Down _ _) pz = promptBase { worldT = worldT pz }
 eventHandler' (EventKey (Char 'R') Down _ _) pz = resetPromptZip pz
 eventHandler' (EventKey (MouseButton LeftButton) Down _ m) pz = pz { worldT = setMouse (worldT pz) m }
 eventHandler' (EventKey (MouseButton LeftButton) Up _ m) pz = pz { worldT = resetMouse (worldT pz) }
@@ -314,7 +315,7 @@ promptSolve = play
   black
   0
   promptBase -- world
-  (seqRender . seqDisp . current)
+  (\pz -> transPicture (worldT pz) . seqRender . seqDisp . current $ pz)
   eventHandler' -- Event -> world -> world
   (\_ x -> x)
 
