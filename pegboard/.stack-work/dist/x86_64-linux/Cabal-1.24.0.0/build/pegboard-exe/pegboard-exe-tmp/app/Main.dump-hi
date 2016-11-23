@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2016-11-19 03:21:43.712848 UTC
+2016-11-23 17:02:36.443356 UTC
 
 interface main@main:Main 8001
-  interface hash: fa1c6434e35f0a28b65568aa92804498
-  ABI hash: 535de95633d3b5b0e5c515ae5cafdbc6
+  interface hash: 0092f1d05af33470bf00ae76c79a0dfb
+  ABI hash: f43f0e3055ad8f350067cefe652f8930
   export-list hash: e44e0e9f2cfd601fc41ac3b7d783e331
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 267082d0d2ca8f2a883a57b6af67b713
@@ -79,7 +79,7 @@ import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Helpers.List
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoard 700fa327013234a57c766ef736b97bb2
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PegBoardMove 916e67d09fe4159a916059e4bcb4c825
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:PlayGame 33dcc890daf23cb58c28e0429f285f74
-import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve b5ea1df3b78982da0dffee077af82432
+import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Solve db4a343cccf277967c07112f554ec23a
 import  -/  pegboard-0.1.0.0@pegboard-0.1.0.0-FjeDzkb0etYsOVuQKSaT2:Symmetries baafbbce683d8abf68a9b39b742d3ee6
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
@@ -233,12 +233,12 @@ e8c50f676015eded4342ca2920579f11
   concB'2 :: PegBoard.Board
   {- Unfolding: (case Main.concB of wild {
                    [] -> GHC.List.badHead @ PegBoard.Board : x ds1 -> x }) -}
-d340f1e054464e277a396393386e8d05
+c3e09e4e05943fd142c0f918826c433c
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Solve.promptSolve1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-9d5ac9d95219ab8d6c007023e42c7900
+12d0be00e4712439af623446565c1f0e
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)

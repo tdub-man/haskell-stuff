@@ -43,6 +43,16 @@ data Prompt = Prompt {
 
 --------------------------------------------------------------------------------
 
+-- Show board selections
+
+removeRow :: Int -> Board
+removeRow n = foldr removePeg (makeBoard 5) [ Coord n y | y <- [1..n] ]
+
+updateBoard :: Coord -> PSequence
+updateBoard (Coord n 0) = coordSeqF . removeRow $ n
+updateBoard c = coordSeqF . removePeg c $ (makeBoard 5)
+--------------------------------------------------------------------------------
+
 -- Prompts
 -- Should a prompt reset after invalid input? Better than waiting til the end?
 -- If we dont advance to next prompt until current is completed, we have to
@@ -50,6 +60,20 @@ data Prompt = Prompt {
 coordSeq :: PSequence
 coordSeq = PSeq labeledPrompt' where
   board = renderBoard . makeBoard $ 5
+  rowLabels = pictures . offset 0 16 $ [ scale 0.1 0.1 $ Text (show n) | n <- [5,4..1] ]
+  rowLabels' = translate 0 (-4) . color white $ rowLabels
+  rowLines  = pictures [ Line [(0,16*n),(l+16,16*n)] | (n,l) <- zip [1..5] [0,8..32] ]
+  rowLines' = color white rowLines
+  colLabels = [ translate 20 36 . scale 0.1 0.1 . Text $ show n | n <- [5,4..1] ]
+  colLines = replicate 5 (Line [(0,0),(16,32)])
+  colLabelLines = [ pictures [lb,ln] | (lb,ln) <- zip colLabels colLines ]
+  colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
+  labeledPrompt = pictures [board,colLabelLines']
+  labeledPrompt' = translate (-48) 0 . pictures . offset 16 0 $ [rowLabels',rowLines',labeledPrompt]
+
+coordSeqF :: Board -> PSequence
+coordSeqF b = PSeq labeledPrompt' where
+  board = renderBoard b
   rowLabels = pictures . offset 0 16 $ [ scale 0.1 0.1 $ Text (show n) | n <- [5,4..1] ]
   rowLabels' = translate 0 (-4) . color white $ rowLabels
   rowLines  = pictures [ Line [(0,16*n),(l+16,16*n)] | (n,l) <- zip [1..5] [0,8..32] ]
@@ -86,17 +110,18 @@ coordPrompt =
   Prompt baseInput handler proc disp chck comp where
     baseInput = defaultInputCoord
     handler p (EventKey (Char c) Down _ _)
-      | not (completed p) && isDigit c = p { input = i' } where
+      | not (completed p) && isDigit c = p { input = i', seqDisp = dsp } where
           i = input p
           i' = i { digits = digitToInt c : (digits i) }
+          dsp = updateBoard $ (coord i')
     handler p (EventKey (SpecialKey enter) Down _ _)
       | enter == KeyEnter || enter == KeyPadEnter = p { input = i', completed = cp } where
           i = (process p) (input p)
-          cp = (check p) i'
+          cp = (check p) i
           i' = case (i,cp) of
-                  (InputCoord _ (Just _) _,_) -> i' -- In the middle of getting coord, don't reset
+                  (InputCoord _ (Just _) _,_) -> i -- In the middle of getting coord, don't reset
                   (_,False) -> defaultInputCoord -- The coord is "completed", but no good, reset
-                  _ -> i' -- The coord is completed and good, don't reset
+                  _ -> i -- The coord is completed and good, don't reset
     handler pt _ = pt
     proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
     proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
@@ -117,7 +142,7 @@ solvePrompt =
       | enter == KeyEnter || enter == KeyPadEnter = p { completed = True }
     handler pt _ = pt
     proc = id
-    disp = coordSeq -- Change to intermediate "solve" prompt
+    disp = solveMsg -- Change to intermediate "solve" prompt
     chck _ = True
     comp = False
 
@@ -228,6 +253,10 @@ pegCountPrompt :: PSequence
 pegCountPrompt = PSeq msg where
   msg = color white . scale 0.1 0.1 $ Text "Enter number of pegs to end with"
 
+solveMsg :: PSequence
+solveMsg = PSeq msg where
+  msg = color white . scale 0.1 0.1 $ Text "Press ENTER to solve"
+
 rowPrompt :: PSequence
 rowPrompt = PSeq labeledPrompt where
   board = renderBoard . makeBoard $ 5
@@ -246,12 +275,6 @@ colPrompt = PSeq labeledPrompt where
   colLabelLines' = color white . translate 104 8 . pictures . offset (-8) 16 $ colLabelLines
   labeledPrompt = pictures [board,colLabelLines']
 
--- promptBase :: Prompts
--- promptBase = ([pegCountPrompt,rowPrompt,colPrompt],[],emptyInputCol,baseTrans)
-
--- Will need special type to hold prompt zipper and worldTrans
-
--- type PromptZip = ([Prompt],[Prompt])
 data PromptZip = PromptZip { current :: Prompt
                            , next :: [Prompt]
                            , prev :: [Prompt]
@@ -280,10 +303,9 @@ resetPromptZip pz = PromptZip cur nxt' [] (worldT pz) where
   cur = head nxt -- Impossible for nxt to be empty, there must be something in old current
   nxt' = tail nxt
 
--- Not doing anything to transform renders
 eventHandler' :: Event -> PromptZip -> PromptZip
 eventHandler' (EventKey (Char 'r') Down _ _) pz = promptBase { worldT = worldT pz }
-eventHandler' (EventKey (Char 'R') Down _ _) pz = resetPromptZip pz
+eventHandler' (EventKey (Char 'R') Down _ _) pz = promptBase { worldT = worldT pz }
 eventHandler' (EventKey (MouseButton LeftButton) Down _ m) pz = pz { worldT = setMouse (worldT pz) m }
 eventHandler' (EventKey (MouseButton LeftButton) Up _ m) pz = pz { worldT = resetMouse (worldT pz) }
 eventHandler' (EventKey (MouseButton WheelUp) _ _ _) pz = pz { worldT = scaleUp (worldT pz) }
@@ -300,7 +322,7 @@ eventHandler' event pz -- guard promptSolve on ENTER keys
               Just bs -> pnxt { current = cur' } where
                 pnxt = promptNext pz -- move zipper to stepsPrompt
                 cur = current pnxt -- get stepsPrompt
-                cur' = cur { seqDisp = PSeqs (map renderBoard bs) [] } -- Updated current
+                cur' = cur { seqDisp = renderBoardsSeq bs } -- Updated current
   | otherwise = pz'' where
       cur = current pz
       cur' = (handle cur) cur event
