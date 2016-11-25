@@ -110,18 +110,17 @@ coordPrompt =
   Prompt baseInput handler proc disp chck comp where
     baseInput = defaultInputCoord
     handler p (EventKey (Char c) Down _ _)
-      | not (completed p) && isDigit c = p { input = i', seqDisp = dsp } where
+      | not (completed p) && isDigit c = p { input = i' } where
           i = input p
           i' = i { digits = digitToInt c : (digits i) }
-          dsp = updateBoard $ (coord i')
     handler p (EventKey (SpecialKey enter) Down _ _)
       | enter == KeyEnter || enter == KeyPadEnter = p { input = i', completed = cp } where
           i = (process p) (input p)
           cp = (check p) i
-          i' = case (i,cp) of
-                  (InputCoord _ (Just _) _,_) -> i -- In the middle of getting coord, don't reset
-                  (_,False) -> defaultInputCoord -- The coord is "completed", but no good, reset
-                  _ -> i -- The coord is completed and good, don't reset
+          (i',dsp) = case (i,cp) of
+                  (InputCoord c (Just _) _,_) -> (i,updateBoard c) -- In the middle of getting coord, don't reset
+                  (_,False) -> (defaultInputCoord,coordSeq) -- The coord is "completed", but no good, reset
+                  _ -> (i,seqDisp p) -- The coord is completed and good, don't reset
     handler pt _ = pt
     proc (InputCoord cd Nothing ds) = InputCoord cd (Just $ makeInt ds) []
     proc (InputCoord _ (Just x) ds) = InputCoord (Coord x $ makeInt ds) Nothing []
