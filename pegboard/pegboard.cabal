@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-                     , /home/tanner/Documents/LYA-Haskell
+                     , /home/tanner/Documents/haskell-stuff
   exposed-modules:     Helpers.Lists
                      , Helpers.Math
                      , Helpers.Classes
