@@ -1,0 +1,5 @@
+-- Solve classic solitaire
+-- Same premise
+-- Create board (approximate pixel circle)
+-- Begin with hole in center
+-- Bonus for one peg left in center
